@@ -17,8 +17,8 @@ import (
 
 var config struct {
 	LogLevel      string `envconfig:"LOG_LEVEL"`
-	MigrationsDir string `envconfig:"MIGRATIONS_DIR"`
-	PostgresURI   string `envconfig:"POSTGRES_URI"`
+	MigrationsDir string `envconfig:"MIGRATIONS_DIR" default:"../../internal/database/postgresql/migrations"`
+	PostgresURI   string `envconfig:"POSTGRES_URI" default:"postgres://postgres:space@localhost:5447/space_vpx_satellite_db?sslmode=disable"`
 }
 
 func main() {
@@ -28,7 +28,10 @@ func main() {
 		log.Fatal("cannot build logger: ", err)
 	}
 
-	time.Sleep(5)
+	zap.L().Info("PostgresURI: ", zap.String("uri", config.PostgresURI))
+	zap.L().Info("MigrationsDir: ", zap.String("dir", config.MigrationsDir))
+
+	time.Sleep(3 * time.Second)
 
 	migrator := postgresql.NewMigrator(config.PostgresURI, config.MigrationsDir)
 	if err := migrator.Apply(); err != nil {
