@@ -38,6 +38,7 @@ func New(
 		userUsecase: userUsecase,
 	}
 
+	zap.L().Error("server http handler request")
 	router := api.NewSpaceVPXBackendServiceAPI(swagger)
 	router.UseSwaggerUI()
 	router.Logger = zap.S().Infof
@@ -46,10 +47,18 @@ func New(
 	// CREATE USER
 	router.RegisterUserHandler = api.RegisterUserHandlerFunc(h.RegisterUserHandler)
 
+	h.router = router.Serve(nil)
+
 	return h
 }
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	zap.L().Error("server http request")
+	if h.router == nil {
+		zap.L().Error("h.router is nil")
+		return
+	}
+	zap.L().Error("h.router is not nil")
 	h.router.ServeHTTP(w, r)
 }
 

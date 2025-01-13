@@ -2,27 +2,37 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
+
 	"os"
 	"os/signal"
 	"syscall"
 
 	"time"
 
-	//"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/handler"
+	"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/handler"
 	"github.com/Maksim646/space_vpx_satellite/internal/database/postgresql"
 	"github.com/Maksim646/space_vpx_satellite/pkg/logger"
+	"github.com/justinas/alice"
 
 	//"github.com/docker/docker/daemon/logger"
 	"github.com/heetch/sqalx"
 	"github.com/jmoiron/sqlx"
 	"github.com/kelseyhightower/envconfig"
 	"go.uber.org/zap"
+
+	_userRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/user/repository/postgresql"
+	_userUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/user/usecase"
+)
+
+const (
+	httpVersion = "development"
 )
 
 var config struct {
-	Addr          string `envconfig:"ADDR" default:"127.0.0.1:8000"`
+	Addr          string `envconfig:"ADDR" default:"8000"`
 	LogLevel      string `envconfig:"LOG_LEVEL"`
 	MigrationsDir string `envconfig:"MIGRATIONS_DIR" default:"../../internal/database/postgresql/migrations"`
 	PostgresURI   string `envconfig:"POSTGRES_URI" default:"postgres://postgres:space@localhost:5447/space_vpx_satellite_db?sslmode=disable"`
@@ -64,8 +74,21 @@ func main() {
 
 	zap.L().Info("Database manage was process successfully")
 
+	userRepo := _userRepo.New(sqalxConn)
+	userUsecase := _userUsecase.New(userRepo)
+
+	appHandler := handler.New(
+		userUsecase,
+		httpVersion,
+	)
+
+	chain := alice.New(appHandler.WsMiddleware).Then(appHandler) // Теперь appHandler is a Handler struct that implements http.Handler
+	if chain == nil {
+		fmt.Println(chain)
+	}
 	server := http.Server{
-		Addr: config.Addr,
+		Handler: chain,
+		Addr:    ":" + config.Addr, // <--- added :
 	}
 
 	go func() {

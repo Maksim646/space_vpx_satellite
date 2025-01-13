@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"fmt"
+
 	"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/api"
 	"github.com/go-openapi/runtime/middleware"
 	"go.uber.org/zap"
@@ -13,6 +15,7 @@ func (h *Handler) RegisterUserHandler(req api.RegisterUserParams) middleware.Res
 	_, err := h.userUsecase.CreateUser(ctx, *req.RegisterUser.Email, *req.RegisterUser.Name, *req.RegisterUser.Password)
 
 	if err != nil {
+		fmt.Println(err)
 		return api.NewRegisterUserInternalServerError()
 	}
 	return api.NewRegisterUserOK()
