@@ -9,6 +9,7 @@ import (
 
 var (
 	ErrUserNotFound = errors.New("user not found")
+	UserNotFound    = "user not found"
 )
 
 type User struct {

@@ -4,6 +4,9 @@ github.com/Masterminds/squirrel
 # github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2
 ## explicit; go 1.13
 github.com/asaskevich/govalidator
+# github.com/dgrijalva/jwt-go v3.2.0+incompatible
+## explicit
+github.com/dgrijalva/jwt-go
 # github.com/docker/docker v27.5.0+incompatible
 ## explicit
 # github.com/docker/go-units v0.5.0
@@ -181,10 +184,6 @@ go.uber.org/zap/internal/exit
 go.uber.org/zap/internal/pool
 go.uber.org/zap/internal/stacktrace
 go.uber.org/zap/zapcore
-# golang.org/x/crypto v0.32.0
-## explicit; go 1.20
-golang.org/x/crypto/bcrypt
-golang.org/x/crypto/blowfish
 # golang.org/x/net v0.34.0
 ## explicit; go 1.18
 golang.org/x/net/netutil

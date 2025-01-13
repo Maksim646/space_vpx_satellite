@@ -42,6 +42,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 
 		JSONProducer: runtime.JSONProducer(),
 
+		LoginUserHandler: LoginUserHandlerFunc(func(params LoginUserParams) middleware.Responder {
+			return middleware.NotImplemented("operation LoginUser has not yet been implemented")
+		}),
 		RegisterUserHandler: RegisterUserHandlerFunc(func(params RegisterUserParams) middleware.Responder {
 			return middleware.NotImplemented("operation RegisterUser has not yet been implemented")
 		}),
@@ -81,6 +84,8 @@ type SpaceVPXBackendServiceAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
+	// LoginUserHandler sets the operation handler for the login user operation
+	LoginUserHandler LoginUserHandler
 	// RegisterUserHandler sets the operation handler for the register user operation
 	RegisterUserHandler RegisterUserHandler
 
@@ -160,6 +165,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
+	if o.LoginUserHandler == nil {
+		unregistered = append(unregistered, "LoginUserHandler")
+	}
 	if o.RegisterUserHandler == nil {
 		unregistered = append(unregistered, "RegisterUserHandler")
 	}
@@ -251,6 +259,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers = make(map[string]map[string]http.Handler)
 	}
 
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/auth/login"] = NewLoginUser(o.context, o.LoginUserHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

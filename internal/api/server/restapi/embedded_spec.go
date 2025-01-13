@@ -31,6 +31,58 @@ func init() {
     "version": "development"
   },
   "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login User",
+        "operationId": "LoginUser",
+        "parameters": [
+          {
+            "description": "Login User Body",
+            "name": "LoginUser",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Response",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/auth/register": {
       "post": {
         "tags": [
@@ -85,8 +137,37 @@ func init() {
     }
   },
   "definitions": {
+    "CallBackResponse": {
+      "type": "object",
+      "required": [
+        "balance"
+      ],
+      "properties": {
+        "balance": {
+          "type": "number"
+        },
+        "error_code": {
+          "type": "string"
+        },
+        "error_description": {
+          "type": "string"
+        },
+        "rollback_transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transaction_id": {
+          "type": "string"
+        }
+      }
+    },
     "Error": {
       "type": "object",
+      "required": [
+        "message"
+      ],
       "properties": {
         "message": {
           "type": "string"
@@ -98,9 +179,34 @@ func init() {
       "properties": {
         "access_token": {
           "type": "string"
-        },
-        "refresh_token": {
+        }
+      }
+    },
+    "LoginUser": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
           "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Principal": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "role": {
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -123,6 +229,28 @@ func init() {
           "type": "string"
         },
         "password": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseMsg": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "UrlResponse": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
           "type": "string"
         }
       }
@@ -150,6 +278,58 @@ func init() {
     "version": "development"
   },
   "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login User",
+        "operationId": "LoginUser",
+        "parameters": [
+          {
+            "description": "Login User Body",
+            "name": "LoginUser",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Response",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/auth/register": {
       "post": {
         "tags": [
@@ -204,8 +384,37 @@ func init() {
     }
   },
   "definitions": {
+    "CallBackResponse": {
+      "type": "object",
+      "required": [
+        "balance"
+      ],
+      "properties": {
+        "balance": {
+          "type": "number"
+        },
+        "error_code": {
+          "type": "string"
+        },
+        "error_description": {
+          "type": "string"
+        },
+        "rollback_transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transaction_id": {
+          "type": "string"
+        }
+      }
+    },
     "Error": {
       "type": "object",
+      "required": [
+        "message"
+      ],
       "properties": {
         "message": {
           "type": "string"
@@ -217,9 +426,34 @@ func init() {
       "properties": {
         "access_token": {
           "type": "string"
-        },
-        "refresh_token": {
+        }
+      }
+    },
+    "LoginUser": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
           "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Principal": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "role": {
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -242,6 +476,28 @@ func init() {
           "type": "string"
         },
         "password": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseMsg": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "UrlResponse": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
           "type": "string"
         }
       }

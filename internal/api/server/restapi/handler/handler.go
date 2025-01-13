@@ -1,7 +1,7 @@
 package handler
 
 import (
-	//"context"
+	"context"
 
 	"net/http"
 	"strings"
@@ -10,7 +10,9 @@ import (
 
 	"encoding/json"
 
+	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 	"github.com/Maksim646/space_vpx_satellite/internal/model"
+	"github.com/Maksim646/space_vpx_satellite/pkg/jsonwebtoken"
 	"go.uber.org/zap"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi"
@@ -22,7 +24,8 @@ type Handler struct {
 	router      http.Handler
 	userUsecase model.IUserUsecase
 
-	HashSalt string
+	HashSalt     string
+	jwtSigninKey string
 }
 
 func New(
@@ -30,6 +33,7 @@ func New(
 
 	version string,
 	HashSalt string,
+	jwtSigninKey string,
 ) *Handler {
 
 	withChangedVersion := strings.ReplaceAll(string(restapi.SwaggerJSON), "development", version)
@@ -41,17 +45,19 @@ func New(
 	h := &Handler{
 		userUsecase: userUsecase,
 
-		HashSalt: HashSalt,
+		HashSalt:     HashSalt,
+		jwtSigninKey: jwtSigninKey,
 	}
 
 	zap.L().Error("server http handler request")
 	router := api.NewSpaceVPXBackendServiceAPI(swagger)
 	router.UseSwaggerUI()
 	router.Logger = zap.S().Infof
-	// router.BearerAuthenticator = h.ValidateHeader
+	//router.BearerAuth = h.ValidateHeader
 
-	// CREATE USER
+	// AUTH
 	router.RegisterUserHandler = api.RegisterUserHandlerFunc(h.RegisterUserHandler)
+	router.LoginUserHandler = api.LoginUserHandlerFunc(h.LoginUserHandler)
 
 	h.router = router.Serve(nil)
 
@@ -68,35 +74,32 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	h.router.ServeHTTP(w, r)
 }
 
-// func (h *Handler) ValidateHeader(bearerHeader string) (*definition.Principal, error) {
-// 	ctx := context.Background()
+func (h *Handler) ValidateHeader(bearerHeader string) (*definition.Principal, error) {
+	ctx := context.Background()
 
-// 	bearerToken := strings.TrimPrefix(bearerHeader, "Bearer ")
-// 	userID, roleID, err := jsonwebtoken.ParseToken(bearerToken, h.jwtSigninKey)
-// 	if err != nil {
-// 		return nil, err
-// 	}
+	bearerToken := strings.TrimPrefix(bearerHeader, "Bearer ")
+	userID, roleID, err := jsonwebtoken.ParseToken(bearerToken, h.jwtSigninKey)
+	if err != nil {
+		return nil, err
+	}
 
-// 	if roleID == 0 {
-// 		_, err = h.userUsecase.GetUserByID(ctx, userID)
-// 		if err != nil {
-// 			return nil, err
-// 		}
+	if roleID == 0 {
+		_, err = h.userUsecase.GetUserByID(ctx, userID)
+		if err != nil {
+			return nil, err
+		}
 
-// 		if err := h.userUsecase.UpdateLastVisitTime(ctx, userID); err != nil {
-// 			return nil, err
-// 		}
-// 	} else {
-// 		_, err = h.adminUsecase.GetByID(ctx, userID)
-// 		if err != nil {
-// 			return nil, err
-// 		}
+	} else {
+		// _, err = h.adminUsecase.GetByID(ctx, userID)
+		// if err != nil {
+		// 	return nil, err
+		// }
 
-// 		if err := h.adminUsecase.UpdateLastVisitTime(ctx, userID); err != nil {
-// 			return nil, err
-// 		}
+		// if err := h.adminUsecase.UpdateLastVisitTime(ctx, userID); err != nil {
+		// 	return nil, err
+		// }
 
-// 	}
+	}
 
-// 	return &definition.Principal{ID: userID}, nil
-// }
+	return &definition.Principal{ID: userID}, nil
+}

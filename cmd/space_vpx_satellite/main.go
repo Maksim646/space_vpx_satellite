@@ -37,7 +37,8 @@ var config struct {
 	MigrationsDir string `envconfig:"MIGRATIONS_DIR" default:"../../internal/database/postgresql/migrations"`
 	PostgresURI   string `envconfig:"POSTGRES_URI" default:"postgres://postgres:space@localhost:5447/space_vpx_satellite_db?sslmode=disable"`
 
-	HashSalt string `envconfig:"HASH_SALT" default:"MaximAdamov2002"`
+	HashSalt     string `envconfig:"HASH_SALT" default:"MaximAdamov2002"`
+	JWTSigninKey string `envconfig:"JWT_SIGNIN_KEY" default:"MaximAdamov2002"`
 }
 
 func main() {
@@ -83,6 +84,7 @@ func main() {
 		userUsecase,
 		httpVersion,
 		config.HashSalt,
+		config.JWTSigninKey,
 	)
 
 	chain := alice.New(appHandler.WsMiddleware).Then(appHandler)

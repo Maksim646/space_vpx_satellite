@@ -19,9 +19,6 @@ type LoginResponse struct {
 
 	// access token
 	AccessToken string `json:"access_token,omitempty"`
-
-	// refresh token
-	RefreshToken string `json:"refresh_token,omitempty"`
 }
 
 // Validate validates this login response

@@ -14,18 +14,18 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Error error
+// ResponseMsg response msg
 //
-// swagger:model Error
-type Error struct {
+// swagger:model ResponseMsg
+type ResponseMsg struct {
 
 	// message
 	// Required: true
 	Message *string `json:"message"`
 }
 
-// Validate validates this error
-func (m *Error) Validate(formats strfmt.Registry) error {
+// Validate validates this response msg
+func (m *ResponseMsg) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateMessage(formats); err != nil {
@@ -38,7 +38,7 @@ func (m *Error) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Error) validateMessage(formats strfmt.Registry) error {
+func (m *ResponseMsg) validateMessage(formats strfmt.Registry) error {
 
 	if err := validate.Required("message", "body", m.Message); err != nil {
 		return err
@@ -47,13 +47,13 @@ func (m *Error) validateMessage(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this error based on context it is used
-func (m *Error) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this response msg based on context it is used
+func (m *ResponseMsg) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *Error) MarshalBinary() ([]byte, error) {
+func (m *ResponseMsg) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -61,8 +61,8 @@ func (m *Error) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Error) UnmarshalBinary(b []byte) error {
-	var res Error
+func (m *ResponseMsg) UnmarshalBinary(b []byte) error {
+	var res ResponseMsg
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
