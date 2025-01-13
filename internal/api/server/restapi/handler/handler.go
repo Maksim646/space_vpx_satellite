@@ -21,11 +21,15 @@ import (
 type Handler struct {
 	router      http.Handler
 	userUsecase model.IUserUsecase
+
+	HashSalt string
 }
 
 func New(
 	userUsecase model.IUserUsecase,
+
 	version string,
+	HashSalt string,
 ) *Handler {
 
 	withChangedVersion := strings.ReplaceAll(string(restapi.SwaggerJSON), "development", version)
@@ -36,6 +40,8 @@ func New(
 
 	h := &Handler{
 		userUsecase: userUsecase,
+
+		HashSalt: HashSalt,
 	}
 
 	zap.L().Error("server http handler request")

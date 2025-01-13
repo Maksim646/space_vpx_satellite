@@ -36,6 +36,8 @@ var config struct {
 	LogLevel      string `envconfig:"LOG_LEVEL"`
 	MigrationsDir string `envconfig:"MIGRATIONS_DIR" default:"../../internal/database/postgresql/migrations"`
 	PostgresURI   string `envconfig:"POSTGRES_URI" default:"postgres://postgres:space@localhost:5447/space_vpx_satellite_db?sslmode=disable"`
+
+	HashSalt string `envconfig:"HASH_SALT" default:"MaximAdamov2002"`
 }
 
 func main() {
@@ -80,6 +82,7 @@ func main() {
 	appHandler := handler.New(
 		userUsecase,
 		httpVersion,
+		config.HashSalt,
 	)
 
 	chain := alice.New(appHandler.WsMiddleware).Then(appHandler)

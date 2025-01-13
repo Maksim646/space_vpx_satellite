@@ -23,3 +23,7 @@ func (u *Usecase) CreateUser(ctx context.Context, email string, name string, pas
 func (u *Usecase) GetUserByEmail(ctx context.Context, email string) (model.User, error) {
 	return u.userRepository.GetUserByEmail(ctx, email)
 }
+
+func (u *Usecase) GetUserByID(ctx context.Context, userID string) (model.User, error) {
+	return u.userRepository.GetUserByID(ctx, userID)
+}

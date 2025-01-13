@@ -19,6 +19,7 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/lib/pq v1.10.9
 	go.uber.org/zap v1.27.0
+	golang.org/x/crypto v0.32.0
 	golang.org/x/net v0.34.0
 )
 

@@ -26,10 +26,12 @@ type IUserRepository interface {
 	CreateUser(ctx context.Context, email string, name string, password string) (string, error)
 
 	GetUserByEmail(ctx context.Context, email string) (User, error)
+	GetUserByID(ctx context.Context, userID string) (User, error)
 }
 
 type IUserUsecase interface {
 	CreateUser(ctx context.Context, email string, name string, password string) (string, error)
 
 	GetUserByEmail(ctx context.Context, email string) (User, error)
+	GetUserByID(ctx context.Context, userID string) (User, error)
 }
