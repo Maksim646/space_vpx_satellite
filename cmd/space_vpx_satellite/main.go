@@ -82,13 +82,13 @@ func main() {
 		httpVersion,
 	)
 
-	chain := alice.New(appHandler.WsMiddleware).Then(appHandler) // Теперь appHandler is a Handler struct that implements http.Handler
+	chain := alice.New(appHandler.WsMiddleware).Then(appHandler)
 	if chain == nil {
 		fmt.Println(chain)
 	}
 	server := http.Server{
 		Handler: chain,
-		Addr:    ":" + config.Addr, // <--- added :
+		Addr:    ":" + config.Addr,
 	}
 
 	go func() {

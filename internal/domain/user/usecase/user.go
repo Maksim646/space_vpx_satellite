@@ -19,3 +19,7 @@ func New(userRepository model.IUserRepository) model.IUserUsecase {
 func (u *Usecase) CreateUser(ctx context.Context, email string, name string, password string) (string, error) {
 	return u.userRepository.CreateUser(ctx, email, name, password)
 }
+
+func (u *Usecase) GetUserByEmail(ctx context.Context, email string) (model.User, error) {
+	return u.userRepository.GetUserByEmail(ctx, email)
+}

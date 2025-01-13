@@ -3,7 +3,12 @@ package model
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"time"
+)
+
+var (
+	ErrUserNotFound = errors.New("user not found")
 )
 
 type User struct {
@@ -19,8 +24,12 @@ type User struct {
 
 type IUserRepository interface {
 	CreateUser(ctx context.Context, email string, name string, password string) (string, error)
+
+	GetUserByEmail(ctx context.Context, email string) (User, error)
 }
 
 type IUserUsecase interface {
 	CreateUser(ctx context.Context, email string, name string, password string) (string, error)
+
+	GetUserByEmail(ctx context.Context, email string) (User, error)
 }
