@@ -11,10 +11,10 @@ services:
       - ADDR=:8000
       - LOG_LEVEL=DEBUG
       - MIGRATIONS_DIR=/migrations
-      - POSTGRES_URI=postgres://postgres:123456789@postgres:5432/space_vpx_satellite_db?sslmode=disable&binary_parameters=yes
+      - POSTGRES_URI=postgres://postgres:space@postgres:5432/space_vpx_satellite_db?sslmode=disable
 
     ports:
-      - 8204:8000
+      - 8205:8000
     depends_on:
       - postgres
 
@@ -28,7 +28,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: space_vpx_satellite_db
-      POSTGRES_PASSWORD: 123456789
+      POSTGRES_PASSWORD: space
 
 volumes:
   postgres:

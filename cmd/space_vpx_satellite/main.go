@@ -28,8 +28,11 @@ func main() {
 		log.Fatal("cannot build logger: ", err)
 	}
 
+	time.Sleep(5)
+
 	migrator := postgresql.NewMigrator(config.PostgresURI, config.MigrationsDir)
 	if err := migrator.Apply(); err != nil {
+
 		log.Fatal("cannot apply migrations: ", err)
 	}
 
@@ -51,4 +54,6 @@ func main() {
 	defer sqalxConn.Close()
 
 	zap.L().Info("Database manage was process successfully")
+
+	time.Sleep(5 * time.Minute)
 }
