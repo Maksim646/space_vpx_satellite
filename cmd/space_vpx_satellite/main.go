@@ -55,5 +55,5 @@ func main() {
 
 	zap.L().Info("Database manage was process successfully")
 
-	time.Sleep(5 * time.Minute)
+	time.Sleep(10 * time.Minute)
 }
