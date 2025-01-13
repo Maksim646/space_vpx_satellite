@@ -1,0 +1,35 @@
+#version: '3.9'
+
+services:
+  space-vpx-sattelite-dev:
+    container_name: space-vpx-sattelite-dev
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: cmd/space_vpx_satellite/Dockerfile
+    environment:
+      - ADDR=:8000
+      - LOG_LEVEL=DEBUG
+      - MIGRATIONS_DIR=/migrations
+      - POSTGRES_URI=postgres://postgres:123456789@postgres:5432/space_vpx_satellite_db?sslmode=disable&binary_parameters=yes
+
+    ports:
+      - 8204:8000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14
+    restart: unless-stopped
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5447:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: space_vpx_satellite_db
+      POSTGRES_PASSWORD: 123456789
+
+volumes:
+  postgres:
+    driver: local
