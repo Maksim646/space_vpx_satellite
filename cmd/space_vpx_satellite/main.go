@@ -1,10 +1,16 @@
 package main
 
 import (
+	"context"
 	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"time"
 
+	//"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/handler"
 	"github.com/Maksim646/space_vpx_satellite/internal/database/postgresql"
 	"github.com/Maksim646/space_vpx_satellite/pkg/logger"
 
@@ -16,6 +22,7 @@ import (
 )
 
 var config struct {
+	Addr          string `envconfig:"ADDR" default:"127.0.0.1:8000"`
 	LogLevel      string `envconfig:"LOG_LEVEL"`
 	MigrationsDir string `envconfig:"MIGRATIONS_DIR" default:"../../internal/database/postgresql/migrations"`
 	PostgresURI   string `envconfig:"POSTGRES_URI" default:"postgres://postgres:space@localhost:5447/space_vpx_satellite_db?sslmode=disable"`
@@ -35,7 +42,6 @@ func main() {
 
 	migrator := postgresql.NewMigrator(config.PostgresURI, config.MigrationsDir)
 	if err := migrator.Apply(); err != nil {
-
 		log.Fatal("cannot apply migrations: ", err)
 	}
 
@@ -58,5 +64,31 @@ func main() {
 
 	zap.L().Info("Database manage was process successfully")
 
-	time.Sleep(10 * time.Minute)
+	server := http.Server{
+		Addr: config.Addr,
+	}
+
+	go func() {
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatal(err)
+		}
+	}()
+
+	// Ожидание сигнала завершения (SIGINT, SIGTERM)
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+
+	// Блокируем `main`, ожидая сигнала
+	<-quit
+	zap.L().Info("Shutdown server ...")
+
+	// Создаем таймаут для выключения сервера
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	// Завершение сервера
+	if err := server.Shutdown(ctx); err != nil {
+		log.Fatal("Server shutdown:", err)
+	}
+	zap.L().Info("Server exiting")
 }
