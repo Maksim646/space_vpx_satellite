@@ -89,7 +89,237 @@ paths:
             $ref: '#/definitions/Error'
 
 ### PROJECT
-  /proj
+  /project:
+    post:
+      security:
+        - Bearer: []
+      summary: Create project
+      operationId: CreateProject
+      tags: 
+        - Project
+      parameters:
+        - name: CreateProject
+          description: Create Project Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProjectBody'
+      responses:
+        200:
+          description: Create Project Response
+          schema:
+            $ref: '#/definitions/CreateProjectResponse'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /project/{id}:
+    get:
+      security:
+        - Bearer: []
+      summary: Get project
+      operationId: GetProject
+      tags: 
+        - Project
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The ID of the project to retrieve
+      responses:
+        200:
+          description: Get Project Response
+          schema:
+            $ref: '#/definitions/Project'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+    patch:
+      security:
+        - Bearer: []
+      summary: Update project
+      operationId: UpdateProject
+      tags: 
+        - Project
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The ID of the project to retrieve
+      - name: UpdateProjectBody
+        in: body
+        required: true
+        description: Update Project Body
+        schema:
+          $ref: '#/definitions/UpdateProjectBody'
+      responses:
+        200:
+          description: Update Project Response
+          schema:
+            $ref: '#/definitions/Project'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      security:
+        - Bearer: []
+      summary: Delete project
+      operationId: DeleteProject
+      tags: 
+        - Project
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The ID of the project to retrieve
+      responses:
+        200:
+          description: Delete Project Response
+          schema:
+            $ref: '#/definitions/CreateProjectResponse'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/user_projects:
+    get:
+      security:
+        - Bearer: []
+      summary: Get user projects
+      operationId: GetUserProjects
+      tags: 
+        - Project
+      parameters:
+      - in: query
+        required: true
+        name: offset
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        required: true
+        name: limit
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        name: sort[field]
+        description: sort parametrs
+        enum: [created_at, updated_at]
+        type: string
+      responses:
+        200:
+          description: Get User Project Response
+          schema:
+            $ref: '#/definitions/Projects'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+### USER
+  /user/get_me:
+    get:
+      security:
+        - Bearer: []
+      summary: Get user me
+      operationId: GetUserMe
+      tags: 
+        - User
+      responses:
+        200:
+          description: Get User Me Response
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+
 
 definitions:
   CallBackResponse:
@@ -144,6 +374,81 @@ definitions:
         type: integer
         readOnly: true
 
+
+### PROJECT
+  CreateProjectBody:
+    type: object
+    required:
+      - project_name
+    properties:
+      project_name:
+        type: string
+  
+  CreateProjectResponse:
+    type: object
+    required:
+      - project_id
+    properties:
+      project_id:
+        type: string
+
+  UpdateProjectBody:
+    type: object
+    required:
+      - project_name
+    properties:
+      project_name:
+        type: string
+
+
+  Project:
+    type: object
+    required:
+      - project_name
+    properties:
+      id:
+        type: string
+      user_id:
+        type: string
+      created_at:
+        type: integer
+      updated_at:
+        type: integer
+      project_name:
+        type: string
+
+  Projects:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+      projects:
+        type: array
+        items:
+          $ref: "#/definitions/Project"
+
+### USER
+  User:
+    type: object
+    required:
+      - email
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      created_at:
+        type: integer
+      updated_at:
+        type: integer
+      
+
+
+###AUTH
   RegisterUser:
     type: object
     required:

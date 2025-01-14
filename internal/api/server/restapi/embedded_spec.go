@@ -134,6 +134,351 @@ func init() {
           }
         }
       }
+    },
+    "/project": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Create project",
+        "operationId": "CreateProject",
+        "parameters": [
+          {
+            "description": "Create Project Body",
+            "name": "CreateProject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Project Response",
+            "schema": {
+              "$ref": "#/definitions/CreateProjectResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/project/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Get project",
+        "operationId": "GetProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Project Response",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Delete project",
+        "operationId": "DeleteProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Project Response",
+            "schema": {
+              "$ref": "#/definitions/CreateProjectResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Update project",
+        "operationId": "UpdateProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Project Body",
+            "name": "UpdateProjectBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateProjectBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Project Response",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/user_projects": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Get user projects",
+        "operationId": "GetUserProjects",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "updated_at"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Project Response",
+            "schema": {
+              "$ref": "#/definitions/Projects"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user/get_me": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user me",
+        "operationId": "GetUserMe",
+        "responses": {
+          "200": {
+            "description": "Get User Me Response",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -159,6 +504,28 @@ func init() {
           }
         },
         "transaction_id": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateProjectBody": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "project_name": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateProjectResponse": {
+      "type": "object",
+      "required": [
+        "project_id"
+      ],
+      "properties": {
+        "project_id": {
           "type": "string"
         }
       }
@@ -210,6 +577,46 @@ func init() {
         }
       }
     },
+    "Project": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string"
+        },
+        "project_name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "Projects": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        }
+      }
+    },
     "RegisterUser": {
       "type": "object",
       "required": [
@@ -244,6 +651,17 @@ func init() {
         }
       }
     },
+    "UpdateProjectBody": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "project_name": {
+          "type": "string"
+        }
+      }
+    },
     "UrlResponse": {
       "type": "object",
       "required": [
@@ -252,6 +670,29 @@ func init() {
       "properties": {
         "url": {
           "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
         }
       }
     }
@@ -381,6 +822,353 @@ func init() {
           }
         }
       }
+    },
+    "/project": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Create project",
+        "operationId": "CreateProject",
+        "parameters": [
+          {
+            "description": "Create Project Body",
+            "name": "CreateProject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Project Response",
+            "schema": {
+              "$ref": "#/definitions/CreateProjectResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/project/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Get project",
+        "operationId": "GetProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Project Response",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Delete project",
+        "operationId": "DeleteProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Project Response",
+            "schema": {
+              "$ref": "#/definitions/CreateProjectResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Update project",
+        "operationId": "UpdateProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Project Body",
+            "name": "UpdateProjectBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateProjectBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Project Response",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/user_projects": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Project"
+        ],
+        "summary": "Get user projects",
+        "operationId": "GetUserProjects",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "updated_at"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Project Response",
+            "schema": {
+              "$ref": "#/definitions/Projects"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user/get_me": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user me",
+        "operationId": "GetUserMe",
+        "responses": {
+          "200": {
+            "description": "Get User Me Response",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -406,6 +1194,28 @@ func init() {
           }
         },
         "transaction_id": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateProjectBody": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "project_name": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateProjectResponse": {
+      "type": "object",
+      "required": [
+        "project_id"
+      ],
+      "properties": {
+        "project_id": {
           "type": "string"
         }
       }
@@ -457,6 +1267,46 @@ func init() {
         }
       }
     },
+    "Project": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string"
+        },
+        "project_name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "Projects": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        }
+      }
+    },
     "RegisterUser": {
       "type": "object",
       "required": [
@@ -491,6 +1341,17 @@ func init() {
         }
       }
     },
+    "UpdateProjectBody": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "project_name": {
+          "type": "string"
+        }
+      }
+    },
     "UrlResponse": {
       "type": "object",
       "required": [
@@ -499,6 +1360,29 @@ func init() {
       "properties": {
         "url": {
           "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
         }
       }
     }

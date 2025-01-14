@@ -21,15 +21,17 @@ import (
 )
 
 type Handler struct {
-	router      http.Handler
-	userUsecase model.IUserUsecase
+	userUsecase    model.IUserUsecase
+	projectUsecase model.IProjectUsecase
 
+	router       http.Handler
 	HashSalt     string
 	jwtSigninKey string
 }
 
 func New(
 	userUsecase model.IUserUsecase,
+	projectUsecase model.IProjectUsecase,
 
 	version string,
 	HashSalt string,
@@ -43,7 +45,8 @@ func New(
 	}
 
 	h := &Handler{
-		userUsecase: userUsecase,
+		userUsecase:    userUsecase,
+		projectUsecase: projectUsecase,
 
 		HashSalt:     HashSalt,
 		jwtSigninKey: jwtSigninKey,
@@ -53,11 +56,20 @@ func New(
 	router := api.NewSpaceVPXBackendServiceAPI(swagger)
 	router.UseSwaggerUI()
 	router.Logger = zap.S().Infof
-	//router.BearerAuth = h.ValidateHeader
+	router.BearerAuth = h.ValidateHeader
 
 	// AUTH
 	router.RegisterUserHandler = api.RegisterUserHandlerFunc(h.RegisterUserHandler)
 	router.LoginUserHandler = api.LoginUserHandlerFunc(h.LoginUserHandler)
+
+	// PROJECTS
+	router.CreateProjectHandler = api.CreateProjectHandlerFunc(h.CreateProjectHandler)
+	router.UpdateProjectHandler = api.UpdateProjectHandlerFunc(h.UpdateProjectHandler)
+	router.GetProjectHandler = api.GetProjectHandlerFunc(h.GetProjectByIDHandler)
+	router.GetUserProjectsHandler = api.GetUserProjectsHandlerFunc(h.GetProjectsByUser)
+
+	// USER
+	router.GetUserMeHandler = api.GetUserMeHandlerFunc(h.GetUserMe)
 
 	h.router = router.Serve(nil)
 

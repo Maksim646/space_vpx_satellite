@@ -56,11 +56,218 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectOK, error)
+
+	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
+
+	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
+
+	GetUserMe(params *GetUserMeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserMeOK, error)
+
+	GetUserProjects(params *GetUserProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserProjectsOK, error)
+
 	LoginUser(params *LoginUserParams, opts ...ClientOption) (*LoginUserOK, error)
 
 	RegisterUser(params *RegisterUserParams, opts ...ClientOption) (*RegisterUserOK, error)
 
+	UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+CreateProject creates project
+*/
+func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateProjectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateProject",
+		Method:             "POST",
+		PathPattern:        "/project",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateProjectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteProject deletes project
+*/
+func (a *Client) DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteProjectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteProject",
+		Method:             "DELETE",
+		PathPattern:        "/project/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteProjectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetProject gets project
+*/
+func (a *Client) GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetProjectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetProject",
+		Method:             "GET",
+		PathPattern:        "/project/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetProjectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetUserMe gets user me
+*/
+func (a *Client) GetUserMe(params *GetUserMeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserMeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUserMeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetUserMe",
+		Method:             "GET",
+		PathPattern:        "/user/get_me",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetUserMeReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUserMeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetUserMe: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetUserProjects gets user projects
+*/
+func (a *Client) GetUserProjects(params *GetUserProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserProjectsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetUserProjectsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetUserProjects",
+		Method:             "GET",
+		PathPattern:        "/projects/user_projects",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetUserProjectsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUserProjectsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetUserProjects: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -136,6 +343,45 @@ func (a *Client) RegisterUser(params *RegisterUserParams, opts ...ClientOption) 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RegisterUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateProject updates project
+*/
+func (a *Client) UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateProjectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateProject",
+		Method:             "PATCH",
+		PathPattern:        "/project/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateProjectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateProjectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

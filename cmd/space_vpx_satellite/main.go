@@ -25,6 +25,9 @@ import (
 
 	_userRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/user/repository/postgresql"
 	_userUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/user/usecase"
+
+	_projectRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/project/repository/postgresql"
+	_projectUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/project/usecase"
 )
 
 const (
@@ -80,8 +83,13 @@ func main() {
 	userRepo := _userRepo.New(sqalxConn)
 	userUsecase := _userUsecase.New(userRepo)
 
+	projectRepo := _projectRepo.New(sqalxConn)
+	projectUsecase := _projectUsecase.New(projectRepo)
+
 	appHandler := handler.New(
 		userUsecase,
+		projectUsecase,
+
 		httpVersion,
 		config.HashSalt,
 		config.JWTSigninKey,

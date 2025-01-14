@@ -18,6 +18,8 @@ import (
 	"github.com/go-openapi/spec"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+
+	models "github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 )
 
 // NewSpaceVPXBackendServiceAPI creates a new SpaceVPXBackendService instance
@@ -42,12 +44,37 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 
 		JSONProducer: runtime.JSONProducer(),
 
+		CreateProjectHandler: CreateProjectHandlerFunc(func(params CreateProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateProject has not yet been implemented")
+		}),
+		DeleteProjectHandler: DeleteProjectHandlerFunc(func(params DeleteProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteProject has not yet been implemented")
+		}),
+		GetProjectHandler: GetProjectHandlerFunc(func(params GetProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetProject has not yet been implemented")
+		}),
+		GetUserMeHandler: GetUserMeHandlerFunc(func(params GetUserMeParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetUserMe has not yet been implemented")
+		}),
+		GetUserProjectsHandler: GetUserProjectsHandlerFunc(func(params GetUserProjectsParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetUserProjects has not yet been implemented")
+		}),
 		LoginUserHandler: LoginUserHandlerFunc(func(params LoginUserParams) middleware.Responder {
 			return middleware.NotImplemented("operation LoginUser has not yet been implemented")
 		}),
 		RegisterUserHandler: RegisterUserHandlerFunc(func(params RegisterUserParams) middleware.Responder {
 			return middleware.NotImplemented("operation RegisterUser has not yet been implemented")
 		}),
+		UpdateProjectHandler: UpdateProjectHandlerFunc(func(params UpdateProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateProject has not yet been implemented")
+		}),
+
+		// Applies when the "Authorization" header is set
+		BearerAuth: func(token string) (*models.Principal, error) {
+			return nil, errors.NotImplemented("api key auth (Bearer) Authorization from header param [Authorization] has not yet been implemented")
+		},
+		// default authorizer is authorized meaning no requests are blocked
+		APIAuthorizer: security.Authorized(),
 	}
 }
 
@@ -84,10 +111,29 @@ type SpaceVPXBackendServiceAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
+	// BearerAuth registers a function that takes a token and returns a principal
+	// it performs authentication based on an api key Authorization provided in the header
+	BearerAuth func(string) (*models.Principal, error)
+
+	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
+	APIAuthorizer runtime.Authorizer
+
+	// CreateProjectHandler sets the operation handler for the create project operation
+	CreateProjectHandler CreateProjectHandler
+	// DeleteProjectHandler sets the operation handler for the delete project operation
+	DeleteProjectHandler DeleteProjectHandler
+	// GetProjectHandler sets the operation handler for the get project operation
+	GetProjectHandler GetProjectHandler
+	// GetUserMeHandler sets the operation handler for the get user me operation
+	GetUserMeHandler GetUserMeHandler
+	// GetUserProjectsHandler sets the operation handler for the get user projects operation
+	GetUserProjectsHandler GetUserProjectsHandler
 	// LoginUserHandler sets the operation handler for the login user operation
 	LoginUserHandler LoginUserHandler
 	// RegisterUserHandler sets the operation handler for the register user operation
 	RegisterUserHandler RegisterUserHandler
+	// UpdateProjectHandler sets the operation handler for the update project operation
+	UpdateProjectHandler UpdateProjectHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -165,11 +211,33 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
+	if o.BearerAuth == nil {
+		unregistered = append(unregistered, "AuthorizationAuth")
+	}
+
+	if o.CreateProjectHandler == nil {
+		unregistered = append(unregistered, "CreateProjectHandler")
+	}
+	if o.DeleteProjectHandler == nil {
+		unregistered = append(unregistered, "DeleteProjectHandler")
+	}
+	if o.GetProjectHandler == nil {
+		unregistered = append(unregistered, "GetProjectHandler")
+	}
+	if o.GetUserMeHandler == nil {
+		unregistered = append(unregistered, "GetUserMeHandler")
+	}
+	if o.GetUserProjectsHandler == nil {
+		unregistered = append(unregistered, "GetUserProjectsHandler")
+	}
 	if o.LoginUserHandler == nil {
 		unregistered = append(unregistered, "LoginUserHandler")
 	}
 	if o.RegisterUserHandler == nil {
 		unregistered = append(unregistered, "RegisterUserHandler")
+	}
+	if o.UpdateProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateProjectHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -186,12 +254,23 @@ func (o *SpaceVPXBackendServiceAPI) ServeErrorFor(operationID string) func(http.
 
 // AuthenticatorsFor gets the authenticators for the specified security schemes
 func (o *SpaceVPXBackendServiceAPI) AuthenticatorsFor(schemes map[string]spec.SecurityScheme) map[string]runtime.Authenticator {
-	return nil
+	result := make(map[string]runtime.Authenticator)
+	for name := range schemes {
+		switch name {
+		case "Bearer":
+			scheme := schemes[name]
+			result[name] = o.APIKeyAuthenticator(scheme.Name, scheme.In, func(token string) (interface{}, error) {
+				return o.BearerAuth(token)
+			})
+
+		}
+	}
+	return result
 }
 
 // Authorizer returns the registered authorizer
 func (o *SpaceVPXBackendServiceAPI) Authorizer() runtime.Authorizer {
-	return nil
+	return o.APIAuthorizer
 }
 
 // ConsumersFor gets the consumers for the specified media types.
@@ -262,11 +341,35 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/project"] = NewCreateProject(o.context, o.CreateProjectHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/project/{id}"] = NewDeleteProject(o.context, o.DeleteProjectHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/project/{id}"] = NewGetProject(o.context, o.GetProjectHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/user/get_me"] = NewGetUserMe(o.context, o.GetUserMeHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/projects/user_projects"] = NewGetUserProjects(o.context, o.GetUserProjectsHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/auth/login"] = NewLoginUser(o.context, o.LoginUserHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/auth/register"] = NewRegisterUser(o.context, o.RegisterUserHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/project/{id}"] = NewUpdateProject(o.context, o.UpdateProjectHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP
