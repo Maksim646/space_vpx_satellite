@@ -495,6 +495,56 @@ paths:
             description: Internal server error
             schema:
               $ref: '#/definitions/Error'
+
+  /chassis/available_chassis:
+    get:
+      security:
+        - Bearer: []
+      summary: Get available chassis 
+      operationId: GetAvailableChassis
+      tags: 
+        - Chassis
+      parameters:
+      - in: query
+        required: true
+        name: offset
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        required: true
+        name: limit
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        name: sort[field]
+        description: sort parametrs
+        enum: [created_at, weight]
+        type: string
+      responses:
+        200:
+          description: Get Available Chassis Response
+          schema:
+            $ref: '#/definitions/Chassises'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
         
 
 
@@ -896,3 +946,15 @@ definitions:
       created_at:
         type: integer
         description: Timestamp of creation
+
+  Chassises:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+      chassises:
+        type: array
+        items:
+          $ref: "#/definitions/Chassis"

@@ -56,6 +56,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		DeleteProjectHandler: DeleteProjectHandlerFunc(func(params DeleteProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteProject has not yet been implemented")
 		}),
+		GetAvailableChassisHandler: GetAvailableChassisHandlerFunc(func(params GetAvailableChassisParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetAvailableChassis has not yet been implemented")
+		}),
 		GetChassisByIDHandler: GetChassisByIDHandlerFunc(func(params GetChassisByIDParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetChassisByID has not yet been implemented")
 		}),
@@ -141,6 +144,8 @@ type SpaceVPXBackendServiceAPI struct {
 	DeleteChassisHandler DeleteChassisHandler
 	// DeleteProjectHandler sets the operation handler for the delete project operation
 	DeleteProjectHandler DeleteProjectHandler
+	// GetAvailableChassisHandler sets the operation handler for the get available chassis operation
+	GetAvailableChassisHandler GetAvailableChassisHandler
 	// GetChassisByIDHandler sets the operation handler for the get chassis by ID operation
 	GetChassisByIDHandler GetChassisByIDHandler
 	// GetProjectHandler sets the operation handler for the get project operation
@@ -251,6 +256,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.DeleteProjectHandler == nil {
 		unregistered = append(unregistered, "DeleteProjectHandler")
+	}
+	if o.GetAvailableChassisHandler == nil {
+		unregistered = append(unregistered, "GetAvailableChassisHandler")
 	}
 	if o.GetChassisByIDHandler == nil {
 		unregistered = append(unregistered, "GetChassisByIDHandler")
@@ -394,6 +402,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/project/{id}"] = NewDeleteProject(o.context, o.DeleteProjectHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/chassis/available_chassis"] = NewGetAvailableChassis(o.context, o.GetAvailableChassisHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

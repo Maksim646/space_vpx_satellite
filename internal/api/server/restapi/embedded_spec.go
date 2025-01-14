@@ -244,6 +244,78 @@ func init() {
         }
       }
     },
+    "/chassis/available_chassis": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Get available chassis",
+        "operationId": "GetAvailableChassis",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "weight"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Available Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/Chassises"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/chassis/{id}": {
       "get": {
         "security": [
@@ -912,6 +984,23 @@ func init() {
         "width": {
           "description": "Width of the chassis",
           "type": "number"
+        }
+      }
+    },
+    "Chassises": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "chassises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Chassis"
+          }
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },
@@ -1494,6 +1583,80 @@ func init() {
         }
       }
     },
+    "/chassis/available_chassis": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Get available chassis",
+        "operationId": "GetAvailableChassis",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "weight"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Available Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/Chassises"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/chassis/{id}": {
       "get": {
         "security": [
@@ -2164,6 +2327,23 @@ func init() {
         "width": {
           "description": "Width of the chassis",
           "type": "number"
+        }
+      }
+    },
+    "Chassises": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "chassises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Chassis"
+          }
+        },
+        "count": {
+          "type": "integer"
         }
       }
     },

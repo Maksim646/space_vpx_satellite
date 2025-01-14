@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"time"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
@@ -273,4 +274,65 @@ func (h *Handler) GetChassisHandler(req api.GetChassisByIDParams, principal *def
 		CreatedAt:                       chassis.CreatedAt.Unix(),
 		UpdatedAt:                       time.Now().Unix(),
 	})
+}
+
+func (h *Handler) GetAvailableChassis(req api.GetAvailableChassisParams, principal *definition.Principal) middleware.Responder {
+	zap.L().Info("get available chassis request, id:" + string(principal.ID))
+	ctx := req.HTTPRequest.Context()
+
+	filters := make(map[string]interface{})
+
+	if *req.SortField == "" {
+		*req.SortField = model.DefaultChassisSort
+	}
+
+	chassises, err := h.chassisUsecase.GetChassisByFilters(ctx, req.Offset, req.Limit, *req.SortField, filters)
+	if err != nil {
+		zap.L().Error("error fetch chassis", zap.Error(err))
+		return api.NewGetAvailableChassisBadRequest()
+	}
+
+	chassisesResult := h.ChassisesToDefinition(ctx, chassises)
+
+	return api.NewGetAvailableChassisOK().WithPayload(&definition.Chassises{
+		Count:     useful.Int64Ptr(int64(len(chassisesResult))),
+		Chassises: chassisesResult,
+	})
+}
+
+func (h *Handler) ChassisesToDefinition(ctx context.Context, chassises []model.Chassis) []*definition.Chassis {
+	chassisesData := make([]*definition.Chassis, len(chassises))
+
+	for i, _ := range chassises {
+		chassisesData[i] = &definition.Chassis{
+			ID:                              chassises[i].ID,
+			Axes:                            &chassises[i].Axes,
+			Height:                          &chassises[i].Height,
+			Length:                          &chassises[i].Length,
+			MaxNonOperatingTemperature:      &chassises[i].MaxNonOperatingTemperature,
+			MaxOperatingTemperature:         &chassises[i].MaxOperatingTemperature,
+			MaxVibrationRandom:              &chassises[i].MaxVibrationRandom,
+			MaxVibrationSine:                &chassises[i].MaxVibrationSine,
+			MinNonOperatingTemperature:      &chassises[i].MinNonOperatingTemperature,
+			MinOperatingTemperature:         &chassises[i].MinOperatingTemperature,
+			MinVibrationRandom:              &chassises[i].MinVibrationRandom,
+			MinVibrationSine:                &chassises[i].MinVibrationSine,
+			Name:                            &chassises[i].Name,
+			Overload:                        &chassises[i].Overload,
+			PeakFrequencySpectrum1:          &chassises[i].PeakFrequencySpectrum1,
+			PeakFrequencySpectrum2:          &chassises[i].PeakFrequencySpectrum2,
+			PeakOverloadSpectrum1:           &chassises[i].PeakOverloadSpectrum1,
+			PeakOverloadSpectrum2:           &chassises[i].PeakOverloadSpectrum2,
+			PowerHandlingCapabilityPerBoard: &chassises[i].PowerHandlingCapabilityPerBoard,
+			ShockResponseSpectrum:           &chassises[i].ShockResponseSpectrum,
+			Size:                            &chassises[i].Size,
+			Slots:                           &chassises[i].Slots,
+			TemperaturePerBoard:             &chassises[i].TemperaturePerBoard,
+			Weight:                          &chassises[i].Weight,
+			Width:                           &chassises[i].Width,
+			CreatedAt:                       chassises[i].CreatedAt.Unix(),
+			UpdatedAt:                       chassises[i].UpdatedAt.Time.Unix(),
+		}
+	}
+	return chassisesData
 }

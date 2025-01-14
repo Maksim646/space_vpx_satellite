@@ -20,6 +20,8 @@ const (
 	FilterChassisByWeight                          = "filter_chassis_by_weight"
 	FilterChassisByPowerHandlingCapabilityPerBoard = "filter_chassis_by_power_handling_capability_per_board"
 	FilterChassisByTemperaturePerBoard             = "filter_chassis_by_temperature_per_board"
+
+	DefaultChassisSort = "id desc"
 )
 
 type Chassis struct {
