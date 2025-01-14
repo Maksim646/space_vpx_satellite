@@ -24,8 +24,8 @@ type DeleteChassisReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *DeleteChassisReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 204:
-		result := NewDeleteChassisNoContent()
+	case 200:
+		result := NewDeleteChassisOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -53,58 +53,72 @@ func (o *DeleteChassisReader) ReadResponse(response runtime.ClientResponse, cons
 	}
 }
 
-// NewDeleteChassisNoContent creates a DeleteChassisNoContent with default headers values
-func NewDeleteChassisNoContent() *DeleteChassisNoContent {
-	return &DeleteChassisNoContent{}
+// NewDeleteChassisOK creates a DeleteChassisOK with default headers values
+func NewDeleteChassisOK() *DeleteChassisOK {
+	return &DeleteChassisOK{}
 }
 
 /*
-DeleteChassisNoContent describes a response with status code 204, with default header values.
+DeleteChassisOK describes a response with status code 200, with default header values.
 
 Chassis deleted successfully
 */
-type DeleteChassisNoContent struct {
+type DeleteChassisOK struct {
+	Payload *models.Error
 }
 
-// IsSuccess returns true when this delete chassis no content response has a 2xx status code
-func (o *DeleteChassisNoContent) IsSuccess() bool {
+// IsSuccess returns true when this delete chassis o k response has a 2xx status code
+func (o *DeleteChassisOK) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this delete chassis no content response has a 3xx status code
-func (o *DeleteChassisNoContent) IsRedirect() bool {
+// IsRedirect returns true when this delete chassis o k response has a 3xx status code
+func (o *DeleteChassisOK) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this delete chassis no content response has a 4xx status code
-func (o *DeleteChassisNoContent) IsClientError() bool {
+// IsClientError returns true when this delete chassis o k response has a 4xx status code
+func (o *DeleteChassisOK) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this delete chassis no content response has a 5xx status code
-func (o *DeleteChassisNoContent) IsServerError() bool {
+// IsServerError returns true when this delete chassis o k response has a 5xx status code
+func (o *DeleteChassisOK) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this delete chassis no content response a status code equal to that given
-func (o *DeleteChassisNoContent) IsCode(code int) bool {
-	return code == 204
+// IsCode returns true when this delete chassis o k response a status code equal to that given
+func (o *DeleteChassisOK) IsCode(code int) bool {
+	return code == 200
 }
 
-// Code gets the status code for the delete chassis no content response
-func (o *DeleteChassisNoContent) Code() int {
-	return 204
+// Code gets the status code for the delete chassis o k response
+func (o *DeleteChassisOK) Code() int {
+	return 200
 }
 
-func (o *DeleteChassisNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /chassis/{id}][%d] deleteChassisNoContent", 204)
+func (o *DeleteChassisOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /chassis/{id}][%d] deleteChassisOK %s", 200, payload)
 }
 
-func (o *DeleteChassisNoContent) String() string {
-	return fmt.Sprintf("[DELETE /chassis/{id}][%d] deleteChassisNoContent", 204)
+func (o *DeleteChassisOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /chassis/{id}][%d] deleteChassisOK %s", 200, payload)
 }
 
-func (o *DeleteChassisNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *DeleteChassisOK) GetPayload() *models.Error {
+	return o.Payload
+}
+
+func (o *DeleteChassisOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Error)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

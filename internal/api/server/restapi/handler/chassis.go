@@ -73,7 +73,6 @@ func (h *Handler) UpdateChassisHandler(req api.UpdateChassisParams, principal *d
 		})
 	}
 
-	// Обновляем только те поля, которые не пустые
 	if *req.CreateChassisBody.Axes != 0 {
 		chassis.Axes = *req.CreateChassisBody.Axes
 	}
@@ -184,20 +183,94 @@ func (h *Handler) UpdateChassisHandler(req api.UpdateChassisParams, principal *d
 	})
 }
 
-func updateChassisInt64Field(chassis *model.Chassis, value *int64, updateFunc func(int64)) {
+func updateChassisInt64Field(value *int64, updateFunc func(int64)) {
 	if value != nil && *value != 0 {
 		updateFunc(*value)
 	}
 }
 
-func updateChassisField(chassis *model.Chassis, value *float64, updateFunc func(float64)) {
+func updateChassisField(value *float64, updateFunc func(float64)) {
 	if value != nil && *value != 0 {
 		updateFunc(*value)
 	}
 }
 
-func updateChassisStringField(chassis *model.Chassis, value *string, updateFunc func(string)) {
+func updateChassisStringField(value *string, updateFunc func(string)) {
 	if value != nil && *value != "" {
 		updateFunc(*value)
 	}
+}
+
+func (h *Handler) DeleteChassisHandler(req api.DeleteChassisParams, principal *definition.Principal) middleware.Responder {
+	zap.L().Info("update chassis request, id:" + string(req.ID))
+	ctx := req.HTTPRequest.Context()
+
+	// Проверка роли пользователя
+	if principal.Role == 0 {
+		return api.NewDeleteChassisForbidden()
+	}
+
+	chassis, err := h.chassisUsecase.GetChassisByID(ctx, req.ID)
+	if err != nil {
+		return api.NewDeleteChassisNotFound().WithPayload(&definition.Error{
+			Message: &model.ChassisNotFound,
+		})
+	}
+
+	err = h.chassisUsecase.DeleteChassisByID(ctx, chassis.ID)
+	if err != nil {
+		zap.L().Error("failed to delete chassis", zap.Error(err))
+		return api.NewDeleteChassisInternalServerError()
+	}
+
+	return api.NewDeleteChassisOK().WithPayload(&definition.Error{
+		Message: useful.StrPtr("Chassis deleted successfully"),
+	})
+}
+
+func (h *Handler) GetChassisHandler(req api.GetChassisByIDParams, principal *definition.Principal) middleware.Responder {
+	zap.L().Info("update chassis request, id:" + string(req.ID))
+	ctx := req.HTTPRequest.Context()
+
+	// Проверка роли пользователя
+	if principal.Role == 0 {
+		return api.NewDeleteChassisForbidden()
+	}
+
+	chassis, err := h.chassisUsecase.GetChassisByID(ctx, req.ID)
+	if err != nil {
+		return api.NewDeleteChassisNotFound().WithPayload(&definition.Error{
+			Message: &model.ChassisNotFound,
+		})
+	}
+
+	return api.NewGetChassisByIDOK().WithPayload(&definition.Chassis{
+		ID:                              chassis.ID,
+		Axes:                            &chassis.Axes,
+		Height:                          &chassis.Height,
+		Length:                          &chassis.Length,
+		MaxNonOperatingTemperature:      &chassis.MaxNonOperatingTemperature,
+		MaxOperatingTemperature:         &chassis.MaxOperatingTemperature,
+		MaxVibrationRandom:              &chassis.MaxVibrationRandom,
+		MaxVibrationSine:                &chassis.MaxVibrationSine,
+		MinNonOperatingTemperature:      &chassis.MinNonOperatingTemperature,
+		MinOperatingTemperature:         &chassis.MinOperatingTemperature,
+		MinVibrationRandom:              &chassis.MinVibrationRandom,
+		MinVibrationSine:                &chassis.MinVibrationSine,
+		Name:                            &chassis.Name,
+		Overload:                        &chassis.Overload,
+		PeakFrequencySpectrum1:          &chassis.PeakFrequencySpectrum1,
+		PeakFrequencySpectrum2:          &chassis.PeakFrequencySpectrum2,
+		PeakOverloadSpectrum1:           &chassis.PeakOverloadSpectrum1,
+		PeakOverloadSpectrum2:           &chassis.PeakOverloadSpectrum2,
+		PowerHandlingCapabilityPerBoard: &chassis.PowerHandlingCapabilityPerBoard,
+		ShockResponseSpectrum:           &chassis.ShockResponseSpectrum,
+		Size:                            &chassis.Size,
+		Slots:                           &chassis.Slots,
+		TemperaturePerBoard:             &chassis.TemperaturePerBoard,
+		Weight:                          &chassis.Weight,
+		Width:                           &chassis.Width,
+		CreatedAt:                       chassis.CreatedAt.Unix(),
+		UpdatedAt:                       time.Now().Unix(),
+	})
 }

@@ -313,8 +313,11 @@ func init() {
           }
         ],
         "responses": {
-          "204": {
-            "description": "Chassis deleted successfully"
+          "200": {
+            "description": "Chassis deleted successfully",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           },
           "403": {
             "description": "Forbidden",
@@ -1560,8 +1563,11 @@ func init() {
           }
         ],
         "responses": {
-          "204": {
-            "description": "Chassis deleted successfully"
+          "200": {
+            "description": "Chassis deleted successfully",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           },
           "403": {
             "description": "Forbidden",

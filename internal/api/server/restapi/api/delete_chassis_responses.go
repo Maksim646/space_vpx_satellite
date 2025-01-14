@@ -13,29 +13,49 @@ import (
 	models "github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 )
 
-// DeleteChassisNoContentCode is the HTTP code returned for type DeleteChassisNoContent
-const DeleteChassisNoContentCode int = 204
+// DeleteChassisOKCode is the HTTP code returned for type DeleteChassisOK
+const DeleteChassisOKCode int = 200
 
 /*
-DeleteChassisNoContent Chassis deleted successfully
+DeleteChassisOK Chassis deleted successfully
 
-swagger:response deleteChassisNoContent
+swagger:response deleteChassisOK
 */
-type DeleteChassisNoContent struct {
+type DeleteChassisOK struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.Error `json:"body,omitempty"`
 }
 
-// NewDeleteChassisNoContent creates DeleteChassisNoContent with default headers values
-func NewDeleteChassisNoContent() *DeleteChassisNoContent {
+// NewDeleteChassisOK creates DeleteChassisOK with default headers values
+func NewDeleteChassisOK() *DeleteChassisOK {
 
-	return &DeleteChassisNoContent{}
+	return &DeleteChassisOK{}
+}
+
+// WithPayload adds the payload to the delete chassis o k response
+func (o *DeleteChassisOK) WithPayload(payload *models.Error) *DeleteChassisOK {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the delete chassis o k response
+func (o *DeleteChassisOK) SetPayload(payload *models.Error) {
+	o.Payload = payload
 }
 
 // WriteResponse to the client
-func (o *DeleteChassisNoContent) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+func (o *DeleteChassisOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
-	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
-
-	rw.WriteHeader(204)
+	rw.WriteHeader(200)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
 }
 
 // DeleteChassisForbiddenCode is the HTTP code returned for type DeleteChassisForbidden

@@ -79,6 +79,8 @@ func New(
 	// CHASSIS
 	router.CreateChassisHandler = api.CreateChassisHandlerFunc(h.CreateChassisHandler)
 	router.UpdateChassisHandler = api.UpdateChassisHandlerFunc(h.UpdateChassisHandler)
+	router.GetChassisByIDHandler = api.GetChassisByIDHandlerFunc(h.GetChassisHandler)
+	router.DeleteChassisHandler = api.DeleteChassisHandlerFunc(h.DeleteChassisHandler)
 
 	// USER
 	router.GetUserMeHandler = api.GetUserMeHandlerFunc(h.GetUserMe)

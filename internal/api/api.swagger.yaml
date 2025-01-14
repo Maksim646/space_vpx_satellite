@@ -479,8 +479,10 @@ paths:
           type: integer
           description: The ID of the chassis
       responses:
-          204:
+          200:
             description: Chassis deleted successfully
+            schema:
+              $ref: '#/definitions/Error'
           404:
             description: Chassis not found
             schema:

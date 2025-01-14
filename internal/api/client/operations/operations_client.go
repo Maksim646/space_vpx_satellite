@@ -60,7 +60,7 @@ type ClientService interface {
 
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectOK, error)
 
-	DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisNoContent, error)
+	DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisOK, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
 
@@ -166,7 +166,7 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 /*
 DeleteChassis deletes chassis by ID
 */
-func (a *Client) DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisNoContent, error) {
+func (a *Client) DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteChassisParams()
@@ -192,7 +192,7 @@ func (a *Client) DeleteChassis(params *DeleteChassisParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteChassisNoContent)
+	success, ok := result.(*DeleteChassisOK)
 	if ok {
 		return success, nil
 	}
