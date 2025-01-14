@@ -88,6 +88,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+### PROJECT
+  /proj
+
 definitions:
   CallBackResponse:
     type: object
