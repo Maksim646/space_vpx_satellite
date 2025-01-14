@@ -88,6 +88,41 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /auth/admin_login:
+    post:
+      summary: Login Admin
+      operationId: LoginAdmin
+      tags: 
+        - Auth
+      parameters:
+        - name: LoginAdmin
+          description: Login Admin Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginAdmin'
+      responses:
+        200:
+          description: Login Admin Response
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
 ### PROJECT
   /project:
     post:
@@ -319,6 +354,147 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+### CHASSIS
+  /chassis:
+    post:
+      security:
+        - Bearer: []
+      summary: Create chasis
+      operationId: CreateChassis
+      tags: 
+        - Chassis
+      parameters:
+        - name: CreateChassisBody
+          description: Create Chassis Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateChassisBody'
+      responses:
+          200:
+            description: Create Chassis Response
+            schema:
+              $ref: '#/definitions/CreateChassisResponse'
+          400:
+            description: Bad request
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Forbidden
+            schema:
+              $ref: '#/definitions/Error' 
+          422:
+            description: Unprocessable Entity
+            schema:
+              $ref: "#/definitions/Error"        
+          500:
+            description: Internal server error
+            schema:
+              $ref: '#/definitions/Error'
+
+  /chassis/{id}:
+    get:
+      security:
+        - Bearer: []
+      summary: Get chassis by ID
+      operationId: GetChassisByID
+      tags: 
+        - Chassis
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the chassis
+      responses:
+          200:
+            description: Chassis Response
+            schema:
+              $ref: '#/definitions/Chassis'
+          404:
+            description: Chassis not found
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Forbidden
+            schema:
+              $ref: '#/definitions/Error' 
+          500:
+            description: Internal server error
+            schema:
+              $ref: '#/definitions/Error'
+
+    patch:
+      security:
+        - Bearer: []
+      summary: Update chassis
+      operationId: UpdateChassis
+      tags: 
+        - Chassis
+      parameters:
+        - name: CreateChassisBody
+          description: Update Chassis Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateChassisBody'
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the chassis
+      responses:
+          200:
+            description: Update Chassis Response
+            schema:
+              $ref: '#/definitions/Chassis'
+          400:
+            description: Bad request
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Forbidden
+            schema:
+              $ref: '#/definitions/Error' 
+          422:
+            description: Unprocessable Entity
+            schema:
+              $ref: "#/definitions/Error"        
+          500:
+            description: Internal server error
+            schema:
+              $ref: '#/definitions/Error'
+
+    delete:
+      security:
+        - Bearer: []
+      summary: Delete chassis by ID
+      operationId: DeleteChassis
+      tags: 
+        - Chassis
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the chassis
+      responses:
+          204:
+            description: Chassis deleted successfully
+          404:
+            description: Chassis not found
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Forbidden
+            schema:
+              $ref: '#/definitions/Error' 
+          500:
+            description: Internal server error
+            schema:
+              $ref: '#/definitions/Error'
+        
+
 
 
 definitions:
@@ -448,7 +624,7 @@ definitions:
       
 
 
-###AUTH
+### AUTH
   RegisterUser:
     type: object
     required:
@@ -482,3 +658,239 @@ definitions:
     properties:
        access_token:
         type: string
+
+  LoginAdmin:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+
+
+### CHASSIS
+
+  CreateChassisBody:
+    type: object
+    required:
+      - name
+      - slots
+      - size
+      - max_operating_temperature
+      - min_operating_temperature
+      - max_non_operating_temperature
+      - min_non_operating_temperature
+      - overload
+      - max_vibration_sine
+      - min_vibration_sine
+      - max_vibration_random
+      - min_vibration_random
+      - axes
+      - shock_response_spectrum
+      - peak_overload_spectrum_1
+      - peak_overload_spectrum_2
+      - peak_frequency_spectrum_1
+      - peak_frequency_spectrum_2
+      - length
+      - width
+      - height
+      - weight
+      - power_handling_capability_per_board
+      - temperature_per_board
+    properties:
+      name:
+        type: string
+        description: Name of the chassis
+      slots:
+        type: integer
+        description: Number of slots in the chassis
+      size:
+        type: string
+        description: Size of the chassis
+      max_operating_temperature:
+        type: number
+        description: Maximum operating temperature in degrees Celsius
+      min_operating_temperature:
+        type: number
+        description: Minimum operating temperature in degrees Celsius
+      max_non_operating_temperature:
+        type: number
+        description: Maximum non-operating temperature in degrees Celsius
+      min_non_operating_temperature:
+        type: number
+        description: Minimum non-operating temperature in degrees Celsius
+      overload:
+        type: number
+        description: Overload capacity
+      max_vibration_sine:
+        type: number
+        description: Maximum sine vibration
+      min_vibration_sine:
+        type: number
+        description: Minimum sine vibration
+      max_vibration_random:
+        type: number
+        description: Maximum random vibration
+      min_vibration_random:
+        type: number
+        description: Minimum random vibration
+      axes:
+        type: integer
+        description: Number of axes
+      shock_response_spectrum:
+        type: number
+        description: Shock response spectrum value
+      peak_overload_spectrum_1:
+        type: number
+        description: Peak overload spectrum value 1
+      peak_overload_spectrum_2:
+        type: number
+        description: Peak overload spectrum value 2
+      peak_frequency_spectrum_1:
+        type: number
+        description: Peak frequency spectrum value 1
+      peak_frequency_spectrum_2:
+        type: number
+        description: Peak frequency spectrum value 2
+      length:
+        type: number
+        description: Length of the chassis
+      width:
+        type: number
+        description: Width of the chassis
+      height:
+        type: number
+        description: Height of the chassis
+      weight:
+        type: number
+        description: Weight of the chassis
+      power_handling_capability_per_board:
+        type: number
+        description: Power handling capability per board
+      temperature_per_board:
+        type: number
+        description: Temperature per board
+
+  CreateChassisResponse:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique identifier for the chassis (auto-generated)
+
+  Chassis:
+    type: object
+    required:
+      - name
+      - slots
+      - size
+      - max_operating_temperature
+      - min_operating_temperature
+      - max_non_operating_temperature
+      - min_non_operating_temperature
+      - overload
+      - max_vibration_sine
+      - min_vibration_sine
+      - max_vibration_random
+      - min_vibration_random
+      - axes
+      - shock_response_spectrum
+      - peak_overload_spectrum_1
+      - peak_overload_spectrum_2
+      - peak_frequency_spectrum_1
+      - peak_frequency_spectrum_2
+      - length
+      - width
+      - height
+      - weight
+      - power_handling_capability_per_board
+      - temperature_per_board
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique identifier for the chassis (auto-generated)
+      name:
+        type: string
+        description: Name of the chassis
+      slots:
+        type: integer
+        description: Number of slots in the chassis
+      size:
+        type: string
+        description: Size of the chassis
+      max_operating_temperature:
+        type: number
+        description: Maximum operating temperature in degrees Celsius
+      min_operating_temperature:
+        type: number
+        description: Minimum operating temperature in degrees Celsius
+      max_non_operating_temperature:
+        type: number
+        description: Maximum non-operating temperature in degrees Celsius
+      min_non_operating_temperature:
+        type: number
+        description: Minimum non-operating temperature in degrees Celsius
+      overload:
+        type: number
+        description: Overload capacity
+      max_vibration_sine:
+        type: number
+        description: Maximum sine vibration
+      min_vibration_sine:
+        type: number
+        description: Minimum sine vibration
+      max_vibration_random:
+        type: number
+        description: Maximum random vibration
+      min_vibration_random:
+        type: number
+        description: Minimum random vibration
+      axes:
+        type: integer
+        description: Number of axes
+      shock_response_spectrum:
+        type: number
+        description: Shock response spectrum value
+      peak_overload_spectrum_1:
+        type: number
+        description: Peak overload spectrum value 1
+      peak_overload_spectrum_2:
+        type: number
+        description: Peak overload spectrum value 2
+      peak_frequency_spectrum_1:
+        type: number
+        description: Peak frequency spectrum value 1
+      peak_frequency_spectrum_2:
+        type: number
+        description: Peak frequency spectrum value 2
+      length:
+        type: number
+        description: Length of the chassis
+      width:
+        type: number
+        description: Width of the chassis
+      height:
+        type: number
+        description: Height of the chassis
+      weight:
+        type: number
+        description: Weight of the chassis
+      power_handling_capability_per_board:
+        type: number
+        description: Power handling capability per board
+      temperature_per_board:
+        type: number
+        description: Temperature per board
+      updated_at:
+        type: integer
+        description: Timestamp of the last update
+      created_at:
+        type: integer
+        description: Timestamp of creation

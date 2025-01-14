@@ -44,11 +44,20 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 
 		JSONProducer: runtime.JSONProducer(),
 
+		CreateChassisHandler: CreateChassisHandlerFunc(func(params CreateChassisParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateChassis has not yet been implemented")
+		}),
 		CreateProjectHandler: CreateProjectHandlerFunc(func(params CreateProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateProject has not yet been implemented")
 		}),
+		DeleteChassisHandler: DeleteChassisHandlerFunc(func(params DeleteChassisParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteChassis has not yet been implemented")
+		}),
 		DeleteProjectHandler: DeleteProjectHandlerFunc(func(params DeleteProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteProject has not yet been implemented")
+		}),
+		GetChassisByIDHandler: GetChassisByIDHandlerFunc(func(params GetChassisByIDParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetChassisByID has not yet been implemented")
 		}),
 		GetProjectHandler: GetProjectHandlerFunc(func(params GetProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetProject has not yet been implemented")
@@ -59,11 +68,17 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		GetUserProjectsHandler: GetUserProjectsHandlerFunc(func(params GetUserProjectsParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetUserProjects has not yet been implemented")
 		}),
+		LoginAdminHandler: LoginAdminHandlerFunc(func(params LoginAdminParams) middleware.Responder {
+			return middleware.NotImplemented("operation LoginAdmin has not yet been implemented")
+		}),
 		LoginUserHandler: LoginUserHandlerFunc(func(params LoginUserParams) middleware.Responder {
 			return middleware.NotImplemented("operation LoginUser has not yet been implemented")
 		}),
 		RegisterUserHandler: RegisterUserHandlerFunc(func(params RegisterUserParams) middleware.Responder {
 			return middleware.NotImplemented("operation RegisterUser has not yet been implemented")
+		}),
+		UpdateChassisHandler: UpdateChassisHandlerFunc(func(params UpdateChassisParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateChassis has not yet been implemented")
 		}),
 		UpdateProjectHandler: UpdateProjectHandlerFunc(func(params UpdateProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateProject has not yet been implemented")
@@ -118,20 +133,30 @@ type SpaceVPXBackendServiceAPI struct {
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
 
+	// CreateChassisHandler sets the operation handler for the create chassis operation
+	CreateChassisHandler CreateChassisHandler
 	// CreateProjectHandler sets the operation handler for the create project operation
 	CreateProjectHandler CreateProjectHandler
+	// DeleteChassisHandler sets the operation handler for the delete chassis operation
+	DeleteChassisHandler DeleteChassisHandler
 	// DeleteProjectHandler sets the operation handler for the delete project operation
 	DeleteProjectHandler DeleteProjectHandler
+	// GetChassisByIDHandler sets the operation handler for the get chassis by ID operation
+	GetChassisByIDHandler GetChassisByIDHandler
 	// GetProjectHandler sets the operation handler for the get project operation
 	GetProjectHandler GetProjectHandler
 	// GetUserMeHandler sets the operation handler for the get user me operation
 	GetUserMeHandler GetUserMeHandler
 	// GetUserProjectsHandler sets the operation handler for the get user projects operation
 	GetUserProjectsHandler GetUserProjectsHandler
+	// LoginAdminHandler sets the operation handler for the login admin operation
+	LoginAdminHandler LoginAdminHandler
 	// LoginUserHandler sets the operation handler for the login user operation
 	LoginUserHandler LoginUserHandler
 	// RegisterUserHandler sets the operation handler for the register user operation
 	RegisterUserHandler RegisterUserHandler
+	// UpdateChassisHandler sets the operation handler for the update chassis operation
+	UpdateChassisHandler UpdateChassisHandler
 	// UpdateProjectHandler sets the operation handler for the update project operation
 	UpdateProjectHandler UpdateProjectHandler
 
@@ -215,11 +240,20 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 		unregistered = append(unregistered, "AuthorizationAuth")
 	}
 
+	if o.CreateChassisHandler == nil {
+		unregistered = append(unregistered, "CreateChassisHandler")
+	}
 	if o.CreateProjectHandler == nil {
 		unregistered = append(unregistered, "CreateProjectHandler")
 	}
+	if o.DeleteChassisHandler == nil {
+		unregistered = append(unregistered, "DeleteChassisHandler")
+	}
 	if o.DeleteProjectHandler == nil {
 		unregistered = append(unregistered, "DeleteProjectHandler")
+	}
+	if o.GetChassisByIDHandler == nil {
+		unregistered = append(unregistered, "GetChassisByIDHandler")
 	}
 	if o.GetProjectHandler == nil {
 		unregistered = append(unregistered, "GetProjectHandler")
@@ -230,11 +264,17 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.GetUserProjectsHandler == nil {
 		unregistered = append(unregistered, "GetUserProjectsHandler")
 	}
+	if o.LoginAdminHandler == nil {
+		unregistered = append(unregistered, "LoginAdminHandler")
+	}
 	if o.LoginUserHandler == nil {
 		unregistered = append(unregistered, "LoginUserHandler")
 	}
 	if o.RegisterUserHandler == nil {
 		unregistered = append(unregistered, "RegisterUserHandler")
+	}
+	if o.UpdateChassisHandler == nil {
+		unregistered = append(unregistered, "UpdateChassisHandler")
 	}
 	if o.UpdateProjectHandler == nil {
 		unregistered = append(unregistered, "UpdateProjectHandler")
@@ -341,11 +381,23 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/chassis"] = NewCreateChassis(o.context, o.CreateChassisHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/project"] = NewCreateProject(o.context, o.CreateProjectHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/chassis/{id}"] = NewDeleteChassis(o.context, o.DeleteChassisHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/project/{id}"] = NewDeleteProject(o.context, o.DeleteProjectHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/chassis/{id}"] = NewGetChassisByID(o.context, o.GetChassisByIDHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -361,11 +413,19 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/auth/admin_login"] = NewLoginAdmin(o.context, o.LoginAdminHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/auth/login"] = NewLoginUser(o.context, o.LoginUserHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/auth/register"] = NewRegisterUser(o.context, o.RegisterUserHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/chassis/{id}"] = NewUpdateChassis(o.context, o.UpdateChassisHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}

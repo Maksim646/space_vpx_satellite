@@ -22,7 +22,9 @@ import (
 
 type Handler struct {
 	userUsecase    model.IUserUsecase
+	adminUsecase   model.IAdminUsecase
 	projectUsecase model.IProjectUsecase
+	chassisUsecase model.IChassisUsecase
 
 	router       http.Handler
 	HashSalt     string
@@ -31,7 +33,9 @@ type Handler struct {
 
 func New(
 	userUsecase model.IUserUsecase,
+	adminUsecase model.IAdminUsecase,
 	projectUsecase model.IProjectUsecase,
+	chassisUsecase model.IChassisUsecase,
 
 	version string,
 	HashSalt string,
@@ -46,7 +50,9 @@ func New(
 
 	h := &Handler{
 		userUsecase:    userUsecase,
+		adminUsecase:   adminUsecase,
 		projectUsecase: projectUsecase,
+		chassisUsecase: chassisUsecase,
 
 		HashSalt:     HashSalt,
 		jwtSigninKey: jwtSigninKey,
@@ -61,12 +67,18 @@ func New(
 	// AUTH
 	router.RegisterUserHandler = api.RegisterUserHandlerFunc(h.RegisterUserHandler)
 	router.LoginUserHandler = api.LoginUserHandlerFunc(h.LoginUserHandler)
+	router.LoginAdminHandler = api.LoginAdminHandlerFunc(h.LoginAdminHandler)
 
 	// PROJECTS
 	router.CreateProjectHandler = api.CreateProjectHandlerFunc(h.CreateProjectHandler)
 	router.UpdateProjectHandler = api.UpdateProjectHandlerFunc(h.UpdateProjectHandler)
 	router.GetProjectHandler = api.GetProjectHandlerFunc(h.GetProjectByIDHandler)
+	router.DeleteProjectHandler = api.DeleteProjectHandlerFunc(h.DeleteProject)
 	router.GetUserProjectsHandler = api.GetUserProjectsHandlerFunc(h.GetProjectsByUser)
+
+	// CHASSIS
+	router.CreateChassisHandler = api.CreateChassisHandlerFunc(h.CreateChassisHandler)
+	router.UpdateChassisHandler = api.UpdateChassisHandlerFunc(h.UpdateChassisHandler)
 
 	// USER
 	router.GetUserMeHandler = api.GetUserMeHandlerFunc(h.GetUserMe)
@@ -102,16 +114,12 @@ func (h *Handler) ValidateHeader(bearerHeader string) (*definition.Principal, er
 		}
 
 	} else {
-		// _, err = h.adminUsecase.GetByID(ctx, userID)
-		// if err != nil {
-		// 	return nil, err
-		// }
-
-		// if err := h.adminUsecase.UpdateLastVisitTime(ctx, userID); err != nil {
-		// 	return nil, err
-		// }
+		_, err = h.adminUsecase.GetAdminByID(ctx, userID)
+		if err != nil {
+			return nil, err
+		}
 
 	}
 
-	return &definition.Principal{ID: userID}, nil
+	return &definition.Principal{ID: userID, Role: roleID}, nil
 }

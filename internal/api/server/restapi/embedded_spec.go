@@ -31,6 +31,58 @@ func init() {
     "version": "development"
   },
   "paths": {
+    "/auth/admin_login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login Admin",
+        "operationId": "LoginAdmin",
+        "parameters": [
+          {
+            "description": "Login Admin Body",
+            "name": "LoginAdmin",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Admin Response",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "tags": [
@@ -106,6 +158,218 @@ func init() {
             "description": "Register Response",
             "schema": {
               "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/chassis": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Create chasis",
+        "operationId": "CreateChassis",
+        "parameters": [
+          {
+            "description": "Create Chassis Body",
+            "name": "CreateChassisBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChassisBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/CreateChassisResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/chassis/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Get chassis by ID",
+        "operationId": "GetChassisByID",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the chassis",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/Chassis"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Chassis not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Delete chassis by ID",
+        "operationId": "DeleteChassis",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the chassis",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Chassis deleted successfully"
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Chassis not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Update chassis",
+        "operationId": "UpdateChassis",
+        "parameters": [
+          {
+            "description": "Update Chassis Body",
+            "name": "CreateChassisBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChassisBody"
+            }
+          },
+          {
+            "type": "integer",
+            "description": "The ID of the chassis",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/Chassis"
             }
           },
           "400": {
@@ -508,6 +772,286 @@ func init() {
         }
       }
     },
+    "Chassis": {
+      "type": "object",
+      "required": [
+        "name",
+        "slots",
+        "size",
+        "max_operating_temperature",
+        "min_operating_temperature",
+        "max_non_operating_temperature",
+        "min_non_operating_temperature",
+        "overload",
+        "max_vibration_sine",
+        "min_vibration_sine",
+        "max_vibration_random",
+        "min_vibration_random",
+        "axes",
+        "shock_response_spectrum",
+        "peak_overload_spectrum_1",
+        "peak_overload_spectrum_2",
+        "peak_frequency_spectrum_1",
+        "peak_frequency_spectrum_2",
+        "length",
+        "width",
+        "height",
+        "weight",
+        "power_handling_capability_per_board",
+        "temperature_per_board"
+      ],
+      "properties": {
+        "axes": {
+          "description": "Number of axes",
+          "type": "integer"
+        },
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Height of the chassis",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the chassis (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "length": {
+          "description": "Length of the chassis",
+          "type": "number"
+        },
+        "max_non_operating_temperature": {
+          "description": "Maximum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_vibration_random": {
+          "description": "Maximum random vibration",
+          "type": "number"
+        },
+        "max_vibration_sine": {
+          "description": "Maximum sine vibration",
+          "type": "number"
+        },
+        "min_non_operating_temperature": {
+          "description": "Minimum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_vibration_random": {
+          "description": "Minimum random vibration",
+          "type": "number"
+        },
+        "min_vibration_sine": {
+          "description": "Minimum sine vibration",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the chassis",
+          "type": "string"
+        },
+        "overload": {
+          "description": "Overload capacity",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_1": {
+          "description": "Peak frequency spectrum value 1",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_2": {
+          "description": "Peak frequency spectrum value 2",
+          "type": "number"
+        },
+        "peak_overload_spectrum_1": {
+          "description": "Peak overload spectrum value 1",
+          "type": "number"
+        },
+        "peak_overload_spectrum_2": {
+          "description": "Peak overload spectrum value 2",
+          "type": "number"
+        },
+        "power_handling_capability_per_board": {
+          "description": "Power handling capability per board",
+          "type": "number"
+        },
+        "shock_response_spectrum": {
+          "description": "Shock response spectrum value",
+          "type": "number"
+        },
+        "size": {
+          "description": "Size of the chassis",
+          "type": "string"
+        },
+        "slots": {
+          "description": "Number of slots in the chassis",
+          "type": "integer"
+        },
+        "temperature_per_board": {
+          "description": "Temperature per board",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "weight": {
+          "description": "Weight of the chassis",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the chassis",
+          "type": "number"
+        }
+      }
+    },
+    "CreateChassisBody": {
+      "type": "object",
+      "required": [
+        "name",
+        "slots",
+        "size",
+        "max_operating_temperature",
+        "min_operating_temperature",
+        "max_non_operating_temperature",
+        "min_non_operating_temperature",
+        "overload",
+        "max_vibration_sine",
+        "min_vibration_sine",
+        "max_vibration_random",
+        "min_vibration_random",
+        "axes",
+        "shock_response_spectrum",
+        "peak_overload_spectrum_1",
+        "peak_overload_spectrum_2",
+        "peak_frequency_spectrum_1",
+        "peak_frequency_spectrum_2",
+        "length",
+        "width",
+        "height",
+        "weight",
+        "power_handling_capability_per_board",
+        "temperature_per_board"
+      ],
+      "properties": {
+        "axes": {
+          "description": "Number of axes",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Height of the chassis",
+          "type": "number"
+        },
+        "length": {
+          "description": "Length of the chassis",
+          "type": "number"
+        },
+        "max_non_operating_temperature": {
+          "description": "Maximum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_vibration_random": {
+          "description": "Maximum random vibration",
+          "type": "number"
+        },
+        "max_vibration_sine": {
+          "description": "Maximum sine vibration",
+          "type": "number"
+        },
+        "min_non_operating_temperature": {
+          "description": "Minimum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_vibration_random": {
+          "description": "Minimum random vibration",
+          "type": "number"
+        },
+        "min_vibration_sine": {
+          "description": "Minimum sine vibration",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the chassis",
+          "type": "string"
+        },
+        "overload": {
+          "description": "Overload capacity",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_1": {
+          "description": "Peak frequency spectrum value 1",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_2": {
+          "description": "Peak frequency spectrum value 2",
+          "type": "number"
+        },
+        "peak_overload_spectrum_1": {
+          "description": "Peak overload spectrum value 1",
+          "type": "number"
+        },
+        "peak_overload_spectrum_2": {
+          "description": "Peak overload spectrum value 2",
+          "type": "number"
+        },
+        "power_handling_capability_per_board": {
+          "description": "Power handling capability per board",
+          "type": "number"
+        },
+        "shock_response_spectrum": {
+          "description": "Shock response spectrum value",
+          "type": "number"
+        },
+        "size": {
+          "description": "Size of the chassis",
+          "type": "string"
+        },
+        "slots": {
+          "description": "Number of slots in the chassis",
+          "type": "integer"
+        },
+        "temperature_per_board": {
+          "description": "Temperature per board",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight of the chassis",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the chassis",
+          "type": "number"
+        }
+      }
+    },
+    "CreateChassisResponse": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the chassis (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "CreateProjectBody": {
       "type": "object",
       "required": [
@@ -537,6 +1081,21 @@ func init() {
       ],
       "properties": {
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginAdmin": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
           "type": "string"
         }
       }
@@ -719,6 +1278,58 @@ func init() {
     "version": "development"
   },
   "paths": {
+    "/auth/admin_login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login Admin",
+        "operationId": "LoginAdmin",
+        "parameters": [
+          {
+            "description": "Login Admin Body",
+            "name": "LoginAdmin",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Admin Response",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "tags": [
@@ -794,6 +1405,218 @@ func init() {
             "description": "Register Response",
             "schema": {
               "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/chassis": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Create chasis",
+        "operationId": "CreateChassis",
+        "parameters": [
+          {
+            "description": "Create Chassis Body",
+            "name": "CreateChassisBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChassisBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/CreateChassisResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/chassis/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Get chassis by ID",
+        "operationId": "GetChassisByID",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the chassis",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/Chassis"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Chassis not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Delete chassis by ID",
+        "operationId": "DeleteChassis",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the chassis",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Chassis deleted successfully"
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Chassis not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Chassis"
+        ],
+        "summary": "Update chassis",
+        "operationId": "UpdateChassis",
+        "parameters": [
+          {
+            "description": "Update Chassis Body",
+            "name": "CreateChassisBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChassisBody"
+            }
+          },
+          {
+            "type": "integer",
+            "description": "The ID of the chassis",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Chassis Response",
+            "schema": {
+              "$ref": "#/definitions/Chassis"
             }
           },
           "400": {
@@ -1198,6 +2021,286 @@ func init() {
         }
       }
     },
+    "Chassis": {
+      "type": "object",
+      "required": [
+        "name",
+        "slots",
+        "size",
+        "max_operating_temperature",
+        "min_operating_temperature",
+        "max_non_operating_temperature",
+        "min_non_operating_temperature",
+        "overload",
+        "max_vibration_sine",
+        "min_vibration_sine",
+        "max_vibration_random",
+        "min_vibration_random",
+        "axes",
+        "shock_response_spectrum",
+        "peak_overload_spectrum_1",
+        "peak_overload_spectrum_2",
+        "peak_frequency_spectrum_1",
+        "peak_frequency_spectrum_2",
+        "length",
+        "width",
+        "height",
+        "weight",
+        "power_handling_capability_per_board",
+        "temperature_per_board"
+      ],
+      "properties": {
+        "axes": {
+          "description": "Number of axes",
+          "type": "integer"
+        },
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Height of the chassis",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the chassis (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "length": {
+          "description": "Length of the chassis",
+          "type": "number"
+        },
+        "max_non_operating_temperature": {
+          "description": "Maximum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_vibration_random": {
+          "description": "Maximum random vibration",
+          "type": "number"
+        },
+        "max_vibration_sine": {
+          "description": "Maximum sine vibration",
+          "type": "number"
+        },
+        "min_non_operating_temperature": {
+          "description": "Minimum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_vibration_random": {
+          "description": "Minimum random vibration",
+          "type": "number"
+        },
+        "min_vibration_sine": {
+          "description": "Minimum sine vibration",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the chassis",
+          "type": "string"
+        },
+        "overload": {
+          "description": "Overload capacity",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_1": {
+          "description": "Peak frequency spectrum value 1",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_2": {
+          "description": "Peak frequency spectrum value 2",
+          "type": "number"
+        },
+        "peak_overload_spectrum_1": {
+          "description": "Peak overload spectrum value 1",
+          "type": "number"
+        },
+        "peak_overload_spectrum_2": {
+          "description": "Peak overload spectrum value 2",
+          "type": "number"
+        },
+        "power_handling_capability_per_board": {
+          "description": "Power handling capability per board",
+          "type": "number"
+        },
+        "shock_response_spectrum": {
+          "description": "Shock response spectrum value",
+          "type": "number"
+        },
+        "size": {
+          "description": "Size of the chassis",
+          "type": "string"
+        },
+        "slots": {
+          "description": "Number of slots in the chassis",
+          "type": "integer"
+        },
+        "temperature_per_board": {
+          "description": "Temperature per board",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "weight": {
+          "description": "Weight of the chassis",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the chassis",
+          "type": "number"
+        }
+      }
+    },
+    "CreateChassisBody": {
+      "type": "object",
+      "required": [
+        "name",
+        "slots",
+        "size",
+        "max_operating_temperature",
+        "min_operating_temperature",
+        "max_non_operating_temperature",
+        "min_non_operating_temperature",
+        "overload",
+        "max_vibration_sine",
+        "min_vibration_sine",
+        "max_vibration_random",
+        "min_vibration_random",
+        "axes",
+        "shock_response_spectrum",
+        "peak_overload_spectrum_1",
+        "peak_overload_spectrum_2",
+        "peak_frequency_spectrum_1",
+        "peak_frequency_spectrum_2",
+        "length",
+        "width",
+        "height",
+        "weight",
+        "power_handling_capability_per_board",
+        "temperature_per_board"
+      ],
+      "properties": {
+        "axes": {
+          "description": "Number of axes",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Height of the chassis",
+          "type": "number"
+        },
+        "length": {
+          "description": "Length of the chassis",
+          "type": "number"
+        },
+        "max_non_operating_temperature": {
+          "description": "Maximum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "max_vibration_random": {
+          "description": "Maximum random vibration",
+          "type": "number"
+        },
+        "max_vibration_sine": {
+          "description": "Maximum sine vibration",
+          "type": "number"
+        },
+        "min_non_operating_temperature": {
+          "description": "Minimum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_vibration_random": {
+          "description": "Minimum random vibration",
+          "type": "number"
+        },
+        "min_vibration_sine": {
+          "description": "Minimum sine vibration",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the chassis",
+          "type": "string"
+        },
+        "overload": {
+          "description": "Overload capacity",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_1": {
+          "description": "Peak frequency spectrum value 1",
+          "type": "number"
+        },
+        "peak_frequency_spectrum_2": {
+          "description": "Peak frequency spectrum value 2",
+          "type": "number"
+        },
+        "peak_overload_spectrum_1": {
+          "description": "Peak overload spectrum value 1",
+          "type": "number"
+        },
+        "peak_overload_spectrum_2": {
+          "description": "Peak overload spectrum value 2",
+          "type": "number"
+        },
+        "power_handling_capability_per_board": {
+          "description": "Power handling capability per board",
+          "type": "number"
+        },
+        "shock_response_spectrum": {
+          "description": "Shock response spectrum value",
+          "type": "number"
+        },
+        "size": {
+          "description": "Size of the chassis",
+          "type": "string"
+        },
+        "slots": {
+          "description": "Number of slots in the chassis",
+          "type": "integer"
+        },
+        "temperature_per_board": {
+          "description": "Temperature per board",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight of the chassis",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the chassis",
+          "type": "number"
+        }
+      }
+    },
+    "CreateChassisResponse": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the chassis (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "CreateProjectBody": {
       "type": "object",
       "required": [
@@ -1227,6 +2330,21 @@ func init() {
       ],
       "properties": {
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginAdmin": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
           "type": "string"
         }
       }

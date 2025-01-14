@@ -56,9 +56,15 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CreateChassis(params *CreateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisOK, error)
+
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectOK, error)
 
+	DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisNoContent, error)
+
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
+
+	GetChassisByID(params *GetChassisByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisByIDOK, error)
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
 
@@ -66,13 +72,56 @@ type ClientService interface {
 
 	GetUserProjects(params *GetUserProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserProjectsOK, error)
 
+	LoginAdmin(params *LoginAdminParams, opts ...ClientOption) (*LoginAdminOK, error)
+
 	LoginUser(params *LoginUserParams, opts ...ClientOption) (*LoginUserOK, error)
 
 	RegisterUser(params *RegisterUserParams, opts ...ClientOption) (*RegisterUserOK, error)
 
+	UpdateChassis(params *UpdateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChassisOK, error)
+
 	UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+CreateChassis creates chasis
+*/
+func (a *Client) CreateChassis(params *CreateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateChassisParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateChassis",
+		Method:             "POST",
+		PathPattern:        "/chassis",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateChassisReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateChassisOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateChassis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -115,6 +164,45 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 }
 
 /*
+DeleteChassis deletes chassis by ID
+*/
+func (a *Client) DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteChassisParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteChassis",
+		Method:             "DELETE",
+		PathPattern:        "/chassis/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteChassisReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteChassisNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteChassis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DeleteProject deletes project
 */
 func (a *Client) DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error) {
@@ -150,6 +238,45 @@ func (a *Client) DeleteProject(params *DeleteProjectParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetChassisByID gets chassis by ID
+*/
+func (a *Client) GetChassisByID(params *GetChassisByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetChassisByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetChassisByID",
+		Method:             "GET",
+		PathPattern:        "/chassis/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetChassisByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetChassisByIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetChassisByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -271,6 +398,44 @@ func (a *Client) GetUserProjects(params *GetUserProjectsParams, authInfo runtime
 }
 
 /*
+LoginAdmin logins admin
+*/
+func (a *Client) LoginAdmin(params *LoginAdminParams, opts ...ClientOption) (*LoginAdminOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLoginAdminParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "LoginAdmin",
+		Method:             "POST",
+		PathPattern:        "/auth/admin_login",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LoginAdminReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LoginAdminOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for LoginAdmin: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 LoginUser logins user
 */
 func (a *Client) LoginUser(params *LoginUserParams, opts ...ClientOption) (*LoginUserOK, error) {
@@ -343,6 +508,45 @@ func (a *Client) RegisterUser(params *RegisterUserParams, opts ...ClientOption) 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RegisterUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateChassis updates chassis
+*/
+func (a *Client) UpdateChassis(params *UpdateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChassisOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateChassisParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateChassis",
+		Method:             "PATCH",
+		PathPattern:        "/chassis/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateChassisReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateChassisOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateChassis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

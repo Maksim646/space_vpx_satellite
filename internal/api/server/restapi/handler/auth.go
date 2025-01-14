@@ -86,3 +86,37 @@ func (h *Handler) LoginUserHandler(req api.LoginUserParams) middleware.Responder
 	})
 
 }
+
+func (h *Handler) LoginAdminHandler(req api.LoginAdminParams) middleware.Responder {
+	zap.L().Info("login request")
+	ctx := req.HTTPRequest.Context()
+
+	admin, err := h.adminUsecase.GetAdminByEmail(ctx, *req.LoginAdmin.Email)
+	if err != nil {
+		return api.NewLoginUserBadRequest().WithPayload(&definition.Error{
+			Message: &model.UserNotFound,
+		})
+	}
+
+	passwordHash, err := hash.GenerateHash(*req.LoginAdmin.Password, h.HashSalt)
+	if err != nil {
+		return api.NewRegisterUserInternalServerError()
+	}
+
+	if strings.Compare(admin.PasswordHash, passwordHash) != 0 {
+
+		return api.NewLoginUserBadRequest().WithPayload(&definition.Error{
+			Message: useful.StrPtr("invalid login or password"),
+		})
+	}
+
+	token, err := jsonwebtoken.GenerateToken(admin.ID, 1, h.jwtSigninKey)
+	if err != nil {
+		return api.NewRegisterUserInternalServerError()
+	}
+
+	return api.NewLoginUserOK().WithPayload(&definition.LoginResponse{
+		AccessToken: token,
+	})
+
+}

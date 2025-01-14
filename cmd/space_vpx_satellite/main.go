@@ -26,8 +26,14 @@ import (
 	_userRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/user/repository/postgresql"
 	_userUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/user/usecase"
 
+	_adminRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/admin/repository/postgresql"
+	_adminUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/admin/usecase"
+
 	_projectRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/project/repository/postgresql"
 	_projectUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/project/usecase"
+
+	_chassisRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/chassis/repository/postgresql"
+	_chassisUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/chassis/usecase"
 )
 
 const (
@@ -83,12 +89,20 @@ func main() {
 	userRepo := _userRepo.New(sqalxConn)
 	userUsecase := _userUsecase.New(userRepo)
 
+	adminRepo := _adminRepo.New(sqalxConn)
+	adminUsecase := _adminUsecase.New(adminRepo)
+
 	projectRepo := _projectRepo.New(sqalxConn)
 	projectUsecase := _projectUsecase.New(projectRepo)
 
+	chassisRepo := _chassisRepo.New(sqalxConn)
+	chassisUsecase := _chassisUsecase.New(chassisRepo)
+
 	appHandler := handler.New(
 		userUsecase,
+		adminUsecase,
 		projectUsecase,
+		chassisUsecase,
 
 		httpVersion,
 		config.HashSalt,
