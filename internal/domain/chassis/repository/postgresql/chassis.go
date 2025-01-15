@@ -236,29 +236,53 @@ func (r *ChassisRepository) GetChassisByFilters(ctx context.Context, filters map
 func (r *ChassisRepository) ApplyFilters(builder sq.SelectBuilder, filters map[string]interface{}) sq.SelectBuilder {
 	for filterKey, filterValue := range filters {
 		switch filterKey {
-		case model.FilterChassisByLength:
+		case model.FilterChassisByMaxLength:
 			if length, ok := filterValue.(float64); ok {
-				builder = builder.Where(sq.GtOrEq{"length": length})
+				builder = builder.Where(sq.LtOrEq{"length": length})
 			}
-		case model.FilterChassisByWidth:
+		case model.FilterChassisByMinLength:
+			if length, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.GtOrEq{"length": length}) // Условие для минимальной длины
+			}
+		case model.FilterChassisByMaxWidth:
 			if width, ok := filterValue.(float64); ok {
-				builder = builder.Where(sq.GtOrEq{"width": width})
+				builder = builder.Where(sq.LtOrEq{"width": width}) // Условие для максимальной ширины
 			}
-		case model.FilterChassisByHeight:
+		case model.FilterChassisByMinWidth:
+			if width, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.GtOrEq{"width": width}) // Условие для минимальной ширины
+			}
+		case model.FilterChassisByMaxHeight:
 			if height, ok := filterValue.(float64); ok {
-				builder = builder.Where(sq.GtOrEq{"height": height})
+				builder = builder.Where(sq.LtOrEq{"height": height}) // Условие для максимальной высоты
 			}
-		case model.FilterChassisByWeight:
+		case model.FilterChassisByMinHeight:
+			if height, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.GtOrEq{"height": height}) // Условие для минимальной высоты
+			}
+		case model.FilterChassisByMaxWeight:
 			if weight, ok := filterValue.(float64); ok {
-				builder = builder.Where(sq.GtOrEq{"weight": weight})
+				builder = builder.Where(sq.LtOrEq{"weight": weight}) // Условие для максимального веса
 			}
-		case model.FilterChassisByPowerHandlingCapabilityPerBoard:
+		case model.FilterChassisByMinWeight:
+			if weight, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.GtOrEq{"weight": weight}) // Условие для минимального веса
+			}
+		case model.FilterChassisByMaxPowerHandlingCapabilityPerBoard:
 			if power, ok := filterValue.(float64); ok {
-				builder = builder.Where(sq.GtOrEq{"power_handling_capability_per_board": power})
+				builder = builder.Where(sq.LtOrEq{"power_handling_capability_per_board": power}) // Условие для максимальной мощности
 			}
-		case model.FilterChassisByTemperaturePerBoard:
+		case model.FilterChassisByMinPowerHandlingCapabilityPerBoard:
+			if power, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.GtOrEq{"power_handling_capability_per_board": power}) // Условие для минимальной мощности
+			}
+		case model.FilterChassisByMaxTemperaturePerBoard:
 			if temperature, ok := filterValue.(float64); ok {
-				builder = builder.Where(sq.GtOrEq{"temperature_per_board": temperature})
+				builder = builder.Where(sq.LtOrEq{"temperature_per_board": temperature}) // Условие для максимальной температуры
+			}
+		case model.FilterChassisByMinTemperaturePerBoard:
+			if temperature, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.GtOrEq{"temperature_per_board": temperature}) // Условие для минимальной температуры
 			}
 		default:
 			zap.L().Info("Unknown filter", zap.String("filterKey", filterKey))

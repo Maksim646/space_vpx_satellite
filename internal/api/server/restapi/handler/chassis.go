@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
@@ -184,24 +185,6 @@ func (h *Handler) UpdateChassisHandler(req api.UpdateChassisParams, principal *d
 	})
 }
 
-func updateChassisInt64Field(value *int64, updateFunc func(int64)) {
-	if value != nil && *value != 0 {
-		updateFunc(*value)
-	}
-}
-
-func updateChassisField(value *float64, updateFunc func(float64)) {
-	if value != nil && *value != 0 {
-		updateFunc(*value)
-	}
-}
-
-func updateChassisStringField(value *string, updateFunc func(string)) {
-	if value != nil && *value != "" {
-		updateFunc(*value)
-	}
-}
-
 func (h *Handler) DeleteChassisHandler(req api.DeleteChassisParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("update chassis request, id:" + string(req.ID))
 	ctx := req.HTTPRequest.Context()
@@ -282,10 +265,49 @@ func (h *Handler) GetAvailableChassis(req api.GetAvailableChassisParams, princip
 
 	filters := make(map[string]interface{})
 
-	if *req.SortField == "" {
-		*req.SortField = model.DefaultChassisSort
+	if req.FilterChassisByMaxLengthFrom != nil {
+		filters[model.FilterChassisByMaxLength] = *req.FilterChassisByMaxLengthFrom
+	}
+	if req.FilterChassisByMinLengthTo != nil {
+		filters[model.FilterChassisByMinLength] = *req.FilterChassisByMinLengthTo
+	}
+	if req.FilterChassisByMaxWidthFrom != nil {
+		filters[model.FilterChassisByMaxWidth] = *req.FilterChassisByMaxWidthFrom
+	}
+	if req.FilterChassisByMinWidthTo != nil {
+		filters[model.FilterChassisByMinWidth] = *req.FilterChassisByMinWidthTo
+	}
+	if req.FilterChassisByMaxHeightFrom != nil {
+		filters[model.FilterChassisByMaxHeight] = *req.FilterChassisByMaxHeightFrom
+	}
+	if req.FilterChassisByMinHeightTo != nil {
+		filters[model.FilterChassisByMinHeight] = *req.FilterChassisByMinHeightTo
+	}
+	if req.FilterChassisByMaxWeightFrom != nil {
+		filters[model.FilterChassisByMaxWeight] = *req.FilterChassisByMaxWeightFrom
+	}
+	if req.FilterChassisByMinWeightTo != nil {
+		filters[model.FilterChassisByMinWeight] = *req.FilterChassisByMinWeightTo
+	}
+	if req.FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom != nil {
+		filters[model.FilterChassisByMaxPowerHandlingCapabilityPerBoard] = *req.FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom
+	}
+	if req.FilterChassisByMinPowerHandlingCapabilityPerBoardTo != nil {
+		filters[model.FilterChassisByMinPowerHandlingCapabilityPerBoard] = *req.FilterChassisByMinPowerHandlingCapabilityPerBoardTo
+	}
+	if req.FilterChassisByMaxTemperaturePerBoardFrom != nil {
+		filters[model.FilterChassisByMaxTemperaturePerBoard] = *req.FilterChassisByMaxTemperaturePerBoardFrom
+	}
+	if req.FilterChassisByMinTemperaturePerBoardTo != nil {
+		filters[model.FilterChassisByMinTemperaturePerBoard] = *req.FilterChassisByMinTemperaturePerBoardTo
 	}
 
+	if req.SortField == nil {
+		*req.SortField = model.DefaultChassisSort
+		fmt.Println(*req.SortField)
+	}
+
+	fmt.Println(filters)
 	chassises, err := h.chassisUsecase.GetChassisByFilters(ctx, req.Offset, req.Limit, *req.SortField, filters)
 	if err != nil {
 		zap.L().Error("error fetch chassis", zap.Error(err))

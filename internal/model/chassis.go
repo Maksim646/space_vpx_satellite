@@ -14,12 +14,18 @@ var (
 )
 
 const (
-	FilterChassisByLength                          = "filter_chassis_by_length"
-	FilterChassisByWidth                           = "filter_chassis_by_width"
-	FilterChassisByHeight                          = "filter_chassis_by_height"
-	FilterChassisByWeight                          = "filter_chassis_by_weight"
-	FilterChassisByPowerHandlingCapabilityPerBoard = "filter_chassis_by_power_handling_capability_per_board"
-	FilterChassisByTemperaturePerBoard             = "filter_chassis_by_temperature_per_board"
+	FilterChassisByMaxLength                          = "filter_chassis_by_max_length"
+	FilterChassisByMinLength                          = "filter_chassis_by_min_length"
+	FilterChassisByMaxWidth                           = "filter_chassis_by_max_width"
+	FilterChassisByMinWidth                           = "filter_chassis_by_min_width"
+	FilterChassisByMaxHeight                          = "filter_chassis_by_max_height"
+	FilterChassisByMinHeight                          = "filter_chassis_by_min_height"
+	FilterChassisByMaxWeight                          = "filter_chassis_by_max_weight"
+	FilterChassisByMinWeight                          = "filter_chassis_by_min_weight"
+	FilterChassisByMaxPowerHandlingCapabilityPerBoard = "filter_chassis_by_max_power_handling_capability_per_board"
+	FilterChassisByMinPowerHandlingCapabilityPerBoard = "filter_chassis_by_min_power_handling_capability_per_board"
+	FilterChassisByMaxTemperaturePerBoard             = "filter_chassis_by_max_temperature_per_board"
+	FilterChassisByMinTemperaturePerBoard             = "filter_chassis_by_min_temperature_per_board"
 
 	DefaultChassisSort = "id desc"
 )

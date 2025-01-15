@@ -33,6 +33,54 @@ type GetAvailableChassisParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
+	/*Filter By Max Height
+	  In: query
+	*/
+	FilterChassisByMaxHeightFrom *float64
+	/*Filter By Max Lenghth
+	  In: query
+	*/
+	FilterChassisByMaxLengthFrom *float64
+	/*Filter By Max Power Handling Capability Per Board
+	  In: query
+	*/
+	FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom *float64
+	/*Filter By Max Temperature Per Board
+	  In: query
+	*/
+	FilterChassisByMaxTemperaturePerBoardFrom *float64
+	/*Filter By Max Weight
+	  In: query
+	*/
+	FilterChassisByMaxWeightFrom *float64
+	/*Filter By Max Width
+	  In: query
+	*/
+	FilterChassisByMaxWidthFrom *float64
+	/*Filter By Min Height
+	  In: query
+	*/
+	FilterChassisByMinHeightTo *float64
+	/*Filter By Min Length
+	  In: query
+	*/
+	FilterChassisByMinLengthTo *float64
+	/*Filter By Min Power Handling Capability Per Board
+	  In: query
+	*/
+	FilterChassisByMinPowerHandlingCapabilityPerBoardTo *float64
+	/*Filter By Min Temperature Per Board
+	  In: query
+	*/
+	FilterChassisByMinTemperaturePerBoardTo *float64
+	/*Filter By Min Weight
+	  In: query
+	*/
+	FilterChassisByMinWeightTo *float64
+	/*Filter By Min Width
+	  In: query
+	*/
+	FilterChassisByMinWidthTo *float64
 	/*Offset Configs
 	  Required: true
 	  Minimum: 0
@@ -62,6 +110,66 @@ func (o *GetAvailableChassisParams) BindRequest(r *http.Request, route *middlewa
 
 	qs := runtime.Values(r.URL.Query())
 
+	qFilterChassisByMaxHeightFrom, qhkFilterChassisByMaxHeightFrom, _ := qs.GetOK("FilterChassisByMaxHeight[from]")
+	if err := o.bindFilterChassisByMaxHeightFrom(qFilterChassisByMaxHeightFrom, qhkFilterChassisByMaxHeightFrom, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMaxLengthFrom, qhkFilterChassisByMaxLengthFrom, _ := qs.GetOK("FilterChassisByMaxLength[from]")
+	if err := o.bindFilterChassisByMaxLengthFrom(qFilterChassisByMaxLengthFrom, qhkFilterChassisByMaxLengthFrom, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMaxPowerHandlingCapabilityPerBoardFrom, qhkFilterChassisByMaxPowerHandlingCapabilityPerBoardFrom, _ := qs.GetOK("FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]")
+	if err := o.bindFilterChassisByMaxPowerHandlingCapabilityPerBoardFrom(qFilterChassisByMaxPowerHandlingCapabilityPerBoardFrom, qhkFilterChassisByMaxPowerHandlingCapabilityPerBoardFrom, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMaxTemperaturePerBoardFrom, qhkFilterChassisByMaxTemperaturePerBoardFrom, _ := qs.GetOK("FilterChassisByMaxTemperaturePerBoard[from]")
+	if err := o.bindFilterChassisByMaxTemperaturePerBoardFrom(qFilterChassisByMaxTemperaturePerBoardFrom, qhkFilterChassisByMaxTemperaturePerBoardFrom, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMaxWeightFrom, qhkFilterChassisByMaxWeightFrom, _ := qs.GetOK("FilterChassisByMaxWeight[from]")
+	if err := o.bindFilterChassisByMaxWeightFrom(qFilterChassisByMaxWeightFrom, qhkFilterChassisByMaxWeightFrom, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMaxWidthFrom, qhkFilterChassisByMaxWidthFrom, _ := qs.GetOK("FilterChassisByMaxWidth[from]")
+	if err := o.bindFilterChassisByMaxWidthFrom(qFilterChassisByMaxWidthFrom, qhkFilterChassisByMaxWidthFrom, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMinHeightTo, qhkFilterChassisByMinHeightTo, _ := qs.GetOK("FilterChassisByMinHeight[to]")
+	if err := o.bindFilterChassisByMinHeightTo(qFilterChassisByMinHeightTo, qhkFilterChassisByMinHeightTo, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMinLengthTo, qhkFilterChassisByMinLengthTo, _ := qs.GetOK("FilterChassisByMinLength[to]")
+	if err := o.bindFilterChassisByMinLengthTo(qFilterChassisByMinLengthTo, qhkFilterChassisByMinLengthTo, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMinPowerHandlingCapabilityPerBoardTo, qhkFilterChassisByMinPowerHandlingCapabilityPerBoardTo, _ := qs.GetOK("FilterChassisByMinPowerHandlingCapabilityPerBoard[to]")
+	if err := o.bindFilterChassisByMinPowerHandlingCapabilityPerBoardTo(qFilterChassisByMinPowerHandlingCapabilityPerBoardTo, qhkFilterChassisByMinPowerHandlingCapabilityPerBoardTo, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMinTemperaturePerBoardTo, qhkFilterChassisByMinTemperaturePerBoardTo, _ := qs.GetOK("FilterChassisByMinTemperaturePerBoard[to]")
+	if err := o.bindFilterChassisByMinTemperaturePerBoardTo(qFilterChassisByMinTemperaturePerBoardTo, qhkFilterChassisByMinTemperaturePerBoardTo, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMinWeightTo, qhkFilterChassisByMinWeightTo, _ := qs.GetOK("FilterChassisByMinWeight[to]")
+	if err := o.bindFilterChassisByMinWeightTo(qFilterChassisByMinWeightTo, qhkFilterChassisByMinWeightTo, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qFilterChassisByMinWidthTo, qhkFilterChassisByMinWidthTo, _ := qs.GetOK("FilterChassisByMinWidth[to]")
+	if err := o.bindFilterChassisByMinWidthTo(qFilterChassisByMinWidthTo, qhkFilterChassisByMinWidthTo, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	qLimit, qhkLimit, _ := qs.GetOK("limit")
 	if err := o.bindLimit(qLimit, qhkLimit, route.Formats); err != nil {
 		res = append(res, err)
@@ -79,6 +187,282 @@ func (o *GetAvailableChassisParams) BindRequest(r *http.Request, route *middlewa
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindFilterChassisByMaxHeightFrom binds and validates parameter FilterChassisByMaxHeightFrom from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMaxHeightFrom(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMaxHeight[from]", "query", "float64", raw)
+	}
+	o.FilterChassisByMaxHeightFrom = &value
+
+	return nil
+}
+
+// bindFilterChassisByMaxLengthFrom binds and validates parameter FilterChassisByMaxLengthFrom from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMaxLengthFrom(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMaxLength[from]", "query", "float64", raw)
+	}
+	o.FilterChassisByMaxLengthFrom = &value
+
+	return nil
+}
+
+// bindFilterChassisByMaxPowerHandlingCapabilityPerBoardFrom binds and validates parameter FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMaxPowerHandlingCapabilityPerBoardFrom(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]", "query", "float64", raw)
+	}
+	o.FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom = &value
+
+	return nil
+}
+
+// bindFilterChassisByMaxTemperaturePerBoardFrom binds and validates parameter FilterChassisByMaxTemperaturePerBoardFrom from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMaxTemperaturePerBoardFrom(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMaxTemperaturePerBoard[from]", "query", "float64", raw)
+	}
+	o.FilterChassisByMaxTemperaturePerBoardFrom = &value
+
+	return nil
+}
+
+// bindFilterChassisByMaxWeightFrom binds and validates parameter FilterChassisByMaxWeightFrom from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMaxWeightFrom(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMaxWeight[from]", "query", "float64", raw)
+	}
+	o.FilterChassisByMaxWeightFrom = &value
+
+	return nil
+}
+
+// bindFilterChassisByMaxWidthFrom binds and validates parameter FilterChassisByMaxWidthFrom from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMaxWidthFrom(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMaxWidth[from]", "query", "float64", raw)
+	}
+	o.FilterChassisByMaxWidthFrom = &value
+
+	return nil
+}
+
+// bindFilterChassisByMinHeightTo binds and validates parameter FilterChassisByMinHeightTo from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMinHeightTo(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMinHeight[to]", "query", "float64", raw)
+	}
+	o.FilterChassisByMinHeightTo = &value
+
+	return nil
+}
+
+// bindFilterChassisByMinLengthTo binds and validates parameter FilterChassisByMinLengthTo from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMinLengthTo(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMinLength[to]", "query", "float64", raw)
+	}
+	o.FilterChassisByMinLengthTo = &value
+
+	return nil
+}
+
+// bindFilterChassisByMinPowerHandlingCapabilityPerBoardTo binds and validates parameter FilterChassisByMinPowerHandlingCapabilityPerBoardTo from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMinPowerHandlingCapabilityPerBoardTo(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMinPowerHandlingCapabilityPerBoard[to]", "query", "float64", raw)
+	}
+	o.FilterChassisByMinPowerHandlingCapabilityPerBoardTo = &value
+
+	return nil
+}
+
+// bindFilterChassisByMinTemperaturePerBoardTo binds and validates parameter FilterChassisByMinTemperaturePerBoardTo from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMinTemperaturePerBoardTo(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMinTemperaturePerBoard[to]", "query", "float64", raw)
+	}
+	o.FilterChassisByMinTemperaturePerBoardTo = &value
+
+	return nil
+}
+
+// bindFilterChassisByMinWeightTo binds and validates parameter FilterChassisByMinWeightTo from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMinWeightTo(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMinWeight[to]", "query", "float64", raw)
+	}
+	o.FilterChassisByMinWeightTo = &value
+
+	return nil
+}
+
+// bindFilterChassisByMinWidthTo binds and validates parameter FilterChassisByMinWidthTo from query.
+func (o *GetAvailableChassisParams) bindFilterChassisByMinWidthTo(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("FilterChassisByMinWidth[to]", "query", "float64", raw)
+	}
+	o.FilterChassisByMinWidthTo = &value
+
 	return nil
 }
 

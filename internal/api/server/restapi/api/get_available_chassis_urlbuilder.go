@@ -15,9 +15,21 @@ import (
 
 // GetAvailableChassisURL generates an URL for the get available chassis operation
 type GetAvailableChassisURL struct {
-	Limit     int64
-	Offset    int64
-	SortField *string
+	FilterChassisByMaxHeightFrom                          *float64
+	FilterChassisByMaxLengthFrom                          *float64
+	FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom *float64
+	FilterChassisByMaxTemperaturePerBoardFrom             *float64
+	FilterChassisByMaxWeightFrom                          *float64
+	FilterChassisByMaxWidthFrom                           *float64
+	FilterChassisByMinHeightTo                            *float64
+	FilterChassisByMinLengthTo                            *float64
+	FilterChassisByMinPowerHandlingCapabilityPerBoardTo   *float64
+	FilterChassisByMinTemperaturePerBoardTo               *float64
+	FilterChassisByMinWeightTo                            *float64
+	FilterChassisByMinWidthTo                             *float64
+	Limit                                                 int64
+	Offset                                                int64
+	SortField                                             *string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -49,6 +61,102 @@ func (o *GetAvailableChassisURL) Build() (*url.URL, error) {
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
 	qs := make(url.Values)
+
+	var filterChassisByMaxHeightFromQ string
+	if o.FilterChassisByMaxHeightFrom != nil {
+		filterChassisByMaxHeightFromQ = swag.FormatFloat64(*o.FilterChassisByMaxHeightFrom)
+	}
+	if filterChassisByMaxHeightFromQ != "" {
+		qs.Set("FilterChassisByMaxHeight[from]", filterChassisByMaxHeightFromQ)
+	}
+
+	var filterChassisByMaxLengthFromQ string
+	if o.FilterChassisByMaxLengthFrom != nil {
+		filterChassisByMaxLengthFromQ = swag.FormatFloat64(*o.FilterChassisByMaxLengthFrom)
+	}
+	if filterChassisByMaxLengthFromQ != "" {
+		qs.Set("FilterChassisByMaxLength[from]", filterChassisByMaxLengthFromQ)
+	}
+
+	var filterChassisByMaxPowerHandlingCapabilityPerBoardFromQ string
+	if o.FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom != nil {
+		filterChassisByMaxPowerHandlingCapabilityPerBoardFromQ = swag.FormatFloat64(*o.FilterChassisByMaxPowerHandlingCapabilityPerBoardFrom)
+	}
+	if filterChassisByMaxPowerHandlingCapabilityPerBoardFromQ != "" {
+		qs.Set("FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]", filterChassisByMaxPowerHandlingCapabilityPerBoardFromQ)
+	}
+
+	var filterChassisByMaxTemperaturePerBoardFromQ string
+	if o.FilterChassisByMaxTemperaturePerBoardFrom != nil {
+		filterChassisByMaxTemperaturePerBoardFromQ = swag.FormatFloat64(*o.FilterChassisByMaxTemperaturePerBoardFrom)
+	}
+	if filterChassisByMaxTemperaturePerBoardFromQ != "" {
+		qs.Set("FilterChassisByMaxTemperaturePerBoard[from]", filterChassisByMaxTemperaturePerBoardFromQ)
+	}
+
+	var filterChassisByMaxWeightFromQ string
+	if o.FilterChassisByMaxWeightFrom != nil {
+		filterChassisByMaxWeightFromQ = swag.FormatFloat64(*o.FilterChassisByMaxWeightFrom)
+	}
+	if filterChassisByMaxWeightFromQ != "" {
+		qs.Set("FilterChassisByMaxWeight[from]", filterChassisByMaxWeightFromQ)
+	}
+
+	var filterChassisByMaxWidthFromQ string
+	if o.FilterChassisByMaxWidthFrom != nil {
+		filterChassisByMaxWidthFromQ = swag.FormatFloat64(*o.FilterChassisByMaxWidthFrom)
+	}
+	if filterChassisByMaxWidthFromQ != "" {
+		qs.Set("FilterChassisByMaxWidth[from]", filterChassisByMaxWidthFromQ)
+	}
+
+	var filterChassisByMinHeightToQ string
+	if o.FilterChassisByMinHeightTo != nil {
+		filterChassisByMinHeightToQ = swag.FormatFloat64(*o.FilterChassisByMinHeightTo)
+	}
+	if filterChassisByMinHeightToQ != "" {
+		qs.Set("FilterChassisByMinHeight[to]", filterChassisByMinHeightToQ)
+	}
+
+	var filterChassisByMinLengthToQ string
+	if o.FilterChassisByMinLengthTo != nil {
+		filterChassisByMinLengthToQ = swag.FormatFloat64(*o.FilterChassisByMinLengthTo)
+	}
+	if filterChassisByMinLengthToQ != "" {
+		qs.Set("FilterChassisByMinLength[to]", filterChassisByMinLengthToQ)
+	}
+
+	var filterChassisByMinPowerHandlingCapabilityPerBoardToQ string
+	if o.FilterChassisByMinPowerHandlingCapabilityPerBoardTo != nil {
+		filterChassisByMinPowerHandlingCapabilityPerBoardToQ = swag.FormatFloat64(*o.FilterChassisByMinPowerHandlingCapabilityPerBoardTo)
+	}
+	if filterChassisByMinPowerHandlingCapabilityPerBoardToQ != "" {
+		qs.Set("FilterChassisByMinPowerHandlingCapabilityPerBoard[to]", filterChassisByMinPowerHandlingCapabilityPerBoardToQ)
+	}
+
+	var filterChassisByMinTemperaturePerBoardToQ string
+	if o.FilterChassisByMinTemperaturePerBoardTo != nil {
+		filterChassisByMinTemperaturePerBoardToQ = swag.FormatFloat64(*o.FilterChassisByMinTemperaturePerBoardTo)
+	}
+	if filterChassisByMinTemperaturePerBoardToQ != "" {
+		qs.Set("FilterChassisByMinTemperaturePerBoard[to]", filterChassisByMinTemperaturePerBoardToQ)
+	}
+
+	var filterChassisByMinWeightToQ string
+	if o.FilterChassisByMinWeightTo != nil {
+		filterChassisByMinWeightToQ = swag.FormatFloat64(*o.FilterChassisByMinWeightTo)
+	}
+	if filterChassisByMinWeightToQ != "" {
+		qs.Set("FilterChassisByMinWeight[to]", filterChassisByMinWeightToQ)
+	}
+
+	var filterChassisByMinWidthToQ string
+	if o.FilterChassisByMinWidthTo != nil {
+		filterChassisByMinWidthToQ = swag.FormatFloat64(*o.FilterChassisByMinWidthTo)
+	}
+	if filterChassisByMinWidthToQ != "" {
+		qs.Set("FilterChassisByMinWidth[to]", filterChassisByMinWidthToQ)
+	}
 
 	limitQ := swag.FormatInt64(o.Limit)
 	if limitQ != "" {

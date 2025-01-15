@@ -272,6 +272,78 @@ func init() {
             "required": true
           },
           {
+            "type": "number",
+            "description": "Filter By Max Lenghth",
+            "name": "FilterChassisByMaxLength[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterChassisByMinLength[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Width",
+            "name": "FilterChassisByMaxWidth[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Width",
+            "name": "FilterChassisByMinWidth[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Height",
+            "name": "FilterChassisByMaxHeight[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Height",
+            "name": "FilterChassisByMinHeight[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Weight",
+            "name": "FilterChassisByMaxWeight[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Weight",
+            "name": "FilterChassisByMinWeight[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Power Handling Capability Per Board",
+            "name": "FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Power Handling Capability Per Board",
+            "name": "FilterChassisByMinPowerHandlingCapabilityPerBoard[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Temperature Per Board",
+            "name": "FilterChassisByMaxTemperaturePerBoard[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Temperature Per Board",
+            "name": "FilterChassisByMinTemperaturePerBoard[to]",
+            "in": "query"
+          },
+          {
             "enum": [
               "created_at",
               "weight"
@@ -1611,6 +1683,78 @@ func init() {
             "name": "limit",
             "in": "query",
             "required": true
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Lenghth",
+            "name": "FilterChassisByMaxLength[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterChassisByMinLength[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Width",
+            "name": "FilterChassisByMaxWidth[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Width",
+            "name": "FilterChassisByMinWidth[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Height",
+            "name": "FilterChassisByMaxHeight[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Height",
+            "name": "FilterChassisByMinHeight[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Weight",
+            "name": "FilterChassisByMaxWeight[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Weight",
+            "name": "FilterChassisByMinWeight[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Power Handling Capability Per Board",
+            "name": "FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Power Handling Capability Per Board",
+            "name": "FilterChassisByMinPowerHandlingCapabilityPerBoard[to]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Temperature Per Board",
+            "name": "FilterChassisByMaxTemperaturePerBoard[from]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Temperature Per Board",
+            "name": "FilterChassisByMinTemperaturePerBoard[to]",
+            "in": "query"
           },
           {
             "enum": [
