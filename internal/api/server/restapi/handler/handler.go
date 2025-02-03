@@ -77,11 +77,11 @@ func New(
 	router.GetUserProjectsHandler = api.GetUserProjectsHandlerFunc(h.GetProjectsByUser)
 
 	// CHASSIS
-	router.CreateChassisHandler = api.CreateChassisHandlerFunc(h.CreateChassisHandler)
-	router.UpdateChassisHandler = api.UpdateChassisHandlerFunc(h.UpdateChassisHandler)
-	router.GetChassisByIDHandler = api.GetChassisByIDHandlerFunc(h.GetChassisHandler)
-	router.DeleteChassisHandler = api.DeleteChassisHandlerFunc(h.DeleteChassisHandler)
-	router.GetAvailableChassisHandler = api.GetAvailableChassisHandlerFunc(h.GetAvailableChassis)
+	router.CreateChassisVPXHandler = api.CreateChassisVPXHandlerFunc(h.CreateChassisVPXHandler)
+	router.UpdateChassisVPXHandler = api.UpdateChassisVPXHandlerFunc(h.UpdateChassisVPXHandler)
+	router.GetChassisVPXByIDHandler = api.GetChassisVPXByIDHandlerFunc(h.GetChassisVPXHandler)
+	router.DeleteChassisVPXHandler = api.DeleteChassisVPXHandlerFunc(h.DeleteChassisVPXHandler)
+	router.GetAvailableChassisVPXHandler = api.GetAvailableChassisVPXHandlerFunc(h.GetAvailableChassisVPX)
 
 	// USER
 	router.GetUserMeHandler = api.GetUserMeHandlerFunc(h.GetUserMe)
@@ -92,12 +92,15 @@ func New(
 }
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	zap.L().Error("server http request")
+	zap.L().Info("Received HTTP request", zap.String("method", r.Method), zap.String("path", r.URL.Path))
+
 	if h.router == nil {
 		zap.L().Error("h.router is nil")
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	zap.L().Error("h.router is not nil")
+
+	zap.L().Info("h.router is not nil, processing request")
 	h.router.ServeHTTP(w, r)
 }
 

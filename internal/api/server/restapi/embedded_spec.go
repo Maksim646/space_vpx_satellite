@@ -187,7 +187,7 @@ func init() {
         }
       }
     },
-    "/chassis": {
+    "/chassis_vpx": {
       "post": {
         "security": [
           {
@@ -195,26 +195,26 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
         "summary": "Create chasis",
-        "operationId": "CreateChassis",
+        "operationId": "CreateChassisVPX",
         "parameters": [
           {
-            "description": "Create Chassis Body",
-            "name": "CreateChassisBody",
+            "description": "Create Chassis VPX Body",
+            "name": "CreateChassisVPXBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateChassisBody"
+              "$ref": "#/definitions/CreateChassisVPXBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Create Chassis Response",
+            "description": "Create Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/CreateChassisResponse"
+              "$ref": "#/definitions/CreateChassisVPXResponse"
             }
           },
           "400": {
@@ -244,7 +244,7 @@ func init() {
         }
       }
     },
-    "/chassis/available_chassis": {
+    "/chassis_vpx/available_chassis": {
       "get": {
         "security": [
           {
@@ -252,10 +252,10 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
-        "summary": "Get available chassis",
-        "operationId": "GetAvailableChassis",
+        "summary": "Get available chassis VPX",
+        "operationId": "GetAvailableChassisVPX",
         "parameters": [
           {
             "type": "integer",
@@ -274,73 +274,73 @@ func init() {
           {
             "type": "number",
             "description": "Filter By Max Lenghth",
-            "name": "FilterChassisByMaxLength[from]",
+            "name": "FilterChassisVPXByMaxLength[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Length",
-            "name": "FilterChassisByMinLength[to]",
+            "name": "FilterChassisVPXByMinLength[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Width",
-            "name": "FilterChassisByMaxWidth[from]",
+            "name": "FilterChassisVPXByMaxWidth[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Width",
-            "name": "FilterChassisByMinWidth[to]",
+            "name": "FilterChassisVPXByMinWidth[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Height",
-            "name": "FilterChassisByMaxHeight[from]",
+            "name": "FilterChassisVPXByMaxHeight[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Height",
-            "name": "FilterChassisByMinHeight[to]",
+            "name": "FilterChassisVPXByMinHeight[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Weight",
-            "name": "FilterChassisByMaxWeight[from]",
+            "name": "FilterChassisVPXByMaxWeight[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Weight",
-            "name": "FilterChassisByMinWeight[to]",
+            "name": "FilterChassisVPXByMinWeight[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Power Handling Capability Per Board",
-            "name": "FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]",
+            "name": "FilterChassisVPXByMaxPowerHandlingCapabilityPerBoard[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Power Handling Capability Per Board",
-            "name": "FilterChassisByMinPowerHandlingCapabilityPerBoard[to]",
+            "name": "FilterChassisVPXByMinPowerHandlingCapabilityPerBoard[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Temperature Per Board",
-            "name": "FilterChassisByMaxTemperaturePerBoard[from]",
+            "name": "FilterChassisVPXByMaxTemperaturePerBoard[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Temperature Per Board",
-            "name": "FilterChassisByMinTemperaturePerBoard[to]",
+            "name": "FilterChassisVPXByMinTemperaturePerBoard[to]",
             "in": "query"
           },
           {
@@ -356,9 +356,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get Available Chassis Response",
+            "description": "Get Available Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/Chassises"
+              "$ref": "#/definitions/ChassisesVPX"
             }
           },
           "400": {
@@ -388,7 +388,7 @@ func init() {
         }
       }
     },
-    "/chassis/{id}": {
+    "/chassis_vpx/{id}": {
       "get": {
         "security": [
           {
@@ -398,12 +398,12 @@ func init() {
         "tags": [
           "Chassis"
         ],
-        "summary": "Get chassis by ID",
-        "operationId": "GetChassisByID",
+        "summary": "Get chassis VPX by ID",
+        "operationId": "GetChassisVPXByID",
         "parameters": [
           {
             "type": "integer",
-            "description": "The ID of the chassis",
+            "description": "The ID of the chassis  VPX",
             "name": "id",
             "in": "path",
             "required": true
@@ -411,9 +411,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Chassis Response",
+            "description": "Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/Chassis"
+              "$ref": "#/definitions/ChassisVPX"
             }
           },
           "403": {
@@ -423,7 +423,7 @@ func init() {
             }
           },
           "404": {
-            "description": "Chassis not found",
+            "description": "Chassis VPX not found",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -443,14 +443,14 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
-        "summary": "Delete chassis by ID",
-        "operationId": "DeleteChassis",
+        "summary": "Delete chassis VPX by ID",
+        "operationId": "DeleteChassisVPX",
         "parameters": [
           {
             "type": "integer",
-            "description": "The ID of the chassis",
+            "description": "The ID of the chassis VPX",
             "name": "id",
             "in": "path",
             "required": true
@@ -458,7 +458,7 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Chassis deleted successfully",
+            "description": "Chassis VPX deleted successfully",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -470,7 +470,7 @@ func init() {
             }
           },
           "404": {
-            "description": "Chassis not found",
+            "description": "Chassis VPX not found",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -490,23 +490,23 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
-        "summary": "Update chassis",
-        "operationId": "UpdateChassis",
+        "summary": "Update chassis VPX",
+        "operationId": "UpdateChassisVPX",
         "parameters": [
           {
-            "description": "Update Chassis Body",
-            "name": "CreateChassisBody",
+            "description": "Update Chassis VPX Body",
+            "name": "CreateChassisVPXBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateChassisBody"
+              "$ref": "#/definitions/CreateChassisVPXBody"
             }
           },
           {
             "type": "integer",
-            "description": "The ID of the chassis",
+            "description": "The ID of the chassis VPX",
             "name": "id",
             "in": "path",
             "required": true
@@ -514,9 +514,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Update Chassis Response",
+            "description": "Update Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/Chassis"
+              "$ref": "#/definitions/ChassisVPX"
             }
           },
           "400": {
@@ -893,33 +893,7 @@ func init() {
     }
   },
   "definitions": {
-    "CallBackResponse": {
-      "type": "object",
-      "required": [
-        "balance"
-      ],
-      "properties": {
-        "balance": {
-          "type": "number"
-        },
-        "error_code": {
-          "type": "string"
-        },
-        "error_description": {
-          "type": "string"
-        },
-        "rollback_transactions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "transaction_id": {
-          "type": "string"
-        }
-      }
-    },
-    "Chassis": {
+    "ChassisVPX": {
       "type": "object",
       "required": [
         "name",
@@ -1059,7 +1033,7 @@ func init() {
         }
       }
     },
-    "Chassises": {
+    "ChassisesVPX": {
       "type": "object",
       "required": [
         "count"
@@ -1068,7 +1042,7 @@ func init() {
         "chassises": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Chassis"
+            "$ref": "#/definitions/ChassisVPX"
           }
         },
         "count": {
@@ -1076,7 +1050,7 @@ func init() {
         }
       }
     },
-    "CreateChassisBody": {
+    "CreateChassisVPXBody": {
       "type": "object",
       "required": [
         "name",
@@ -1110,11 +1084,11 @@ func init() {
           "type": "integer"
         },
         "height": {
-          "description": "Height of the chassis",
+          "description": "Height of the chassis VPX",
           "type": "number"
         },
         "length": {
-          "description": "Length of the chassis",
+          "description": "Length of the chassis VPX",
           "type": "number"
         },
         "max_non_operating_temperature": {
@@ -1194,16 +1168,16 @@ func init() {
           "type": "number"
         },
         "weight": {
-          "description": "Weight of the chassis",
+          "description": "Weight of the chassis VPX",
           "type": "number"
         },
         "width": {
-          "description": "Width of the chassis",
+          "description": "Width of the chassis VPX",
           "type": "number"
         }
       }
     },
-    "CreateChassisResponse": {
+    "CreateChassisVPXResponse": {
       "type": "object",
       "required": [
         "id"
@@ -1598,7 +1572,7 @@ func init() {
         }
       }
     },
-    "/chassis": {
+    "/chassis_vpx": {
       "post": {
         "security": [
           {
@@ -1606,26 +1580,26 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
         "summary": "Create chasis",
-        "operationId": "CreateChassis",
+        "operationId": "CreateChassisVPX",
         "parameters": [
           {
-            "description": "Create Chassis Body",
-            "name": "CreateChassisBody",
+            "description": "Create Chassis VPX Body",
+            "name": "CreateChassisVPXBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateChassisBody"
+              "$ref": "#/definitions/CreateChassisVPXBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Create Chassis Response",
+            "description": "Create Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/CreateChassisResponse"
+              "$ref": "#/definitions/CreateChassisVPXResponse"
             }
           },
           "400": {
@@ -1655,7 +1629,7 @@ func init() {
         }
       }
     },
-    "/chassis/available_chassis": {
+    "/chassis_vpx/available_chassis": {
       "get": {
         "security": [
           {
@@ -1663,10 +1637,10 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
-        "summary": "Get available chassis",
-        "operationId": "GetAvailableChassis",
+        "summary": "Get available chassis VPX",
+        "operationId": "GetAvailableChassisVPX",
         "parameters": [
           {
             "minimum": 0,
@@ -1687,73 +1661,73 @@ func init() {
           {
             "type": "number",
             "description": "Filter By Max Lenghth",
-            "name": "FilterChassisByMaxLength[from]",
+            "name": "FilterChassisVPXByMaxLength[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Length",
-            "name": "FilterChassisByMinLength[to]",
+            "name": "FilterChassisVPXByMinLength[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Width",
-            "name": "FilterChassisByMaxWidth[from]",
+            "name": "FilterChassisVPXByMaxWidth[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Width",
-            "name": "FilterChassisByMinWidth[to]",
+            "name": "FilterChassisVPXByMinWidth[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Height",
-            "name": "FilterChassisByMaxHeight[from]",
+            "name": "FilterChassisVPXByMaxHeight[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Height",
-            "name": "FilterChassisByMinHeight[to]",
+            "name": "FilterChassisVPXByMinHeight[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Weight",
-            "name": "FilterChassisByMaxWeight[from]",
+            "name": "FilterChassisVPXByMaxWeight[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Weight",
-            "name": "FilterChassisByMinWeight[to]",
+            "name": "FilterChassisVPXByMinWeight[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Power Handling Capability Per Board",
-            "name": "FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]",
+            "name": "FilterChassisVPXByMaxPowerHandlingCapabilityPerBoard[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Power Handling Capability Per Board",
-            "name": "FilterChassisByMinPowerHandlingCapabilityPerBoard[to]",
+            "name": "FilterChassisVPXByMinPowerHandlingCapabilityPerBoard[to]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Max Temperature Per Board",
-            "name": "FilterChassisByMaxTemperaturePerBoard[from]",
+            "name": "FilterChassisVPXByMaxTemperaturePerBoard[from]",
             "in": "query"
           },
           {
             "type": "number",
             "description": "Filter By Min Temperature Per Board",
-            "name": "FilterChassisByMinTemperaturePerBoard[to]",
+            "name": "FilterChassisVPXByMinTemperaturePerBoard[to]",
             "in": "query"
           },
           {
@@ -1769,9 +1743,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get Available Chassis Response",
+            "description": "Get Available Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/Chassises"
+              "$ref": "#/definitions/ChassisesVPX"
             }
           },
           "400": {
@@ -1801,7 +1775,7 @@ func init() {
         }
       }
     },
-    "/chassis/{id}": {
+    "/chassis_vpx/{id}": {
       "get": {
         "security": [
           {
@@ -1811,12 +1785,12 @@ func init() {
         "tags": [
           "Chassis"
         ],
-        "summary": "Get chassis by ID",
-        "operationId": "GetChassisByID",
+        "summary": "Get chassis VPX by ID",
+        "operationId": "GetChassisVPXByID",
         "parameters": [
           {
             "type": "integer",
-            "description": "The ID of the chassis",
+            "description": "The ID of the chassis  VPX",
             "name": "id",
             "in": "path",
             "required": true
@@ -1824,9 +1798,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Chassis Response",
+            "description": "Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/Chassis"
+              "$ref": "#/definitions/ChassisVPX"
             }
           },
           "403": {
@@ -1836,7 +1810,7 @@ func init() {
             }
           },
           "404": {
-            "description": "Chassis not found",
+            "description": "Chassis VPX not found",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1856,14 +1830,14 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
-        "summary": "Delete chassis by ID",
-        "operationId": "DeleteChassis",
+        "summary": "Delete chassis VPX by ID",
+        "operationId": "DeleteChassisVPX",
         "parameters": [
           {
             "type": "integer",
-            "description": "The ID of the chassis",
+            "description": "The ID of the chassis VPX",
             "name": "id",
             "in": "path",
             "required": true
@@ -1871,7 +1845,7 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Chassis deleted successfully",
+            "description": "Chassis VPX deleted successfully",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1883,7 +1857,7 @@ func init() {
             }
           },
           "404": {
-            "description": "Chassis not found",
+            "description": "Chassis VPX not found",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1903,23 +1877,23 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
-        "summary": "Update chassis",
-        "operationId": "UpdateChassis",
+        "summary": "Update chassis VPX",
+        "operationId": "UpdateChassisVPX",
         "parameters": [
           {
-            "description": "Update Chassis Body",
-            "name": "CreateChassisBody",
+            "description": "Update Chassis VPX Body",
+            "name": "CreateChassisVPXBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateChassisBody"
+              "$ref": "#/definitions/CreateChassisVPXBody"
             }
           },
           {
             "type": "integer",
-            "description": "The ID of the chassis",
+            "description": "The ID of the chassis VPX",
             "name": "id",
             "in": "path",
             "required": true
@@ -1927,9 +1901,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Update Chassis Response",
+            "description": "Update Chassis VPX Response",
             "schema": {
-              "$ref": "#/definitions/Chassis"
+              "$ref": "#/definitions/ChassisVPX"
             }
           },
           "400": {
@@ -2308,33 +2282,7 @@ func init() {
     }
   },
   "definitions": {
-    "CallBackResponse": {
-      "type": "object",
-      "required": [
-        "balance"
-      ],
-      "properties": {
-        "balance": {
-          "type": "number"
-        },
-        "error_code": {
-          "type": "string"
-        },
-        "error_description": {
-          "type": "string"
-        },
-        "rollback_transactions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "transaction_id": {
-          "type": "string"
-        }
-      }
-    },
-    "Chassis": {
+    "ChassisVPX": {
       "type": "object",
       "required": [
         "name",
@@ -2474,7 +2422,7 @@ func init() {
         }
       }
     },
-    "Chassises": {
+    "ChassisesVPX": {
       "type": "object",
       "required": [
         "count"
@@ -2483,7 +2431,7 @@ func init() {
         "chassises": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Chassis"
+            "$ref": "#/definitions/ChassisVPX"
           }
         },
         "count": {
@@ -2491,7 +2439,7 @@ func init() {
         }
       }
     },
-    "CreateChassisBody": {
+    "CreateChassisVPXBody": {
       "type": "object",
       "required": [
         "name",
@@ -2525,11 +2473,11 @@ func init() {
           "type": "integer"
         },
         "height": {
-          "description": "Height of the chassis",
+          "description": "Height of the chassis VPX",
           "type": "number"
         },
         "length": {
-          "description": "Length of the chassis",
+          "description": "Length of the chassis VPX",
           "type": "number"
         },
         "max_non_operating_temperature": {
@@ -2609,16 +2557,16 @@ func init() {
           "type": "number"
         },
         "weight": {
-          "description": "Weight of the chassis",
+          "description": "Weight of the chassis VPX",
           "type": "number"
         },
         "width": {
-          "description": "Width of the chassis",
+          "description": "Width of the chassis VPX",
           "type": "number"
         }
       }
     },
-    "CreateChassisResponse": {
+    "CreateChassisVPXResponse": {
       "type": "object",
       "required": [
         "id"

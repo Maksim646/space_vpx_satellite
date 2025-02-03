@@ -56,17 +56,17 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateChassis(params *CreateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisOK, error)
+	CreateChassisVPX(params *CreateChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisVPXOK, error)
 
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectOK, error)
 
-	DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisOK, error)
+	DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
 
-	GetAvailableChassis(params *GetAvailableChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisOK, error)
+	GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisVPXOK, error)
 
-	GetChassisByID(params *GetChassisByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisByIDOK, error)
+	GetChassisVPXByID(params *GetChassisVPXByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisVPXByIDOK, error)
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
 
@@ -80,7 +80,7 @@ type ClientService interface {
 
 	RegisterUser(params *RegisterUserParams, opts ...ClientOption) (*RegisterUserOK, error)
 
-	UpdateChassis(params *UpdateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChassisOK, error)
+	UpdateChassisVPX(params *UpdateChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChassisVPXOK, error)
 
 	UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error)
 
@@ -88,22 +88,22 @@ type ClientService interface {
 }
 
 /*
-CreateChassis creates chasis
+CreateChassisVPX creates chasis
 */
-func (a *Client) CreateChassis(params *CreateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisOK, error) {
+func (a *Client) CreateChassisVPX(params *CreateChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisVPXOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateChassisParams()
+		params = NewCreateChassisVPXParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateChassis",
+		ID:                 "CreateChassisVPX",
 		Method:             "POST",
-		PathPattern:        "/chassis",
+		PathPattern:        "/chassis_vpx",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateChassisReader{formats: a.formats},
+		Reader:             &CreateChassisVPXReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -116,13 +116,13 @@ func (a *Client) CreateChassis(params *CreateChassisParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateChassisOK)
+	success, ok := result.(*CreateChassisVPXOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateChassis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for CreateChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -166,22 +166,22 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 }
 
 /*
-DeleteChassis deletes chassis by ID
+DeleteChassisVPX deletes chassis v p x by ID
 */
-func (a *Client) DeleteChassis(params *DeleteChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisOK, error) {
+func (a *Client) DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteChassisParams()
+		params = NewDeleteChassisVPXParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteChassis",
+		ID:                 "DeleteChassisVPX",
 		Method:             "DELETE",
-		PathPattern:        "/chassis/{id}",
+		PathPattern:        "/chassis_vpx/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteChassisReader{formats: a.formats},
+		Reader:             &DeleteChassisVPXReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -194,13 +194,13 @@ func (a *Client) DeleteChassis(params *DeleteChassisParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteChassisOK)
+	success, ok := result.(*DeleteChassisVPXOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteChassis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for DeleteChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -244,22 +244,22 @@ func (a *Client) DeleteProject(params *DeleteProjectParams, authInfo runtime.Cli
 }
 
 /*
-GetAvailableChassis gets available chassis
+GetAvailableChassisVPX gets available chassis v p x
 */
-func (a *Client) GetAvailableChassis(params *GetAvailableChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisOK, error) {
+func (a *Client) GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisVPXOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAvailableChassisParams()
+		params = NewGetAvailableChassisVPXParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetAvailableChassis",
+		ID:                 "GetAvailableChassisVPX",
 		Method:             "GET",
-		PathPattern:        "/chassis/available_chassis",
+		PathPattern:        "/chassis_vpx/available_chassis",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAvailableChassisReader{formats: a.formats},
+		Reader:             &GetAvailableChassisVPXReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -272,33 +272,33 @@ func (a *Client) GetAvailableChassis(params *GetAvailableChassisParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAvailableChassisOK)
+	success, ok := result.(*GetAvailableChassisVPXOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetAvailableChassis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetAvailableChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetChassisByID gets chassis by ID
+GetChassisVPXByID gets chassis v p x by ID
 */
-func (a *Client) GetChassisByID(params *GetChassisByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisByIDOK, error) {
+func (a *Client) GetChassisVPXByID(params *GetChassisVPXByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisVPXByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetChassisByIDParams()
+		params = NewGetChassisVPXByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetChassisByID",
+		ID:                 "GetChassisVPXByID",
 		Method:             "GET",
-		PathPattern:        "/chassis/{id}",
+		PathPattern:        "/chassis_vpx/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetChassisByIDReader{formats: a.formats},
+		Reader:             &GetChassisVPXByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -311,13 +311,13 @@ func (a *Client) GetChassisByID(params *GetChassisByIDParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetChassisByIDOK)
+	success, ok := result.(*GetChassisVPXByIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetChassisByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetChassisVPXByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -553,22 +553,22 @@ func (a *Client) RegisterUser(params *RegisterUserParams, opts ...ClientOption) 
 }
 
 /*
-UpdateChassis updates chassis
+UpdateChassisVPX updates chassis v p x
 */
-func (a *Client) UpdateChassis(params *UpdateChassisParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChassisOK, error) {
+func (a *Client) UpdateChassisVPX(params *UpdateChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChassisVPXOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateChassisParams()
+		params = NewUpdateChassisVPXParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "UpdateChassis",
+		ID:                 "UpdateChassisVPX",
 		Method:             "PATCH",
-		PathPattern:        "/chassis/{id}",
+		PathPattern:        "/chassis_vpx/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateChassisReader{formats: a.formats},
+		Reader:             &UpdateChassisVPXReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -581,13 +581,13 @@ func (a *Client) UpdateChassis(params *UpdateChassisParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*UpdateChassisOK)
+	success, ok := result.(*UpdateChassisVPXOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateChassis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for UpdateChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -1,7 +1,6 @@
 package handler
 
 import (
-	_ "fmt"
 	"strings"
 
 	"github.com/Maksim646/space_vpx_satellite/pkg/hash"

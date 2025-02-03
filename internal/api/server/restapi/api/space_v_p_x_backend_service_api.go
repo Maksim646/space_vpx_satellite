@@ -44,23 +44,23 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 
 		JSONProducer: runtime.JSONProducer(),
 
-		CreateChassisHandler: CreateChassisHandlerFunc(func(params CreateChassisParams, principal *models.Principal) middleware.Responder {
-			return middleware.NotImplemented("operation CreateChassis has not yet been implemented")
+		CreateChassisVPXHandler: CreateChassisVPXHandlerFunc(func(params CreateChassisVPXParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateChassisVPX has not yet been implemented")
 		}),
 		CreateProjectHandler: CreateProjectHandlerFunc(func(params CreateProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateProject has not yet been implemented")
 		}),
-		DeleteChassisHandler: DeleteChassisHandlerFunc(func(params DeleteChassisParams, principal *models.Principal) middleware.Responder {
-			return middleware.NotImplemented("operation DeleteChassis has not yet been implemented")
+		DeleteChassisVPXHandler: DeleteChassisVPXHandlerFunc(func(params DeleteChassisVPXParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteChassisVPX has not yet been implemented")
 		}),
 		DeleteProjectHandler: DeleteProjectHandlerFunc(func(params DeleteProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteProject has not yet been implemented")
 		}),
-		GetAvailableChassisHandler: GetAvailableChassisHandlerFunc(func(params GetAvailableChassisParams, principal *models.Principal) middleware.Responder {
-			return middleware.NotImplemented("operation GetAvailableChassis has not yet been implemented")
+		GetAvailableChassisVPXHandler: GetAvailableChassisVPXHandlerFunc(func(params GetAvailableChassisVPXParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetAvailableChassisVPX has not yet been implemented")
 		}),
-		GetChassisByIDHandler: GetChassisByIDHandlerFunc(func(params GetChassisByIDParams, principal *models.Principal) middleware.Responder {
-			return middleware.NotImplemented("operation GetChassisByID has not yet been implemented")
+		GetChassisVPXByIDHandler: GetChassisVPXByIDHandlerFunc(func(params GetChassisVPXByIDParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetChassisVPXByID has not yet been implemented")
 		}),
 		GetProjectHandler: GetProjectHandlerFunc(func(params GetProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetProject has not yet been implemented")
@@ -80,8 +80,8 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		RegisterUserHandler: RegisterUserHandlerFunc(func(params RegisterUserParams) middleware.Responder {
 			return middleware.NotImplemented("operation RegisterUser has not yet been implemented")
 		}),
-		UpdateChassisHandler: UpdateChassisHandlerFunc(func(params UpdateChassisParams, principal *models.Principal) middleware.Responder {
-			return middleware.NotImplemented("operation UpdateChassis has not yet been implemented")
+		UpdateChassisVPXHandler: UpdateChassisVPXHandlerFunc(func(params UpdateChassisVPXParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateChassisVPX has not yet been implemented")
 		}),
 		UpdateProjectHandler: UpdateProjectHandlerFunc(func(params UpdateProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateProject has not yet been implemented")
@@ -136,18 +136,18 @@ type SpaceVPXBackendServiceAPI struct {
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
 
-	// CreateChassisHandler sets the operation handler for the create chassis operation
-	CreateChassisHandler CreateChassisHandler
+	// CreateChassisVPXHandler sets the operation handler for the create chassis v p x operation
+	CreateChassisVPXHandler CreateChassisVPXHandler
 	// CreateProjectHandler sets the operation handler for the create project operation
 	CreateProjectHandler CreateProjectHandler
-	// DeleteChassisHandler sets the operation handler for the delete chassis operation
-	DeleteChassisHandler DeleteChassisHandler
+	// DeleteChassisVPXHandler sets the operation handler for the delete chassis v p x operation
+	DeleteChassisVPXHandler DeleteChassisVPXHandler
 	// DeleteProjectHandler sets the operation handler for the delete project operation
 	DeleteProjectHandler DeleteProjectHandler
-	// GetAvailableChassisHandler sets the operation handler for the get available chassis operation
-	GetAvailableChassisHandler GetAvailableChassisHandler
-	// GetChassisByIDHandler sets the operation handler for the get chassis by ID operation
-	GetChassisByIDHandler GetChassisByIDHandler
+	// GetAvailableChassisVPXHandler sets the operation handler for the get available chassis v p x operation
+	GetAvailableChassisVPXHandler GetAvailableChassisVPXHandler
+	// GetChassisVPXByIDHandler sets the operation handler for the get chassis v p x by ID operation
+	GetChassisVPXByIDHandler GetChassisVPXByIDHandler
 	// GetProjectHandler sets the operation handler for the get project operation
 	GetProjectHandler GetProjectHandler
 	// GetUserMeHandler sets the operation handler for the get user me operation
@@ -160,8 +160,8 @@ type SpaceVPXBackendServiceAPI struct {
 	LoginUserHandler LoginUserHandler
 	// RegisterUserHandler sets the operation handler for the register user operation
 	RegisterUserHandler RegisterUserHandler
-	// UpdateChassisHandler sets the operation handler for the update chassis operation
-	UpdateChassisHandler UpdateChassisHandler
+	// UpdateChassisVPXHandler sets the operation handler for the update chassis v p x operation
+	UpdateChassisVPXHandler UpdateChassisVPXHandler
 	// UpdateProjectHandler sets the operation handler for the update project operation
 	UpdateProjectHandler UpdateProjectHandler
 
@@ -245,23 +245,23 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 		unregistered = append(unregistered, "AuthorizationAuth")
 	}
 
-	if o.CreateChassisHandler == nil {
-		unregistered = append(unregistered, "CreateChassisHandler")
+	if o.CreateChassisVPXHandler == nil {
+		unregistered = append(unregistered, "CreateChassisVPXHandler")
 	}
 	if o.CreateProjectHandler == nil {
 		unregistered = append(unregistered, "CreateProjectHandler")
 	}
-	if o.DeleteChassisHandler == nil {
-		unregistered = append(unregistered, "DeleteChassisHandler")
+	if o.DeleteChassisVPXHandler == nil {
+		unregistered = append(unregistered, "DeleteChassisVPXHandler")
 	}
 	if o.DeleteProjectHandler == nil {
 		unregistered = append(unregistered, "DeleteProjectHandler")
 	}
-	if o.GetAvailableChassisHandler == nil {
-		unregistered = append(unregistered, "GetAvailableChassisHandler")
+	if o.GetAvailableChassisVPXHandler == nil {
+		unregistered = append(unregistered, "GetAvailableChassisVPXHandler")
 	}
-	if o.GetChassisByIDHandler == nil {
-		unregistered = append(unregistered, "GetChassisByIDHandler")
+	if o.GetChassisVPXByIDHandler == nil {
+		unregistered = append(unregistered, "GetChassisVPXByIDHandler")
 	}
 	if o.GetProjectHandler == nil {
 		unregistered = append(unregistered, "GetProjectHandler")
@@ -281,8 +281,8 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.RegisterUserHandler == nil {
 		unregistered = append(unregistered, "RegisterUserHandler")
 	}
-	if o.UpdateChassisHandler == nil {
-		unregistered = append(unregistered, "UpdateChassisHandler")
+	if o.UpdateChassisVPXHandler == nil {
+		unregistered = append(unregistered, "UpdateChassisVPXHandler")
 	}
 	if o.UpdateProjectHandler == nil {
 		unregistered = append(unregistered, "UpdateProjectHandler")
@@ -389,7 +389,7 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/chassis"] = NewCreateChassis(o.context, o.CreateChassisHandler)
+	o.handlers["POST"]["/chassis_vpx"] = NewCreateChassisVPX(o.context, o.CreateChassisVPXHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -397,7 +397,7 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
-	o.handlers["DELETE"]["/chassis/{id}"] = NewDeleteChassis(o.context, o.DeleteChassisHandler)
+	o.handlers["DELETE"]["/chassis_vpx/{id}"] = NewDeleteChassisVPX(o.context, o.DeleteChassisVPXHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -405,11 +405,11 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/chassis/available_chassis"] = NewGetAvailableChassis(o.context, o.GetAvailableChassisHandler)
+	o.handlers["GET"]["/chassis_vpx/available_chassis"] = NewGetAvailableChassisVPX(o.context, o.GetAvailableChassisVPXHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/chassis/{id}"] = NewGetChassisByID(o.context, o.GetChassisByIDHandler)
+	o.handlers["GET"]["/chassis_vpx/{id}"] = NewGetChassisVPXByID(o.context, o.GetChassisVPXByIDHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -437,7 +437,7 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
-	o.handlers["PATCH"]["/chassis/{id}"] = NewUpdateChassis(o.context, o.UpdateChassisHandler)
+	o.handlers["PATCH"]["/chassis_vpx/{id}"] = NewUpdateChassisVPX(o.context, o.UpdateChassisVPXHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}

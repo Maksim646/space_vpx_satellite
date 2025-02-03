@@ -181,7 +181,7 @@ func (r *ChassisRepository) GetChassisByID(ctx context.Context, id int64) (model
 	zap.L().Debug(postgresql.BuildQuery(query, params))
 	if err = r.sqalxConn.GetContext(ctx, &chassis, query, params...); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return chassis, model.ErrChassisNotFound // Предполагается, что вы определили эту ошибку в модели
+			return chassis, model.ErrChassisNotFound
 		}
 	}
 

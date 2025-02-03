@@ -355,26 +355,26 @@ paths:
             $ref: '#/definitions/Error'
 
 ### CHASSIS
-  /chassis:
+  /chassis_vpx:
     post:
       security:
         - Bearer: []
       summary: Create chasis
-      operationId: CreateChassis
+      operationId: CreateChassisVPX
       tags: 
-        - Chassis
+        - ChassisVPX
       parameters:
-        - name: CreateChassisBody
-          description: Create Chassis Body
+        - name: CreateChassisVPXBody
+          description: Create Chassis VPX Body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateChassisBody'
+            $ref: '#/definitions/CreateChassisVPXBody'
       responses:
           200:
-            description: Create Chassis Response
+            description: Create Chassis VPX Response
             schema:
-              $ref: '#/definitions/CreateChassisResponse'
+              $ref: '#/definitions/CreateChassisVPXResponse'
           400:
             description: Bad request
             schema:
@@ -392,12 +392,12 @@ paths:
             schema:
               $ref: '#/definitions/Error'
 
-  /chassis/{id}:
+  /chassis_vpx/{id}:
     get:
       security:
         - Bearer: []
-      summary: Get chassis by ID
-      operationId: GetChassisByID
+      summary: Get chassis VPX by ID
+      operationId: GetChassisVPXByID
       tags: 
         - Chassis
       parameters:
@@ -405,14 +405,14 @@ paths:
           in: path
           required: true
           type: integer
-          description: The ID of the chassis
+          description: The ID of the chassis  VPX
       responses:
           200:
-            description: Chassis Response
+            description: Chassis VPX Response
             schema:
-              $ref: '#/definitions/Chassis'
+              $ref: '#/definitions/ChassisVPX'
           404:
-            description: Chassis not found
+            description: Chassis VPX not found
             schema:
               $ref: '#/definitions/Error'
           403:
@@ -427,27 +427,27 @@ paths:
     patch:
       security:
         - Bearer: []
-      summary: Update chassis
-      operationId: UpdateChassis
+      summary: Update chassis VPX
+      operationId: UpdateChassisVPX
       tags: 
-        - Chassis
+        - ChassisVPX
       parameters:
-        - name: CreateChassisBody
-          description: Update Chassis Body
+        - name: CreateChassisVPXBody
+          description: Update Chassis VPX Body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateChassisBody'
+            $ref: '#/definitions/CreateChassisVPXBody'
         - name: id
           in: path
           required: true
           type: integer
-          description: The ID of the chassis
+          description: The ID of the chassis VPX
       responses:
           200:
-            description: Update Chassis Response
+            description: Update Chassis VPX Response
             schema:
-              $ref: '#/definitions/Chassis'
+              $ref: '#/definitions/ChassisVPX'
           400:
             description: Bad request
             schema:
@@ -468,23 +468,23 @@ paths:
     delete:
       security:
         - Bearer: []
-      summary: Delete chassis by ID
-      operationId: DeleteChassis
+      summary: Delete chassis VPX by ID
+      operationId: DeleteChassisVPX
       tags: 
-        - Chassis
+        - ChassisVPX
       parameters:
         - name: id
           in: path
           required: true
           type: integer
-          description: The ID of the chassis
+          description: The ID of the chassis VPX
       responses:
           200:
-            description: Chassis deleted successfully
+            description: Chassis VPX deleted successfully
             schema:
               $ref: '#/definitions/Error'
           404:
-            description: Chassis not found
+            description: Chassis VPX not found
             schema:
               $ref: '#/definitions/Error'
           403:
@@ -496,14 +496,14 @@ paths:
             schema:
               $ref: '#/definitions/Error'
 
-  /chassis/available_chassis:
+  /chassis_vpx/available_chassis:
     get:
       security:
         - Bearer: []
-      summary: Get available chassis 
-      operationId: GetAvailableChassis
+      summary: Get available chassis VPX
+      operationId: GetAvailableChassisVPX
       tags: 
-        - Chassis
+        - ChassisVPX
       parameters:
       - in: query
         required: true
@@ -520,51 +520,51 @@ paths:
         minimum: 0
         required: true
       - in: query
-        name: FilterChassisByMaxLength[from]
+        name: FilterChassisVPXByMaxLength[from]
         description: Filter By Max Lenghth
         type: number
       - in: query
-        name: FilterChassisByMinLength[to]
+        name: FilterChassisVPXByMinLength[to]
         description: Filter By Min Length
         type: number
       - in: query
-        name: FilterChassisByMaxWidth[from]
+        name: FilterChassisVPXByMaxWidth[from]
         description: Filter By Max Width
         type: number
       - in: query
-        name: FilterChassisByMinWidth[to]
+        name: FilterChassisVPXByMinWidth[to]
         description: Filter By Min Width
         type: number
       - in: query
-        name: FilterChassisByMaxHeight[from]
+        name: FilterChassisVPXByMaxHeight[from]
         description: Filter By Max Height
         type: number
       - in: query
-        name: FilterChassisByMinHeight[to]
+        name: FilterChassisVPXByMinHeight[to]
         description: Filter By Min Height
         type: number
       - in: query
-        name: FilterChassisByMaxWeight[from]
+        name: FilterChassisVPXByMaxWeight[from]
         description: Filter By Max Weight
         type: number
       - in: query
-        name: FilterChassisByMinWeight[to]
+        name: FilterChassisVPXByMinWeight[to]
         description: Filter By Min Weight
         type: number
       - in: query
-        name: FilterChassisByMaxPowerHandlingCapabilityPerBoard[from]
+        name: FilterChassisVPXByMaxPowerHandlingCapabilityPerBoard[from]
         description: Filter By Max Power Handling Capability Per Board
         type: number
       - in: query
-        name: FilterChassisByMinPowerHandlingCapabilityPerBoard[to]
+        name: FilterChassisVPXByMinPowerHandlingCapabilityPerBoard[to]
         description: Filter By Min Power Handling Capability Per Board
         type: number
       - in: query
-        name: FilterChassisByMaxTemperaturePerBoard[from]
+        name: FilterChassisVPXByMaxTemperaturePerBoard[from]
         description: Filter By Max Temperature Per Board
         type: number
       - in: query
-        name: FilterChassisByMinTemperaturePerBoard[to]
+        name: FilterChassisVPXByMinTemperaturePerBoard[to]
         description: Filter By Min Temperature Per Board
         type: number
       - in: query
@@ -574,9 +574,9 @@ paths:
         type: string
       responses:
         200:
-          description: Get Available Chassis Response
+          description: Get Available Chassis VPX Response
           schema:
-            $ref: '#/definitions/Chassises'
+            $ref: '#/definitions/ChassisesVPX'
         400:
           description: Bad request
           schema:
@@ -598,23 +598,6 @@ paths:
 
 
 definitions:
-  CallBackResponse:
-    type: object
-    required:
-      - balance
-    properties:
-      error_code:
-        type: string
-      error_description:
-        type: string     
-      transaction_id:
-        type: string           
-      balance:
-        type: number   
-      rollback_transactions:
-        type: array
-        items:
-          type: string
 
   UrlResponse:
       type: object
@@ -771,9 +754,9 @@ definitions:
         type: string
 
 
-### CHASSIS
+### CHASSISVPX
 
-  CreateChassisBody:
+  CreateChassisVPXBody:
     type: object
     required:
       - name
@@ -857,16 +840,16 @@ definitions:
         description: Peak frequency spectrum value 2
       length:
         type: number
-        description: Length of the chassis
+        description: Length of the chassis VPX
       width:
         type: number
-        description: Width of the chassis
+        description: Width of the chassis VPX
       height:
         type: number
-        description: Height of the chassis
+        description: Height of the chassis VPX
       weight:
         type: number
-        description: Weight of the chassis
+        description: Weight of the chassis VPX
       power_handling_capability_per_board:
         type: number
         description: Power handling capability per board
@@ -874,7 +857,7 @@ definitions:
         type: number
         description: Temperature per board
 
-  CreateChassisResponse:
+  CreateChassisVPXResponse:
     type: object
     required:
       - id
@@ -884,7 +867,7 @@ definitions:
         format: int64
         description: Unique identifier for the chassis (auto-generated)
 
-  Chassis:
+  ChassisVPX:
     type: object
     required:
       - name
@@ -995,7 +978,7 @@ definitions:
         type: integer
         description: Timestamp of creation
 
-  Chassises:
+  ChassisesVPX:
     type: object
     required:
       - count
@@ -1005,4 +988,4 @@ definitions:
       chassises:
         type: array
         items:
-          $ref: "#/definitions/Chassis"
+          $ref: "#/definitions/ChassisVPX"

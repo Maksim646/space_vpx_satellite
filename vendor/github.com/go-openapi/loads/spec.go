@@ -55,6 +55,7 @@ func JSONSpec(path string, options ...LoaderOption) (*Document, error) {
 	}
 
 	doc.specFilePath = path
+	fmt.Println(doc)
 
 	return doc, nil
 }
