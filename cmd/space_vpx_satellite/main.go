@@ -34,6 +34,9 @@ import (
 
 	_chassisRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/chassis/repository/postgresql"
 	_chassisUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/chassis/usecase"
+
+	_solarPanelRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/solar_panel/repository/postgresql"
+	_solarPanelUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/solar_panel/usecase"
 )
 
 const (
@@ -98,11 +101,15 @@ func main() {
 	chassisRepo := _chassisRepo.New(sqalxConn)
 	chassisUsecase := _chassisUsecase.New(chassisRepo)
 
+	solarPanelRepo := _solarPanelRepo.New(sqalxConn)
+	solarPanelUsecase := _solarPanelUsecase.New(solarPanelRepo)
+
 	appHandler := handler.New(
 		userUsecase,
 		adminUsecase,
 		projectUsecase,
 		chassisUsecase,
+		solarPanelUsecase,
 
 		httpVersion,
 		config.HashSalt,

@@ -593,6 +593,44 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/Error'
+
+
+###SOLARPANEL
+  /solarpanel:
+    get:
+      security:
+        - Bearer: []
+      summary: Get solar panel 
+      operationId: GetSolarPanel
+      tags: 
+        - SolarPanel
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        description: The ID of solar panel
+      responses:
+        200:
+          description: Get SolarPanel Response
+          schema:
+            $ref: '#/definitions/SolarPanel'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
         
 
 
@@ -989,3 +1027,68 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/ChassisVPX"
+
+### SolarPanel
+  SolarPanel:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique identifier for the chassis (auto-generated)
+      length:
+        type: number
+        description: Name of the chassis
+      width:
+        type: number
+        description: Number of slots in the chassis
+      height:
+        type: number
+        description: Size of the chassis
+      max_operating_temperature:
+        type: number
+        description: Maximum operating temperature in degrees Celsius
+      min_operating_temperature:
+        type: number
+        description: Minimum operating temperature in degrees Celsius
+      weight:
+        type: number
+        description: Maximum non-operating temperature in degrees Celsius
+      interface:
+        type: string
+        description: Minimum non-operating temperature in degrees Celsius
+      voc:
+        type: number
+        description: Overload capacity
+      isc:
+        type: number
+        description: Maximum sine vibration
+      vmp:
+        type: number
+        description: Minimum sine vibration
+      imp:
+        type: number
+        description: Maximum random vibration
+      efficiency:
+        type: integer
+        description: Minimum random vibration
+      coil_area:
+        type: number
+        description: Number of axes
+      coil_resistance:
+        type: integer
+        description: Shock response spectrum value
+      mechanical_vibration:
+        type: integer
+        description: Peak overload spectrum value 1
+      mechanical_shock:
+        type: integer
+        description: Peak overload spectrum value 2
+      updated_at:
+        type: integer
+        description: Timestamp of the last update
+      created_at:
+        type: integer
+        description: Timestamp of creation

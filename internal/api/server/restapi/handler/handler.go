@@ -21,10 +21,11 @@ import (
 )
 
 type Handler struct {
-	userUsecase    model.IUserUsecase
-	adminUsecase   model.IAdminUsecase
-	projectUsecase model.IProjectUsecase
-	chassisUsecase model.IChassisUsecase
+	userUsecase       model.IUserUsecase
+	adminUsecase      model.IAdminUsecase
+	projectUsecase    model.IProjectUsecase
+	chassisUsecase    model.IChassisUsecase
+	solarPanelUsecase model.ISolarPanelUsecase
 
 	router       http.Handler
 	HashSalt     string
@@ -36,6 +37,7 @@ func New(
 	adminUsecase model.IAdminUsecase,
 	projectUsecase model.IProjectUsecase,
 	chassisUsecase model.IChassisUsecase,
+	solarPanelUsecase model.ISolarPanelUsecase,
 
 	version string,
 	HashSalt string,
@@ -49,10 +51,11 @@ func New(
 	}
 
 	h := &Handler{
-		userUsecase:    userUsecase,
-		adminUsecase:   adminUsecase,
-		projectUsecase: projectUsecase,
-		chassisUsecase: chassisUsecase,
+		userUsecase:       userUsecase,
+		adminUsecase:      adminUsecase,
+		projectUsecase:    projectUsecase,
+		chassisUsecase:    chassisUsecase,
+		solarPanelUsecase: solarPanelUsecase,
 
 		HashSalt:     HashSalt,
 		jwtSigninKey: jwtSigninKey,
