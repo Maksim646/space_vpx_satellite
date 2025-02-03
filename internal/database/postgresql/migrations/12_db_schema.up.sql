@@ -66,6 +66,22 @@ CREATE TABLE IF NOT EXISTS chassis
     created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
 );
 
+CREATE TABLE IF NOT EXISTS cube_sat_frame
+(
+    id                                  BIGSERIAL PRIMARY KEY,
+    length                              NUMERIC,
+    width                               NUMERIC,
+    height                              NUMERIC,
+    weight                              BIGINT,
+    operating_temperature_min           BIGINT,
+    operating_temperature_max           BIGINT,
+    mechanical_vibration                BIGINT,
+    mechanical_shock                    BIGINT,
+    link                                VARCHAR(255),
+    updated_at                          TIMESTAMP WITHOUT TIME ZONE,
+    created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
+);
+
 CREATE TABLE IF NOT EXISTS admins
 (
     id                       uuid DEFAULT uuid_generate_v4(),
