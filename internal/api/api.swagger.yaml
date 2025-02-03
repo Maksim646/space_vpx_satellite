@@ -596,7 +596,7 @@ paths:
 
 
 ###SOLARPANEL
-  /solarpanel:
+  /solarpanel/{id}:
     get:
       security:
         - Bearer: []

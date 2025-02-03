@@ -65,6 +65,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		GetProjectHandler: GetProjectHandlerFunc(func(params GetProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetProject has not yet been implemented")
 		}),
+		GetSolarPanelHandler: GetSolarPanelHandlerFunc(func(params GetSolarPanelParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetSolarPanel has not yet been implemented")
+		}),
 		GetUserMeHandler: GetUserMeHandlerFunc(func(params GetUserMeParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetUserMe has not yet been implemented")
 		}),
@@ -150,6 +153,8 @@ type SpaceVPXBackendServiceAPI struct {
 	GetChassisVPXByIDHandler GetChassisVPXByIDHandler
 	// GetProjectHandler sets the operation handler for the get project operation
 	GetProjectHandler GetProjectHandler
+	// GetSolarPanelHandler sets the operation handler for the get solar panel operation
+	GetSolarPanelHandler GetSolarPanelHandler
 	// GetUserMeHandler sets the operation handler for the get user me operation
 	GetUserMeHandler GetUserMeHandler
 	// GetUserProjectsHandler sets the operation handler for the get user projects operation
@@ -265,6 +270,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.GetProjectHandler == nil {
 		unregistered = append(unregistered, "GetProjectHandler")
+	}
+	if o.GetSolarPanelHandler == nil {
+		unregistered = append(unregistered, "GetSolarPanelHandler")
 	}
 	if o.GetUserMeHandler == nil {
 		unregistered = append(unregistered, "GetUserMeHandler")
@@ -414,6 +422,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{id}"] = NewGetProject(o.context, o.GetProjectHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/solarpanel/{id}"] = NewGetSolarPanel(o.context, o.GetSolarPanelHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

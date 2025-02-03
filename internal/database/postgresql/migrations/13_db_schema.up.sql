@@ -82,6 +82,30 @@ CREATE TABLE IF NOT EXISTS cube_sat_frame
     created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
 );
 
+CREATE TABLE IF NOT EXISTS solar_panel
+(
+    id                                  BIGSERIAL PRIMARY KEY,
+    length                              NUMERIC,
+    width                               NUMERIC,
+    height                              NUMERIC,
+    weight                              NUMERIC,
+    interface                           VARCHAR(255),
+    voc                                 NUMERIC,
+    isc                                 NUMERIC,
+    vmp                                 NUMERIC,
+    imp                                 NUMERIC,
+    efficiency                          BIGINT,
+    coil_area                           NUMERIC,
+    coil_resistance                     BIGINT,
+    max_operating_temperature           NUMERIC,
+    min_operating_temperature           NUMERIC,
+    mechanical_vibration                BIGINT,
+    mechanical_shock                    BIGINT,
+    updated_at                          TIMESTAMP WITHOUT TIME ZONE,
+    created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
+
+);
+
 CREATE TABLE IF NOT EXISTS admins
 (
     id                       uuid DEFAULT uuid_generate_v4(),

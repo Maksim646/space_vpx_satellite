@@ -845,6 +845,61 @@ func init() {
         }
       }
     },
+    "/solarpanel/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanel"
+        ],
+        "summary": "Get solar panel",
+        "operationId": "GetSolarPanel",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of solar panel",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get SolarPanel Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanel"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/user/get_me": {
       "get": {
         "security": [
@@ -1345,6 +1400,91 @@ func init() {
       "properties": {
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "SolarPanel": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "coil_area": {
+          "description": "Number of axes",
+          "type": "number"
+        },
+        "coil_resistance": {
+          "description": "Shock response spectrum value",
+          "type": "integer"
+        },
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "efficiency": {
+          "description": "Minimum random vibration",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Size of the chassis",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the chassis (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "imp": {
+          "description": "Maximum random vibration",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Minimum non-operating temperature in degrees Celsius",
+          "type": "string"
+        },
+        "isc": {
+          "description": "Maximum sine vibration",
+          "type": "number"
+        },
+        "length": {
+          "description": "Name of the chassis",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Peak overload spectrum value 2",
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "description": "Peak overload spectrum value 1",
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "vmp": {
+          "description": "Minimum sine vibration",
+          "type": "number"
+        },
+        "voc": {
+          "description": "Overload capacity",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Maximum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "width": {
+          "description": "Number of slots in the chassis",
+          "type": "number"
         }
       }
     },
@@ -2234,6 +2374,61 @@ func init() {
         }
       }
     },
+    "/solarpanel/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanel"
+        ],
+        "summary": "Get solar panel",
+        "operationId": "GetSolarPanel",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of solar panel",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get SolarPanel Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanel"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/user/get_me": {
       "get": {
         "security": [
@@ -2734,6 +2929,91 @@ func init() {
       "properties": {
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "SolarPanel": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "coil_area": {
+          "description": "Number of axes",
+          "type": "number"
+        },
+        "coil_resistance": {
+          "description": "Shock response spectrum value",
+          "type": "integer"
+        },
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "efficiency": {
+          "description": "Minimum random vibration",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Size of the chassis",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the chassis (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "imp": {
+          "description": "Maximum random vibration",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Minimum non-operating temperature in degrees Celsius",
+          "type": "string"
+        },
+        "isc": {
+          "description": "Maximum sine vibration",
+          "type": "number"
+        },
+        "length": {
+          "description": "Name of the chassis",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Peak overload spectrum value 2",
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "description": "Peak overload spectrum value 1",
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "vmp": {
+          "description": "Minimum sine vibration",
+          "type": "number"
+        },
+        "voc": {
+          "description": "Overload capacity",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Maximum non-operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "width": {
+          "description": "Number of slots in the chassis",
+          "type": "number"
         }
       }
     },
