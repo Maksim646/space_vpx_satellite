@@ -656,6 +656,68 @@ func init() {
             }
           }
         }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Update Cube Sat Frame",
+        "operationId": "UpdateCubeSatFrame",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat frame",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create Cube Sat Frame Body",
+            "name": "CreateCubeSatFrameBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCubeSatFrameBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update CubeSat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
       }
     },
     "/project": {
@@ -2495,6 +2557,68 @@ func init() {
         "responses": {
           "200": {
             "description": "Get CubeSat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Update Cube Sat Frame",
+        "operationId": "UpdateCubeSatFrame",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat frame",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create Cube Sat Frame Body",
+            "name": "CreateCubeSatFrameBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCubeSatFrameBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update CubeSat Frame Response",
             "schema": {
               "$ref": "#/definitions/CubeSatFrame"
             }

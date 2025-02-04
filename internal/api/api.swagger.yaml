@@ -743,6 +743,48 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+    patch:
+      security:
+        - Bearer: []
+      summary: Update Cube Sat Frame
+      operationId: UpdateCubeSatFrame
+      tags: 
+        - CubeSateFrame
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        description: The ID of cube sat frame
+      - name: CreateCubeSatFrameBody
+        description: Create Cube Sat Frame Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CreateCubeSatFrameBody'
+      responses:
+        200:
+          description: Update CubeSat Frame Response
+          schema:
+            $ref: '#/definitions/CubeSatFrame'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+
         
 
 

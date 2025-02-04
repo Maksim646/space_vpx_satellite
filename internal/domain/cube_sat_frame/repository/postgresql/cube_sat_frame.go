@@ -86,7 +86,9 @@ func (r *CubeSatFrameRepository) GetCubeSatFrameByID(ctx context.Context, id int
 	var cubeSatFrame model.CubeSatFrame
 	query, params, err := postgresql.Builder.Select(
 		"id",
-		"dimension",
+		"height",
+		"width",
+		"length",
 		"weight",
 		"operating_temperature_min",
 		"operating_temperature_max",
@@ -114,7 +116,9 @@ func (r *CubeSatFrameRepository) GetCubeSatFrameByID(ctx context.Context, id int
 func (r *CubeSatFrameRepository) GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatFrame, error) {
 	builder := postgresql.Builder.Select(
 		"id",
-		"dimension",
+		"height",
+		"width",
+		"length",
 		"weight",
 		"operating_temperature_min",
 		"operating_temperature_max",

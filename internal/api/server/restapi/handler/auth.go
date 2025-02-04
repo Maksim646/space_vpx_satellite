@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/Maksim646/space_vpx_satellite/pkg/hash"
@@ -102,6 +103,7 @@ func (h *Handler) LoginAdminHandler(req api.LoginAdminParams) middleware.Respond
 		return api.NewRegisterUserInternalServerError()
 	}
 
+	fmt.Println(passwordHash)
 	if strings.Compare(admin.PasswordHash, passwordHash) != 0 {
 
 		return api.NewLoginUserBadRequest().WithPayload(&definition.Error{

@@ -94,6 +94,7 @@ func New(
 
 	/// CUBESATFRAME
 	router.CreateCubeSatFrameHandler = api.CreateCubeSatFrameHandlerFunc(h.CreateCubeSatFrameHandler)
+	router.GetCubeSatFrameHandler = api.GetCubeSatFrameHandlerFunc(h.GetCubeSatFrame)
 
 	// USER
 	router.GetUserMeHandler = api.GetUserMeHandlerFunc(h.GetUserMe)

@@ -95,6 +95,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		UpdateChassisVPXHandler: UpdateChassisVPXHandlerFunc(func(params UpdateChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateChassisVPX has not yet been implemented")
 		}),
+		UpdateCubeSatFrameHandler: UpdateCubeSatFrameHandlerFunc(func(params UpdateCubeSatFrameParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatFrame has not yet been implemented")
+		}),
 		UpdateProjectHandler: UpdateProjectHandlerFunc(func(params UpdateProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateProject has not yet been implemented")
 		}),
@@ -182,6 +185,8 @@ type SpaceVPXBackendServiceAPI struct {
 	RegisterUserHandler RegisterUserHandler
 	// UpdateChassisVPXHandler sets the operation handler for the update chassis v p x operation
 	UpdateChassisVPXHandler UpdateChassisVPXHandler
+	// UpdateCubeSatFrameHandler sets the operation handler for the update cube sat frame operation
+	UpdateCubeSatFrameHandler UpdateCubeSatFrameHandler
 	// UpdateProjectHandler sets the operation handler for the update project operation
 	UpdateProjectHandler UpdateProjectHandler
 
@@ -315,6 +320,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.UpdateChassisVPXHandler == nil {
 		unregistered = append(unregistered, "UpdateChassisVPXHandler")
+	}
+	if o.UpdateCubeSatFrameHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatFrameHandler")
 	}
 	if o.UpdateProjectHandler == nil {
 		unregistered = append(unregistered, "UpdateProjectHandler")
@@ -486,6 +494,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/chassis_vpx/{id}"] = NewUpdateChassisVPX(o.context, o.UpdateChassisVPXHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/cube_sat_frame/{id}"] = NewUpdateCubeSatFrame(o.context, o.UpdateCubeSatFrameHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}

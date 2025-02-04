@@ -3,7 +3,14 @@ package model
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"time"
+)
+
+var (
+	ErrCubeSatFrameNotFound = errors.New("cube sat frame not found")
+
+	CubeSatFrameNotFound = "cube sat frame not found"
 )
 
 type CubeSatFrame struct {
