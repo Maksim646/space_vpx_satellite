@@ -47,6 +47,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		CreateChassisVPXHandler: CreateChassisVPXHandlerFunc(func(params CreateChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateChassisVPX has not yet been implemented")
 		}),
+		CreateCubeSatFrameHandler: CreateCubeSatFrameHandlerFunc(func(params CreateCubeSatFrameParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateCubeSatFrame has not yet been implemented")
+		}),
 		CreateProjectHandler: CreateProjectHandlerFunc(func(params CreateProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateProject has not yet been implemented")
 		}),
@@ -141,6 +144,8 @@ type SpaceVPXBackendServiceAPI struct {
 
 	// CreateChassisVPXHandler sets the operation handler for the create chassis v p x operation
 	CreateChassisVPXHandler CreateChassisVPXHandler
+	// CreateCubeSatFrameHandler sets the operation handler for the create cube sat frame operation
+	CreateCubeSatFrameHandler CreateCubeSatFrameHandler
 	// CreateProjectHandler sets the operation handler for the create project operation
 	CreateProjectHandler CreateProjectHandler
 	// DeleteChassisVPXHandler sets the operation handler for the delete chassis v p x operation
@@ -252,6 +257,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 
 	if o.CreateChassisVPXHandler == nil {
 		unregistered = append(unregistered, "CreateChassisVPXHandler")
+	}
+	if o.CreateCubeSatFrameHandler == nil {
+		unregistered = append(unregistered, "CreateCubeSatFrameHandler")
 	}
 	if o.CreateProjectHandler == nil {
 		unregistered = append(unregistered, "CreateProjectHandler")
@@ -398,6 +406,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/chassis_vpx"] = NewCreateChassisVPX(o.context, o.CreateChassisVPXHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/cube_sat_frame"] = NewCreateCubeSatFrame(o.context, o.CreateCubeSatFrameHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

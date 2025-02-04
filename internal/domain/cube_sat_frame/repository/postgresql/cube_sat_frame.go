@@ -24,7 +24,9 @@ func New(sqalxConn sqalx.Node) model.ICubeSatFrameRepository {
 func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSatFrame model.CubeSatFrame) (int64, error) {
 	query, params, err := postgresql.Builder.Insert("cube_sat_frame").
 		Columns(
-			"dimension",
+			"height",
+			"width",
+			"length",
 			"weight",
 			"operating_temperature_min",
 			"operating_temperature_max",
@@ -33,8 +35,11 @@ func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSat
 			"link",
 		).
 		Values(
-			cubeSatFrame.Dimension,
-			cubeSatFrame.Weight,
+
+			cubeSatFrame.Height.Float64,
+			cubeSatFrame.Width.Float64,
+			cubeSatFrame.Length.Float64,
+			cubeSatFrame.Weight.Int64,
 			cubeSatFrame.OperatingTemperatureMin,
 			cubeSatFrame.OperatingTemperatureMax,
 			cubeSatFrame.MechanicalVibration,
@@ -56,7 +61,9 @@ func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSat
 
 func (r *CubeSatFrameRepository) UpdateCubeSatFrame(ctx context.Context, cubeSatFrame model.CubeSatFrame) error {
 	query, params, err := postgresql.Builder.Update("cube_sat_frame").
-		Set("dimension", cubeSatFrame.Dimension).
+		Set("height", cubeSatFrame.Height.Float64).
+		Set("width", cubeSatFrame.Weight.Int64).
+		Set("length", cubeSatFrame.Length.Float64).
 		Set("weight", cubeSatFrame.Weight).
 		Set("operating_temperature_min", cubeSatFrame.OperatingTemperatureMin).
 		Set("operating_temperature_max", cubeSatFrame.OperatingTemperatureMax).

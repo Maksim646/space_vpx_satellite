@@ -399,7 +399,7 @@ paths:
       summary: Get chassis VPX by ID
       operationId: GetChassisVPXByID
       tags: 
-        - Chassis
+        - ChassisVPX
       parameters:
         - name: id
           in: path
@@ -615,6 +615,44 @@ paths:
           description: Get SolarPanel Response
           schema:
             $ref: '#/definitions/SolarPanel'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+### CUBE SAT FRAME
+  /cube_sat_frame:
+    post:
+      security:
+        - Bearer: []
+      summary: Create Cube Sat Frame
+      operationId: CreateCubeSatFrame
+      tags: 
+        - CubeSateFrame
+      parameters:
+        - name: CreateCubeSatFrameBody
+          description: Create Cube Sat Frame Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCubeSatFrameBody'
+      responses:
+        200:
+          description: Create Cube Sat Frame Response
+          schema:
+            $ref: '#/definitions/CubeSatFrame'
         400:
           description: Bad request
           schema:
@@ -1092,3 +1130,71 @@ definitions:
       created_at:
         type: integer
         description: Timestamp of creation
+
+### CUBESATFRAME
+  CreateCubeSatFrameBody:
+    type: object
+    required:
+      - length
+      - width
+      - height
+      - weight
+      - operating_temperature_min
+      - operating_temperature_max
+      - mechanical_vibration
+      - mechanical_shock
+      - link
+    properties:
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: integer
+      operating_temperature_min:
+        type: integer
+      operating_temperature_max:
+        type: integer
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+      link:
+        type: string
+      
+  CubeSatFrame:
+    type: object
+    required:
+      - id
+      - length
+      - width
+      - height
+      - weight
+      - operating_temperature_min
+      - operating_temperature_max
+      - mechanical_vibration
+      - mechanical_shock
+      - link
+    properties:
+      id:
+        type: integer
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: integer
+      operating_temperature_min:
+        type: integer
+      operating_temperature_max:
+        type: integer
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+      link:
+        type: string

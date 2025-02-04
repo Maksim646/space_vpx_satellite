@@ -58,6 +58,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateChassisVPX(params *CreateChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisVPXOK, error)
 
+	CreateCubeSatFrame(params *CreateCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCubeSatFrameOK, error)
+
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectOK, error)
 
 	DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error)
@@ -125,6 +127,45 @@ func (a *Client) CreateChassisVPX(params *CreateChassisVPXParams, authInfo runti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateCubeSatFrame creates cube sat frame
+*/
+func (a *Client) CreateCubeSatFrame(params *CreateCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCubeSatFrameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateCubeSatFrameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateCubeSatFrame",
+		Method:             "POST",
+		PathPattern:        "/cube_sat_frame",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateCubeSatFrameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateCubeSatFrameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateCubeSatFrame: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

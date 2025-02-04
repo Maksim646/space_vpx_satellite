@@ -21,11 +21,12 @@ import (
 )
 
 type Handler struct {
-	userUsecase       model.IUserUsecase
-	adminUsecase      model.IAdminUsecase
-	projectUsecase    model.IProjectUsecase
-	chassisUsecase    model.IChassisUsecase
-	solarPanelUsecase model.ISolarPanelUsecase
+	userUsecase         model.IUserUsecase
+	adminUsecase        model.IAdminUsecase
+	projectUsecase      model.IProjectUsecase
+	chassisUsecase      model.IChassisUsecase
+	solarPanelUsecase   model.ISolarPanelUsecase
+	cubeSatFrameUsecase model.ICubeSatFrameUsecase
 
 	router       http.Handler
 	HashSalt     string
@@ -38,6 +39,7 @@ func New(
 	projectUsecase model.IProjectUsecase,
 	chassisUsecase model.IChassisUsecase,
 	solarPanelUsecase model.ISolarPanelUsecase,
+	cubeSatFrameUsecase model.ICubeSatFrameUsecase,
 
 	version string,
 	HashSalt string,
@@ -51,11 +53,12 @@ func New(
 	}
 
 	h := &Handler{
-		userUsecase:       userUsecase,
-		adminUsecase:      adminUsecase,
-		projectUsecase:    projectUsecase,
-		chassisUsecase:    chassisUsecase,
-		solarPanelUsecase: solarPanelUsecase,
+		userUsecase:         userUsecase,
+		adminUsecase:        adminUsecase,
+		projectUsecase:      projectUsecase,
+		chassisUsecase:      chassisUsecase,
+		solarPanelUsecase:   solarPanelUsecase,
+		cubeSatFrameUsecase: cubeSatFrameUsecase,
 
 		HashSalt:     HashSalt,
 		jwtSigninKey: jwtSigninKey,
@@ -85,6 +88,9 @@ func New(
 	router.GetChassisVPXByIDHandler = api.GetChassisVPXByIDHandlerFunc(h.GetChassisVPXHandler)
 	router.DeleteChassisVPXHandler = api.DeleteChassisVPXHandlerFunc(h.DeleteChassisVPXHandler)
 	router.GetAvailableChassisVPXHandler = api.GetAvailableChassisVPXHandlerFunc(h.GetAvailableChassisVPX)
+
+	/// CUBESATFRAME
+	router.CreateCubeSatFrameHandler = api.CreateCubeSatFrameHandlerFunc(h.CreateCubeSatFrameHandler)
 
 	// USER
 	router.GetUserMeHandler = api.GetUserMeHandlerFunc(h.GetUserMe)

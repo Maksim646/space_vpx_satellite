@@ -546,6 +546,63 @@ func init() {
         }
       }
     },
+    "/cube_sat_frame": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Create Cube Sat Frame",
+        "operationId": "CreateCubeSatFrame",
+        "parameters": [
+          {
+            "description": "Create Cube Sat Frame Body",
+            "name": "CreateCubeSatFrameBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCubeSatFrameBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Cube Sat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/project": {
       "post": {
         "security": [
@@ -1245,6 +1302,49 @@ func init() {
         }
       }
     },
+    "CreateCubeSatFrameBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height",
+        "weight",
+        "operating_temperature_min",
+        "operating_temperature_max",
+        "mechanical_vibration",
+        "mechanical_shock",
+        "link"
+      ],
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "link": {
+          "type": "string"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "operating_temperature_max": {
+          "type": "integer"
+        },
+        "operating_temperature_min": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "CreateProjectBody": {
       "type": "object",
       "required": [
@@ -1264,6 +1364,53 @@ func init() {
       "properties": {
         "project_id": {
           "type": "string"
+        }
+      }
+    },
+    "CubeSatFrame": {
+      "type": "object",
+      "required": [
+        "id",
+        "length",
+        "width",
+        "height",
+        "weight",
+        "operating_temperature_min",
+        "operating_temperature_max",
+        "mechanical_vibration",
+        "mechanical_shock",
+        "link"
+      ],
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "length": {
+          "type": "number"
+        },
+        "link": {
+          "type": "string"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "operating_temperature_max": {
+          "type": "integer"
+        },
+        "operating_temperature_min": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "number"
         }
       }
     },
@@ -2073,6 +2220,63 @@ func init() {
         }
       }
     },
+    "/cube_sat_frame": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Create Cube Sat Frame",
+        "operationId": "CreateCubeSatFrame",
+        "parameters": [
+          {
+            "description": "Create Cube Sat Frame Body",
+            "name": "CreateCubeSatFrameBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCubeSatFrameBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Cube Sat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/project": {
       "post": {
         "security": [
@@ -2774,6 +2978,49 @@ func init() {
         }
       }
     },
+    "CreateCubeSatFrameBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height",
+        "weight",
+        "operating_temperature_min",
+        "operating_temperature_max",
+        "mechanical_vibration",
+        "mechanical_shock",
+        "link"
+      ],
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "link": {
+          "type": "string"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "operating_temperature_max": {
+          "type": "integer"
+        },
+        "operating_temperature_min": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "CreateProjectBody": {
       "type": "object",
       "required": [
@@ -2793,6 +3040,53 @@ func init() {
       "properties": {
         "project_id": {
           "type": "string"
+        }
+      }
+    },
+    "CubeSatFrame": {
+      "type": "object",
+      "required": [
+        "id",
+        "length",
+        "width",
+        "height",
+        "weight",
+        "operating_temperature_min",
+        "operating_temperature_max",
+        "mechanical_vibration",
+        "mechanical_shock",
+        "link"
+      ],
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "length": {
+          "type": "number"
+        },
+        "link": {
+          "type": "string"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "operating_temperature_max": {
+          "type": "integer"
+        },
+        "operating_temperature_min": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "number"
         }
       }
     },

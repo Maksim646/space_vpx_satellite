@@ -9,15 +9,17 @@ import (
 type CubeSatFrame struct {
 	ID int64 `db:"id"`
 
-	Dimension               sql.NullInt64  `db:"dimension"`
-	Weight                  sql.NullInt64  `db:"weight"`
-	OperatingTemperatureMin sql.NullInt64  `db:"operating_temperature_min"`
-	OperatingTemperatureMax sql.NullInt64  `db:"operating_temperature_max"`
-	MechanicalVibration     sql.NullInt64  `db:"mechanical_vibration"`
-	MechanicalShock         sql.NullInt64  `db:"mechanical_shock"`
-	Link                    sql.NullString `db:"link"`
-	UpdatedAt               sql.NullTime   `db:"updated_at"`
-	CreatedAt               time.Time      `db:"created_at"`
+	Length                  sql.NullFloat64 `db:"length"`
+	Width                   sql.NullFloat64 `db:"width"`
+	Height                  sql.NullFloat64 `db:"height"`
+	Weight                  sql.NullInt64   `db:"weight"`
+	OperatingTemperatureMin sql.NullInt64   `db:"operating_temperature_min"`
+	OperatingTemperatureMax sql.NullInt64   `db:"operating_temperature_max"`
+	MechanicalVibration     sql.NullInt64   `db:"mechanical_vibration"`
+	MechanicalShock         sql.NullInt64   `db:"mechanical_shock"`
+	Link                    sql.NullString  `db:"link"`
+	UpdatedAt               sql.NullTime    `db:"updated_at"`
+	CreatedAt               time.Time       `db:"created_at"`
 }
 
 type ICubeSatFrameRepository interface {

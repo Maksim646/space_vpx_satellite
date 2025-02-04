@@ -37,6 +37,9 @@ import (
 
 	_solarPanelRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/solar_panel/repository/postgresql"
 	_solarPanelUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/solar_panel/usecase"
+
+	_cubeSatFrameRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_frame/repository/postgresql"
+	_cubeSatFrameUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_frame/usecase"
 )
 
 const (
@@ -104,12 +107,16 @@ func main() {
 	solarPanelRepo := _solarPanelRepo.New(sqalxConn)
 	solarPanelUsecase := _solarPanelUsecase.New(solarPanelRepo)
 
+	cubeSatFrameRepo := _cubeSatFrameRepo.New(sqalxConn)
+	cubeSatFrameUsecase := _cubeSatFrameUsecase.New(cubeSatFrameRepo)
+
 	appHandler := handler.New(
 		userUsecase,
 		adminUsecase,
 		projectUsecase,
 		chassisUsecase,
 		solarPanelUsecase,
+		cubeSatFrameUsecase,
 
 		httpVersion,
 		config.HashSalt,
