@@ -10,6 +10,47 @@ import (
 	"go.uber.org/zap"
 )
 
+// func (h *Handler) CreateSolarPanelHandler(req api.CreateSolarPanelParams, principal *definition.Principal) middleware.Responder {
+// 	zap.L().Info("create solar_panel request")
+// 	ctx := req.HTTPRequest.Context()
+
+// 	if principal.Role == 0 {
+// 		return api.NewCreateSolarPanelForbidden()
+// 	}
+
+// 	solar_panel := model.SolarPanel{
+
+// 		Height:                          *req.CreateSolarPanel.Height,
+// 		Length:                          *req.CreateSolarPanel.Length,
+// 	}
+// }
+// func (h *Handler) DeleteSolarPanelHandler(req api.DeleteSolarPanelParams, principal *definition.Principal) middleware.Responder {
+// 	zap.L().Info("update solar_panel request, id:" + string(req.ID))
+// 	ctx := req.HTTPRequest.Context()
+
+// 	// Проверка роли пользователя
+// 	if principal.Role == 0 {
+// 		return api.NewDeleteSolarPanelForbidden()
+// 	}
+
+// 	solar_panel, err := h.solarPanelUsecase.GetSolarPanelByID(ctx, req.ID)
+// 	if err != nil {
+// 		return api.NewDeleteChassisVPXNotFound().WithPayload(&definition.Error{
+// 			Message: &model.ChassisNotFound,
+// 		})
+// 	}
+
+// 	err = h.solarPanelUsecase.DeleteSolarPanelByID(ctx, solar_panel.ID)
+// 	if err != nil {
+// 		zap.L().Error("failed to delete solar_panel", zap.Error(err))
+// 		return api.NewDeleteSolarPanelInternalServerError()
+// 	}
+
+// 	return api.NewDeleteSolarPanelOK().WithPayload(&definition.Error{
+// 		Message: useful.StrPtr("SolarPanel deleted successfully"),
+// 	})
+// }
+
 func (h *Handler) GetSolarPanelHandler(req api.GetSolarPanelParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("get solar_panel request, id:" + string(req.ID))
 	ctx := req.HTTPRequest.Context()

@@ -34,10 +34,13 @@ type SolarPanel struct {
 	UpdatedAt               sql.NullTime    `db:"updated_at"`
 	CreatedAt               time.Time       `db:"created_at"`
 }
+
 type ISolarPanelRepository interface {
+	CreateSolarPanel(ctx context.Context, solarPanel SolarPanel) (int64, error)
 	GetSolarPanelByID(ctx context.Context, id int64) (SolarPanel, error)
 }
 
 type ISolarPanelUsecase interface {
+	CreateSolarPanel(ctx context.Context, solarPanel SolarPanel) (int64, error)
 	GetSolarPanelByID(ctx context.Context, id int64) (SolarPanel, error)
 }
