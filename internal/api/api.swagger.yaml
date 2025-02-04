@@ -784,6 +784,99 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+    delete:
+      security:
+        - Bearer: []
+      summary: Delete Cube Sat Frame
+      operationId: DeleteCubeSatFrame
+      tags: 
+        - CubeSateFrame
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        description: The ID of cube sat frame
+      responses:
+        200:
+          description: Delete CubeSat Frame Response
+          schema:
+            $ref: '#/definitions/Error'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /cube_sat_frame/available_cube_sat_frame:
+    get:
+      security:
+        - Bearer: []
+      summary: Get Cube Sat frames
+      operationId: GetCubeSatFrames
+      tags: 
+        - CubeSateFrame
+      parameters:
+      - in: query
+        required: true
+        name: offset
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        required: true
+        name: limit
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        name: sort[field]
+        description: sort parametrs
+        enum: [created_at]
+        type: string
+      - in: query
+        name: FilterCubeSatFrameByMinLength[min]
+        description: Filter By Min Length
+        type: number
+      - in: query
+        name: FilterCubeSatFrameByMinLength[max]
+        description: Filter By Max Length
+        type: number
+      responses:
+        200:
+          description: Get User Project Response
+          schema:
+            $ref: '#/definitions/CubeSatFrames'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
 
         
 
@@ -1376,3 +1469,21 @@ definitions:
         type: integer
       link:
         type: string
+      updated_at:
+        type: integer
+        description: Timestamp of the last update
+      created_at:
+        type: integer
+        description: Timestamp of creation
+
+  CubeSatFrames:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+      cube_sat_frames:
+        type: array
+        items:
+          $ref: "#/definitions/CubeSatFrame"

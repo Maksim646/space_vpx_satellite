@@ -59,6 +59,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		DeleteChassisVPXHandler: DeleteChassisVPXHandlerFunc(func(params DeleteChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteChassisVPX has not yet been implemented")
 		}),
+		DeleteCubeSatFrameHandler: DeleteCubeSatFrameHandlerFunc(func(params DeleteCubeSatFrameParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteCubeSatFrame has not yet been implemented")
+		}),
 		DeleteProjectHandler: DeleteProjectHandlerFunc(func(params DeleteProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteProject has not yet been implemented")
 		}),
@@ -70,6 +73,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		GetCubeSatFrameHandler: GetCubeSatFrameHandlerFunc(func(params GetCubeSatFrameParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetCubeSatFrame has not yet been implemented")
+		}),
+		GetCubeSatFramesHandler: GetCubeSatFramesHandlerFunc(func(params GetCubeSatFramesParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetCubeSatFrames has not yet been implemented")
 		}),
 		GetProjectHandler: GetProjectHandlerFunc(func(params GetProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetProject has not yet been implemented")
@@ -161,6 +167,8 @@ type SpaceVPXBackendServiceAPI struct {
 	CreateSolarPanelHandler CreateSolarPanelHandler
 	// DeleteChassisVPXHandler sets the operation handler for the delete chassis v p x operation
 	DeleteChassisVPXHandler DeleteChassisVPXHandler
+	// DeleteCubeSatFrameHandler sets the operation handler for the delete cube sat frame operation
+	DeleteCubeSatFrameHandler DeleteCubeSatFrameHandler
 	// DeleteProjectHandler sets the operation handler for the delete project operation
 	DeleteProjectHandler DeleteProjectHandler
 	// GetAvailableChassisVPXHandler sets the operation handler for the get available chassis v p x operation
@@ -169,6 +177,8 @@ type SpaceVPXBackendServiceAPI struct {
 	GetChassisVPXByIDHandler GetChassisVPXByIDHandler
 	// GetCubeSatFrameHandler sets the operation handler for the get cube sat frame operation
 	GetCubeSatFrameHandler GetCubeSatFrameHandler
+	// GetCubeSatFramesHandler sets the operation handler for the get cube sat frames operation
+	GetCubeSatFramesHandler GetCubeSatFramesHandler
 	// GetProjectHandler sets the operation handler for the get project operation
 	GetProjectHandler GetProjectHandler
 	// GetSolarPanelHandler sets the operation handler for the get solar panel operation
@@ -285,6 +295,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.DeleteChassisVPXHandler == nil {
 		unregistered = append(unregistered, "DeleteChassisVPXHandler")
 	}
+	if o.DeleteCubeSatFrameHandler == nil {
+		unregistered = append(unregistered, "DeleteCubeSatFrameHandler")
+	}
 	if o.DeleteProjectHandler == nil {
 		unregistered = append(unregistered, "DeleteProjectHandler")
 	}
@@ -296,6 +309,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.GetCubeSatFrameHandler == nil {
 		unregistered = append(unregistered, "GetCubeSatFrameHandler")
+	}
+	if o.GetCubeSatFramesHandler == nil {
+		unregistered = append(unregistered, "GetCubeSatFramesHandler")
 	}
 	if o.GetProjectHandler == nil {
 		unregistered = append(unregistered, "GetProjectHandler")
@@ -449,6 +465,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/cube_sat_frame/{id}"] = NewDeleteCubeSatFrame(o.context, o.DeleteCubeSatFrameHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/project/{id}"] = NewDeleteProject(o.context, o.DeleteProjectHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -462,6 +482,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/cube_sat_frame/{id}"] = NewGetCubeSatFrame(o.context, o.GetCubeSatFrameHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/cube_sat_frame/available_cube_sat_frame"] = NewGetCubeSatFrames(o.context, o.GetCubeSatFramesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

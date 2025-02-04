@@ -64,12 +64,12 @@ func (r *CubeSatFrameRepository) UpdateCubeSatFrame(ctx context.Context, cubeSat
 		Set("height", cubeSatFrame.Height.Float64).
 		Set("width", cubeSatFrame.Weight.Int64).
 		Set("length", cubeSatFrame.Length.Float64).
-		Set("weight", cubeSatFrame.Weight).
-		Set("operating_temperature_min", cubeSatFrame.OperatingTemperatureMin).
-		Set("operating_temperature_max", cubeSatFrame.OperatingTemperatureMax).
-		Set("mechanical_vibration", cubeSatFrame.MechanicalVibration).
-		Set("mechanical_shock", cubeSatFrame.MechanicalShock).
-		Set("link", cubeSatFrame.Link).
+		Set("weight", cubeSatFrame.Weight.Int64).
+		Set("operating_temperature_min", cubeSatFrame.OperatingTemperatureMin.Int64).
+		Set("operating_temperature_max", cubeSatFrame.OperatingTemperatureMax.Int64).
+		Set("mechanical_vibration", cubeSatFrame.MechanicalVibration.Int64).
+		Set("mechanical_shock", cubeSatFrame.MechanicalShock.Int64).
+		Set("link", cubeSatFrame.Link.String).
 		Set("updated_at", time.Now().UTC()).
 		Where(sq.Eq{"id": cubeSatFrame.ID}).
 		ToSql()
@@ -127,7 +127,7 @@ func (r *CubeSatFrameRepository) GetCubeSatFramesByFilters(ctx context.Context, 
 		"link",
 	).From("cube_sat_frame")
 
-	// builder = r.ApplyFilters(builder, filters)
+	builder = r.ApplyFilters(builder, filters)
 
 	query, params, err := builder.ToSql()
 	if err != nil {
@@ -143,65 +143,34 @@ func (r *CubeSatFrameRepository) GetCubeSatFramesByFilters(ctx context.Context, 
 	return cubeSatFrames, nil
 }
 
-// func (r *CubeSatFrameRepository) ApplyFilters(builder sq.SelectBuilder, filters map[string]interface{}) sq.SelectBuilder {
-// 	for filterKey, filterValue := range filters {
-// 		switch filterKey {
-// 		case model.FilterCubeSatFrameByMaxLength:
-// 			if length, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.LtOrEq{"length": length})
-// 			}
-// 		case model.FilterCubeSatFrameByMinLength:
-// 			if length, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.GtOrEq{"length": length})
-// 			}
-// 		case model.FilterChassisByMaxWidth:
-// 			if width, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.LtOrEq{"width": width}) // Условие для максимальной ширины
-// 			}
-// 		case model.FilterChassisByMinWidth:
-// 			if width, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.GtOrEq{"width": width}) // Условие для минимальной ширины
-// 			}
-// 		case model.FilterChassisByMaxHeight:
-// 			if height, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.LtOrEq{"height": height}) // Условие для максимальной высоты
-// 			}
-// 		case model.FilterChassisByMinHeight:
-// 			if height, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.GtOrEq{"height": height}) // Условие для минимальной высоты
-// 			}
-// 		case model.FilterChassisByMaxWeight:
-// 			if weight, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.LtOrEq{"weight": weight}) // Условие для максимального веса
-// 			}
-// 		case model.FilterChassisByMinWeight:
-// 			if weight, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.GtOrEq{"weight": weight}) // Условие для минимального веса
-// 			}
-// 		case model.FilterChassisByMaxPowerHandlingCapabilityPerBoard:
-// 			if power, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.LtOrEq{"power_handling_capability_per_board": power}) // Условие для максимальной мощности
-// 			}
-// 		case model.FilterChassisByMinPowerHandlingCapabilityPerBoard:
-// 			if power, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.GtOrEq{"power_handling_capability_per_board": power}) // Условие для минимальной мощности
-// 			}
-// 		case model.FilterChassisByMaxTemperaturePerBoard:
-// 			if temperature, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.LtOrEq{"temperature_per_board": temperature}) // Условие для максимальной температуры
-// 			}
-// 		case model.FilterChassisByMinTemperaturePerBoard:
-// 			if temperature, ok := filterValue.(float64); ok {
-// 				builder = builder.Where(sq.GtOrEq{"temperature_per_board": temperature}) // Условие для минимальной температуры
-// 			}
-// 		default:
-// 			zap.L().Info("Unknown filter", zap.String("filterKey", filterKey))
-// 		}
-// 	}
+func (r *CubeSatFrameRepository) ApplyFilters(builder sq.SelectBuilder, filters map[string]interface{}) sq.SelectBuilder {
+	for filterKey, filterValue := range filters {
+		switch filterKey {
+		case model.FilterCubeSatFrameByMaxLength:
+			if length, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.LtOrEq{"length": length})
+			}
+		case model.FilterCubeSatFrameByMinLength:
+			if length, ok := filterValue.(float64); ok {
+				builder = builder.Where(sq.GtOrEq{"length": length})
+			}
+		default:
+			zap.L().Info("Unknown filter", zap.String("filterKey", filterKey))
+		}
+	}
 
-// 	return builder
-// }
+	return builder
+}
 
-// func (r *CubeSatFrameRepository) DeleteCubeSatFrame(ctx context.Context, id int64) error {
+func (r *CubeSatFrameRepository) DeleteCubeSatFrame(ctx context.Context, id int64) error {
+	query, params, err := postgresql.Builder.Delete("cube_sat_frame").
+		Where(sq.Eq{"id": id}).
+		ToSql()
+	if err != nil {
+		return err
+	}
 
-// }
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	_, err = r.sqalxConn.ExecContext(ctx, query, params...)
+	return err
+}

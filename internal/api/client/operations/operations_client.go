@@ -66,6 +66,8 @@ type ClientService interface {
 
 	DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error)
 
+	DeleteCubeSatFrame(params *DeleteCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatFrameOK, error)
+
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
 
 	GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisVPXOK, error)
@@ -73,6 +75,8 @@ type ClientService interface {
 	GetChassisVPXByID(params *GetChassisVPXByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisVPXByIDOK, error)
 
 	GetCubeSatFrame(params *GetCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatFrameOK, error)
+
+	GetCubeSatFrames(params *GetCubeSatFramesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatFramesOK, error)
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
 
@@ -293,6 +297,45 @@ func (a *Client) DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runti
 }
 
 /*
+DeleteCubeSatFrame deletes cube sat frame
+*/
+func (a *Client) DeleteCubeSatFrame(params *DeleteCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatFrameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteCubeSatFrameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteCubeSatFrame",
+		Method:             "DELETE",
+		PathPattern:        "/cube_sat_frame/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteCubeSatFrameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteCubeSatFrameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteCubeSatFrame: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DeleteProject deletes project
 */
 func (a *Client) DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error) {
@@ -445,6 +488,45 @@ func (a *Client) GetCubeSatFrame(params *GetCubeSatFrameParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCubeSatFrame: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCubeSatFrames gets cube sat frames
+*/
+func (a *Client) GetCubeSatFrames(params *GetCubeSatFramesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatFramesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCubeSatFramesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetCubeSatFrames",
+		Method:             "GET",
+		PathPattern:        "/cube_sat_frame/available_cube_sat_frame",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetCubeSatFramesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetCubeSatFramesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetCubeSatFrames: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

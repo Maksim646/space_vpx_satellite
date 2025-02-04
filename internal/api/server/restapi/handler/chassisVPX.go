@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"strconv"
 	"time"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
@@ -59,7 +60,7 @@ func (h *Handler) CreateChassisVPXHandler(req api.CreateChassisVPXParams, princi
 }
 
 func (h *Handler) UpdateChassisVPXHandler(req api.UpdateChassisVPXParams, principal *definition.Principal) middleware.Responder {
-	zap.L().Info("update chassis request, id:" + string(req.ID))
+	zap.L().Info("update chassis request, id: " + strconv.Itoa(int(req.ID)))
 	ctx := req.HTTPRequest.Context()
 
 	// Проверка роли пользователя
@@ -185,7 +186,7 @@ func (h *Handler) UpdateChassisVPXHandler(req api.UpdateChassisVPXParams, princi
 }
 
 func (h *Handler) DeleteChassisVPXHandler(req api.DeleteChassisVPXParams, principal *definition.Principal) middleware.Responder {
-	zap.L().Info("update chassis request, id:" + string(req.ID))
+	zap.L().Info("update chassis request, id:" + strconv.Itoa(int(req.ID)))
 	ctx := req.HTTPRequest.Context()
 
 	// Проверка роли пользователя
@@ -212,7 +213,7 @@ func (h *Handler) DeleteChassisVPXHandler(req api.DeleteChassisVPXParams, princi
 }
 
 func (h *Handler) GetChassisVPXHandler(req api.GetChassisVPXByIDParams, principal *definition.Principal) middleware.Responder {
-	zap.L().Info("get chassis request, id:" + string(req.ID))
+	zap.L().Info("get chassis request, id:" + strconv.Itoa(int(req.ID)))
 	ctx := req.HTTPRequest.Context()
 
 	// Проверка роли пользователя
@@ -322,7 +323,7 @@ func (h *Handler) GetAvailableChassisVPX(req api.GetAvailableChassisVPXParams, p
 func (h *Handler) ChassisesVPXToDefinition(ctx context.Context, chassises []model.Chassis) []*definition.ChassisVPX {
 	chassisesData := make([]*definition.ChassisVPX, len(chassises))
 
-	for i, _ := range chassises {
+	for i := range chassises {
 		chassisesData[i] = &definition.ChassisVPX{
 			ID:                              chassises[i].ID,
 			Axes:                            &chassises[i].Axes,

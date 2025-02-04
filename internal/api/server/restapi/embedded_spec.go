@@ -603,6 +603,89 @@ func init() {
         }
       }
     },
+    "/cube_sat_frame/available_cube_sat_frame": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Get Cube Sat frames",
+        "operationId": "GetCubeSatFrames",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatFrameByMinLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatFrameByMinLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Project Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrames"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/cube_sat_frame/{id}": {
       "get": {
         "security": [
@@ -629,6 +712,59 @@ func init() {
             "description": "Get CubeSat Frame Response",
             "schema": {
               "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Delete Cube Sat Frame",
+        "operationId": "DeleteCubeSatFrame",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat frame",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete CubeSat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "400": {
@@ -1638,6 +1774,10 @@ func init() {
         "link"
       ],
       "properties": {
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
         "height": {
           "type": "number"
         },
@@ -1662,11 +1802,32 @@ func init() {
         "operating_temperature_min": {
           "type": "integer"
         },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
         "weight": {
           "type": "integer"
         },
         "width": {
           "type": "number"
+        }
+      }
+    },
+    "CubeSatFrames": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_frames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CubeSatFrame"
+          }
         }
       }
     },
@@ -2533,6 +2694,91 @@ func init() {
         }
       }
     },
+    "/cube_sat_frame/available_cube_sat_frame": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Get Cube Sat frames",
+        "operationId": "GetCubeSatFrames",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatFrameByMinLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatFrameByMinLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get User Project Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrames"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/cube_sat_frame/{id}": {
       "get": {
         "security": [
@@ -2559,6 +2805,59 @@ func init() {
             "description": "Get CubeSat Frame Response",
             "schema": {
               "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Delete Cube Sat Frame",
+        "operationId": "DeleteCubeSatFrame",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat frame",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete CubeSat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           },
           "400": {
@@ -3570,6 +3869,10 @@ func init() {
         "link"
       ],
       "properties": {
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
         "height": {
           "type": "number"
         },
@@ -3594,11 +3897,32 @@ func init() {
         "operating_temperature_min": {
           "type": "integer"
         },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
         "weight": {
           "type": "integer"
         },
         "width": {
           "type": "number"
+        }
+      }
+    },
+    "CubeSatFrames": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_frames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CubeSatFrame"
+          }
         }
       }
     },

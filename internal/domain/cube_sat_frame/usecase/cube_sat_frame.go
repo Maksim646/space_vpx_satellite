@@ -28,10 +28,10 @@ func (u *Usecase) GetCubeSatFrameByID(ctx context.Context, id int64) (model.Cube
 	return u.cubeSatFrameRepository.GetCubeSatFrameByID(ctx, id)
 }
 
-// func (u *Usecase) GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatFrame, error) {
-// 	return u.GetCubeSatFramesByFilters(ctx, offset, limit, sortParams, filters)
-// }
+func (u *Usecase) GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatFrame, error) {
+	return u.cubeSatFrameRepository.GetCubeSatFramesByFilters(ctx, offset, limit, sortParams, filters)
+}
 
-// func (u *Usecase) DeleteCubeSatFrame(ctx context.Context, id int64) error {
-// 	return u.DeleteCubeSatFrame(ctx, id)
-// }
+func (u *Usecase) DeleteCubeSatFrame(ctx context.Context, id int64) error {
+	return u.cubeSatFrameRepository.DeleteCubeSatFrame(ctx, id)
+}

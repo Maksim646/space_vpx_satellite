@@ -10,7 +10,16 @@ import (
 var (
 	ErrCubeSatFrameNotFound = errors.New("cube sat frame not found")
 
-	CubeSatFrameNotFound = "cube sat frame not found"
+	CubeSatFrameNotFound  = "cube sat frame not found"
+	CubeSatFramesNotFound = "cube sat frames not found"
+)
+
+const (
+	FilterCubeSatFrameByMinLength = "filter_cube_sat_frame_min_length"
+	FilterCubeSatFrameByMaxLength = "filter_cube_sat_frame_man_length"
+
+	DefaultCubeSatFramesSort     = "id desc"
+	CubeSatFramesSortByCreatedAt = "created_at desc"
 )
 
 type CubeSatFrame struct {
@@ -35,9 +44,9 @@ type ICubeSatFrameRepository interface {
 	UpdateCubeSatFrame(ctx context.Context, cubeSatFrame CubeSatFrame) error
 
 	GetCubeSatFrameByID(ctx context.Context, id int64) (CubeSatFrame, error)
-	// GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatFrame, error)
+	GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatFrame, error)
 
-	// DeleteCubeSatFrame(ctx context.Context, id int64) error
+	DeleteCubeSatFrame(ctx context.Context, id int64) error
 }
 
 type ICubeSatFrameUsecase interface {
@@ -46,7 +55,7 @@ type ICubeSatFrameUsecase interface {
 	UpdateCubeSatFrame(ctx context.Context, cubeSatFrame CubeSatFrame) error
 
 	GetCubeSatFrameByID(ctx context.Context, id int64) (CubeSatFrame, error)
-	// 	GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatFrame, error)
+	GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatFrame, error)
 
-	// 	DeleteCubeSatFrame(ctx context.Context, id int64) error
+	DeleteCubeSatFrame(ctx context.Context, id int64) error
 }

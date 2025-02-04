@@ -2,6 +2,7 @@ package handler
 
 import (
 	"database/sql"
+	"strconv"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 	"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/api"
@@ -106,7 +107,7 @@ func (h *Handler) CreateSolarPanelHandler(req api.CreateSolarPanelParams, princi
 // }
 
 func (h *Handler) GetSolarPanelHandler(req api.GetSolarPanelParams, principal *definition.Principal) middleware.Responder {
-	zap.L().Info("get solar_panel request, id:" + string(req.ID))
+	zap.L().Info("get solar_panel request, id:" + strconv.Itoa(int(req.ID)))
 	ctx := req.HTTPRequest.Context()
 
 	if principal.Role != 0 {

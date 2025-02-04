@@ -29,6 +29,29 @@ func (h *Handler) CubeSatFrameToDefinition(ctx context.Context, cubeSat model.Cu
 	return &cubeSatFrameDefinition
 }
 
+func (h *Handler) CubeSatFramesToDefinition(ctx context.Context, cubeSats []model.CubeSatFrame) []*definition.CubeSatFrame {
+	cubeSatFramesDefinition := make([]*definition.CubeSatFrame, len(cubeSats))
+
+	for i := range cubeSats {
+		cubeSatFramesDefinition[i] = &definition.CubeSatFrame{
+			ID:                      &cubeSats[i].ID,
+			Length:                  &cubeSats[i].Length.Float64,
+			Width:                   &cubeSats[i].Width.Float64,
+			Height:                  &cubeSats[i].Height.Float64,
+			Weight:                  &cubeSats[i].Weight.Int64,
+			OperatingTemperatureMin: &cubeSats[i].OperatingTemperatureMin.Int64,
+			OperatingTemperatureMax: &cubeSats[i].OperatingTemperatureMax.Int64,
+			MechanicalVibration:     &cubeSats[i].MechanicalVibration.Int64,
+			MechanicalShock:         &cubeSats[i].MechanicalShock.Int64,
+			Link:                    &cubeSats[i].Link.String,
+			UpdatedAt:               cubeSats[i].UpdatedAt.Time.Unix(),
+			CreatedAt:               cubeSats[i].CreatedAt.Unix(),
+		}
+	}
+
+	return cubeSatFramesDefinition
+}
+
 func (h *Handler) CreateCubeSatFrameHandler(req api.CreateCubeSatFrameParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("create cube sat frame request")
 	ctx := req.HTTPRequest.Context()
@@ -135,7 +158,6 @@ func (h *Handler) UpdateCubeSatFrameHandler(req api.UpdateCubeSatFrameParams, pr
 	}
 	cubeSatFrame.UpdatedAt.Time = time.Now()
 
-	// Сохраняем обновленный CubeSatFrame
 	err = h.cubeSatFrameUsecase.UpdateCubeSatFrame(ctx, cubeSatFrame)
 	if err != nil {
 		zap.L().Error("error updating cube sat frame", zap.Error(err))
@@ -155,4 +177,78 @@ func (h *Handler) UpdateCubeSatFrameHandler(req api.UpdateCubeSatFrameParams, pr
 	cubeSatFrameDefinition := h.CubeSatFrameToDefinition(ctx, cubeSatFrame)
 
 	return api.NewUpdateCubeSatFrameOK().WithPayload(cubeSatFrameDefinition)
+}
+
+func (h *Handler) DeleteCubeSatFrameHandler(req api.DeleteCubeSatFrameParams, principal *definition.Principal) middleware.Responder {
+	zap.L().Info("delete cube sat frame request")
+	ctx := req.HTTPRequest.Context()
+
+	if principal.Role == 0 {
+		return api.NewCreateChassisForbidden()
+	}
+
+	cubeSatFrame, err := h.cubeSatFrameUsecase.GetCubeSatFrameByID(ctx, req.ID)
+	if err != nil {
+		zap.L().Error("error fetch cube sat frame", zap.Error(err))
+		return api.NewDeleteCubeSatFrameBadRequest().WithPayload(&definition.Error{
+			Message: &model.CubeSatFrameNotFound,
+		})
+	}
+
+	err = h.cubeSatFrameUsecase.DeleteCubeSatFrame(ctx, cubeSatFrame.ID)
+	if err != nil {
+		zap.L().Error("error delete cube sat frame", zap.Error(err))
+		return api.NewDeleteCubeSatFrameInternalServerError()
+	}
+
+	return api.NewDeleteCubeSatFrameOK().WithPayload(&definition.Error{
+		Message: useful.StrPtr("Cube sat frame deleted successfully"),
+	})
+}
+
+func (h *Handler) GetAvailableCubeSatFrames(req api.GetCubeSatFramesParams, principal *definition.Principal) middleware.Responder {
+	zap.L().Info("get available cube sat frame request")
+	ctx := req.HTTPRequest.Context()
+
+	if principal.Role != 0 {
+		return api.NewCreateChassisForbidden()
+	}
+
+	var sortParams string
+	if req.SortField == nil {
+		sortParams = model.DefaultCubeSatFramesSort
+	} else {
+		switch *req.SortField {
+		case "created_at":
+			sortParams = model.CubeSatFramesSortByCreatedAt
+		default:
+			sortParams = model.DefaultCubeSatFramesSort
+		}
+	}
+
+	filters := make(map[string]interface{})
+
+	if req.FilterCubeSatFrameByMinLengthMax != nil {
+		filters[model.FilterCubeSatFrameByMaxLength] = *req.FilterCubeSatFrameByMinLengthMax
+	}
+
+	if req.FilterCubeSatFrameByMinLengthMin != nil {
+		filters[model.FilterCubeSatFrameByMinLength] = *req.FilterCubeSatFrameByMinLengthMin
+	}
+
+	cubeSatFrames, err := h.cubeSatFrameUsecase.GetCubeSatFramesByFilters(ctx, req.Offset, req.Limit, sortParams, filters)
+	if err != nil {
+		zap.L().Error("error get cube sat frames by filters", zap.Error(err))
+		return api.NewGetCubeSatFramesBadRequest().WithPayload(&definition.Error{
+			Message: &model.CubeSatFramesNotFound,
+		})
+	}
+
+	cubeSatFramesDefinition := h.CubeSatFramesToDefinition(ctx, cubeSatFrames)
+
+	return api.NewGetCubeSatFramesOK().WithPayload(&definition.CubeSatFrames{
+		Count:         useful.Int64Ptr(int64(len(cubeSatFramesDefinition))),
+		CubeSatFrames: cubeSatFramesDefinition,
+	})
+
 }

@@ -19,6 +19,9 @@ import (
 // swagger:model CubeSatFrame
 type CubeSatFrame struct {
 
+	// Timestamp of creation
+	CreatedAt int64 `json:"created_at,omitempty"`
+
 	// height
 	// Required: true
 	Height *float64 `json:"height"`
@@ -50,6 +53,9 @@ type CubeSatFrame struct {
 	// operating temperature min
 	// Required: true
 	OperatingTemperatureMin *int64 `json:"operating_temperature_min"`
+
+	// Timestamp of the last update
+	UpdatedAt int64 `json:"updated_at,omitempty"`
 
 	// weight
 	// Required: true

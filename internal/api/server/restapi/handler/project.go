@@ -132,7 +132,7 @@ func (h *Handler) ProjectToDefinition(ctx context.Context, project model.Project
 func (h *Handler) ProjectsToDefinition(ctx context.Context, projects []model.Project) []*definition.Project {
 	projectsData := make([]*definition.Project, len(projects))
 
-	for i, _ := range projects {
+	for i := range projects {
 		projectsData[i] = &definition.Project{
 			ID:          projects[i].ID,
 			ProjectName: &projects[i].Name,
