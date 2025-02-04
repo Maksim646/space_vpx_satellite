@@ -84,6 +84,7 @@ func New(
 
 	// SOLARPANEL
 	router.GetSolarPanelHandler = api.GetSolarPanelHandlerFunc(h.GetSolarPanelHandler)
+	router.CreateSolarPanelHandler = api.CreateSolarPanelHandlerFunc(h.CreateSolarPanelHandler)
 
 	// CHASSIS
 	router.CreateChassisVPXHandler = api.CreateChassisVPXHandlerFunc(h.CreateChassisVPXHandler)
