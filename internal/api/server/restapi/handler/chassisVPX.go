@@ -212,12 +212,12 @@ func (h *Handler) DeleteChassisVPXHandler(req api.DeleteChassisVPXParams, princi
 }
 
 func (h *Handler) GetChassisVPXHandler(req api.GetChassisVPXByIDParams, principal *definition.Principal) middleware.Responder {
-	zap.L().Info("update chassis request, id:" + string(req.ID))
+	zap.L().Info("get chassis request, id:" + string(req.ID))
 	ctx := req.HTTPRequest.Context()
 
 	// Проверка роли пользователя
-	if principal.Role == 0 {
-		return api.NewDeleteChassisVPXForbidden()
+	if principal.Role != 0 {
+		return api.NewGetChassisByIDForbidden()
 	}
 
 	chassis, err := h.chassisUsecase.GetChassisByID(ctx, req.ID)

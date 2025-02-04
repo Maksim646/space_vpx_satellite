@@ -82,6 +82,9 @@ func New(
 	router.DeleteProjectHandler = api.DeleteProjectHandlerFunc(h.DeleteProject)
 	router.GetUserProjectsHandler = api.GetUserProjectsHandlerFunc(h.GetProjectsByUser)
 
+	// SOLARPANEL
+	router.GetSolarPanelHandler = api.GetSolarPanelHandlerFunc(h.GetSolarPanelHandler)
+
 	// CHASSIS
 	router.CreateChassisVPXHandler = api.CreateChassisVPXHandlerFunc(h.CreateChassisVPXHandler)
 	router.UpdateChassisVPXHandler = api.UpdateChassisVPXHandlerFunc(h.UpdateChassisVPXHandler)

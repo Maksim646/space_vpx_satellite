@@ -3,7 +3,14 @@ package model
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"time"
+)
+
+var (
+	ErrSolarPanelNotFound = errors.New("solar panel not found")
+
+	SolarPanelNotFound = "solar panel not found"
 )
 
 type SolarPanel struct {
@@ -14,7 +21,7 @@ type SolarPanel struct {
 	Weight                  sql.NullFloat64 `db:"weight"`
 	Interface               sql.NullString  `db:"interface"`
 	Voc                     sql.NullFloat64 `db:"voc"`
-	Isc                     sql.NullFloat64 `db:"Isc"`
+	Isc                     sql.NullFloat64 `db:"isc"`
 	Vmp                     sql.NullFloat64 `db:"vmp"`
 	Imp                     sql.NullFloat64 `db:"imp"`
 	Efficiency              sql.NullInt64   `db:"efficiency"`
