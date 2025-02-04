@@ -70,6 +70,8 @@ type ClientService interface {
 
 	GetChassisVPXByID(params *GetChassisVPXByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisVPXByIDOK, error)
 
+	GetCubeSatFrame(params *GetCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatFrameOK, error)
+
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
 
 	GetSolarPanel(params *GetSolarPanelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSolarPanelOK, error)
@@ -361,6 +363,45 @@ func (a *Client) GetChassisVPXByID(params *GetChassisVPXByIDParams, authInfo run
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetChassisVPXByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCubeSatFrame gets cube sat frame
+*/
+func (a *Client) GetCubeSatFrame(params *GetCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatFrameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCubeSatFrameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetCubeSatFrame",
+		Method:             "GET",
+		PathPattern:        "/cube_sat_frame/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetCubeSatFrameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetCubeSatFrameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetCubeSatFrame: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

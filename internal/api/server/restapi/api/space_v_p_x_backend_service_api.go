@@ -65,6 +65,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		GetChassisVPXByIDHandler: GetChassisVPXByIDHandlerFunc(func(params GetChassisVPXByIDParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetChassisVPXByID has not yet been implemented")
 		}),
+		GetCubeSatFrameHandler: GetCubeSatFrameHandlerFunc(func(params GetCubeSatFrameParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetCubeSatFrame has not yet been implemented")
+		}),
 		GetProjectHandler: GetProjectHandlerFunc(func(params GetProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetProject has not yet been implemented")
 		}),
@@ -156,6 +159,8 @@ type SpaceVPXBackendServiceAPI struct {
 	GetAvailableChassisVPXHandler GetAvailableChassisVPXHandler
 	// GetChassisVPXByIDHandler sets the operation handler for the get chassis v p x by ID operation
 	GetChassisVPXByIDHandler GetChassisVPXByIDHandler
+	// GetCubeSatFrameHandler sets the operation handler for the get cube sat frame operation
+	GetCubeSatFrameHandler GetCubeSatFrameHandler
 	// GetProjectHandler sets the operation handler for the get project operation
 	GetProjectHandler GetProjectHandler
 	// GetSolarPanelHandler sets the operation handler for the get solar panel operation
@@ -275,6 +280,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.GetChassisVPXByIDHandler == nil {
 		unregistered = append(unregistered, "GetChassisVPXByIDHandler")
+	}
+	if o.GetCubeSatFrameHandler == nil {
+		unregistered = append(unregistered, "GetCubeSatFrameHandler")
 	}
 	if o.GetProjectHandler == nil {
 		unregistered = append(unregistered, "GetProjectHandler")
@@ -430,6 +438,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/chassis_vpx/{id}"] = NewGetChassisVPXByID(o.context, o.GetChassisVPXByIDHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/cube_sat_frame/{id}"] = NewGetCubeSatFrame(o.context, o.GetCubeSatFrameHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

@@ -67,3 +67,7 @@ func (h *Handler) CreateCubeSatFrameHandler(req api.CreateCubeSatFrameParams, pr
 
 	return api.NewCreateCubeSatFrameOK().WithPayload(cubeSatFrameDefinition)
 }
+
+// func (h *Handler) GetCubeSatFrame(req api.GetCubeSatFrameParams, principal *definition.Principal) middleware.Responder {
+
+// }

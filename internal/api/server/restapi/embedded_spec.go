@@ -396,7 +396,7 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
         "summary": "Get chassis VPX by ID",
         "operationId": "GetChassisVPXByID",
@@ -572,6 +572,61 @@ func init() {
         "responses": {
           "200": {
             "description": "Create Cube Sat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_frame/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Get Cube Sat Frame",
+        "operationId": "GetCubeSatFrame",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat frame",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Frame Response",
             "schema": {
               "$ref": "#/definitions/CubeSatFrame"
             }
@@ -2070,7 +2125,7 @@ func init() {
           }
         ],
         "tags": [
-          "Chassis"
+          "ChassisVPX"
         ],
         "summary": "Get chassis VPX by ID",
         "operationId": "GetChassisVPXByID",
@@ -2246,6 +2301,61 @@ func init() {
         "responses": {
           "200": {
             "description": "Create Cube Sat Frame Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatFrame"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_frame/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSateFrame"
+        ],
+        "summary": "Get Cube Sat Frame",
+        "operationId": "GetCubeSatFrame",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat frame",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Frame Response",
             "schema": {
               "$ref": "#/definitions/CubeSatFrame"
             }

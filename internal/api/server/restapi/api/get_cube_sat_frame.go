@@ -13,40 +13,40 @@ import (
 	models "github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 )
 
-// GetChassisVPXByIDHandlerFunc turns a function with the right signature into a get chassis v p x by ID handler
-type GetChassisVPXByIDHandlerFunc func(GetChassisVPXByIDParams, *models.Principal) middleware.Responder
+// GetCubeSatFrameHandlerFunc turns a function with the right signature into a get cube sat frame handler
+type GetCubeSatFrameHandlerFunc func(GetCubeSatFrameParams, *models.Principal) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetChassisVPXByIDHandlerFunc) Handle(params GetChassisVPXByIDParams, principal *models.Principal) middleware.Responder {
+func (fn GetCubeSatFrameHandlerFunc) Handle(params GetCubeSatFrameParams, principal *models.Principal) middleware.Responder {
 	return fn(params, principal)
 }
 
-// GetChassisVPXByIDHandler interface for that can handle valid get chassis v p x by ID params
-type GetChassisVPXByIDHandler interface {
-	Handle(GetChassisVPXByIDParams, *models.Principal) middleware.Responder
+// GetCubeSatFrameHandler interface for that can handle valid get cube sat frame params
+type GetCubeSatFrameHandler interface {
+	Handle(GetCubeSatFrameParams, *models.Principal) middleware.Responder
 }
 
-// NewGetChassisVPXByID creates a new http.Handler for the get chassis v p x by ID operation
-func NewGetChassisVPXByID(ctx *middleware.Context, handler GetChassisVPXByIDHandler) *GetChassisVPXByID {
-	return &GetChassisVPXByID{Context: ctx, Handler: handler}
+// NewGetCubeSatFrame creates a new http.Handler for the get cube sat frame operation
+func NewGetCubeSatFrame(ctx *middleware.Context, handler GetCubeSatFrameHandler) *GetCubeSatFrame {
+	return &GetCubeSatFrame{Context: ctx, Handler: handler}
 }
 
 /*
-	GetChassisVPXByID swagger:route GET /chassis_vpx/{id} ChassisVPX getChassisVPXById
+	GetCubeSatFrame swagger:route GET /cube_sat_frame/{id} CubeSateFrame getCubeSatFrame
 
-Get chassis VPX by ID
+Get Cube Sat Frame
 */
-type GetChassisVPXByID struct {
+type GetCubeSatFrame struct {
 	Context *middleware.Context
-	Handler GetChassisVPXByIDHandler
+	Handler GetCubeSatFrameHandler
 }
 
-func (o *GetChassisVPXByID) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *GetCubeSatFrame) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
 		*r = *rCtx
 	}
-	var Params = NewGetChassisVPXByIDParams()
+	var Params = NewGetCubeSatFrameParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
 	if err != nil {
 		o.Context.Respond(rw, r, route.Produces, route, err)
