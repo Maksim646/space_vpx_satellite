@@ -9,24 +9,17 @@ import (
 	"errors"
 	"net/url"
 	golangswaggerpaths "path"
-	"strings"
-
-	"github.com/go-openapi/swag"
 )
 
-// GetSolarPanelURL generates an URL for the get solar panel operation
-type GetSolarPanelURL struct {
-	ID int64
-
+// CreateSolarPanelURL generates an URL for the create solar panel operation
+type CreateSolarPanelURL struct {
 	_basePath string
-	// avoid unkeyed usage
-	_ struct{}
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetSolarPanelURL) WithBasePath(bp string) *GetSolarPanelURL {
+func (o *CreateSolarPanelURL) WithBasePath(bp string) *CreateSolarPanelURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -34,22 +27,15 @@ func (o *GetSolarPanelURL) WithBasePath(bp string) *GetSolarPanelURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetSolarPanelURL) SetBasePath(bp string) {
+func (o *CreateSolarPanelURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *GetSolarPanelURL) Build() (*url.URL, error) {
+func (o *CreateSolarPanelURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/solar_panel/{id}"
-
-	id := swag.FormatInt64(o.ID)
-	if id != "" {
-		_path = strings.Replace(_path, "{id}", id, -1)
-	} else {
-		return nil, errors.New("id is required on GetSolarPanelURL")
-	}
+	var _path = "/solar_panel"
 
 	_basePath := o._basePath
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
@@ -58,7 +44,7 @@ func (o *GetSolarPanelURL) Build() (*url.URL, error) {
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *GetSolarPanelURL) Must(u *url.URL, err error) *url.URL {
+func (o *CreateSolarPanelURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -69,17 +55,17 @@ func (o *GetSolarPanelURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *GetSolarPanelURL) String() string {
+func (o *CreateSolarPanelURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *GetSolarPanelURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *CreateSolarPanelURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on GetSolarPanelURL")
+		return nil, errors.New("scheme is required for a full url on CreateSolarPanelURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on GetSolarPanelURL")
+		return nil, errors.New("host is required for a full url on CreateSolarPanelURL")
 	}
 
 	base, err := o.Build()
@@ -93,6 +79,6 @@ func (o *GetSolarPanelURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *GetSolarPanelURL) StringFull(scheme, host string) string {
+func (o *CreateSolarPanelURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

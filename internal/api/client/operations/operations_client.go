@@ -62,6 +62,8 @@ type ClientService interface {
 
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectOK, error)
 
+	CreateSolarPanel(params *CreateSolarPanelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelOK, error)
+
 	DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
@@ -207,6 +209,45 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateSolarPanel creates solar panel
+*/
+func (a *Client) CreateSolarPanel(params *CreateSolarPanelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateSolarPanelParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateSolarPanel",
+		Method:             "POST",
+		PathPattern:        "/solar_panel",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateSolarPanelReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateSolarPanelOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateSolarPanel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -455,7 +496,7 @@ func (a *Client) GetSolarPanel(params *GetSolarPanelParams, authInfo runtime.Cli
 	op := &runtime.ClientOperation{
 		ID:                 "GetSolarPanel",
 		Method:             "GET",
-		PathPattern:        "/solarpanel/{id}",
+		PathPattern:        "/solar_panel/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

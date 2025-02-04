@@ -53,6 +53,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		CreateProjectHandler: CreateProjectHandlerFunc(func(params CreateProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateProject has not yet been implemented")
 		}),
+		CreateSolarPanelHandler: CreateSolarPanelHandlerFunc(func(params CreateSolarPanelParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateSolarPanel has not yet been implemented")
+		}),
 		DeleteChassisVPXHandler: DeleteChassisVPXHandlerFunc(func(params DeleteChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteChassisVPX has not yet been implemented")
 		}),
@@ -151,6 +154,8 @@ type SpaceVPXBackendServiceAPI struct {
 	CreateCubeSatFrameHandler CreateCubeSatFrameHandler
 	// CreateProjectHandler sets the operation handler for the create project operation
 	CreateProjectHandler CreateProjectHandler
+	// CreateSolarPanelHandler sets the operation handler for the create solar panel operation
+	CreateSolarPanelHandler CreateSolarPanelHandler
 	// DeleteChassisVPXHandler sets the operation handler for the delete chassis v p x operation
 	DeleteChassisVPXHandler DeleteChassisVPXHandler
 	// DeleteProjectHandler sets the operation handler for the delete project operation
@@ -268,6 +273,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.CreateProjectHandler == nil {
 		unregistered = append(unregistered, "CreateProjectHandler")
+	}
+	if o.CreateSolarPanelHandler == nil {
+		unregistered = append(unregistered, "CreateSolarPanelHandler")
 	}
 	if o.DeleteChassisVPXHandler == nil {
 		unregistered = append(unregistered, "DeleteChassisVPXHandler")
@@ -422,6 +430,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/project"] = NewCreateProject(o.context, o.CreateProjectHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/solar_panel"] = NewCreateSolarPanel(o.context, o.CreateSolarPanelHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -449,7 +461,7 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/solarpanel/{id}"] = NewGetSolarPanel(o.context, o.GetSolarPanelHandler)
+	o.handlers["GET"]["/solar_panel/{id}"] = NewGetSolarPanel(o.context, o.GetSolarPanelHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

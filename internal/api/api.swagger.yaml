@@ -596,7 +596,7 @@ paths:
 
 
 ###SOLARPANEL
-  /solarpanel/{id}:
+  /solar_panel/{id}:
     get:
       security:
         - Bearer: []
@@ -634,7 +634,7 @@ paths:
 
   /solar_panel:
     post:
-    security:
+      security:
         - Bearer: []
       summary: Create Solar Panel
       operationId: CreateSolarPanel
@@ -1206,7 +1206,7 @@ definitions:
         description: Timestamp of creation
       
   CreateSolarPanelBody:
-      type: object
+    type: object
     required:
       - length
       - width

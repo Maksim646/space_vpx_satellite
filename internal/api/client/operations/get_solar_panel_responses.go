@@ -55,7 +55,7 @@ func (o *GetSolarPanelReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /solarpanel/{id}] GetSolarPanel", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /solar_panel/{id}] GetSolarPanel", response, response.Code())
 	}
 }
 
@@ -105,12 +105,12 @@ func (o *GetSolarPanelOK) Code() int {
 
 func (o *GetSolarPanelOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelOK %s", 200, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelOK %s", 200, payload)
 }
 
 func (o *GetSolarPanelOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelOK %s", 200, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelOK %s", 200, payload)
 }
 
 func (o *GetSolarPanelOK) GetPayload() *models.SolarPanel {
@@ -175,12 +175,12 @@ func (o *GetSolarPanelBadRequest) Code() int {
 
 func (o *GetSolarPanelBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelBadRequest %s", 400, payload)
 }
 
 func (o *GetSolarPanelBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelBadRequest %s", 400, payload)
 }
 
 func (o *GetSolarPanelBadRequest) GetPayload() *models.Error {
@@ -245,12 +245,12 @@ func (o *GetSolarPanelForbidden) Code() int {
 
 func (o *GetSolarPanelForbidden) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelForbidden %s", 403, payload)
 }
 
 func (o *GetSolarPanelForbidden) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelForbidden %s", 403, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelForbidden %s", 403, payload)
 }
 
 func (o *GetSolarPanelForbidden) GetPayload() *models.Error {
@@ -315,12 +315,12 @@ func (o *GetSolarPanelUnprocessableEntity) Code() int {
 
 func (o *GetSolarPanelUnprocessableEntity) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelUnprocessableEntity %s", 422, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetSolarPanelUnprocessableEntity) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelUnprocessableEntity %s", 422, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetSolarPanelUnprocessableEntity) GetPayload() *models.Error {
@@ -385,12 +385,12 @@ func (o *GetSolarPanelInternalServerError) Code() int {
 
 func (o *GetSolarPanelInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelInternalServerError %s", 500, payload)
 }
 
 func (o *GetSolarPanelInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /solarpanel/{id}][%d] getSolarPanelInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /solar_panel/{id}][%d] getSolarPanelInternalServerError %s", 500, payload)
 }
 
 func (o *GetSolarPanelInternalServerError) GetPayload() *models.Error {

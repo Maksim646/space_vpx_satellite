@@ -13,40 +13,40 @@ import (
 	models "github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 )
 
-// GetSolarPanelHandlerFunc turns a function with the right signature into a get solar panel handler
-type GetSolarPanelHandlerFunc func(GetSolarPanelParams, *models.Principal) middleware.Responder
+// CreateSolarPanelHandlerFunc turns a function with the right signature into a create solar panel handler
+type CreateSolarPanelHandlerFunc func(CreateSolarPanelParams, *models.Principal) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetSolarPanelHandlerFunc) Handle(params GetSolarPanelParams, principal *models.Principal) middleware.Responder {
+func (fn CreateSolarPanelHandlerFunc) Handle(params CreateSolarPanelParams, principal *models.Principal) middleware.Responder {
 	return fn(params, principal)
 }
 
-// GetSolarPanelHandler interface for that can handle valid get solar panel params
-type GetSolarPanelHandler interface {
-	Handle(GetSolarPanelParams, *models.Principal) middleware.Responder
+// CreateSolarPanelHandler interface for that can handle valid create solar panel params
+type CreateSolarPanelHandler interface {
+	Handle(CreateSolarPanelParams, *models.Principal) middleware.Responder
 }
 
-// NewGetSolarPanel creates a new http.Handler for the get solar panel operation
-func NewGetSolarPanel(ctx *middleware.Context, handler GetSolarPanelHandler) *GetSolarPanel {
-	return &GetSolarPanel{Context: ctx, Handler: handler}
+// NewCreateSolarPanel creates a new http.Handler for the create solar panel operation
+func NewCreateSolarPanel(ctx *middleware.Context, handler CreateSolarPanelHandler) *CreateSolarPanel {
+	return &CreateSolarPanel{Context: ctx, Handler: handler}
 }
 
 /*
-	GetSolarPanel swagger:route GET /solar_panel/{id} SolarPanel getSolarPanel
+	CreateSolarPanel swagger:route POST /solar_panel SolarPanel createSolarPanel
 
-Get solar panel
+Create Solar Panel
 */
-type GetSolarPanel struct {
+type CreateSolarPanel struct {
 	Context *middleware.Context
-	Handler GetSolarPanelHandler
+	Handler CreateSolarPanelHandler
 }
 
-func (o *GetSolarPanel) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *CreateSolarPanel) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
 		*r = *rCtx
 	}
-	var Params = NewGetSolarPanelParams()
+	var Params = NewCreateSolarPanelParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
 	if err != nil {
 		o.Context.Respond(rw, r, route.Produces, route, err)
