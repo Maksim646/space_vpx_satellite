@@ -16,6 +16,10 @@ func New(solarPanelRepository model.ISolarPanelRepository) model.ISolarPanelUsec
 	}
 }
 
+func (u *SolarPanelUsecase) CreateSolarPanel(ctx context.Context, solarPanel model.SolarPanel) (int64, error) {
+	return u.solarPanelRepository.CreateSolarPanel(ctx, solarPanel)
+}
+
 func (u *SolarPanelUsecase) GetSolarPanelByID(ctx context.Context, id int64) (model.SolarPanel, error) {
 	return u.solarPanelRepository.GetSolarPanelByID(ctx, id)
 }

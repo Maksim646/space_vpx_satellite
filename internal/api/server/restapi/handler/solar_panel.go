@@ -18,12 +18,12 @@ import (
 // 		return api.NewCreateSolarPanelForbidden()
 // 	}
 
-// 	solar_panel := model.Chassis{
+// 	solar_panel := model.SolarPanel{
 
-// 		Height:                          *req.CreateChassisVPXBody.Height,
-// 		Length:                          *req.CreateChassisVPXBody.Length,
+// 		Height:                          *req.CreateSolarPanel.Height,
+// 		Length:                          *req.CreateSolarPanel.Length,
 // 	}
-
+// }
 // func (h *Handler) DeleteSolarPanelHandler(req api.DeleteSolarPanelParams, principal *definition.Principal) middleware.Responder {
 // 	zap.L().Info("update solar_panel request, id:" + string(req.ID))
 // 	ctx := req.HTTPRequest.Context()
