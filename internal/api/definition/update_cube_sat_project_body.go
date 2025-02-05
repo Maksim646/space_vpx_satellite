@@ -19,9 +19,15 @@ import (
 // swagger:model UpdateCubeSatProjectBody
 type UpdateCubeSatProjectBody struct {
 
+	// cube sat frame name
+	CubeSatFrameName string `json:"cube_sat_frame_name,omitempty"`
+
 	// project name
 	// Required: true
 	ProjectName *string `json:"project_name"`
+
+	// solar panael name
+	SolarPanaelName string `json:"solar_panael_name,omitempty"`
 }
 
 // Validate validates this update cube sat project body

@@ -28,15 +28,15 @@ func New(sqalxConn sqalx.Node) model.IProjectRepository {
 
 func (r *ProjectRepository) GetProjectBuilder() sq.SelectBuilder {
 	builder := postgresql.Builder.Select(
-		"projects.id",
-		"projects.user_id",
-		"projects.name",
-		"cube_sat_frame_id",
-		"projects.solar_panael_id",
-		"projects.created_at",
-		"projects.updated_at",
+		"cube_sat_projects.id",
+		"cube_sat_projects.user_id",
+		"cube_sat_projects.name",
+		"cube_sat_projects.cube_sat_frame_name",
+		"cube_sat_projects.solar_panael_name",
+		"cube_sat_projects.created_at",
+		"cube_sat_projects.updated_at",
 	).
-		From("projects")
+		From("cube_sat_projects")
 
 	return builder
 }
@@ -69,8 +69,8 @@ func (r *ProjectRepository) GetProjectByID(ctx context.Context, projectID string
 		"cube_sat_projects.id",
 		"cube_sat_projects.user_id",
 		"cube_sat_projects.name",
-		"cube_sat_projects.cube_sat_frame_id",
-		"cube_sat_projects.solar_panael_id",
+		"cube_sat_projects.cube_sat_frame_name",
+		"cube_sat_projects.solar_panael_name",
 		"cube_sat_projects.updated_at",
 		"cube_sat_projects.created_at",
 	).
@@ -120,11 +120,13 @@ func (r *ProjectRepository) GetProjectsByFilters(ctx context.Context, offset int
 	return cubeSatProjects, cubeSatProjectsCount, nil
 }
 
-func (r *ProjectRepository) UpdateProjectByID(ctx context.Context, projectID string, name string) error {
+func (r *ProjectRepository) UpdateProjectByID(ctx context.Context, cubeSatProject model.CubeSatProject) error {
 	query, params, err := postgresql.Builder.Update("cube_sat_projects").
-		Set("name", name).
+		Set("name", cubeSatProject.Name).
+		Set("cube_sat_frame_name", cubeSatProject.CubeSatFrameName.String).
+		Set("solar_panael_name", cubeSatProject.CubeSatSolarPanelName.String).
 		Set("updated_at", time.Now().UTC()).
-		Where(sq.Eq{"id": projectID}).
+		Where(sq.Eq{"id": cubeSatProject.ID}).
 		ToSql()
 	if err != nil {
 		return err

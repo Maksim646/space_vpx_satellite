@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 	"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/api"
@@ -49,16 +50,27 @@ func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, princ
 
 	project, err := h.projectUsecase.GetProjectByID(ctx, req.ID)
 	if err != nil {
+		zap.L().Error("error getch cube sat project", zap.Error(err))
 		return api.NewUpdateCubeSatProjectBadRequest().WithPayload(&definition.Error{
 			Message: &model.ProjectNotFound,
 		})
 	}
 
 	if *req.UpdateCubeSatProjectBody.ProjectName != "" {
-		err := h.projectUsecase.UpdateProjectByID(ctx, project.ID, *req.UpdateCubeSatProjectBody.ProjectName)
-		if err != nil {
-			return api.NewUpdateCubeSatProjectInternalServerError()
-		}
+		project.Name = *req.UpdateCubeSatProjectBody.ProjectName
+	}
+
+	if req.UpdateCubeSatProjectBody.CubeSatFrameName != "" {
+		project.CubeSatFrameName.String = req.UpdateCubeSatProjectBody.CubeSatFrameName
+	}
+
+	if req.UpdateCubeSatProjectBody.SolarPanaelName != "" {
+		project.CubeSatSolarPanelName.String = req.UpdateCubeSatProjectBody.SolarPanaelName
+	}
+
+	err = h.projectUsecase.UpdateProjectByID(ctx, project)
+	if err != nil {
+		return api.NewUpdateCubeSatProjectInternalServerError()
 	}
 
 	newProject, err := h.projectUsecase.GetProjectByID(ctx, req.ID)
@@ -66,6 +78,7 @@ func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, princ
 		return api.NewUpdateCubeSatProjectInternalServerError()
 	}
 
+	fmt.Println(newProject.CubeSatFrameName.String)
 	projectResult := h.ProjectToDefinition(ctx, newProject)
 
 	return api.NewUpdateCubeSatProjectOK().WithPayload(&projectResult)

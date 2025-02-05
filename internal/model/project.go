@@ -22,8 +22,8 @@ const (
 type CubeSatProject struct {
 	ID                    string         `db:"id"`
 	UserID                string         `db:"user_id"`
-	CubeSatFrameName      sql.NullString `db:"cube_sat_frame_id"`
-	CubeSatSolarPanelName sql.NullString `db:"solar_panael_id"`
+	CubeSatFrameName      sql.NullString `db:"cube_sat_frame_name"`
+	CubeSatSolarPanelName sql.NullString `db:"solar_panael_name"`
 	Name                  string         `db:"name"`
 	CreatedAt             time.Time      `db:"created_at"`
 	UpdatedAt             sql.NullTime   `db:"updated_at"`
@@ -35,7 +35,7 @@ type IProjectRepository interface {
 	GetProjectByID(ctx context.Context, projectID string) (CubeSatProject, error)
 	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatProject, int64, error)
 
-	UpdateProjectByID(ctx context.Context, projectID string, name string) error
+	UpdateProjectByID(ctx context.Context, cubeSatProject CubeSatProject) error
 
 	DeleteProject(ctx context.Context, projectID string) error
 }
@@ -46,7 +46,7 @@ type IProjectUsecase interface {
 	GetProjectByID(ctx context.Context, projectID string) (CubeSatProject, error)
 	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatProject, int64, error)
 
-	UpdateProjectByID(ctx context.Context, projectID string, name string) error
+	UpdateProjectByID(ctx context.Context, cubeSatProject CubeSatProject) error
 
 	DeleteProject(ctx context.Context, projectID string) error
 }

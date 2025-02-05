@@ -1077,6 +1077,10 @@ definitions:
     properties:
       project_name:
         type: string
+      cube_sat_frame_name:
+        type: string
+      solar_panael_name:
+        type: string
 
 
   CubeSatProject:

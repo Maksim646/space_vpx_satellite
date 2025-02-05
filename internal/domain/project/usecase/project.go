@@ -28,8 +28,8 @@ func (u *Usecase) GetProjectsByFilters(ctx context.Context, offset int64, limit 
 	return u.projectRepository.GetProjectsByFilters(ctx, offset, limit, sortParams, filters)
 }
 
-func (u *Usecase) UpdateProjectByID(ctx context.Context, projectID string, name string) error {
-	return u.projectRepository.UpdateProjectByID(ctx, projectID, name)
+func (u *Usecase) UpdateProjectByID(ctx context.Context, cubeSatProject model.CubeSatProject) error {
+	return u.projectRepository.UpdateProjectByID(ctx, cubeSatProject)
 }
 
 func (u *Usecase) DeleteProject(ctx context.Context, projectID string) error {

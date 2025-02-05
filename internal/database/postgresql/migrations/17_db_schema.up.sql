@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS cube_sat_projects
     id                       uuid DEFAULT uuid_generate_v4(),
     name                     VARCHAR(255),
     user_id                  VARCHAR(255),
-    cube_sat_frame_name      BIGINT,
-    solar_panael_name        BIGINT,
+    cube_sat_frame_name      VARCHAR(255),
+    solar_panael_name        VARCHAR(255),
     updated_at               TIMESTAMP WITHOUT TIME ZONE,
     created_at               TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
 );

@@ -2267,7 +2267,13 @@ func init() {
         "project_name"
       ],
       "properties": {
+        "cube_sat_frame_name": {
+          "type": "string"
+        },
         "project_name": {
+          "type": "string"
+        },
+        "solar_panael_name": {
           "type": "string"
         }
       }
@@ -4634,7 +4640,13 @@ func init() {
         "project_name"
       ],
       "properties": {
+        "cube_sat_frame_name": {
+          "type": "string"
+        },
         "project_name": {
+          "type": "string"
+        },
+        "solar_panael_name": {
           "type": "string"
         }
       }
