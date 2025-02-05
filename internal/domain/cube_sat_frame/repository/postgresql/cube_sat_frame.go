@@ -24,6 +24,7 @@ func New(sqalxConn sqalx.Node) model.ICubeSatFrameRepository {
 func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSatFrame model.CubeSatFrame) (int64, error) {
 	query, params, err := postgresql.Builder.Insert("cube_sat_frame").
 		Columns(
+			"name",
 			"height",
 			"width",
 			"length",
@@ -35,7 +36,7 @@ func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSat
 			"link",
 		).
 		Values(
-
+			cubeSatFrame.Name.String,
 			cubeSatFrame.Height.Float64,
 			cubeSatFrame.Width.Float64,
 			cubeSatFrame.Length.Float64,
@@ -61,6 +62,7 @@ func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSat
 
 func (r *CubeSatFrameRepository) UpdateCubeSatFrame(ctx context.Context, cubeSatFrame model.CubeSatFrame) error {
 	query, params, err := postgresql.Builder.Update("cube_sat_frame").
+		Set("name", cubeSatFrame.Name.String).
 		Set("height", cubeSatFrame.Height.Float64).
 		Set("width", cubeSatFrame.Weight.Int64).
 		Set("length", cubeSatFrame.Length.Float64).
@@ -86,6 +88,7 @@ func (r *CubeSatFrameRepository) GetCubeSatFrameByID(ctx context.Context, id int
 	var cubeSatFrame model.CubeSatFrame
 	query, params, err := postgresql.Builder.Select(
 		"id",
+		"name",
 		"height",
 		"width",
 		"length",
@@ -116,6 +119,7 @@ func (r *CubeSatFrameRepository) GetCubeSatFrameByID(ctx context.Context, id int
 func (r *CubeSatFrameRepository) GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatFrame, error) {
 	builder := postgresql.Builder.Select(
 		"id",
+		"name",
 		"height",
 		"width",
 		"length",

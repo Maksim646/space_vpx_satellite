@@ -16,7 +16,7 @@ var (
 
 const (
 	FilterCubeSatFrameByMinLength = "filter_cube_sat_frame_min_length"
-	FilterCubeSatFrameByMaxLength = "filter_cube_sat_frame_man_length"
+	FilterCubeSatFrameByMaxLength = "filter_cube_sat_frame_max_length"
 
 	DefaultCubeSatFramesSort     = "id desc"
 	CubeSatFramesSortByCreatedAt = "created_at desc"
@@ -25,6 +25,7 @@ const (
 type CubeSatFrame struct {
 	ID int64 `db:"id"`
 
+	Name                    sql.NullString  `db:"name"`
 	Length                  sql.NullFloat64 `db:"length"`
 	Width                   sql.NullFloat64 `db:"width"`
 	Height                  sql.NullFloat64 `db:"height"`

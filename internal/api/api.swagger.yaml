@@ -124,26 +124,26 @@ paths:
             $ref: '#/definitions/Error'
 
 ### PROJECT
-  /project:
+  /cube_sat_project:
     post:
       security:
         - Bearer: []
-      summary: Create project
-      operationId: CreateProject
+      summary: Create CubeSat project
+      operationId: CreateCubeSatProject
       tags: 
-        - Project
+        - CubeSatProject
       parameters:
-        - name: CreateProject
-          description: Create Project Body
+        - name: CreateCubeSatProject
+          description: Create CubeSat Project Body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateProjectBody'
+            $ref: '#/definitions/CreateCubeSatProjectBody'
       responses:
         200:
-          description: Create Project Response
+          description: Create CubeSat Project Response
           schema:
-            $ref: '#/definitions/CreateProjectResponse'
+            $ref: '#/definitions/CreateCubeSatProjectResponse'
         400:
           description: Bad request
           schema:
@@ -165,10 +165,10 @@ paths:
     get:
       security:
         - Bearer: []
-      summary: Get project
-      operationId: GetProject
+      summary: Get CubeSat project
+      operationId: Get CubeSat Project
       tags: 
-        - Project
+        - CubeSatProject
       parameters:
       - name: id
         in: path
@@ -177,9 +177,9 @@ paths:
         description: The ID of the project to retrieve
       responses:
         200:
-          description: Get Project Response
+          description: Get CubeSat Project Response
           schema:
-            $ref: '#/definitions/Project'
+            $ref: '#/definitions/CubeSatProject'
         400:
           description: Bad request
           schema:
@@ -200,27 +200,27 @@ paths:
     patch:
       security:
         - Bearer: []
-      summary: Update project
-      operationId: UpdateProject
+      summary: Update CubeSat project
+      operationId: UpdateCubeSatProject
       tags: 
-        - Project
+        - CubeSatProject
       parameters:
       - name: id
         in: path
         required: true
         type: string
         description: The ID of the project to retrieve
-      - name: UpdateProjectBody
+      - name: UpdateCubeSatProjectBody
         in: body
         required: true
-        description: Update Project Body
+        description: Update CubeSat Project Body
         schema:
-          $ref: '#/definitions/UpdateProjectBody'
+          $ref: '#/definitions/UpdateCubeSatProjectBody'
       responses:
         200:
-          description: Update Project Response
+          description: Update CubeSat Project Response
           schema:
-            $ref: '#/definitions/Project'
+            $ref: '#/definitions/CubeSatProject'
         400:
           description: Bad request
           schema:
@@ -241,10 +241,10 @@ paths:
     delete:
       security:
         - Bearer: []
-      summary: Delete project
-      operationId: DeleteProject
+      summary: Delete CubeSat project
+      operationId: DeleteCubeSatProject
       tags: 
-        - Project
+        - CubeSatProject
       parameters:
       - name: id
         in: path
@@ -253,9 +253,9 @@ paths:
         description: The ID of the project to retrieve
       responses:
         200:
-          description: Delete Project Response
+          description: Delete CubeSat Project Response
           schema:
-            $ref: '#/definitions/CreateProjectResponse'
+            $ref: '#/definitions/CreateCubeSatProjectResponse'
         400:
           description: Bad request
           schema:
@@ -277,10 +277,10 @@ paths:
     get:
       security:
         - Bearer: []
-      summary: Get user projects
-      operationId: GetUserProjects
+      summary: Get user CubeSat projects
+      operationId: GetUserCubeSatProjects
       tags: 
-        - Project
+        - CubeSatProject
       parameters:
       - in: query
         required: true
@@ -303,9 +303,9 @@ paths:
         type: string
       responses:
         200:
-          description: Get User Project Response
+          description: Get User CubeSat Project Response
           schema:
-            $ref: '#/definitions/Projects'
+            $ref: '#/definitions/CubeSatProjects'
         400:
           description: Bad request
           schema:
@@ -595,26 +595,26 @@ paths:
             $ref: '#/definitions/Error'
 
 
-###SOLARPANEL
-  /solar_panel/{id}:
+###SOLARPANELSIDE
+  /solar_panel_side/{id}:
     get:
       security:
         - Bearer: []
-      summary: Get solar panel 
-      operationId: GetSolarPanel
+      summary: Get solar panel side
+      operationId: GetSolarPanelSide
       tags: 
-        - SolarPanel
+        - SolarPanelSide
       parameters:
       - name: id
         in: path
         required: true
         type: integer
-        description: The ID of solar panel
+        description: The ID of solar panel side
       responses:
         200:
-          description: Get SolarPanel Response
+          description: Get Solar Panel Side Response
           schema:
-            $ref: '#/definitions/SolarPanel'
+            $ref: '#/definitions/SolarPanelSide'
         400:
           description: Bad request
           schema:
@@ -632,26 +632,160 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /solar_panel:
+    patch:
+      security:
+        - Bearer: []
+      summary: Update Cube Sat Solar Panel Side
+      operationId: UpdateCubeSatSolarPanelSide
+      tags: 
+        - SolarPanelSide
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        description: The ID of cube sat solar panel side
+      - name: UpdateSolarPanelSideBody
+        description: Update Solar Panel Side Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateSolarPanelSideBody'
+      responses:
+        200:
+          description: Update Solar Panel Side Response
+          schema:
+            $ref: '#/definitions/SolarPanelSide'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      security:
+        - Bearer: []
+      summary: Delete Cube Sat Solar Panel Side
+      operationId: DeleteCubeSatSolarPanelSide
+      tags: 
+        - SolarPanelSide
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        description: The ID of cube sat solar panel side
+      responses:
+        200:
+          description: Delete Cube Sat Solar Panel Side Response
+          schema:
+            $ref: '#/definitions/Error'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /solar_panel_side:
     post:
       security:
         - Bearer: []
-      summary: Create Solar Panel
-      operationId: CreateSolarPanel
+      summary: Create Solar Panel Side
+      operationId: CreateSolarPanelSide
       tags: 
-        - SolarPanel
+        - SolarPanelSide
       parameters:
-        - name: CreateSolarPanelBody
-          description: Create Solar Panel Body
+        - name: CreateSolarPanelSideBody
+          description: Create Solar Panel Side Body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSolarPanelBody'
+            $ref: '#/definitions/CreateSolarPanelSideBody'
       responses:
         200:
-          description: Create Solar Panel Response
+          description: Create Solar Panel Side Response
           schema:
-            $ref: '#/definitions/SolarPanel'
+            $ref: '#/definitions/SolarPanelSide'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /solar_panel_side/available_solar_panel_side:
+    get:
+      security:
+        - Bearer: []
+      summary: Get Cube Sat Solar Panels Side
+      operationId: GetCubeSatSolarPanelsSide
+      tags: 
+        - SolarPanelSide
+      parameters:
+      - in: query
+        required: true
+        name: offset
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        required: true
+        name: limit
+        type: integer
+        description: Offset Configs
+        minimum: 0
+        required: true
+      - in: query
+        name: sort[field]
+        description: sort parametrs
+        enum: [created_at]
+        type: string
+      - in: query
+        name: FilterCubeSatSolarPanelByLength[min]
+        description: Filter By Min Length
+        type: number
+      - in: query
+        name: FilterCubeSatSolarPanelByLength[max]
+        description: Filter By Max Length
+        type: number
+      responses:
+        200:
+          description: Get CubeSat Solar Panels Side Response
+          schema:
+            $ref: '#/definitions/CubeSatSolarPanelsSide'
         400:
           description: Bad request
           schema:
@@ -920,7 +1054,7 @@ definitions:
 
 
 ### PROJECT
-  CreateProjectBody:
+  CreateCubeSatProjectBody:
     type: object
     required:
       - project_name
@@ -928,7 +1062,7 @@ definitions:
       project_name:
         type: string
   
-  CreateProjectResponse:
+  CreateCubeSatProjectResponse:
     type: object
     required:
       - project_id
@@ -936,7 +1070,7 @@ definitions:
       project_id:
         type: string
 
-  UpdateProjectBody:
+  UpdateCubeSatProjectBody:
     type: object
     required:
       - project_name
@@ -945,7 +1079,7 @@ definitions:
         type: string
 
 
-  Project:
+  CubeSatProject:
     type: object
     required:
       - project_name
@@ -960,8 +1094,13 @@ definitions:
         type: integer
       project_name:
         type: string
+      cube_sat_frame_name:
+        type: string
+      cube_sat_solar_panel_name:
+        type: string
 
-  Projects:
+
+  CubeSatProjects:
     type: object
     required:
       - count
@@ -971,7 +1110,7 @@ definitions:
       projects:
         type: array
         items:
-          $ref: "#/definitions/Project"
+          $ref: "#/definitions/CubeSatProject"
 
 ### USER
   User:
@@ -1275,8 +1414,8 @@ definitions:
         items:
           $ref: "#/definitions/ChassisVPX"
 
-### SolarPanel
-  SolarPanel:
+### SOLAR PANEL SIDE
+  SolarPanelSide:
     type: object
     required:
       - id
@@ -1285,68 +1424,8 @@ definitions:
         type: integer
         format: int64
         description: Unique identifier for the chassis (auto-generated)
-      length:
-        type: number
-        description: Name of the chassis
-      width:
-        type: number
-        description: Number of slots in the chassis
-      height:
-        type: number
-        description: Size of the chassis
-      max_operating_temperature:
-        type: number
-        description: Maximum operating temperature in degrees Celsius
-      min_operating_temperature:
-        type: number
-        description: Minimum operating temperature in degrees Celsius
-      weight:
-        type: number
-        description: Maximum non-operating temperature in degrees Celsius
-      interface:
+      name:
         type: string
-        description: Minimum non-operating temperature in degrees Celsius
-      voc:
-        type: number
-        description: Overload capacity
-      isc:
-        type: number
-        description: Maximum sine vibration
-      vmp:
-        type: number
-        description: Minimum sine vibration
-      imp:
-        type: number
-        description: Maximum random vibration
-      efficiency:
-        type: integer
-        description: Minimum random vibration
-      coil_area:
-        type: number
-        description: Number of axes
-      coil_resistance:
-        type: integer
-        description: Shock response spectrum value
-      mechanical_vibration:
-        type: integer
-        description: Peak overload spectrum value 1
-      mechanical_shock:
-        type: integer
-        description: Peak overload spectrum value 2
-      updated_at:
-        type: integer
-        description: Timestamp of the last update
-      created_at:
-        type: integer
-        description: Timestamp of creation
-      
-  CreateSolarPanelBody:
-    type: object
-    required:
-      - length
-      - width
-      - height
-    properties:
       length:
         type: number
         description: Name of the chassis
@@ -1402,6 +1481,103 @@ definitions:
         type: integer
         description: Timestamp of creation
 
+  CubeSatSolarPanelsSide:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+      cube_sat_solar_panels_side:
+        type: array
+        items:
+          $ref: "#/definitions/SolarPanelSide"
+
+      
+  CreateSolarPanelSideBody:
+    type: object
+    required:
+      - length
+      - width
+      - height
+    properties:
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      weight:
+        type: number
+      interface:
+        type: string
+      voc:
+        type: number
+      isc:
+        type: number
+      vmp:
+        type: number
+      imp:
+        type: number
+      efficiency:
+        type: integer
+      coil_area:
+        type: number
+      coil_resistance:
+        type: integer
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+
+  UpdateSolarPanelSideBody:
+    type: object
+    required:
+      - length
+      - width
+      - height
+    properties:
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      weight:
+        type: number
+      interface:
+        type: string
+      voc:
+        type: number
+      isc:
+        type: number
+      vmp:
+        type: number
+      imp:
+        type: number
+      efficiency:
+        type: integer
+      coil_area:
+        type: number
+      coil_resistance:
+        type: integer
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+
 ### CUBESATFRAME
   CreateCubeSatFrameBody:
     type: object
@@ -1416,6 +1592,8 @@ definitions:
       - mechanical_shock
       - link
     properties:
+      name:
+        type: string
       length:
         type: number
       width:
@@ -1451,6 +1629,8 @@ definitions:
     properties:
       id:
         type: integer
+      name:
+        type: string
       length:
         type: number
       width:

@@ -75,16 +75,19 @@ func New(
 	router.LoginUserHandler = api.LoginUserHandlerFunc(h.LoginUserHandler)
 	router.LoginAdminHandler = api.LoginAdminHandlerFunc(h.LoginAdminHandler)
 
-	// PROJECTS
-	router.CreateProjectHandler = api.CreateProjectHandlerFunc(h.CreateProjectHandler)
-	router.UpdateProjectHandler = api.UpdateProjectHandlerFunc(h.UpdateProjectHandler)
-	router.GetProjectHandler = api.GetProjectHandlerFunc(h.GetProjectByIDHandler)
-	router.DeleteProjectHandler = api.DeleteProjectHandlerFunc(h.DeleteProject)
-	router.GetUserProjectsHandler = api.GetUserProjectsHandlerFunc(h.GetProjectsByUser)
+	// CUBESATPROJECTS
+	router.CreateCubeSatProjectHandler = api.CreateCubeSatProjectHandlerFunc(h.CreateProjectHandler)
+	router.UpdateCubeSatProjectHandler = api.UpdateCubeSatProjectHandlerFunc(h.UpdateProjectHandler)
+	router.GetCubeSatProjectHandler = api.GetCubeSatProjectHandlerFunc(h.GetProjectByIDHandler)
+	router.DeleteCubeSatProjectHandler = api.DeleteCubeSatProjectHandlerFunc(h.DeleteProject)
+	router.GetUserCubeSatProjectsHandler = api.GetUserCubeSatProjectsHandlerFunc(h.GetProjectsByUser)
 
-	// SOLARPANEL
-	router.GetSolarPanelHandler = api.GetSolarPanelHandlerFunc(h.GetSolarPanelHandler)
-	router.CreateSolarPanelHandler = api.CreateSolarPanelHandlerFunc(h.CreateSolarPanelHandler)
+	// SOLARPANELSide
+	router.CreateSolarPanelSideHandler = api.CreateSolarPanelSideHandlerFunc(h.CreateSolarPanelSideHandler)
+	router.GetSolarPanelSideHandler = api.GetSolarPanelSideHandlerFunc(h.GetSolarPanelSideHandler)
+	router.GetCubeSatSolarPanelsSideHandler = api.GetCubeSatSolarPanelsSideHandlerFunc(h.GetCubeSatSolarPanelsSide)
+	router.UpdateCubeSatSolarPanelSideHandler = api.UpdateCubeSatSolarPanelSideHandlerFunc(h.UpdateCubeSatSolarPanelSideHandler)
+	router.DeleteCubeSatSolarPanelSideHandler = api.DeleteCubeSatSolarPanelSideHandlerFunc(h.DeleteCubeSatSolarPanelSideHandler)
 
 	// CHASSIS
 	router.CreateChassisVPXHandler = api.CreateChassisVPXHandlerFunc(h.CreateChassisVPXHandler)

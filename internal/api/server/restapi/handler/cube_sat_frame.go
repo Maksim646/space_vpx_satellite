@@ -17,6 +17,7 @@ func (h *Handler) CubeSatFrameToDefinition(ctx context.Context, cubeSat model.Cu
 	cubeSatFrameDefinition := definition.CubeSatFrame{
 		Height:                  &cubeSat.Height.Float64,
 		ID:                      &cubeSat.ID,
+		Name:                    cubeSat.Name.String,
 		Length:                  &cubeSat.Length.Float64,
 		Link:                    &cubeSat.Link.String,
 		MechanicalShock:         &cubeSat.MechanicalShock.Int64,
@@ -35,6 +36,7 @@ func (h *Handler) CubeSatFramesToDefinition(ctx context.Context, cubeSats []mode
 	for i := range cubeSats {
 		cubeSatFramesDefinition[i] = &definition.CubeSatFrame{
 			ID:                      &cubeSats[i].ID,
+			Name:                    cubeSats[i].Name.String,
 			Length:                  &cubeSats[i].Length.Float64,
 			Width:                   &cubeSats[i].Width.Float64,
 			Height:                  &cubeSats[i].Height.Float64,
@@ -61,6 +63,8 @@ func (h *Handler) CreateCubeSatFrameHandler(req api.CreateCubeSatFrameParams, pr
 	}
 
 	cubeSatFrame := model.CubeSatFrame{
+		Height:                  sql.NullFloat64{Float64: *req.CreateCubeSatFrameBody.Height, Valid: true},
+		Name:                    sql.NullString{String: req.CreateCubeSatFrameBody.Name, Valid: true},
 		Length:                  sql.NullFloat64{Float64: *req.CreateCubeSatFrameBody.Length, Valid: true},
 		Width:                   sql.NullFloat64{Float64: *req.CreateCubeSatFrameBody.Width, Valid: true},
 		Weight:                  sql.NullInt64{Int64: *req.CreateCubeSatFrameBody.Weight, Valid: true},
@@ -129,31 +133,35 @@ func (h *Handler) UpdateCubeSatFrameHandler(req api.UpdateCubeSatFrameParams, pr
 		})
 	}
 
-	if req.CreateCubeSatFrameBody.Height != nil {
+	if req.CreateCubeSatFrameBody.Name != "" {
+		cubeSatFrame.Name.String = req.CreateCubeSatFrameBody.Name
+	}
+
+	if *req.CreateCubeSatFrameBody.Height != 0 {
 		cubeSatFrame.Height.Float64 = *req.CreateCubeSatFrameBody.Height
 	}
-	if req.CreateCubeSatFrameBody.Length != nil {
+	if *req.CreateCubeSatFrameBody.Length != 0 {
 		cubeSatFrame.Length.Float64 = *req.CreateCubeSatFrameBody.Length
 	}
-	if req.CreateCubeSatFrameBody.Width != nil {
+	if *req.CreateCubeSatFrameBody.Width != 0 {
 		cubeSatFrame.Width.Float64 = *req.CreateCubeSatFrameBody.Width
 	}
-	if req.CreateCubeSatFrameBody.Weight != nil {
+	if *req.CreateCubeSatFrameBody.Weight != 0 {
 		cubeSatFrame.Weight.Int64 = *req.CreateCubeSatFrameBody.Weight
 	}
-	if req.CreateCubeSatFrameBody.OperatingTemperatureMin != nil {
+	if *req.CreateCubeSatFrameBody.OperatingTemperatureMin != 0 {
 		cubeSatFrame.OperatingTemperatureMin.Int64 = *req.CreateCubeSatFrameBody.OperatingTemperatureMin
 	}
-	if req.CreateCubeSatFrameBody.OperatingTemperatureMax != nil {
+	if *req.CreateCubeSatFrameBody.OperatingTemperatureMax != 0 {
 		cubeSatFrame.OperatingTemperatureMax.Int64 = *req.CreateCubeSatFrameBody.OperatingTemperatureMax
 	}
-	if req.CreateCubeSatFrameBody.MechanicalVibration != nil {
+	if *req.CreateCubeSatFrameBody.MechanicalVibration != 0 {
 		cubeSatFrame.MechanicalVibration.Int64 = *req.CreateCubeSatFrameBody.MechanicalVibration
 	}
-	if req.CreateCubeSatFrameBody.MechanicalShock != nil {
+	if *req.CreateCubeSatFrameBody.MechanicalShock != 0 {
 		cubeSatFrame.MechanicalShock.Int64 = *req.CreateCubeSatFrameBody.MechanicalShock
 	}
-	if req.CreateCubeSatFrameBody.Link != nil {
+	if *req.CreateCubeSatFrameBody.Link != "" {
 		cubeSatFrame.Link.String = *req.CreateCubeSatFrameBody.Link
 	}
 	cubeSatFrame.UpdatedAt.Time = time.Now()

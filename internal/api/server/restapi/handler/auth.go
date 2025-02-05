@@ -102,8 +102,8 @@ func (h *Handler) LoginAdminHandler(req api.LoginAdminParams) middleware.Respond
 	if err != nil {
 		return api.NewRegisterUserInternalServerError()
 	}
-
 	fmt.Println(passwordHash)
+
 	if strings.Compare(admin.PasswordHash, passwordHash) != 0 {
 
 		return api.NewLoginUserBadRequest().WithPayload(&definition.Error{

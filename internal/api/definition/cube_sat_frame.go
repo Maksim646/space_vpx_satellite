@@ -46,6 +46,9 @@ type CubeSatFrame struct {
 	// Required: true
 	MechanicalVibration *int64 `json:"mechanical_vibration"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
 	// operating temperature max
 	// Required: true
 	OperatingTemperatureMax *int64 `json:"operating_temperature_max"`

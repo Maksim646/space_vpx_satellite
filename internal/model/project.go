@@ -16,23 +16,24 @@ var (
 )
 
 const (
-	FilterProjectsByUser = "filter_projects_by_user"
+	FilterCubeSatProjectsByUser = "filter_projects_by_user"
 )
 
-type Project struct {
-	ID     string `db:"id"`
-	UserID string `db:"user_id"`
-
-	Name      string       `db:"name"`
-	CreatedAt time.Time    `db:"created_at"`
-	UpdatedAt sql.NullTime `db:"updated_at"`
+type CubeSatProject struct {
+	ID                    string         `db:"id"`
+	UserID                string         `db:"user_id"`
+	CubeSatFrameName      sql.NullString `db:"cube_sat_frame_id"`
+	CubeSatSolarPanelName sql.NullString `db:"solar_panael_id"`
+	Name                  string         `db:"name"`
+	CreatedAt             time.Time      `db:"created_at"`
+	UpdatedAt             sql.NullTime   `db:"updated_at"`
 }
 
 type IProjectRepository interface {
 	CreatedProject(ctx context.Context, name string, userID string) (string, error)
 
-	GetProjectByID(ctx context.Context, projectID string) (Project, error)
-	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]Project, int64, error)
+	GetProjectByID(ctx context.Context, projectID string) (CubeSatProject, error)
+	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatProject, int64, error)
 
 	UpdateProjectByID(ctx context.Context, projectID string, name string) error
 
@@ -42,8 +43,8 @@ type IProjectRepository interface {
 type IProjectUsecase interface {
 	CreatedProject(ctx context.Context, name string, userID string) (string, error)
 
-	GetProjectByID(ctx context.Context, projectID string) (Project, error)
-	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]Project, int64, error)
+	GetProjectByID(ctx context.Context, projectID string) (CubeSatProject, error)
+	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatProject, int64, error)
 
 	UpdateProjectByID(ctx context.Context, projectID string, name string) error
 

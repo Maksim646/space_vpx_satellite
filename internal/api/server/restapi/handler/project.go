@@ -11,134 +11,138 @@ import (
 	"go.uber.org/zap"
 )
 
-func (h *Handler) CreateProjectHandler(req api.CreateProjectParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) CreateProjectHandler(req api.CreateCubeSatProjectParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("create project request")
 	ctx := req.HTTPRequest.Context()
 
-	projectID, err := h.projectUsecase.CreatedProject(ctx, *req.CreateProject.ProjectName, principal.ID)
+	projectID, err := h.projectUsecase.CreatedProject(ctx, *req.CreateCubeSatProject.ProjectName, principal.ID)
 	if err != nil {
 		zap.L().Error("error create project", zap.Error(err))
-		return api.NewCreateProjectInternalServerError()
+		return api.NewCreateCubeSatProjectInternalServerError()
 	}
 
-	return api.NewCreateProjectOK().WithPayload(&definition.CreateProjectResponse{
+	return api.NewCreateCubeSatProjectOK().WithPayload(&definition.CreateCubeSatProjectResponse{
 		ProjectID: useful.StrPtr(projectID),
 	})
 }
 
-func (h *Handler) GetProjectByIDHandler(req api.GetProjectParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) GetProjectByIDHandler(req api.GetCubeSatProjectParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("get project request, userID: " + req.ID)
 	ctx := req.HTTPRequest.Context()
 
 	project, err := h.projectUsecase.GetProjectByID(ctx, req.ID)
 	if err != nil {
-		return api.NewGetProjectBadRequest().WithPayload(&definition.Error{
+		return api.NewGetCubeSatProjectBadRequest().WithPayload(&definition.Error{
 			Message: &model.ProjectNotFound,
 		})
 	}
 
 	projectResult := h.ProjectToDefinition(ctx, project)
 
-	return api.NewGetProjectOK().WithPayload(&projectResult)
+	return api.NewGetCubeSatProjectOK().WithPayload(&projectResult)
 
 }
 
-func (h *Handler) UpdateProjectHandler(req api.UpdateProjectParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("update project request")
 	ctx := req.HTTPRequest.Context()
 
 	project, err := h.projectUsecase.GetProjectByID(ctx, req.ID)
 	if err != nil {
-		return api.NewUpdateProjectBadRequest().WithPayload(&definition.Error{
+		return api.NewUpdateCubeSatProjectBadRequest().WithPayload(&definition.Error{
 			Message: &model.ProjectNotFound,
 		})
 	}
 
-	if *req.UpdateProjectBody.ProjectName != "" {
-		err := h.projectUsecase.UpdateProjectByID(ctx, project.ID, *req.UpdateProjectBody.ProjectName)
+	if *req.UpdateCubeSatProjectBody.ProjectName != "" {
+		err := h.projectUsecase.UpdateProjectByID(ctx, project.ID, *req.UpdateCubeSatProjectBody.ProjectName)
 		if err != nil {
-			return api.NewUpdateProjectInternalServerError()
+			return api.NewUpdateCubeSatProjectInternalServerError()
 		}
 	}
 
 	newProject, err := h.projectUsecase.GetProjectByID(ctx, req.ID)
 	if err != nil {
-		return api.NewUpdateProjectInternalServerError()
+		return api.NewUpdateCubeSatProjectInternalServerError()
 	}
 
 	projectResult := h.ProjectToDefinition(ctx, newProject)
 
-	return api.NewUpdateProjectOK().WithPayload(&projectResult)
+	return api.NewUpdateCubeSatProjectOK().WithPayload(&projectResult)
 
 }
 
-func (h *Handler) DeleteProject(req api.DeleteProjectParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) DeleteProject(req api.DeleteCubeSatProjectParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("delete project request")
 	ctx := req.HTTPRequest.Context()
 
 	project, err := h.projectUsecase.GetProjectByID(ctx, req.ID)
 	if err != nil {
-		return api.NewDeleteProjectBadRequest().WithPayload(&definition.Error{
+		return api.NewDeleteCubeSatProjectBadRequest().WithPayload(&definition.Error{
 			Message: &model.ProjectNotFound,
 		})
 	}
 
 	err = h.projectUsecase.DeleteProject(ctx, project.ID)
 	if err != nil {
-		return api.NewDeleteProjectInternalServerError()
+		return api.NewDeleteCubeSatProjectInternalServerError()
 	}
 
-	return api.NewDeleteProjectOK().WithPayload(&definition.CreateProjectResponse{
+	return api.NewDeleteCubeSatProjectOK().WithPayload(&definition.CreateCubeSatProjectResponse{
 		ProjectID: useful.StrPtr(project.ID),
 	})
 }
 
-func (h *Handler) GetProjectsByUser(req api.GetUserProjectsParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) GetProjectsByUser(req api.GetUserCubeSatProjectsParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("get user projects request")
 	ctx := req.HTTPRequest.Context()
 
 	filters := make(map[string]interface{})
-	filters[model.FilterProjectsByUser] = principal.ID
+	filters[model.FilterCubeSatProjectsByUser] = principal.ID
 
 	projects, projectsCount, err := h.projectUsecase.GetProjectsByFilters(ctx, req.Offset, req.Limit, *req.SortField, filters)
 	if err != nil {
-		return api.NewDeleteProjectBadRequest().WithPayload(&definition.Error{
+		return api.NewDeleteCubeSatProjectBadRequest().WithPayload(&definition.Error{
 			Message: &model.ProjectsNotFound,
 		})
 	}
 
 	projectsResult := h.ProjectsToDefinition(ctx, projects)
 
-	projectsResponse := definition.Projects{
+	projectsResponse := definition.CubeSatProjects{
 		Count:    useful.Int64Ptr(projectsCount),
 		Projects: projectsResult,
 	}
 
-	return api.NewGetUserProjectsOK().WithPayload(&projectsResponse)
+	return api.NewGetUserCubeSatProjectsOK().WithPayload(&projectsResponse)
 }
 
-func (h *Handler) ProjectToDefinition(ctx context.Context, project model.Project) definition.Project {
-	projectResult := &definition.Project{
-		ID:          project.ID,
-		UserID:      project.UserID,
-		ProjectName: &project.Name,
-		CreatedAt:   project.CreatedAt.Unix(),
-		UpdatedAt:   project.UpdatedAt.Time.Unix(),
+func (h *Handler) ProjectToDefinition(ctx context.Context, project model.CubeSatProject) definition.CubeSatProject {
+	projectResult := &definition.CubeSatProject{
+		ID:                    project.ID,
+		UserID:                project.UserID,
+		ProjectName:           &project.Name,
+		CubeSatFrameName:      project.CubeSatFrameName.String,
+		CubeSatSolarPanelName: project.CubeSatSolarPanelName.String,
+		CreatedAt:             project.CreatedAt.Unix(),
+		UpdatedAt:             project.UpdatedAt.Time.Unix(),
 	}
 
 	return *projectResult
 }
 
-func (h *Handler) ProjectsToDefinition(ctx context.Context, projects []model.Project) []*definition.Project {
-	projectsData := make([]*definition.Project, len(projects))
+func (h *Handler) ProjectsToDefinition(ctx context.Context, projects []model.CubeSatProject) []*definition.CubeSatProject {
+	projectsData := make([]*definition.CubeSatProject, len(projects))
 
 	for i := range projects {
-		projectsData[i] = &definition.Project{
-			ID:          projects[i].ID,
-			ProjectName: &projects[i].Name,
-			UserID:      projects[i].UserID,
-			CreatedAt:   projects[i].CreatedAt.Unix(),
-			UpdatedAt:   projects[i].UpdatedAt.Time.Unix(),
+		projectsData[i] = &definition.CubeSatProject{
+			ID:                    projects[i].ID,
+			ProjectName:           &projects[i].Name,
+			UserID:                projects[i].UserID,
+			CubeSatFrameName:      projects[i].CubeSatFrameName.String,
+			CubeSatSolarPanelName: projects[i].CubeSatSolarPanelName.String,
+			CreatedAt:             projects[i].CreatedAt.Unix(),
+			UpdatedAt:             projects[i].UpdatedAt.Time.Unix(),
 		}
 	}
 	return projectsData

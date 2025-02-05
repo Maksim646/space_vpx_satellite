@@ -856,7 +856,7 @@ func init() {
         }
       }
     },
-    "/project": {
+    "/cube_sat_project": {
       "post": {
         "security": [
           {
@@ -864,26 +864,26 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Create project",
-        "operationId": "CreateProject",
+        "summary": "Create CubeSat project",
+        "operationId": "CreateCubeSatProject",
         "parameters": [
           {
-            "description": "Create Project Body",
-            "name": "CreateProject",
+            "description": "Create CubeSat Project Body",
+            "name": "CreateCubeSatProject",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectBody"
+              "$ref": "#/definitions/CreateCubeSatProjectBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Create Project Response",
+            "description": "Create CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/CreateProjectResponse"
+              "$ref": "#/definitions/CreateCubeSatProjectResponse"
             }
           },
           "400": {
@@ -921,10 +921,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Get project",
-        "operationId": "GetProject",
+        "summary": "Get CubeSat project",
+        "operationId": "Get CubeSat Project",
         "parameters": [
           {
             "type": "string",
@@ -936,9 +936,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get Project Response",
+            "description": "Get CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/CubeSatProject"
             }
           },
           "400": {
@@ -974,10 +974,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Delete project",
-        "operationId": "DeleteProject",
+        "summary": "Delete CubeSat project",
+        "operationId": "DeleteCubeSatProject",
         "parameters": [
           {
             "type": "string",
@@ -989,9 +989,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Delete Project Response",
+            "description": "Delete CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/CreateProjectResponse"
+              "$ref": "#/definitions/CreateCubeSatProjectResponse"
             }
           },
           "400": {
@@ -1027,10 +1027,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Update project",
-        "operationId": "UpdateProject",
+        "summary": "Update CubeSat project",
+        "operationId": "UpdateCubeSatProject",
         "parameters": [
           {
             "type": "string",
@@ -1040,20 +1040,20 @@ func init() {
             "required": true
           },
           {
-            "description": "Update Project Body",
-            "name": "UpdateProjectBody",
+            "description": "Update CubeSat Project Body",
+            "name": "UpdateCubeSatProjectBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateProjectBody"
+              "$ref": "#/definitions/UpdateCubeSatProjectBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update Project Response",
+            "description": "Update CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/CubeSatProject"
             }
           },
           "400": {
@@ -1091,10 +1091,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Get user projects",
-        "operationId": "GetUserProjects",
+        "summary": "Get user CubeSat projects",
+        "operationId": "GetUserCubeSatProjects",
         "parameters": [
           {
             "type": "integer",
@@ -1123,9 +1123,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get User Project Response",
+            "description": "Get User CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/Projects"
+              "$ref": "#/definitions/CubeSatProjects"
             }
           },
           "400": {
@@ -1155,7 +1155,7 @@ func init() {
         }
       }
     },
-    "/solar_panel": {
+    "/solar_panel_side": {
       "post": {
         "security": [
           {
@@ -1163,26 +1163,26 @@ func init() {
           }
         ],
         "tags": [
-          "SolarPanel"
+          "SolarPanelSide"
         ],
-        "summary": "Create Solar Panel",
-        "operationId": "CreateSolarPanel",
+        "summary": "Create Solar Panel Side",
+        "operationId": "CreateSolarPanelSide",
         "parameters": [
           {
-            "description": "Create Solar Panel Body",
-            "name": "CreateSolarPanelBody",
+            "description": "Create Solar Panel Side Body",
+            "name": "CreateSolarPanelSideBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateSolarPanelBody"
+              "$ref": "#/definitions/CreateSolarPanelSideBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Create Solar Panel Response",
+            "description": "Create Solar Panel Side Response",
             "schema": {
-              "$ref": "#/definitions/SolarPanel"
+              "$ref": "#/definitions/SolarPanelSide"
             }
           },
           "400": {
@@ -1212,7 +1212,7 @@ func init() {
         }
       }
     },
-    "/solar_panel/{id}": {
+    "/solar_panel_side/available_solar_panel_side": {
       "get": {
         "security": [
           {
@@ -1220,14 +1220,97 @@ func init() {
           }
         ],
         "tags": [
-          "SolarPanel"
+          "SolarPanelSide"
         ],
-        "summary": "Get solar panel",
-        "operationId": "GetSolarPanel",
+        "summary": "Get Cube Sat Solar Panels Side",
+        "operationId": "GetCubeSatSolarPanelsSide",
         "parameters": [
           {
             "type": "integer",
-            "description": "The ID of solar panel",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatSolarPanelByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatSolarPanelByLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Solar Panels Side Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatSolarPanelsSide"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/solar_panel_side/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelSide"
+        ],
+        "summary": "Get solar panel side",
+        "operationId": "GetSolarPanelSide",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of solar panel side",
             "name": "id",
             "in": "path",
             "required": true
@@ -1235,9 +1318,124 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get SolarPanel Response",
+            "description": "Get Solar Panel Side Response",
             "schema": {
-              "$ref": "#/definitions/SolarPanel"
+              "$ref": "#/definitions/SolarPanelSide"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelSide"
+        ],
+        "summary": "Delete Cube Sat Solar Panel Side",
+        "operationId": "DeleteCubeSatSolarPanelSide",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel side",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Cube Sat Solar Panel Side Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelSide"
+        ],
+        "summary": "Update Cube Sat Solar Panel Side",
+        "operationId": "UpdateCubeSatSolarPanelSide",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel side",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Solar Panel Side Body",
+            "name": "UpdateSolarPanelSideBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSolarPanelSideBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Solar Panel Side Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelSide"
             }
           },
           "400": {
@@ -1641,6 +1839,9 @@ func init() {
         "mechanical_vibration": {
           "type": "integer"
         },
+        "name": {
+          "type": "string"
+        },
         "operating_temperature_max": {
           "type": "integer"
         },
@@ -1655,7 +1856,7 @@ func init() {
         }
       }
     },
-    "CreateProjectBody": {
+    "CreateCubeSatProjectBody": {
       "type": "object",
       "required": [
         "project_name"
@@ -1666,7 +1867,7 @@ func init() {
         }
       }
     },
-    "CreateProjectResponse": {
+    "CreateCubeSatProjectResponse": {
       "type": "object",
       "required": [
         "project_id"
@@ -1677,7 +1878,7 @@ func init() {
         }
       }
     },
-    "CreateSolarPanelBody": {
+    "CreateSolarPanelSideBody": {
       "type": "object",
       "required": [
         "length",
@@ -1686,75 +1887,54 @@ func init() {
       ],
       "properties": {
         "coil_area": {
-          "description": "Number of axes",
           "type": "number"
         },
         "coil_resistance": {
-          "description": "Shock response spectrum value",
-          "type": "integer"
-        },
-        "created_at": {
-          "description": "Timestamp of creation",
           "type": "integer"
         },
         "efficiency": {
-          "description": "Minimum random vibration",
           "type": "integer"
         },
         "height": {
-          "description": "Size of the chassis",
           "type": "number"
         },
         "imp": {
-          "description": "Maximum random vibration",
           "type": "number"
         },
         "interface": {
-          "description": "Minimum non-operating temperature in degrees Celsius",
           "type": "string"
         },
         "isc": {
-          "description": "Maximum sine vibration",
           "type": "number"
         },
         "length": {
-          "description": "Name of the chassis",
           "type": "number"
         },
         "max_operating_temperature": {
-          "description": "Maximum operating temperature in degrees Celsius",
           "type": "number"
         },
         "mechanical_shock": {
-          "description": "Peak overload spectrum value 2",
           "type": "integer"
         },
         "mechanical_vibration": {
-          "description": "Peak overload spectrum value 1",
           "type": "integer"
         },
         "min_operating_temperature": {
-          "description": "Minimum operating temperature in degrees Celsius",
           "type": "number"
         },
-        "updated_at": {
-          "description": "Timestamp of the last update",
-          "type": "integer"
+        "name": {
+          "type": "string"
         },
         "vmp": {
-          "description": "Minimum sine vibration",
           "type": "number"
         },
         "voc": {
-          "description": "Overload capacity",
           "type": "number"
         },
         "weight": {
-          "description": "Maximum non-operating temperature in degrees Celsius",
           "type": "number"
         },
         "width": {
-          "description": "Number of slots in the chassis",
           "type": "number"
         }
       }
@@ -1796,6 +1976,9 @@ func init() {
         "mechanical_vibration": {
           "type": "integer"
         },
+        "name": {
+          "type": "string"
+        },
         "operating_temperature_max": {
           "type": "integer"
         },
@@ -1827,6 +2010,69 @@ func init() {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CubeSatFrame"
+          }
+        }
+      }
+    },
+    "CubeSatProject": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "cube_sat_frame_name": {
+          "type": "string"
+        },
+        "cube_sat_solar_panel_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "project_name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "CubeSatProjects": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CubeSatProject"
+          }
+        }
+      }
+    },
+    "CubeSatSolarPanelsSide": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_solar_panels_side": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolarPanelSide"
           }
         }
       }
@@ -1893,46 +2139,6 @@ func init() {
         }
       }
     },
-    "Project": {
-      "type": "object",
-      "required": [
-        "project_name"
-      ],
-      "properties": {
-        "created_at": {
-          "type": "integer"
-        },
-        "id": {
-          "type": "string"
-        },
-        "project_name": {
-          "type": "string"
-        },
-        "updated_at": {
-          "type": "integer"
-        },
-        "user_id": {
-          "type": "string"
-        }
-      }
-    },
-    "Projects": {
-      "type": "object",
-      "required": [
-        "count"
-      ],
-      "properties": {
-        "count": {
-          "type": "integer"
-        },
-        "projects": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Project"
-          }
-        }
-      }
-    },
     "RegisterUser": {
       "type": "object",
       "required": [
@@ -1967,7 +2173,7 @@ func init() {
         }
       }
     },
-    "SolarPanel": {
+    "SolarPanelSide": {
       "type": "object",
       "required": [
         "id"
@@ -2030,6 +2236,9 @@ func init() {
           "description": "Minimum operating temperature in degrees Celsius",
           "type": "number"
         },
+        "name": {
+          "type": "string"
+        },
         "updated_at": {
           "description": "Timestamp of the last update",
           "type": "integer"
@@ -2052,7 +2261,7 @@ func init() {
         }
       }
     },
-    "UpdateProjectBody": {
+    "UpdateCubeSatProjectBody": {
       "type": "object",
       "required": [
         "project_name"
@@ -2060,6 +2269,67 @@ func init() {
       "properties": {
         "project_name": {
           "type": "string"
+        }
+      }
+    },
+    "UpdateSolarPanelSideBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "coil_area": {
+          "type": "number"
+        },
+        "coil_resistance": {
+          "type": "integer"
+        },
+        "efficiency": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "number"
+        },
+        "imp": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "isc": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "vmp": {
+          "type": "number"
+        },
+        "voc": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
         }
       }
     },
@@ -2949,7 +3219,7 @@ func init() {
         }
       }
     },
-    "/project": {
+    "/cube_sat_project": {
       "post": {
         "security": [
           {
@@ -2957,26 +3227,26 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Create project",
-        "operationId": "CreateProject",
+        "summary": "Create CubeSat project",
+        "operationId": "CreateCubeSatProject",
         "parameters": [
           {
-            "description": "Create Project Body",
-            "name": "CreateProject",
+            "description": "Create CubeSat Project Body",
+            "name": "CreateCubeSatProject",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectBody"
+              "$ref": "#/definitions/CreateCubeSatProjectBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Create Project Response",
+            "description": "Create CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/CreateProjectResponse"
+              "$ref": "#/definitions/CreateCubeSatProjectResponse"
             }
           },
           "400": {
@@ -3014,10 +3284,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Get project",
-        "operationId": "GetProject",
+        "summary": "Get CubeSat project",
+        "operationId": "Get CubeSat Project",
         "parameters": [
           {
             "type": "string",
@@ -3029,9 +3299,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get Project Response",
+            "description": "Get CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/CubeSatProject"
             }
           },
           "400": {
@@ -3067,10 +3337,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Delete project",
-        "operationId": "DeleteProject",
+        "summary": "Delete CubeSat project",
+        "operationId": "DeleteCubeSatProject",
         "parameters": [
           {
             "type": "string",
@@ -3082,9 +3352,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Delete Project Response",
+            "description": "Delete CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/CreateProjectResponse"
+              "$ref": "#/definitions/CreateCubeSatProjectResponse"
             }
           },
           "400": {
@@ -3120,10 +3390,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Update project",
-        "operationId": "UpdateProject",
+        "summary": "Update CubeSat project",
+        "operationId": "UpdateCubeSatProject",
         "parameters": [
           {
             "type": "string",
@@ -3133,20 +3403,20 @@ func init() {
             "required": true
           },
           {
-            "description": "Update Project Body",
-            "name": "UpdateProjectBody",
+            "description": "Update CubeSat Project Body",
+            "name": "UpdateCubeSatProjectBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateProjectBody"
+              "$ref": "#/definitions/UpdateCubeSatProjectBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update Project Response",
+            "description": "Update CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/Project"
+              "$ref": "#/definitions/CubeSatProject"
             }
           },
           "400": {
@@ -3184,10 +3454,10 @@ func init() {
           }
         ],
         "tags": [
-          "Project"
+          "CubeSatProject"
         ],
-        "summary": "Get user projects",
-        "operationId": "GetUserProjects",
+        "summary": "Get user CubeSat projects",
+        "operationId": "GetUserCubeSatProjects",
         "parameters": [
           {
             "minimum": 0,
@@ -3218,9 +3488,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get User Project Response",
+            "description": "Get User CubeSat Project Response",
             "schema": {
-              "$ref": "#/definitions/Projects"
+              "$ref": "#/definitions/CubeSatProjects"
             }
           },
           "400": {
@@ -3250,7 +3520,7 @@ func init() {
         }
       }
     },
-    "/solar_panel": {
+    "/solar_panel_side": {
       "post": {
         "security": [
           {
@@ -3258,26 +3528,26 @@ func init() {
           }
         ],
         "tags": [
-          "SolarPanel"
+          "SolarPanelSide"
         ],
-        "summary": "Create Solar Panel",
-        "operationId": "CreateSolarPanel",
+        "summary": "Create Solar Panel Side",
+        "operationId": "CreateSolarPanelSide",
         "parameters": [
           {
-            "description": "Create Solar Panel Body",
-            "name": "CreateSolarPanelBody",
+            "description": "Create Solar Panel Side Body",
+            "name": "CreateSolarPanelSideBody",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateSolarPanelBody"
+              "$ref": "#/definitions/CreateSolarPanelSideBody"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Create Solar Panel Response",
+            "description": "Create Solar Panel Side Response",
             "schema": {
-              "$ref": "#/definitions/SolarPanel"
+              "$ref": "#/definitions/SolarPanelSide"
             }
           },
           "400": {
@@ -3307,7 +3577,7 @@ func init() {
         }
       }
     },
-    "/solar_panel/{id}": {
+    "/solar_panel_side/available_solar_panel_side": {
       "get": {
         "security": [
           {
@@ -3315,14 +3585,99 @@ func init() {
           }
         ],
         "tags": [
-          "SolarPanel"
+          "SolarPanelSide"
         ],
-        "summary": "Get solar panel",
-        "operationId": "GetSolarPanel",
+        "summary": "Get Cube Sat Solar Panels Side",
+        "operationId": "GetCubeSatSolarPanelsSide",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parametrs",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatSolarPanelByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatSolarPanelByLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Solar Panels Side Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatSolarPanelsSide"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/solar_panel_side/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelSide"
+        ],
+        "summary": "Get solar panel side",
+        "operationId": "GetSolarPanelSide",
         "parameters": [
           {
             "type": "integer",
-            "description": "The ID of solar panel",
+            "description": "The ID of solar panel side",
             "name": "id",
             "in": "path",
             "required": true
@@ -3330,9 +3685,124 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Get SolarPanel Response",
+            "description": "Get Solar Panel Side Response",
             "schema": {
-              "$ref": "#/definitions/SolarPanel"
+              "$ref": "#/definitions/SolarPanelSide"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelSide"
+        ],
+        "summary": "Delete Cube Sat Solar Panel Side",
+        "operationId": "DeleteCubeSatSolarPanelSide",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel side",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Cube Sat Solar Panel Side Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelSide"
+        ],
+        "summary": "Update Cube Sat Solar Panel Side",
+        "operationId": "UpdateCubeSatSolarPanelSide",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel side",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Solar Panel Side Body",
+            "name": "UpdateSolarPanelSideBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSolarPanelSideBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Solar Panel Side Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelSide"
             }
           },
           "400": {
@@ -3736,6 +4206,9 @@ func init() {
         "mechanical_vibration": {
           "type": "integer"
         },
+        "name": {
+          "type": "string"
+        },
         "operating_temperature_max": {
           "type": "integer"
         },
@@ -3750,7 +4223,7 @@ func init() {
         }
       }
     },
-    "CreateProjectBody": {
+    "CreateCubeSatProjectBody": {
       "type": "object",
       "required": [
         "project_name"
@@ -3761,7 +4234,7 @@ func init() {
         }
       }
     },
-    "CreateProjectResponse": {
+    "CreateCubeSatProjectResponse": {
       "type": "object",
       "required": [
         "project_id"
@@ -3772,7 +4245,7 @@ func init() {
         }
       }
     },
-    "CreateSolarPanelBody": {
+    "CreateSolarPanelSideBody": {
       "type": "object",
       "required": [
         "length",
@@ -3781,75 +4254,54 @@ func init() {
       ],
       "properties": {
         "coil_area": {
-          "description": "Number of axes",
           "type": "number"
         },
         "coil_resistance": {
-          "description": "Shock response spectrum value",
-          "type": "integer"
-        },
-        "created_at": {
-          "description": "Timestamp of creation",
           "type": "integer"
         },
         "efficiency": {
-          "description": "Minimum random vibration",
           "type": "integer"
         },
         "height": {
-          "description": "Size of the chassis",
           "type": "number"
         },
         "imp": {
-          "description": "Maximum random vibration",
           "type": "number"
         },
         "interface": {
-          "description": "Minimum non-operating temperature in degrees Celsius",
           "type": "string"
         },
         "isc": {
-          "description": "Maximum sine vibration",
           "type": "number"
         },
         "length": {
-          "description": "Name of the chassis",
           "type": "number"
         },
         "max_operating_temperature": {
-          "description": "Maximum operating temperature in degrees Celsius",
           "type": "number"
         },
         "mechanical_shock": {
-          "description": "Peak overload spectrum value 2",
           "type": "integer"
         },
         "mechanical_vibration": {
-          "description": "Peak overload spectrum value 1",
           "type": "integer"
         },
         "min_operating_temperature": {
-          "description": "Minimum operating temperature in degrees Celsius",
           "type": "number"
         },
-        "updated_at": {
-          "description": "Timestamp of the last update",
-          "type": "integer"
+        "name": {
+          "type": "string"
         },
         "vmp": {
-          "description": "Minimum sine vibration",
           "type": "number"
         },
         "voc": {
-          "description": "Overload capacity",
           "type": "number"
         },
         "weight": {
-          "description": "Maximum non-operating temperature in degrees Celsius",
           "type": "number"
         },
         "width": {
-          "description": "Number of slots in the chassis",
           "type": "number"
         }
       }
@@ -3891,6 +4343,9 @@ func init() {
         "mechanical_vibration": {
           "type": "integer"
         },
+        "name": {
+          "type": "string"
+        },
         "operating_temperature_max": {
           "type": "integer"
         },
@@ -3922,6 +4377,69 @@ func init() {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CubeSatFrame"
+          }
+        }
+      }
+    },
+    "CubeSatProject": {
+      "type": "object",
+      "required": [
+        "project_name"
+      ],
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "cube_sat_frame_name": {
+          "type": "string"
+        },
+        "cube_sat_solar_panel_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "project_name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "CubeSatProjects": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CubeSatProject"
+          }
+        }
+      }
+    },
+    "CubeSatSolarPanelsSide": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_solar_panels_side": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolarPanelSide"
           }
         }
       }
@@ -3988,46 +4506,6 @@ func init() {
         }
       }
     },
-    "Project": {
-      "type": "object",
-      "required": [
-        "project_name"
-      ],
-      "properties": {
-        "created_at": {
-          "type": "integer"
-        },
-        "id": {
-          "type": "string"
-        },
-        "project_name": {
-          "type": "string"
-        },
-        "updated_at": {
-          "type": "integer"
-        },
-        "user_id": {
-          "type": "string"
-        }
-      }
-    },
-    "Projects": {
-      "type": "object",
-      "required": [
-        "count"
-      ],
-      "properties": {
-        "count": {
-          "type": "integer"
-        },
-        "projects": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Project"
-          }
-        }
-      }
-    },
     "RegisterUser": {
       "type": "object",
       "required": [
@@ -4062,7 +4540,7 @@ func init() {
         }
       }
     },
-    "SolarPanel": {
+    "SolarPanelSide": {
       "type": "object",
       "required": [
         "id"
@@ -4125,6 +4603,9 @@ func init() {
           "description": "Minimum operating temperature in degrees Celsius",
           "type": "number"
         },
+        "name": {
+          "type": "string"
+        },
         "updated_at": {
           "description": "Timestamp of the last update",
           "type": "integer"
@@ -4147,7 +4628,7 @@ func init() {
         }
       }
     },
-    "UpdateProjectBody": {
+    "UpdateCubeSatProjectBody": {
       "type": "object",
       "required": [
         "project_name"
@@ -4155,6 +4636,67 @@ func init() {
       "properties": {
         "project_name": {
           "type": "string"
+        }
+      }
+    },
+    "UpdateSolarPanelSideBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "coil_area": {
+          "type": "number"
+        },
+        "coil_resistance": {
+          "type": "integer"
+        },
+        "efficiency": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "number"
+        },
+        "imp": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "isc": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "vmp": {
+          "type": "number"
+        },
+        "voc": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
         }
       }
     },

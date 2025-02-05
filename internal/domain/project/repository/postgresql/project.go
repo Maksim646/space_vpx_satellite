@@ -31,6 +31,8 @@ func (r *ProjectRepository) GetProjectBuilder() sq.SelectBuilder {
 		"projects.id",
 		"projects.user_id",
 		"projects.name",
+		"cube_sat_frame_id",
+		"projects.solar_panael_id",
 		"projects.created_at",
 		"projects.updated_at",
 	).
@@ -40,7 +42,7 @@ func (r *ProjectRepository) GetProjectBuilder() sq.SelectBuilder {
 }
 
 func (r *ProjectRepository) CreatedProject(ctx context.Context, name string, userID string) (string, error) {
-	query, params, err := postgresql.Builder.Insert("projects").
+	query, params, err := postgresql.Builder.Insert("cube_sat_projects").
 		Columns(
 			"name",
 			"user_id",
@@ -61,17 +63,19 @@ func (r *ProjectRepository) CreatedProject(ctx context.Context, name string, use
 	return newProjectID, err
 }
 
-func (r *ProjectRepository) GetProjectByID(ctx context.Context, projectID string) (model.Project, error) {
-	var project model.Project
+func (r *ProjectRepository) GetProjectByID(ctx context.Context, projectID string) (model.CubeSatProject, error) {
+	var project model.CubeSatProject
 	query, params, err := postgresql.Builder.Select(
-		"projects.id",
-		"projects.user_id",
-		"projects.name",
-		"projects.updated_at",
-		"projects.created_at",
+		"cube_sat_projects.id",
+		"cube_sat_projects.user_id",
+		"cube_sat_projects.name",
+		"cube_sat_projects.cube_sat_frame_id",
+		"cube_sat_projects.solar_panael_id",
+		"cube_sat_projects.updated_at",
+		"cube_sat_projects.created_at",
 	).
-		From("projects").
-		Where(sq.Eq{"projects.id": projectID}).ToSql()
+		From("cube_sat_projects").
+		Where(sq.Eq{"cube_sat_projects.id": projectID}).ToSql()
 	if err != nil {
 		return project, err
 	}
@@ -87,10 +91,10 @@ func (r *ProjectRepository) GetProjectByID(ctx context.Context, projectID string
 	return project, err
 }
 
-func (r *ProjectRepository) GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.Project, int64, error) {
-	projectsCount, err := r.GetCountByFilters(ctx, filters)
+func (r *ProjectRepository) GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatProject, int64, error) {
+	cubeSatProjectsCount, err := r.GetCountByFilters(ctx, filters)
 	if err != nil {
-		return []model.Project{}, projectsCount, err
+		return []model.CubeSatProject{}, cubeSatProjectsCount, err
 	}
 	builder := r.GetProjectBuilder()
 
@@ -102,22 +106,22 @@ func (r *ProjectRepository) GetProjectsByFilters(ctx context.Context, offset int
 		Limit(uint64(limit)).ToSql()
 
 	if err != nil {
-		return []model.Project{}, projectsCount, err
+		return []model.CubeSatProject{}, cubeSatProjectsCount, err
 	}
 
-	var projects []model.Project
+	var cubeSatProjects []model.CubeSatProject
 	zap.L().Debug(postgresql.BuildQuery(query, params))
-	if err = r.sqalxConn.SelectContext(ctx, &projects, query, params...); err != nil {
+	if err = r.sqalxConn.SelectContext(ctx, &cubeSatProjects, query, params...); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return projects, projectsCount, model.ErrProjectNotFound
+			return cubeSatProjects, cubeSatProjectsCount, model.ErrProjectNotFound
 		}
 	}
 
-	return projects, projectsCount, nil
+	return cubeSatProjects, cubeSatProjectsCount, nil
 }
 
 func (r *ProjectRepository) UpdateProjectByID(ctx context.Context, projectID string, name string) error {
-	query, params, err := postgresql.Builder.Update("projects").
+	query, params, err := postgresql.Builder.Update("cube_sat_projects").
 		Set("name", name).
 		Set("updated_at", time.Now().UTC()).
 		Where(sq.Eq{"id": projectID}).
@@ -132,8 +136,8 @@ func (r *ProjectRepository) UpdateProjectByID(ctx context.Context, projectID str
 }
 
 func (r *ProjectRepository) DeleteProject(ctx context.Context, projectID string) error {
-	query, params, err := postgresql.Builder.Delete("projects").
-		Where(sq.Eq{"projects.id": projectID}).
+	query, params, err := postgresql.Builder.Delete("cube_sat_projects").
+		Where(sq.Eq{"cube_sat_projects.id": projectID}).
 		ToSql()
 	if err != nil {
 		return err
@@ -147,9 +151,9 @@ func (r *ProjectRepository) DeleteProject(ctx context.Context, projectID string)
 func (r *ProjectRepository) ApplyFilters(builder sq.SelectBuilder, filters map[string]interface{}) sq.SelectBuilder {
 	for filterKey, filterValue := range filters {
 		switch filterKey {
-		case model.FilterProjectsByUser:
+		case model.FilterCubeSatProjectsByUser:
 			if userID, ok := filterValue.(string); ok {
-				builder = builder.Where(sq.Eq{"projects.user_id": userID})
+				builder = builder.Where(sq.Eq{"cube_sat_projects.user_id": userID})
 			}
 		default:
 			zap.L().Info("Unknown filter", zap.String("filterKey", filterKey))
@@ -161,7 +165,7 @@ func (r *ProjectRepository) ApplyFilters(builder sq.SelectBuilder, filters map[s
 
 func (r *ProjectRepository) GetCountByFilters(ctx context.Context, filters map[string]interface{}) (int64, error) {
 	var count int64
-	builder := postgresql.Builder.Select("COUNT(id)").From("projects")
+	builder := postgresql.Builder.Select("COUNT(id)").From("cube_sat_projects")
 	builder = r.ApplyFilters(builder, filters)
 	query, params, err := builder.ToSql()
 	if err != nil {

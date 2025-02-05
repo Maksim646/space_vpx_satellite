@@ -20,11 +20,11 @@ func (u *Usecase) CreatedProject(ctx context.Context, name string, userID string
 	return u.projectRepository.CreatedProject(ctx, name, userID)
 }
 
-func (u *Usecase) GetProjectByID(ctx context.Context, projectID string) (model.Project, error) {
+func (u *Usecase) GetProjectByID(ctx context.Context, projectID string) (model.CubeSatProject, error) {
 	return u.projectRepository.GetProjectByID(ctx, projectID)
 }
 
-func (u *Usecase) GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.Project, int64, error) {
+func (u *Usecase) GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatProject, int64, error) {
 	return u.projectRepository.GetProjectsByFilters(ctx, offset, limit, sortParams, filters)
 }
 

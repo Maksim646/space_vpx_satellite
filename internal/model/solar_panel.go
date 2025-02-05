@@ -10,11 +10,22 @@ import (
 var (
 	ErrSolarPanelNotFound = errors.New("solar panel not found")
 
-	SolarPanelNotFound = "solar panel not found"
+	SolarPanelNotFound  = "solar panel not found"
+	SolarPanelsNotFound = "solar panels not found"
 )
 
-type SolarPanel struct {
-	ID                      int64           `db:"id"`
+const (
+	FilterCubeSatSolarPanelSideByMinLength = "filter_cube_sat_solar_panel_side_min_length"
+	FilterCubeSatSolarPanelSideByMaxLength = "filter_cube_sat_solar_panel_side_max_length"
+
+	DefaultCubeSatSolarPanelsSideSort     = "id desc"
+	CubeSatSolarPanelsSideSortByCreatedAt = "created_at desc"
+)
+
+type CubeSatSolarPanelSide struct {
+	ID int64 `db:"id"`
+
+	Name                    sql.NullString  `db:"name"`
 	Length                  sql.NullFloat64 `db:"length"`
 	Width                   sql.NullFloat64 `db:"width"`
 	Height                  sql.NullFloat64 `db:"height"`
@@ -36,11 +47,23 @@ type SolarPanel struct {
 }
 
 type ISolarPanelRepository interface {
-	CreateSolarPanel(ctx context.Context, solarPanel SolarPanel) (int64, error)
-	GetSolarPanelByID(ctx context.Context, id int64) (SolarPanel, error)
+	CreateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) (int64, error)
+
+	GetSolarPanelSideByID(ctx context.Context, solarPanelSideID int64) (CubeSatSolarPanelSide, error)
+	GetSolarPanelSideByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatSolarPanelSide, error)
+
+	UpdateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) error
+
+	DeleteSolarPanelSide(ctx context.Context, solarPanelSideID int64) error
 }
 
 type ISolarPanelUsecase interface {
-	CreateSolarPanel(ctx context.Context, solarPanel SolarPanel) (int64, error)
-	GetSolarPanelByID(ctx context.Context, id int64) (SolarPanel, error)
+	CreateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) (int64, error)
+
+	GetSolarPanelSideByID(ctx context.Context, solarPanelSideID int64) (CubeSatSolarPanelSide, error)
+	GetSolarPanelSideByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatSolarPanelSide, error)
+
+	UpdateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) error
+
+	DeleteSolarPanelSide(ctx context.Context, solarPanelSideID int64) error
 }

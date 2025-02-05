@@ -55,7 +55,7 @@ func (o *CreateProjectReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /project] CreateProject", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cube_sat_project] CreateProject", response, response.Code())
 	}
 }
 
@@ -67,10 +67,10 @@ func NewCreateProjectOK() *CreateProjectOK {
 /*
 CreateProjectOK describes a response with status code 200, with default header values.
 
-Create Project Response
+Create CubeSat Project Response
 */
 type CreateProjectOK struct {
-	Payload *models.CreateProjectResponse
+	Payload *models.CreateCubeSatProjectResponse
 }
 
 // IsSuccess returns true when this create project o k response has a 2xx status code
@@ -105,21 +105,21 @@ func (o *CreateProjectOK) Code() int {
 
 func (o *CreateProjectOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectOK %s", 200, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectOK %s", 200, payload)
 }
 
 func (o *CreateProjectOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectOK %s", 200, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectOK %s", 200, payload)
 }
 
-func (o *CreateProjectOK) GetPayload() *models.CreateProjectResponse {
+func (o *CreateProjectOK) GetPayload() *models.CreateCubeSatProjectResponse {
 	return o.Payload
 }
 
 func (o *CreateProjectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.CreateProjectResponse)
+	o.Payload = new(models.CreateCubeSatProjectResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -175,12 +175,12 @@ func (o *CreateProjectBadRequest) Code() int {
 
 func (o *CreateProjectBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectBadRequest %s", 400, payload)
 }
 
 func (o *CreateProjectBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectBadRequest %s", 400, payload)
 }
 
 func (o *CreateProjectBadRequest) GetPayload() *models.Error {
@@ -245,12 +245,12 @@ func (o *CreateProjectForbidden) Code() int {
 
 func (o *CreateProjectForbidden) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectForbidden %s", 403, payload)
 }
 
 func (o *CreateProjectForbidden) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectForbidden %s", 403, payload)
 }
 
 func (o *CreateProjectForbidden) GetPayload() *models.Error {
@@ -315,12 +315,12 @@ func (o *CreateProjectUnprocessableEntity) Code() int {
 
 func (o *CreateProjectUnprocessableEntity) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectUnprocessableEntity %s", 422, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateProjectUnprocessableEntity) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectUnprocessableEntity %s", 422, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateProjectUnprocessableEntity) GetPayload() *models.Error {
@@ -385,12 +385,12 @@ func (o *CreateProjectInternalServerError) Code() int {
 
 func (o *CreateProjectInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectInternalServerError %s", 500, payload)
 }
 
 func (o *CreateProjectInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /project][%d] createProjectInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /cube_sat_project][%d] createProjectInternalServerError %s", 500, payload)
 }
 
 func (o *CreateProjectInternalServerError) GetPayload() *models.Error {

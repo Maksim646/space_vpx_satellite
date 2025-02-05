@@ -16,10 +16,22 @@ func New(solarPanelRepository model.ISolarPanelRepository) model.ISolarPanelUsec
 	}
 }
 
-func (u *SolarPanelUsecase) CreateSolarPanel(ctx context.Context, solarPanel model.SolarPanel) (int64, error) {
-	return u.solarPanelRepository.CreateSolarPanel(ctx, solarPanel)
+func (u *SolarPanelUsecase) CreateSolarPanelSide(ctx context.Context, solarPanel model.CubeSatSolarPanelSide) (int64, error) {
+	return u.solarPanelRepository.CreateSolarPanelSide(ctx, solarPanel)
 }
 
-func (u *SolarPanelUsecase) GetSolarPanelByID(ctx context.Context, id int64) (model.SolarPanel, error) {
-	return u.solarPanelRepository.GetSolarPanelByID(ctx, id)
+func (u *SolarPanelUsecase) GetSolarPanelSideByID(ctx context.Context, solarPanelSideID int64) (model.CubeSatSolarPanelSide, error) {
+	return u.solarPanelRepository.GetSolarPanelSideByID(ctx, solarPanelSideID)
+}
+
+func (u *SolarPanelUsecase) GetSolarPanelSideByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatSolarPanelSide, error) {
+	return u.solarPanelRepository.GetSolarPanelSideByFilters(ctx, offset, limit, sortParams, filters)
+}
+
+func (u *SolarPanelUsecase) UpdateSolarPanelSide(ctx context.Context, solarPanel model.CubeSatSolarPanelSide) error {
+	return u.solarPanelRepository.UpdateSolarPanelSide(ctx, solarPanel)
+}
+
+func (u *SolarPanelUsecase) DeleteSolarPanelSide(ctx context.Context, solarPanelSideID int64) error {
+	return u.solarPanelRepository.DeleteSolarPanelSide(ctx, solarPanelSideID)
 }

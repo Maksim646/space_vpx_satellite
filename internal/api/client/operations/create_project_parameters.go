@@ -63,11 +63,11 @@ CreateProjectParams contains all the parameters to send to the API endpoint
 */
 type CreateProjectParams struct {
 
-	/* CreateProject.
+	/* CreateCubeSatProject.
 
-	   Create Project Body
+	   Create CubeSat Project Body
 	*/
-	CreateProject *models.CreateProjectBody
+	CreateCubeSatProject *models.CreateCubeSatProjectBody
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,15 +122,15 @@ func (o *CreateProjectParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithCreateProject adds the createProject to the create project params
-func (o *CreateProjectParams) WithCreateProject(createProject *models.CreateProjectBody) *CreateProjectParams {
-	o.SetCreateProject(createProject)
+// WithCreateCubeSatProject adds the createCubeSatProject to the create project params
+func (o *CreateProjectParams) WithCreateCubeSatProject(createCubeSatProject *models.CreateCubeSatProjectBody) *CreateProjectParams {
+	o.SetCreateCubeSatProject(createCubeSatProject)
 	return o
 }
 
-// SetCreateProject adds the createProject to the create project params
-func (o *CreateProjectParams) SetCreateProject(createProject *models.CreateProjectBody) {
-	o.CreateProject = createProject
+// SetCreateCubeSatProject adds the createCubeSatProject to the create project params
+func (o *CreateProjectParams) SetCreateCubeSatProject(createCubeSatProject *models.CreateCubeSatProjectBody) {
+	o.CreateCubeSatProject = createCubeSatProject
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +140,8 @@ func (o *CreateProjectParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-	if o.CreateProject != nil {
-		if err := r.SetBodyParam(o.CreateProject); err != nil {
+	if o.CreateCubeSatProject != nil {
+		if err := r.SetBodyParam(o.CreateCubeSatProject); err != nil {
 			return err
 		}
 	}

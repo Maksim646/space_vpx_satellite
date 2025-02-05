@@ -22,6 +22,12 @@ type Project struct {
 	// created at
 	CreatedAt int64 `json:"created_at,omitempty"`
 
+	// cube sat frame name
+	CubeSatFrameName string `json:"cube_sat_frame_name,omitempty"`
+
+	// cube sat solar panel name
+	CubeSatSolarPanelName string `json:"cube_sat_solar_panel_name,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
