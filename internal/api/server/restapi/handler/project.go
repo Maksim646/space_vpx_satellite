@@ -2,7 +2,6 @@ package handler
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 	"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/api"
@@ -78,7 +77,6 @@ func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, princ
 		return api.NewUpdateCubeSatProjectInternalServerError()
 	}
 
-	fmt.Println(newProject.CubeSatFrameName.String)
 	projectResult := h.ProjectToDefinition(ctx, newProject)
 
 	return api.NewUpdateCubeSatProjectOK().WithPayload(&projectResult)
