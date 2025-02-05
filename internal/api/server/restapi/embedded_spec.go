@@ -1875,6 +1875,9 @@ func init() {
       "properties": {
         "project_id": {
           "type": "string"
+        },
+        "project_name": {
+          "type": "string"
         }
       }
     },
@@ -4247,6 +4250,9 @@ func init() {
       ],
       "properties": {
         "project_id": {
+          "type": "string"
+        },
+        "project_name": {
           "type": "string"
         }
       }

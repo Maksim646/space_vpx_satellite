@@ -22,7 +22,8 @@ func (h *Handler) CreateProjectHandler(req api.CreateCubeSatProjectParams, princ
 	}
 
 	return api.NewCreateCubeSatProjectOK().WithPayload(&definition.CreateCubeSatProjectResponse{
-		ProjectID: useful.StrPtr(projectID),
+		ProjectID:   useful.StrPtr(projectID),
+		ProjectName: *req.CreateCubeSatProject.ProjectName,
 	})
 }
 

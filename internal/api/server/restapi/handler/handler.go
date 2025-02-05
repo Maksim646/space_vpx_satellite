@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 
 	"net/http"
 	"strings"
@@ -127,6 +128,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) ValidateHeader(bearerHeader string) (*definition.Principal, error) {
 	ctx := context.Background()
 
+	fmt.Println("1")
 	bearerToken := strings.TrimPrefix(bearerHeader, "Bearer ")
 	userID, roleID, err := jsonwebtoken.ParseToken(bearerToken, h.jwtSigninKey)
 	if err != nil {

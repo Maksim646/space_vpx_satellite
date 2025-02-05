@@ -22,6 +22,9 @@ type CreateCubeSatProjectResponse struct {
 	// project id
 	// Required: true
 	ProjectID *string `json:"project_id"`
+
+	// project name
+	ProjectName string `json:"project_name,omitempty"`
 }
 
 // Validate validates this create cube sat project response
