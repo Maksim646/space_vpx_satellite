@@ -22,12 +22,14 @@ import (
 )
 
 type Handler struct {
-	userUsecase         model.IUserUsecase
-	adminUsecase        model.IAdminUsecase
-	projectUsecase      model.IProjectUsecase
-	chassisUsecase      model.IChassisUsecase
-	solarPanelUsecase   model.ISolarPanelUsecase
-	cubeSatFrameUsecase model.ICubeSatFrameUsecase
+	userUsecase                 model.IUserUsecase
+	adminUsecase                model.IAdminUsecase
+	projectUsecase              model.IProjectUsecase
+	chassisUsecase              model.IChassisUsecase
+	solarPanelUsecase           model.ISolarPanelUsecase
+	cubeSatSolarPanelTopUsecase model.ISolarPanelTopUsecase
+	cubeSatFrameUsecase         model.ICubeSatFrameUsecase
+	cubeSatPowerSystemUsecase   model.IPowerSystemUsecase
 
 	router       http.Handler
 	HashSalt     string
@@ -40,7 +42,9 @@ func New(
 	projectUsecase model.IProjectUsecase,
 	chassisUsecase model.IChassisUsecase,
 	solarPanelUsecase model.ISolarPanelUsecase,
+	cubeSatSolarPanelTopUsecase model.ISolarPanelTopUsecase,
 	cubeSatFrameUsecase model.ICubeSatFrameUsecase,
+	cubeSatPowerSystemUsecase model.IPowerSystemUsecase,
 
 	version string,
 	HashSalt string,
@@ -54,12 +58,14 @@ func New(
 	}
 
 	h := &Handler{
-		userUsecase:         userUsecase,
-		adminUsecase:        adminUsecase,
-		projectUsecase:      projectUsecase,
-		chassisUsecase:      chassisUsecase,
-		solarPanelUsecase:   solarPanelUsecase,
-		cubeSatFrameUsecase: cubeSatFrameUsecase,
+		userUsecase:                 userUsecase,
+		adminUsecase:                adminUsecase,
+		projectUsecase:              projectUsecase,
+		chassisUsecase:              chassisUsecase,
+		solarPanelUsecase:           solarPanelUsecase,
+		cubeSatSolarPanelTopUsecase: cubeSatSolarPanelTopUsecase,
+		cubeSatFrameUsecase:         cubeSatFrameUsecase,
+		cubeSatPowerSystemUsecase:   cubeSatPowerSystemUsecase,
 
 		HashSalt:     HashSalt,
 		jwtSigninKey: jwtSigninKey,
@@ -76,19 +82,33 @@ func New(
 	router.LoginUserHandler = api.LoginUserHandlerFunc(h.LoginUserHandler)
 	router.LoginAdminHandler = api.LoginAdminHandlerFunc(h.LoginAdminHandler)
 
-	// CUBESATPROJECTS
+	// CUBE SAT PROJECTS
 	router.CreateCubeSatProjectHandler = api.CreateCubeSatProjectHandlerFunc(h.CreateProjectHandler)
 	router.UpdateCubeSatProjectHandler = api.UpdateCubeSatProjectHandlerFunc(h.UpdateProjectHandler)
 	router.GetCubeSatProjectHandler = api.GetCubeSatProjectHandlerFunc(h.GetProjectByIDHandler)
 	router.DeleteCubeSatProjectHandler = api.DeleteCubeSatProjectHandlerFunc(h.DeleteProject)
 	router.GetUserCubeSatProjectsHandler = api.GetUserCubeSatProjectsHandlerFunc(h.GetProjectsByUser)
 
-	// SOLARPANELSide
+	// CUBE SAT POWER SYSTEM
+	router.CreatePowerSystemHandler = api.CreatePowerSystemHandlerFunc(h.CreatePowerSystemHandler)
+	router.GetPowerSystemHandler = api.GetPowerSystemHandlerFunc(h.GetPowerSystemHandler)
+	router.GetCubeSatPowerSystemsHandler = api.GetCubeSatPowerSystemsHandlerFunc(h.GetCubeSatPowerSystems)
+	router.UpdateCubeSatPowerSystemHandler = api.UpdateCubeSatPowerSystemHandlerFunc(h.UpdateCubeSatPowerSystemHandler)
+	router.DeleteCubeSatPowerSystemHandler = api.DeleteCubeSatPowerSystemHandlerFunc(h.DeleteCubeSatPowerSystemHandler)
+
+	// SOLAR PANEL SIDE
 	router.CreateSolarPanelSideHandler = api.CreateSolarPanelSideHandlerFunc(h.CreateSolarPanelSideHandler)
 	router.GetSolarPanelSideHandler = api.GetSolarPanelSideHandlerFunc(h.GetSolarPanelSideHandler)
 	router.GetCubeSatSolarPanelsSideHandler = api.GetCubeSatSolarPanelsSideHandlerFunc(h.GetCubeSatSolarPanelsSide)
 	router.UpdateCubeSatSolarPanelSideHandler = api.UpdateCubeSatSolarPanelSideHandlerFunc(h.UpdateCubeSatSolarPanelSideHandler)
 	router.DeleteCubeSatSolarPanelSideHandler = api.DeleteCubeSatSolarPanelSideHandlerFunc(h.DeleteCubeSatSolarPanelSideHandler)
+
+	// SOLAR PANEL TOP
+	router.CreateSolarPanelTopHandler = api.CreateSolarPanelTopHandlerFunc(h.CreateSolarPanelTopHandler)
+	router.GetSolarPanelTopHandler = api.GetSolarPanelTopHandlerFunc(h.GetSolarPanelTopHandler)
+	router.GetCubeSatSolarPanelsTopHandler = api.GetCubeSatSolarPanelsTopHandlerFunc(h.GetCubeSatSolarPanelsTop)
+	router.UpdateCubeSatSolarPanelTopHandler = api.UpdateCubeSatSolarPanelTopHandlerFunc(h.UpdateCubeSatSolarPanelTopHandler)
+	router.DeleteCubeSatSolarPanelTopHandler = api.DeleteCubeSatSolarPanelTopHandlerFunc(h.DeleteCubeSatSolarPanelTopHandler)
 
 	// CHASSIS
 	router.CreateChassisVPXHandler = api.CreateChassisVPXHandlerFunc(h.CreateChassisVPXHandler)
@@ -97,7 +117,7 @@ func New(
 	router.DeleteChassisVPXHandler = api.DeleteChassisVPXHandlerFunc(h.DeleteChassisVPXHandler)
 	router.GetAvailableChassisVPXHandler = api.GetAvailableChassisVPXHandlerFunc(h.GetAvailableChassisVPX)
 
-	/// CUBESATFRAME
+	/// CUBE SAT FRAME
 	router.CreateCubeSatFrameHandler = api.CreateCubeSatFrameHandlerFunc(h.CreateCubeSatFrameHandler)
 	router.GetCubeSatFrameHandler = api.GetCubeSatFrameHandlerFunc(h.GetCubeSatFrame)
 	router.GetCubeSatFramesHandler = api.GetCubeSatFramesHandlerFunc(h.GetAvailableCubeSatFrames)

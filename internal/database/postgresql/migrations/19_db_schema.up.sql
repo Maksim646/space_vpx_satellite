@@ -109,6 +109,57 @@ CREATE TABLE IF NOT EXISTS cube_sat_solar_panel_side
 
 );
 
+CREATE TABLE IF NOT EXISTS cube_sat_solar_panel_top (
+    id                                  BIGSERIAL PRIMARY KEY,
+    name                                VARCHAR(255) UNIQUE,       
+    length                              NUMERIC,                   
+    width                               NUMERIC,                    
+    height                              NUMERIC,                    
+    weight                              NUMERIC,                                 
+    interface                           VARCHAR(255),               
+    voc                                 NUMERIC,                    
+    isc                                 NUMERIC,                    
+    vmp                                 NUMERIC,                   
+    imp                                 NUMERIC,                    
+    efficiency                          NUMERIC,                    
+    coil_area                           NUMERIC,
+    coil_resistance                     BIGINT,                  
+    min_operating_temperature           NUMERIC,                    
+    max_operating_temperature           NUMERIC,                                       
+    mechanical_vibration                NUMERIC,                   
+    mechanical_shock                    NUMERIC,                   
+    updated_at                          TIMESTAMP WITHOUT TIME ZONE,
+    created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT (now() at TIME zone 'utc')
+);
+
+CREATE TABLE IF NOT EXISTS cube_sat_power_system
+(
+    id                                  BIGSERIAL PRIMARY KEY,
+    name                                VARCHAR(255) UNIQUE,
+    length                              NUMERIC,
+    width                               NUMERIC,
+    height                              NUMERIC,
+    weight                              NUMERIC,
+    solar_panel_channels                BIGINT,
+    solar_panels_type                   VARCHAR(255),
+    solar_panel_voltage_min             NUMERIC,
+    solar_panel_voltage_max             NUMERIC,
+    solar_panel_current_per_channel_max NUMERIC,
+    total_current_of_solar_panels_max   NUMERIC,
+    output_channels                     BIGINT,
+    system_bus_voltage_solar_panels     NUMERIC,
+    system_bus_voltage_output_channels  NUMERIC,
+    current_output_channels_max         NUMERIC,
+    total_output_current                NUMERIC,
+    data_interface                      VARCHAR(255),
+    max_operating_temperature           NUMERIC,
+    min_operating_temperature           NUMERIC,
+    mechanical_vibration                BIGINT,
+    mechanical_shock                    BIGINT,
+    updated_at                          TIMESTAMP WITHOUT TIME ZONE,
+    created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
+);
+
 CREATE TABLE IF NOT EXISTS admins
 (
     id                       uuid DEFAULT uuid_generate_v4(),

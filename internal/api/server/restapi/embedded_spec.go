@@ -856,6 +856,316 @@ func init() {
         }
       }
     },
+    "/cube_sat_power_system": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Create Power System",
+        "operationId": "CreatePowerSystem",
+        "parameters": [
+          {
+            "description": "Create Power System Body",
+            "name": "CreatePowerSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePowerSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Power System Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_power_system/available_power_systems": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Get Cube Sat Power Systems",
+        "operationId": "GetCubeSatPowerSystems",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatPowerSystemByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatPowerSystemByLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Power Systems Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystems"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_power_system/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Get power system",
+        "operationId": "GetPowerSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the power system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Power System Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Delete Cube Sat Power System",
+        "operationId": "DeleteCubeSatPowerSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the cube sat power system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Cube Sat Power System Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Update Cube Sat Power System",
+        "operationId": "UpdateCubeSatPowerSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the cube sat power system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Power System Body",
+            "name": "UpdatePowerSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePowerSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Power System Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/cube_sat_project": {
       "post": {
         "security": [
@@ -1465,6 +1775,316 @@ func init() {
         }
       }
     },
+    "/solar_panel_top": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Create Solar Panel Top",
+        "operationId": "CreateSolarPanelTop",
+        "parameters": [
+          {
+            "description": "Create Solar Panel Top Body",
+            "name": "CreateSolarPanelTopBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSolarPanelTopBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/solar_panel_top/available_solar_panel_top": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Get Cube Sat Solar Panels Top",
+        "operationId": "GetCubeSatSolarPanelsTop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatSolarPanelByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatSolarPanelByLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Solar Panels Top Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatSolarPanelsTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/solar_panel_top/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Get solar panel top",
+        "operationId": "GetSolarPanelTop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of solar panel top",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Delete Cube Sat Solar Panel Top",
+        "operationId": "DeleteCubeSatSolarPanelTop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel top",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Cube Sat Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Update Cube Sat Solar Panel Top",
+        "operationId": "UpdateCubeSatSolarPanelTop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel top",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Solar Panel Top Body",
+            "name": "UpdateSolarPanelTopBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSolarPanelTopBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/user/get_me": {
       "get": {
         "security": [
@@ -1881,6 +2501,79 @@ func init() {
         }
       }
     },
+    "CreatePowerSystemBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "current_output_channels_max": {
+          "type": "number"
+        },
+        "data_interface": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "output_channels": {
+          "type": "integer"
+        },
+        "solar_panel_channels": {
+          "type": "integer"
+        },
+        "solar_panel_current_per_channel_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_min": {
+          "type": "number"
+        },
+        "solar_panels_type": {
+          "type": "string"
+        },
+        "system_bus_voltage_output_channels": {
+          "type": "number"
+        },
+        "system_bus_voltage_solar_panels": {
+          "type": "number"
+        },
+        "total_current_of_solar_panels_max": {
+          "type": "number"
+        },
+        "total_output_current": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "CreateSolarPanelSideBody": {
       "type": "object",
       "required": [
@@ -1921,6 +2614,67 @@ func init() {
         },
         "mechanical_vibration": {
           "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "vmp": {
+          "type": "number"
+        },
+        "voc": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "CreateSolarPanelTopBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "coil_area": {
+          "type": "number"
+        },
+        "coil_resistance": {
+          "type": "number"
+        },
+        "efficiency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "imp": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "isc": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "number"
+        },
+        "mechanical_vibration": {
+          "type": "number"
         },
         "min_operating_temperature": {
           "type": "number"
@@ -2017,6 +2771,127 @@ func init() {
         }
       }
     },
+    "CubeSatPowerSystem": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "current_output_channels_max": {
+          "description": "Maximum current for output channels",
+          "type": "number"
+        },
+        "data_interface": {
+          "description": "Data interface type",
+          "type": "string"
+        },
+        "height": {
+          "description": "Height of the power system",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the power system (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "length": {
+          "description": "Length of the power system",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock value",
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration value",
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "output_channels": {
+          "description": "Number of output channels",
+          "type": "integer"
+        },
+        "solar_panel_channels": {
+          "description": "Number of solar panel channels",
+          "type": "integer"
+        },
+        "solar_panel_current_per_channel_max": {
+          "description": "Maximum current per solar panel channel",
+          "type": "number"
+        },
+        "solar_panel_voltage_max": {
+          "description": "Maximum voltage of the solar panels",
+          "type": "number"
+        },
+        "solar_panel_voltage_min": {
+          "description": "Minimum voltage of the solar panels",
+          "type": "number"
+        },
+        "solar_panels_type": {
+          "description": "Type of solar panels used",
+          "type": "string"
+        },
+        "system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
+        "system_bus_voltage_solar_panels": {
+          "description": "System bus voltage for solar panels",
+          "type": "number"
+        },
+        "total_current_of_solar_panels_max": {
+          "description": "Maximum total current of solar panels",
+          "type": "number"
+        },
+        "total_output_current": {
+          "description": "Total output current",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "weight": {
+          "description": "Weight of the power system",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the power system",
+          "type": "number"
+        }
+      }
+    },
+    "CubeSatPowerSystems": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_power_systems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CubeSatPowerSystem"
+          }
+        }
+      }
+    },
     "CubeSatProject": {
       "type": "object",
       "required": [
@@ -2076,6 +2951,23 @@ func init() {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SolarPanelSide"
+          }
+        }
+      }
+    },
+    "CubeSatSolarPanelsTop": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_solar_panels_top": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolarPanelTop"
           }
         }
       }
@@ -2264,6 +3156,94 @@ func init() {
         }
       }
     },
+    "SolarPanelTop": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "coil_area": {
+          "description": "Area of the coil",
+          "type": "number"
+        },
+        "coil_resistance": {
+          "description": "Coil resistance value",
+          "type": "number"
+        },
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "efficiency": {
+          "description": "Efficiency percentage",
+          "type": "number"
+        },
+        "height": {
+          "description": "Height of the solar panel top",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the solar panel top (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "imp": {
+          "description": "Current at maximum power",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Interface type of the solar panel top",
+          "type": "string"
+        },
+        "isc": {
+          "description": "Short circuit current",
+          "type": "number"
+        },
+        "length": {
+          "description": "Length of the solar panel top",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock value",
+          "type": "number"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration value",
+          "type": "number"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "vmp": {
+          "description": "Voltage at maximum power",
+          "type": "number"
+        },
+        "voc": {
+          "description": "Open circuit voltage",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight of the solar panel top",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the solar panel top",
+          "type": "number"
+        }
+      }
+    },
     "UpdateCubeSatProjectBody": {
       "type": "object",
       "required": [
@@ -2278,6 +3258,79 @@ func init() {
         },
         "solar_panael_name": {
           "type": "string"
+        }
+      }
+    },
+    "UpdatePowerSystemBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "current_output_channels_max": {
+          "type": "number"
+        },
+        "data_interface": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "output_channels": {
+          "type": "integer"
+        },
+        "solar_panel_channels": {
+          "type": "integer"
+        },
+        "solar_panel_current_per_channel_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_min": {
+          "type": "number"
+        },
+        "solar_panels_type": {
+          "type": "string"
+        },
+        "system_bus_voltage_output_channels": {
+          "type": "number"
+        },
+        "system_bus_voltage_solar_panels": {
+          "type": "number"
+        },
+        "total_current_of_solar_panels_max": {
+          "type": "number"
+        },
+        "total_output_current": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
         }
       }
     },
@@ -2321,6 +3374,67 @@ func init() {
         },
         "mechanical_vibration": {
           "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "vmp": {
+          "type": "number"
+        },
+        "voc": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "UpdateSolarPanelTopBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "coil_area": {
+          "type": "number"
+        },
+        "coil_resistance": {
+          "type": "number"
+        },
+        "efficiency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "imp": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "isc": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "number"
+        },
+        "mechanical_vibration": {
+          "type": "number"
         },
         "min_operating_temperature": {
           "type": "number"
@@ -3228,6 +4342,318 @@ func init() {
         }
       }
     },
+    "/cube_sat_power_system": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Create Power System",
+        "operationId": "CreatePowerSystem",
+        "parameters": [
+          {
+            "description": "Create Power System Body",
+            "name": "CreatePowerSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePowerSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Power System Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_power_system/available_power_systems": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Get Cube Sat Power Systems",
+        "operationId": "GetCubeSatPowerSystems",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatPowerSystemByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatPowerSystemByLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Power Systems Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystems"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_power_system/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Get power system",
+        "operationId": "GetPowerSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the power system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Power System Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Delete Cube Sat Power System",
+        "operationId": "DeleteCubeSatPowerSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the cube sat power system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Cube Sat Power System Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "PowerSystem"
+        ],
+        "summary": "Update Cube Sat Power System",
+        "operationId": "UpdateCubeSatPowerSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the cube sat power system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Power System Body",
+            "name": "UpdatePowerSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePowerSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Power System Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatPowerSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/cube_sat_project": {
       "post": {
         "security": [
@@ -3841,6 +5267,318 @@ func init() {
         }
       }
     },
+    "/solar_panel_top": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Create Solar Panel Top",
+        "operationId": "CreateSolarPanelTop",
+        "parameters": [
+          {
+            "description": "Create Solar Panel Top Body",
+            "name": "CreateSolarPanelTopBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSolarPanelTopBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/solar_panel_top/available_solar_panel_top": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Get Cube Sat Solar Panels Top",
+        "operationId": "GetCubeSatSolarPanelsTop",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset Configs",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Min Length",
+            "name": "FilterCubeSatSolarPanelByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter By Max Length",
+            "name": "FilterCubeSatSolarPanelByLength[max]",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat Solar Panels Top Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatSolarPanelsTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/solar_panel_top/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Get solar panel top",
+        "operationId": "GetSolarPanelTop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of solar panel top",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Delete Cube Sat Solar Panel Top",
+        "operationId": "DeleteCubeSatSolarPanelTop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel top",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Cube Sat Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "SolarPanelTop"
+        ],
+        "summary": "Update Cube Sat Solar Panel Top",
+        "operationId": "UpdateCubeSatSolarPanelTop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of cube sat solar panel top",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Solar Panel Top Body",
+            "name": "UpdateSolarPanelTopBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSolarPanelTopBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Solar Panel Top Response",
+            "schema": {
+              "$ref": "#/definitions/SolarPanelTop"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/user/get_me": {
       "get": {
         "security": [
@@ -4257,6 +5995,79 @@ func init() {
         }
       }
     },
+    "CreatePowerSystemBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "current_output_channels_max": {
+          "type": "number"
+        },
+        "data_interface": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "output_channels": {
+          "type": "integer"
+        },
+        "solar_panel_channels": {
+          "type": "integer"
+        },
+        "solar_panel_current_per_channel_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_min": {
+          "type": "number"
+        },
+        "solar_panels_type": {
+          "type": "string"
+        },
+        "system_bus_voltage_output_channels": {
+          "type": "number"
+        },
+        "system_bus_voltage_solar_panels": {
+          "type": "number"
+        },
+        "total_current_of_solar_panels_max": {
+          "type": "number"
+        },
+        "total_output_current": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "CreateSolarPanelSideBody": {
       "type": "object",
       "required": [
@@ -4297,6 +6108,67 @@ func init() {
         },
         "mechanical_vibration": {
           "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "vmp": {
+          "type": "number"
+        },
+        "voc": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "CreateSolarPanelTopBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "coil_area": {
+          "type": "number"
+        },
+        "coil_resistance": {
+          "type": "number"
+        },
+        "efficiency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "imp": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "isc": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "number"
+        },
+        "mechanical_vibration": {
+          "type": "number"
         },
         "min_operating_temperature": {
           "type": "number"
@@ -4393,6 +6265,127 @@ func init() {
         }
       }
     },
+    "CubeSatPowerSystem": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "current_output_channels_max": {
+          "description": "Maximum current for output channels",
+          "type": "number"
+        },
+        "data_interface": {
+          "description": "Data interface type",
+          "type": "string"
+        },
+        "height": {
+          "description": "Height of the power system",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the power system (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "length": {
+          "description": "Length of the power system",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock value",
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration value",
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "output_channels": {
+          "description": "Number of output channels",
+          "type": "integer"
+        },
+        "solar_panel_channels": {
+          "description": "Number of solar panel channels",
+          "type": "integer"
+        },
+        "solar_panel_current_per_channel_max": {
+          "description": "Maximum current per solar panel channel",
+          "type": "number"
+        },
+        "solar_panel_voltage_max": {
+          "description": "Maximum voltage of the solar panels",
+          "type": "number"
+        },
+        "solar_panel_voltage_min": {
+          "description": "Minimum voltage of the solar panels",
+          "type": "number"
+        },
+        "solar_panels_type": {
+          "description": "Type of solar panels used",
+          "type": "string"
+        },
+        "system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
+        "system_bus_voltage_solar_panels": {
+          "description": "System bus voltage for solar panels",
+          "type": "number"
+        },
+        "total_current_of_solar_panels_max": {
+          "description": "Maximum total current of solar panels",
+          "type": "number"
+        },
+        "total_output_current": {
+          "description": "Total output current",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "weight": {
+          "description": "Weight of the power system",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the power system",
+          "type": "number"
+        }
+      }
+    },
+    "CubeSatPowerSystems": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_power_systems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CubeSatPowerSystem"
+          }
+        }
+      }
+    },
     "CubeSatProject": {
       "type": "object",
       "required": [
@@ -4452,6 +6445,23 @@ func init() {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SolarPanelSide"
+          }
+        }
+      }
+    },
+    "CubeSatSolarPanelsTop": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "cube_sat_solar_panels_top": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolarPanelTop"
           }
         }
       }
@@ -4640,6 +6650,94 @@ func init() {
         }
       }
     },
+    "SolarPanelTop": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "coil_area": {
+          "description": "Area of the coil",
+          "type": "number"
+        },
+        "coil_resistance": {
+          "description": "Coil resistance value",
+          "type": "number"
+        },
+        "created_at": {
+          "description": "Timestamp of creation",
+          "type": "integer"
+        },
+        "efficiency": {
+          "description": "Efficiency percentage",
+          "type": "number"
+        },
+        "height": {
+          "description": "Height of the solar panel top",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the solar panel top (auto-generated)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "imp": {
+          "description": "Current at maximum power",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Interface type of the solar panel top",
+          "type": "string"
+        },
+        "isc": {
+          "description": "Short circuit current",
+          "type": "number"
+        },
+        "length": {
+          "description": "Length of the solar panel top",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock value",
+          "type": "number"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration value",
+          "type": "number"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Timestamp of the last update",
+          "type": "integer"
+        },
+        "vmp": {
+          "description": "Voltage at maximum power",
+          "type": "number"
+        },
+        "voc": {
+          "description": "Open circuit voltage",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight of the solar panel top",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width of the solar panel top",
+          "type": "number"
+        }
+      }
+    },
     "UpdateCubeSatProjectBody": {
       "type": "object",
       "required": [
@@ -4654,6 +6752,79 @@ func init() {
         },
         "solar_panael_name": {
           "type": "string"
+        }
+      }
+    },
+    "UpdatePowerSystemBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "current_output_channels_max": {
+          "type": "number"
+        },
+        "data_interface": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "output_channels": {
+          "type": "integer"
+        },
+        "solar_panel_channels": {
+          "type": "integer"
+        },
+        "solar_panel_current_per_channel_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_max": {
+          "type": "number"
+        },
+        "solar_panel_voltage_min": {
+          "type": "number"
+        },
+        "solar_panels_type": {
+          "type": "string"
+        },
+        "system_bus_voltage_output_channels": {
+          "type": "number"
+        },
+        "system_bus_voltage_solar_panels": {
+          "type": "number"
+        },
+        "total_current_of_solar_panels_max": {
+          "type": "number"
+        },
+        "total_output_current": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
         }
       }
     },
@@ -4697,6 +6868,67 @@ func init() {
         },
         "mechanical_vibration": {
           "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "vmp": {
+          "type": "number"
+        },
+        "voc": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "UpdateSolarPanelTopBody": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "coil_area": {
+          "type": "number"
+        },
+        "coil_resistance": {
+          "type": "number"
+        },
+        "efficiency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "imp": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "isc": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "number"
+        },
+        "mechanical_vibration": {
+          "type": "number"
         },
         "min_operating_temperature": {
           "type": "number"

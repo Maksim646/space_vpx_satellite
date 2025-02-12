@@ -231,6 +231,10 @@ func (h *Handler) UpdateCubeSatSolarPanelSideHandler(req api.UpdateCubeSatSolarP
 	}
 
 	newSolarPanel, err := h.solarPanelUsecase.GetSolarPanelSideByID(ctx, solarPanel.ID)
+	if err != nil {
+		zap.L().Error("error fetch dolar panel side", zap.Error(err))
+		return api.NewUpdateCubeSatSolarPanelSideInternalServerError()
+	}
 
 	return api.NewUpdateCubeSatSolarPanelSideOK().WithPayload(&definition.SolarPanelSide{
 		CoilArea:                newSolarPanel.CoilArea.Float64,

@@ -62,15 +62,23 @@ type ClientService interface {
 
 	CreateCubeSatProject(params *CreateCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCubeSatProjectOK, error)
 
+	CreatePowerSystem(params *CreatePowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePowerSystemOK, error)
+
 	CreateSolarPanelSide(params *CreateSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelSideOK, error)
+
+	CreateSolarPanelTop(params *CreateSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelTopOK, error)
 
 	DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error)
 
 	DeleteCubeSatFrame(params *DeleteCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatFrameOK, error)
 
+	DeleteCubeSatPowerSystem(params *DeleteCubeSatPowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatPowerSystemOK, error)
+
 	DeleteCubeSatProject(params *DeleteCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatProjectOK, error)
 
 	DeleteCubeSatSolarPanelSide(params *DeleteCubeSatSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatSolarPanelSideOK, error)
+
+	DeleteCubeSatSolarPanelTop(params *DeleteCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatSolarPanelTopOK, error)
 
 	GetCubeSatProject(params *GetCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatProjectOK, error)
 
@@ -82,9 +90,17 @@ type ClientService interface {
 
 	GetCubeSatFrames(params *GetCubeSatFramesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatFramesOK, error)
 
+	GetCubeSatPowerSystems(params *GetCubeSatPowerSystemsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatPowerSystemsOK, error)
+
 	GetCubeSatSolarPanelsSide(params *GetCubeSatSolarPanelsSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatSolarPanelsSideOK, error)
 
+	GetCubeSatSolarPanelsTop(params *GetCubeSatSolarPanelsTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatSolarPanelsTopOK, error)
+
+	GetPowerSystem(params *GetPowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPowerSystemOK, error)
+
 	GetSolarPanelSide(params *GetSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSolarPanelSideOK, error)
+
+	GetSolarPanelTop(params *GetSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSolarPanelTopOK, error)
 
 	GetUserCubeSatProjects(params *GetUserCubeSatProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserCubeSatProjectsOK, error)
 
@@ -100,9 +116,13 @@ type ClientService interface {
 
 	UpdateCubeSatFrame(params *UpdateCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatFrameOK, error)
 
+	UpdateCubeSatPowerSystem(params *UpdateCubeSatPowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatPowerSystemOK, error)
+
 	UpdateCubeSatProject(params *UpdateCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatProjectOK, error)
 
 	UpdateCubeSatSolarPanelSide(params *UpdateCubeSatSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelSideOK, error)
+
+	UpdateCubeSatSolarPanelTop(params *UpdateCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelTopOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -225,6 +245,45 @@ func (a *Client) CreateCubeSatProject(params *CreateCubeSatProjectParams, authIn
 }
 
 /*
+CreatePowerSystem creates power system
+*/
+func (a *Client) CreatePowerSystem(params *CreatePowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePowerSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePowerSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreatePowerSystem",
+		Method:             "POST",
+		PathPattern:        "/cube_sat_power_system",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePowerSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePowerSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreatePowerSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 CreateSolarPanelSide creates solar panel side
 */
 func (a *Client) CreateSolarPanelSide(params *CreateSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelSideOK, error) {
@@ -260,6 +319,45 @@ func (a *Client) CreateSolarPanelSide(params *CreateSolarPanelSideParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateSolarPanelSide: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateSolarPanelTop creates solar panel top
+*/
+func (a *Client) CreateSolarPanelTop(params *CreateSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelTopOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateSolarPanelTopParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateSolarPanelTop",
+		Method:             "POST",
+		PathPattern:        "/solar_panel_top",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateSolarPanelTopReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateSolarPanelTopOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateSolarPanelTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -342,6 +440,45 @@ func (a *Client) DeleteCubeSatFrame(params *DeleteCubeSatFrameParams, authInfo r
 }
 
 /*
+DeleteCubeSatPowerSystem deletes cube sat power system
+*/
+func (a *Client) DeleteCubeSatPowerSystem(params *DeleteCubeSatPowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatPowerSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteCubeSatPowerSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteCubeSatPowerSystem",
+		Method:             "DELETE",
+		PathPattern:        "/cube_sat_power_system/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteCubeSatPowerSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteCubeSatPowerSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteCubeSatPowerSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DeleteCubeSatProject deletes cube sat project
 */
 func (a *Client) DeleteCubeSatProject(params *DeleteCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatProjectOK, error) {
@@ -416,6 +553,45 @@ func (a *Client) DeleteCubeSatSolarPanelSide(params *DeleteCubeSatSolarPanelSide
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteCubeSatSolarPanelSide: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteCubeSatSolarPanelTop deletes cube sat solar panel top
+*/
+func (a *Client) DeleteCubeSatSolarPanelTop(params *DeleteCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatSolarPanelTopOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteCubeSatSolarPanelTopParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteCubeSatSolarPanelTop",
+		Method:             "DELETE",
+		PathPattern:        "/solar_panel_top/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteCubeSatSolarPanelTopReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteCubeSatSolarPanelTopOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteCubeSatSolarPanelTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -615,6 +791,45 @@ func (a *Client) GetCubeSatFrames(params *GetCubeSatFramesParams, authInfo runti
 }
 
 /*
+GetCubeSatPowerSystems gets cube sat power systems
+*/
+func (a *Client) GetCubeSatPowerSystems(params *GetCubeSatPowerSystemsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatPowerSystemsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCubeSatPowerSystemsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetCubeSatPowerSystems",
+		Method:             "GET",
+		PathPattern:        "/cube_sat_power_system/available_power_systems",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetCubeSatPowerSystemsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetCubeSatPowerSystemsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetCubeSatPowerSystems: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetCubeSatSolarPanelsSide gets cube sat solar panels side
 */
 func (a *Client) GetCubeSatSolarPanelsSide(params *GetCubeSatSolarPanelsSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatSolarPanelsSideOK, error) {
@@ -654,6 +869,84 @@ func (a *Client) GetCubeSatSolarPanelsSide(params *GetCubeSatSolarPanelsSidePara
 }
 
 /*
+GetCubeSatSolarPanelsTop gets cube sat solar panels top
+*/
+func (a *Client) GetCubeSatSolarPanelsTop(params *GetCubeSatSolarPanelsTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatSolarPanelsTopOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCubeSatSolarPanelsTopParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetCubeSatSolarPanelsTop",
+		Method:             "GET",
+		PathPattern:        "/solar_panel_top/available_solar_panel_top",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetCubeSatSolarPanelsTopReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetCubeSatSolarPanelsTopOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetCubeSatSolarPanelsTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetPowerSystem gets power system
+*/
+func (a *Client) GetPowerSystem(params *GetPowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPowerSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPowerSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetPowerSystem",
+		Method:             "GET",
+		PathPattern:        "/cube_sat_power_system/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPowerSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPowerSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetPowerSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetSolarPanelSide gets solar panel side
 */
 func (a *Client) GetSolarPanelSide(params *GetSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSolarPanelSideOK, error) {
@@ -689,6 +982,45 @@ func (a *Client) GetSolarPanelSide(params *GetSolarPanelSideParams, authInfo run
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetSolarPanelSide: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetSolarPanelTop gets solar panel top
+*/
+func (a *Client) GetSolarPanelTop(params *GetSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSolarPanelTopOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetSolarPanelTopParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetSolarPanelTop",
+		Method:             "GET",
+		PathPattern:        "/solar_panel_top/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetSolarPanelTopReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetSolarPanelTopOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetSolarPanelTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -963,6 +1295,45 @@ func (a *Client) UpdateCubeSatFrame(params *UpdateCubeSatFrameParams, authInfo r
 }
 
 /*
+UpdateCubeSatPowerSystem updates cube sat power system
+*/
+func (a *Client) UpdateCubeSatPowerSystem(params *UpdateCubeSatPowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatPowerSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateCubeSatPowerSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateCubeSatPowerSystem",
+		Method:             "PATCH",
+		PathPattern:        "/cube_sat_power_system/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateCubeSatPowerSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateCubeSatPowerSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateCubeSatPowerSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 UpdateCubeSatProject updates cube sat project
 */
 func (a *Client) UpdateCubeSatProject(params *UpdateCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatProjectOK, error) {
@@ -1037,6 +1408,45 @@ func (a *Client) UpdateCubeSatSolarPanelSide(params *UpdateCubeSatSolarPanelSide
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateCubeSatSolarPanelSide: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateCubeSatSolarPanelTop updates cube sat solar panel top
+*/
+func (a *Client) UpdateCubeSatSolarPanelTop(params *UpdateCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelTopOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateCubeSatSolarPanelTopParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateCubeSatSolarPanelTop",
+		Method:             "PATCH",
+		PathPattern:        "/solar_panel_top/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateCubeSatSolarPanelTopReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateCubeSatSolarPanelTopOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateCubeSatSolarPanelTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

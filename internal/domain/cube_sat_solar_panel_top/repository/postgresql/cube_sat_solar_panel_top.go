@@ -13,16 +13,16 @@ import (
 	"go.uber.org/zap"
 )
 
-type SolarPanelRepository struct {
+type SolarPanelTopRepository struct {
 	sqalxConn sqalx.Node
 }
 
-func New(sqalxConn sqalx.Node) model.ISolarPanelRepository {
-	return &SolarPanelRepository{sqalxConn: sqalxConn}
+func New(sqalxConn sqalx.Node) model.ISolarPanelTopRepository {
+	return &SolarPanelTopRepository{sqalxConn: sqalxConn}
 }
 
-func (r *SolarPanelRepository) CreateSolarPanelSide(ctx context.Context, solarPanel model.CubeSatSolarPanelSide) (int64, error) {
-	query, params, err := postgresql.Builder.Insert("cube_sat_solar_panel_side").
+func (r *SolarPanelTopRepository) CreateSolarPanelTop(ctx context.Context, solarPanel model.SolarPanelTop) (int64, error) {
+	query, params, err := postgresql.Builder.Insert("cube_sat_solar_panel_top").
 		Columns(
 			"length",
 			"name",
@@ -37,8 +37,8 @@ func (r *SolarPanelRepository) CreateSolarPanelSide(ctx context.Context, solarPa
 			"efficiency",
 			"coil_area",
 			"coil_resistance",
-			"max_operating_temperature",
 			"min_operating_temperature",
+			"max_operating_temperature",
 			"mechanical_vibration",
 			"mechanical_shock",
 		).
@@ -53,13 +53,13 @@ func (r *SolarPanelRepository) CreateSolarPanelSide(ctx context.Context, solarPa
 			solarPanel.Isc.Float64,
 			solarPanel.Vmp.Float64,
 			solarPanel.Imp.Float64,
-			solarPanel.Efficiency.Int64,
+			solarPanel.Efficiency.Float64,
 			solarPanel.CoilArea.Float64,
-			solarPanel.CoilResistance.Int64,
-			solarPanel.MaxOperatingTemperature.Float64,
+			solarPanel.CoilResistance.Float64,
 			solarPanel.MinOperatingTemperature.Float64,
-			solarPanel.MechanicalVibration.Int64,
-			solarPanel.MechanicalShock.Int64,
+			solarPanel.MaxOperatingTemperature.Float64,
+			solarPanel.MechanicalVibration.Float64,
+			solarPanel.MechanicalShock.Float64,
 		).
 		Suffix("RETURNING id").
 		ToSql()
@@ -69,13 +69,13 @@ func (r *SolarPanelRepository) CreateSolarPanelSide(ctx context.Context, solarPa
 
 	zap.L().Debug(postgresql.BuildQuery(query, params))
 
-	var newSolarPanelID int64
-	err = r.sqalxConn.GetContext(ctx, &newSolarPanelID, query, params...)
-	return newSolarPanelID, err
+	var newSolarPanelTopID int64
+	err = r.sqalxConn.GetContext(ctx, &newSolarPanelTopID, query, params...)
+	return newSolarPanelTopID, err
 }
 
-func (r *SolarPanelRepository) GetSolarPanelSideByID(ctx context.Context, solarPanelSideID int64) (model.CubeSatSolarPanelSide, error) {
-	var solarPanel model.CubeSatSolarPanelSide
+func (r *SolarPanelTopRepository) GetSolarPanelTopByID(ctx context.Context, solarPanelTopID int64) (model.SolarPanelTop, error) {
+	var solarPanelTop model.SolarPanelTop
 	query, params, err := postgresql.Builder.Select(
 		"id",
 		"name",
@@ -91,31 +91,31 @@ func (r *SolarPanelRepository) GetSolarPanelSideByID(ctx context.Context, solarP
 		"efficiency",
 		"coil_area",
 		"coil_resistance",
-		"max_operating_temperature",
 		"min_operating_temperature",
+		"max_operating_temperature",
 		"mechanical_vibration",
 		"mechanical_shock",
 		"updated_at",
 		"created_at",
 	).
-		From("cube_sat_solar_panel_side").
-		Where(sq.Eq{"id": solarPanelSideID}).
+		From("cube_sat_solar_panel_top").
+		Where(sq.Eq{"id": solarPanelTopID}).
 		ToSql()
 	if err != nil {
-		return solarPanel, err
+		return solarPanelTop, err
 	}
 
 	zap.L().Debug(postgresql.BuildQuery(query, params))
-	if err = r.sqalxConn.GetContext(ctx, &solarPanel, query, params...); err != nil {
+	if err = r.sqalxConn.GetContext(ctx, &solarPanelTop, query, params...); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return solarPanel, model.ErrChassisNotFound
+			return solarPanelTop, model.ErrSolarPanelTopNotFound
 		}
 	}
 
-	return solarPanel, err
+	return solarPanelTop, err
 }
 
-func (r *SolarPanelRepository) GetSolarPanelSideByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatSolarPanelSide, error) {
+func (r *SolarPanelTopRepository) GetSolarPanelTopByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.SolarPanelTop, error) {
 	builder := postgresql.Builder.Select(
 		"id",
 		"name",
@@ -131,38 +131,45 @@ func (r *SolarPanelRepository) GetSolarPanelSideByFilters(ctx context.Context, o
 		"efficiency",
 		"coil_area",
 		"coil_resistance",
-		"max_operating_temperature",
 		"min_operating_temperature",
+		"max_operating_temperature",
 		"mechanical_vibration",
 		"mechanical_shock",
 		"updated_at",
 		"created_at",
-	).From("cube_sat_solar_panel_side")
+	).From("cube_sat_solar_panel_top")
 
 	builder = r.ApplyFilters(builder, filters)
+
+	if sortParams != "" {
+		builder = builder.OrderBy(sortParams)
+	}
+
+	builder = builder.Offset(uint64(offset)).Limit(uint64(limit))
 
 	query, params, err := builder.ToSql()
 	if err != nil {
 		return nil, err
 	}
 
-	var solarPanels []model.CubeSatSolarPanelSide
+	var solarPanelsTop []model.SolarPanelTop
 	zap.L().Debug(postgresql.BuildQuery(query, params))
-	if err = r.sqalxConn.SelectContext(ctx, &solarPanels, query, params...); err != nil {
+	if err = r.sqalxConn.SelectContext(ctx, &solarPanelsTop, query, params...); err != nil {
 		return nil, err
 	}
 
-	return solarPanels, nil
+	return solarPanelsTop, nil
 }
 
-func (r *SolarPanelRepository) ApplyFilters(builder sq.SelectBuilder, filters map[string]interface{}) sq.SelectBuilder {
+// ApplyFilters applies filters to the SQL query builder.
+func (r *SolarPanelTopRepository) ApplyFilters(builder sq.SelectBuilder, filters map[string]interface{}) sq.SelectBuilder {
 	for filterKey, filterValue := range filters {
 		switch filterKey {
-		case model.FilterCubeSatSolarPanelSideByMaxLength:
+		case model.FilterSolarPanelTopByMaxLength:
 			if length, ok := filterValue.(float64); ok {
 				builder = builder.Where(sq.LtOrEq{"length": length})
 			}
-		case model.FilterCubeSatSolarPanelSideByMinLength:
+		case model.FilterSolarPanelTopByMinLength:
 			if length, ok := filterValue.(float64); ok {
 				builder = builder.Where(sq.GtOrEq{"length": length})
 			}
@@ -174,8 +181,8 @@ func (r *SolarPanelRepository) ApplyFilters(builder sq.SelectBuilder, filters ma
 	return builder
 }
 
-func (r *SolarPanelRepository) UpdateSolarPanelSide(ctx context.Context, solarPanel model.CubeSatSolarPanelSide) error {
-	query, params, err := postgresql.Builder.Update("cube_sat_solar_panel_side").
+func (r *SolarPanelTopRepository) UpdateSolarPanelTop(ctx context.Context, solarPanel model.SolarPanelTop) error {
+	query, params, err := postgresql.Builder.Update("cube_sat_solar_panel_top").
 		Set("name", solarPanel.Name.String).
 		Set("length", solarPanel.Length.Float64).
 		Set("width", solarPanel.Width.Float64).
@@ -186,13 +193,13 @@ func (r *SolarPanelRepository) UpdateSolarPanelSide(ctx context.Context, solarPa
 		Set("isc", solarPanel.Isc.Float64).
 		Set("vmp", solarPanel.Vmp.Float64).
 		Set("imp", solarPanel.Imp.Float64).
-		Set("efficiency", solarPanel.Efficiency.Int64).
+		Set("efficiency", solarPanel.Efficiency.Float64).
 		Set("coil_area", solarPanel.CoilArea.Float64).
-		Set("coil_resistance", solarPanel.CoilResistance.Int64).
-		Set("max_operating_temperature", solarPanel.MaxOperatingTemperature.Float64).
+		Set("coil_resistance", solarPanel.CoilResistance.Float64).
 		Set("min_operating_temperature", solarPanel.MinOperatingTemperature.Float64).
-		Set("mechanical_vibration", solarPanel.MechanicalVibration.Int64).
-		Set("mechanical_shock", solarPanel.MechanicalShock.Int64).
+		Set("max_operating_temperature", solarPanel.MaxOperatingTemperature.Float64).
+		Set("mechanical_vibration", solarPanel.MechanicalVibration.Float64).
+		Set("mechanical_shock", solarPanel.MechanicalShock.Float64).
 		Set("updated_at", time.Now().UTC()).
 		Where(sq.Eq{"id": solarPanel.ID}).
 		ToSql()
@@ -205,9 +212,9 @@ func (r *SolarPanelRepository) UpdateSolarPanelSide(ctx context.Context, solarPa
 	return err
 }
 
-func (r *SolarPanelRepository) DeleteSolarPanelSide(ctx context.Context, solarPanelSideID int64) error {
-	query, params, err := postgresql.Builder.Delete("cube_sat_solar_panel_side").
-		Where(sq.Eq{"cube_sat_solar_panel_side.id": solarPanelSideID}).
+func (r *SolarPanelTopRepository) DeleteSolarPanelTop(ctx context.Context, solarPanelTopID int64) error {
+	query, params, err := postgresql.Builder.Delete("cube_sat_solar_panel_top").
+		Where(sq.Eq{"id": solarPanelTopID}).
 		ToSql()
 	if err != nil {
 		return err

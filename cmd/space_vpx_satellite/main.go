@@ -35,11 +35,17 @@ import (
 	_chassisRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/chassis/repository/postgresql"
 	_chassisUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/chassis/usecase"
 
-	_solarPanelRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/solar_panel/repository/postgresql"
-	_solarPanelUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/solar_panel/usecase"
+	_cubeSatSolarPanelSideRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_solar_panel_side/repository/postgresql"
+	_cubeSatSolarPanelSideUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_solar_panel_side/usecase"
+
+	_cubeSatSolarPanelTopRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_solar_panel_top/repository/postgresql"
+	_cubeSatSolarPanelTopUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_solar_panel_top/usecase"
 
 	_cubeSatFrameRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_frame/repository/postgresql"
 	_cubeSatFrameUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_frame/usecase"
+
+	_cubeSatPowerSystemRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_power_system/repository/postgresql"
+	_cubeSatPowerSystemUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_power_system/usecase"
 )
 
 const (
@@ -104,19 +110,27 @@ func main() {
 	chassisRepo := _chassisRepo.New(sqalxConn)
 	chassisUsecase := _chassisUsecase.New(chassisRepo)
 
-	solarPanelRepo := _solarPanelRepo.New(sqalxConn)
-	solarPanelUsecase := _solarPanelUsecase.New(solarPanelRepo)
+	cubeSatSolarPanelSideRepo := _cubeSatSolarPanelSideRepo.New(sqalxConn)
+	cubeSatSolarPanelSideUsecase := _cubeSatSolarPanelSideUsecase.New(cubeSatSolarPanelSideRepo)
+
+	cubeSatSolarPanelTopRepo := _cubeSatSolarPanelTopRepo.New(sqalxConn)
+	cubeSatSolarPanelTopUsecase := _cubeSatSolarPanelTopUsecase.New(cubeSatSolarPanelTopRepo)
 
 	cubeSatFrameRepo := _cubeSatFrameRepo.New(sqalxConn)
 	cubeSatFrameUsecase := _cubeSatFrameUsecase.New(cubeSatFrameRepo)
+
+	cubeSatPowerSystemRepo := _cubeSatPowerSystemRepo.New(sqalxConn)
+	cubeSatPowerSystemUsecase := _cubeSatPowerSystemUsecase.New(cubeSatPowerSystemRepo)
 
 	appHandler := handler.New(
 		userUsecase,
 		adminUsecase,
 		projectUsecase,
 		chassisUsecase,
-		solarPanelUsecase,
+		cubeSatSolarPanelSideUsecase,
+		cubeSatSolarPanelTopUsecase,
 		cubeSatFrameUsecase,
+		cubeSatPowerSystemUsecase,
 
 		httpVersion,
 		config.HashSalt,
