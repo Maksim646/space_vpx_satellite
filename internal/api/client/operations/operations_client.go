@@ -64,6 +64,8 @@ type ClientService interface {
 
 	CreateCubeSatProject(params *CreateCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCubeSatProjectOK, error)
 
+	CreateCubeSatVHTransceiver(params *CreateCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCubeSatVHTransceiverOK, error)
+
 	CreatePowerSystem(params *CreatePowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePowerSystemOK, error)
 
 	CreateSolarPanelSide(params *CreateSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelSideOK, error)
@@ -86,6 +88,8 @@ type ClientService interface {
 
 	DeleteCubeSatSolarPanelTop(params *DeleteCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatSolarPanelTopOK, error)
 
+	DeleteCubeSatVHTransceiver(params *DeleteCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatVHTransceiverOK, error)
+
 	DeleteVHFAntennaSystem(params *DeleteVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVHFAntennaSystemOK, error)
 
 	GetCubeSatProject(params *GetCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatProjectOK, error)
@@ -93,6 +97,8 @@ type ClientService interface {
 	GetAvailableBoardComputingModules(params *GetAvailableBoardComputingModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableBoardComputingModulesOK, error)
 
 	GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisVPXOK, error)
+
+	GetAvailableCubeSatVHTransceivers(params *GetAvailableCubeSatVHTransceiversParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableCubeSatVHTransceiversOK, error)
 
 	GetAvailableVHFAntennaSystems(params *GetAvailableVHFAntennaSystemsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableVHFAntennaSystemsOK, error)
 
@@ -109,6 +115,8 @@ type ClientService interface {
 	GetCubeSatSolarPanelsSide(params *GetCubeSatSolarPanelsSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatSolarPanelsSideOK, error)
 
 	GetCubeSatSolarPanelsTop(params *GetCubeSatSolarPanelsTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatSolarPanelsTopOK, error)
+
+	GetCubeSatVHTransceiver(params *GetCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatVHTransceiverOK, error)
 
 	GetPowerSystem(params *GetPowerSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPowerSystemOK, error)
 
@@ -141,6 +149,8 @@ type ClientService interface {
 	UpdateCubeSatSolarPanelSide(params *UpdateCubeSatSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelSideOK, error)
 
 	UpdateCubeSatSolarPanelTop(params *UpdateCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelTopOK, error)
+
+	UpdateCubeSatVHTransceiver(params *UpdateCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatVHTransceiverOK, error)
 
 	UpdateVHFAntennaSystem(params *UpdateVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVHFAntennaSystemOK, error)
 
@@ -300,6 +310,45 @@ func (a *Client) CreateCubeSatProject(params *CreateCubeSatProjectParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateCubeSatProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateCubeSatVHTransceiver creates cube sat v h f transceiver
+*/
+func (a *Client) CreateCubeSatVHTransceiver(params *CreateCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCubeSatVHTransceiverOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateCubeSatVHTransceiverParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateCubeSatVHTransceiver",
+		Method:             "POST",
+		PathPattern:        "/cube_sat_vhf_transceiver",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateCubeSatVHTransceiverReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateCubeSatVHTransceiverOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateCubeSatVHTransceiver: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -733,6 +782,45 @@ func (a *Client) DeleteCubeSatSolarPanelTop(params *DeleteCubeSatSolarPanelTopPa
 }
 
 /*
+DeleteCubeSatVHTransceiver deletes cube sat v h f transceiver
+*/
+func (a *Client) DeleteCubeSatVHTransceiver(params *DeleteCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatVHTransceiverOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteCubeSatVHTransceiverParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteCubeSatVHTransceiver",
+		Method:             "DELETE",
+		PathPattern:        "/cube_sat_vhf_transceiver/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteCubeSatVHTransceiverReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteCubeSatVHTransceiverOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteCubeSatVHTransceiver: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DeleteVHFAntennaSystem deletes v h f antenna system
 */
 func (a *Client) DeleteVHFAntennaSystem(params *DeleteVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVHFAntennaSystemOK, error) {
@@ -885,6 +973,45 @@ func (a *Client) GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAvailableChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAvailableCubeSatVHTransceivers gets available cube sat v h f transceivers
+*/
+func (a *Client) GetAvailableCubeSatVHTransceivers(params *GetAvailableCubeSatVHTransceiversParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableCubeSatVHTransceiversOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAvailableCubeSatVHTransceiversParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAvailableCubeSatVHTransceivers",
+		Method:             "GET",
+		PathPattern:        "/cube_sat_vhf_transceiver/available",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAvailableCubeSatVHTransceiversReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAvailableCubeSatVHTransceiversOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAvailableCubeSatVHTransceivers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1197,6 +1324,45 @@ func (a *Client) GetCubeSatSolarPanelsTop(params *GetCubeSatSolarPanelsTopParams
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetCubeSatSolarPanelsTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCubeSatVHTransceiver gets cube sat v h f transceiver
+*/
+func (a *Client) GetCubeSatVHTransceiver(params *GetCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatVHTransceiverOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCubeSatVHTransceiverParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetCubeSatVHTransceiver",
+		Method:             "GET",
+		PathPattern:        "/cube_sat_vhf_transceiver/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetCubeSatVHTransceiverReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetCubeSatVHTransceiverOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetCubeSatVHTransceiver: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1818,6 +1984,45 @@ func (a *Client) UpdateCubeSatSolarPanelTop(params *UpdateCubeSatSolarPanelTopPa
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateCubeSatSolarPanelTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateCubeSatVHTransceiver updates cube sat v h f transceiver
+*/
+func (a *Client) UpdateCubeSatVHTransceiver(params *UpdateCubeSatVHTransceiverParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatVHTransceiverOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateCubeSatVHTransceiverParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateCubeSatVHTransceiver",
+		Method:             "PATCH",
+		PathPattern:        "/cube_sat_vhf_transceiver/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateCubeSatVHTransceiverReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateCubeSatVHTransceiverOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateCubeSatVHTransceiver: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

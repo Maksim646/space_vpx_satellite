@@ -1219,6 +1219,213 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+### CUBE SAT VHF TRABSCIEVER
+
+  /cube_sat_vhf_transceiver/{id}:
+    get:
+      security:
+        - Bearer: []
+      summary: Get CubeSat VHF Transceiver
+      operationId: GetCubeSatVHTransceiver
+      tags: 
+        - CubeSatVHFTransceiver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the CubeSat VHF transceiver
+      responses:
+        200:
+          description: Get CubeSat VHF Transceiver Response
+          schema:
+            $ref: '#/definitions/VHFTransceiver'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+    patch:
+      security:
+        - Bearer: []
+      summary: Update CubeSat VHF Transceiver
+      operationId: UpdateCubeSatVHTransceiver
+      tags: 
+        - CubeSatVHFTransceiver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the CubeSat VHF transceiver
+        - name: UpdateVHFTransceiverBody
+          description: Update VHF Transceiver Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateVHFTransceiverBody'
+      responses:
+        200:
+          description: Update CubeSat VHF Transceiver Response
+          schema:
+            $ref: '#/definitions/VHFTransceiver'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      security:
+        - Bearer: []
+      summary: Delete CubeSat VHF Transceiver
+      operationId: DeleteCubeSatVHTransceiver
+      tags: 
+        - CubeSatVHFTransceiver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the CubeSat VHF transceiver
+      responses:
+        200:
+          description: Delete CubeSat VHF Transceiver Response
+          schema:
+            $ref: '#/definitions/Error'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /cube_sat_vhf_transceiver:
+    post:
+      security:
+        - Bearer: []
+      summary: Create CubeSat VHF Transceiver
+      operationId: CreateCubeSatVHTransceiver
+      tags: 
+        - CubeSatVHFTransceiver
+      parameters:
+        - name: CreateVHFTransceiverBody
+          description: Create VHF Transceiver Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateVHFTransceiverBody'
+      responses:
+        200:
+          description: Create CubeSat VHF Transceiver Response
+          schema:
+            $ref: '#/definitions/VHFTransceiver'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /cube_sat_vhf_transceiver/available:
+    get:
+      security:
+        - Bearer: []
+      summary: Get Available CubeSat VHF Transceivers
+      operationId: GetAvailableCubeSatVHTransceivers
+      tags: 
+        - CubeSatVHFTransceiver
+      parameters:
+        - in: query
+          required: true
+          name: offset
+          type: integer
+          description: Offset for pagination
+          minimum: 0
+        - in: query
+          required: true
+          name: limit
+          type: integer
+          description: Limit for pagination
+          minimum: 1
+        - in: query
+          name: sort[field]
+          description: Sort parameters
+          enum: [created_at]
+          type: string
+        - in: query
+          name: FilterCubeSatVHFTransceiverByMinFrequency
+          description: Filter by minimum operating frequency
+          type: number
+        - in: query
+          name: FilterCubeSatVHFTransceiverByMaxFrequency
+          description: Filter by maximum operating frequency
+          type: number
+      responses:
+        200:
+          description: Get Available CubeSat VHF Transceivers Response
+          schema:
+            $ref: '#/definitions/CubeSatVHFTransceivers'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
 ### CUBE SAT VHF ANTENNA SYSTEM
 
   /vhf_antenna_system/{id}:
@@ -3135,3 +3342,124 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/VHFAntennaSystem'
+
+### CUBE SAT VHF TRABSCIEVER
+  VHFTransceiver:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: number
+      supply_voltage:
+        type: number
+      power_consumption:
+        type: number
+      interface:
+        type: string
+      operating_frequency:
+        type: number
+      output_power:
+        type: number
+      sensitivity_receiver:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+      updated_at:
+        type: integer
+      created_at:
+        type: integer
+
+  CreateVHFTransceiverBody:
+    type: object
+    properties:
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: number
+      supply_voltage:
+        type: number
+      power_consumption:
+        type: number
+      interface:
+        type: string
+      operating_frequency:
+        type: number
+      output_power:
+        type: number
+      sensitivity_receiver:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+
+  UpdateVHFTransceiverBody:
+    type: object
+    properties:
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: number
+      supply_voltage:
+        type: number
+      power_consumption:
+        type: number
+      interface:
+        type: string
+      operating_frequency:
+        type: number
+      output_power:
+        type: number
+      sensitivity_receiver:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+
+  CubeSatVHFTransceivers:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+      vhf_transceivers:
+        type: array
+        items:
+          $ref: '#/definitions/VHFTransceiver'

@@ -1589,6 +1589,317 @@ func init() {
         }
       }
     },
+    "/cube_sat_vhf_transceiver": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Create CubeSat VHF Transceiver",
+        "operationId": "CreateCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "description": "Create VHF Transceiver Body",
+            "name": "CreateVHFTransceiverBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateVHFTransceiverBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/VHFTransceiver"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_vhf_transceiver/available": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Get Available CubeSat VHF Transceivers",
+        "operationId": "GetAvailableCubeSatVHTransceivers",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset for pagination",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Limit for pagination",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "Sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by minimum operating frequency",
+            "name": "FilterCubeSatVHFTransceiverByMinFrequency",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by maximum operating frequency",
+            "name": "FilterCubeSatVHFTransceiverByMaxFrequency",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Available CubeSat VHF Transceivers Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatVHFTransceivers"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_vhf_transceiver/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Get CubeSat VHF Transceiver",
+        "operationId": "GetCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the CubeSat VHF transceiver",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/VHFTransceiver"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Delete CubeSat VHF Transceiver",
+        "operationId": "DeleteCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the CubeSat VHF transceiver",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Update CubeSat VHF Transceiver",
+        "operationId": "UpdateCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the CubeSat VHF transceiver",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update VHF Transceiver Body",
+            "name": "UpdateVHFTransceiverBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateVHFTransceiverBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/VHFTransceiver"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/project/{id}": {
       "get": {
         "security": [
@@ -3553,6 +3864,56 @@ func init() {
         }
       }
     },
+    "CreateVHFTransceiverBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "operating_frequency": {
+          "type": "number"
+        },
+        "output_power": {
+          "type": "number"
+        },
+        "power_consumption": {
+          "type": "number"
+        },
+        "sensitivity_receiver": {
+          "type": "number"
+        },
+        "supply_voltage": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "CubeSatFrame": {
       "type": "object",
       "required": [
@@ -3825,6 +4186,23 @@ func init() {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SolarPanelTop"
+          }
+        }
+      }
+    },
+    "CubeSatVHFTransceivers": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "vhf_transceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VHFTransceiver"
           }
         }
       }
@@ -4406,6 +4784,56 @@ func init() {
         }
       }
     },
+    "UpdateVHFTransceiverBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "operating_frequency": {
+          "type": "number"
+        },
+        "output_power": {
+          "type": "number"
+        },
+        "power_consumption": {
+          "type": "number"
+        },
+        "sensitivity_receiver": {
+          "type": "number"
+        },
+        "supply_voltage": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "UrlResponse": {
       "type": "object",
       "required": [
@@ -4501,6 +4929,65 @@ func init() {
           "items": {
             "$ref": "#/definitions/VHFAntennaSystem"
           }
+        }
+      }
+    },
+    "VHFTransceiver": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "number"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "operating_frequency": {
+          "type": "number"
+        },
+        "output_power": {
+          "type": "number"
+        },
+        "power_consumption": {
+          "type": "number"
+        },
+        "sensitivity_receiver": {
+          "type": "number"
+        },
+        "supply_voltage": {
+          "type": "number"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
         }
       }
     }
@@ -6092,6 +6579,318 @@ func init() {
         }
       }
     },
+    "/cube_sat_vhf_transceiver": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Create CubeSat VHF Transceiver",
+        "operationId": "CreateCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "description": "Create VHF Transceiver Body",
+            "name": "CreateVHFTransceiverBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateVHFTransceiverBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/VHFTransceiver"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_vhf_transceiver/available": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Get Available CubeSat VHF Transceivers",
+        "operationId": "GetAvailableCubeSatVHTransceivers",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset for pagination",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Limit for pagination",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at"
+            ],
+            "type": "string",
+            "description": "Sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by minimum operating frequency",
+            "name": "FilterCubeSatVHFTransceiverByMinFrequency",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by maximum operating frequency",
+            "name": "FilterCubeSatVHFTransceiverByMaxFrequency",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Available CubeSat VHF Transceivers Response",
+            "schema": {
+              "$ref": "#/definitions/CubeSatVHFTransceivers"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/cube_sat_vhf_transceiver/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Get CubeSat VHF Transceiver",
+        "operationId": "GetCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the CubeSat VHF transceiver",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/VHFTransceiver"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Delete CubeSat VHF Transceiver",
+        "operationId": "DeleteCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the CubeSat VHF transceiver",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatVHFTransceiver"
+        ],
+        "summary": "Update CubeSat VHF Transceiver",
+        "operationId": "UpdateCubeSatVHTransceiver",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the CubeSat VHF transceiver",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update VHF Transceiver Body",
+            "name": "UpdateVHFTransceiverBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateVHFTransceiverBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update CubeSat VHF Transceiver Response",
+            "schema": {
+              "$ref": "#/definitions/VHFTransceiver"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/project/{id}": {
       "get": {
         "security": [
@@ -8063,6 +8862,56 @@ func init() {
         }
       }
     },
+    "CreateVHFTransceiverBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "operating_frequency": {
+          "type": "number"
+        },
+        "output_power": {
+          "type": "number"
+        },
+        "power_consumption": {
+          "type": "number"
+        },
+        "sensitivity_receiver": {
+          "type": "number"
+        },
+        "supply_voltage": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "CubeSatFrame": {
       "type": "object",
       "required": [
@@ -8335,6 +9184,23 @@ func init() {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SolarPanelTop"
+          }
+        }
+      }
+    },
+    "CubeSatVHFTransceivers": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "vhf_transceivers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VHFTransceiver"
           }
         }
       }
@@ -8916,6 +9782,56 @@ func init() {
         }
       }
     },
+    "UpdateVHFTransceiverBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "operating_frequency": {
+          "type": "number"
+        },
+        "output_power": {
+          "type": "number"
+        },
+        "power_consumption": {
+          "type": "number"
+        },
+        "sensitivity_receiver": {
+          "type": "number"
+        },
+        "supply_voltage": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "UrlResponse": {
       "type": "object",
       "required": [
@@ -9011,6 +9927,65 @@ func init() {
           "items": {
             "$ref": "#/definitions/VHFAntennaSystem"
           }
+        }
+      }
+    },
+    "VHFTransceiver": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "number"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "operating_frequency": {
+          "type": "number"
+        },
+        "output_power": {
+          "type": "number"
+        },
+        "power_consumption": {
+          "type": "number"
+        },
+        "sensitivity_receiver": {
+          "type": "number"
+        },
+        "supply_voltage": {
+          "type": "number"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
         }
       }
     }

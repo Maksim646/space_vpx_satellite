@@ -56,6 +56,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		CreateCubeSatProjectHandler: CreateCubeSatProjectHandlerFunc(func(params CreateCubeSatProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateCubeSatProject has not yet been implemented")
 		}),
+		CreateCubeSatVHTransceiverHandler: CreateCubeSatVHTransceiverHandlerFunc(func(params CreateCubeSatVHTransceiverParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateCubeSatVHTransceiver has not yet been implemented")
+		}),
 		CreatePowerSystemHandler: CreatePowerSystemHandlerFunc(func(params CreatePowerSystemParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreatePowerSystem has not yet been implemented")
 		}),
@@ -89,6 +92,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		DeleteCubeSatSolarPanelTopHandler: DeleteCubeSatSolarPanelTopHandlerFunc(func(params DeleteCubeSatSolarPanelTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteCubeSatSolarPanelTop has not yet been implemented")
 		}),
+		DeleteCubeSatVHTransceiverHandler: DeleteCubeSatVHTransceiverHandlerFunc(func(params DeleteCubeSatVHTransceiverParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteCubeSatVHTransceiver has not yet been implemented")
+		}),
 		DeleteVHFAntennaSystemHandler: DeleteVHFAntennaSystemHandlerFunc(func(params DeleteVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteVHFAntennaSystem has not yet been implemented")
 		}),
@@ -100,6 +106,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		GetAvailableChassisVPXHandler: GetAvailableChassisVPXHandlerFunc(func(params GetAvailableChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetAvailableChassisVPX has not yet been implemented")
+		}),
+		GetAvailableCubeSatVHTransceiversHandler: GetAvailableCubeSatVHTransceiversHandlerFunc(func(params GetAvailableCubeSatVHTransceiversParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetAvailableCubeSatVHTransceivers has not yet been implemented")
 		}),
 		GetAvailableVHFAntennaSystemsHandler: GetAvailableVHFAntennaSystemsHandlerFunc(func(params GetAvailableVHFAntennaSystemsParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetAvailableVHFAntennaSystems has not yet been implemented")
@@ -124,6 +133,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		GetCubeSatSolarPanelsTopHandler: GetCubeSatSolarPanelsTopHandlerFunc(func(params GetCubeSatSolarPanelsTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetCubeSatSolarPanelsTop has not yet been implemented")
+		}),
+		GetCubeSatVHTransceiverHandler: GetCubeSatVHTransceiverHandlerFunc(func(params GetCubeSatVHTransceiverParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetCubeSatVHTransceiver has not yet been implemented")
 		}),
 		GetPowerSystemHandler: GetPowerSystemHandlerFunc(func(params GetPowerSystemParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetPowerSystem has not yet been implemented")
@@ -172,6 +184,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		UpdateCubeSatSolarPanelTopHandler: UpdateCubeSatSolarPanelTopHandlerFunc(func(params UpdateCubeSatSolarPanelTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatSolarPanelTop has not yet been implemented")
+		}),
+		UpdateCubeSatVHTransceiverHandler: UpdateCubeSatVHTransceiverHandlerFunc(func(params UpdateCubeSatVHTransceiverParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatVHTransceiver has not yet been implemented")
 		}),
 		UpdateVHFAntennaSystemHandler: UpdateVHFAntennaSystemHandlerFunc(func(params UpdateVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateVHFAntennaSystem has not yet been implemented")
@@ -234,6 +249,8 @@ type SpaceVPXBackendServiceAPI struct {
 	CreateCubeSatFrameHandler CreateCubeSatFrameHandler
 	// CreateCubeSatProjectHandler sets the operation handler for the create cube sat project operation
 	CreateCubeSatProjectHandler CreateCubeSatProjectHandler
+	// CreateCubeSatVHTransceiverHandler sets the operation handler for the create cube sat v h transceiver operation
+	CreateCubeSatVHTransceiverHandler CreateCubeSatVHTransceiverHandler
 	// CreatePowerSystemHandler sets the operation handler for the create power system operation
 	CreatePowerSystemHandler CreatePowerSystemHandler
 	// CreateSolarPanelSideHandler sets the operation handler for the create solar panel side operation
@@ -256,6 +273,8 @@ type SpaceVPXBackendServiceAPI struct {
 	DeleteCubeSatSolarPanelSideHandler DeleteCubeSatSolarPanelSideHandler
 	// DeleteCubeSatSolarPanelTopHandler sets the operation handler for the delete cube sat solar panel top operation
 	DeleteCubeSatSolarPanelTopHandler DeleteCubeSatSolarPanelTopHandler
+	// DeleteCubeSatVHTransceiverHandler sets the operation handler for the delete cube sat v h transceiver operation
+	DeleteCubeSatVHTransceiverHandler DeleteCubeSatVHTransceiverHandler
 	// DeleteVHFAntennaSystemHandler sets the operation handler for the delete v h f antenna system operation
 	DeleteVHFAntennaSystemHandler DeleteVHFAntennaSystemHandler
 	// GetCubeSatProjectHandler sets the operation handler for the get cube sat project operation
@@ -264,6 +283,8 @@ type SpaceVPXBackendServiceAPI struct {
 	GetAvailableBoardComputingModulesHandler GetAvailableBoardComputingModulesHandler
 	// GetAvailableChassisVPXHandler sets the operation handler for the get available chassis v p x operation
 	GetAvailableChassisVPXHandler GetAvailableChassisVPXHandler
+	// GetAvailableCubeSatVHTransceiversHandler sets the operation handler for the get available cube sat v h transceivers operation
+	GetAvailableCubeSatVHTransceiversHandler GetAvailableCubeSatVHTransceiversHandler
 	// GetAvailableVHFAntennaSystemsHandler sets the operation handler for the get available v h f antenna systems operation
 	GetAvailableVHFAntennaSystemsHandler GetAvailableVHFAntennaSystemsHandler
 	// GetBoardComputingModuleByIDHandler sets the operation handler for the get board computing module by ID operation
@@ -280,6 +301,8 @@ type SpaceVPXBackendServiceAPI struct {
 	GetCubeSatSolarPanelsSideHandler GetCubeSatSolarPanelsSideHandler
 	// GetCubeSatSolarPanelsTopHandler sets the operation handler for the get cube sat solar panels top operation
 	GetCubeSatSolarPanelsTopHandler GetCubeSatSolarPanelsTopHandler
+	// GetCubeSatVHTransceiverHandler sets the operation handler for the get cube sat v h transceiver operation
+	GetCubeSatVHTransceiverHandler GetCubeSatVHTransceiverHandler
 	// GetPowerSystemHandler sets the operation handler for the get power system operation
 	GetPowerSystemHandler GetPowerSystemHandler
 	// GetSolarPanelSideHandler sets the operation handler for the get solar panel side operation
@@ -312,6 +335,8 @@ type SpaceVPXBackendServiceAPI struct {
 	UpdateCubeSatSolarPanelSideHandler UpdateCubeSatSolarPanelSideHandler
 	// UpdateCubeSatSolarPanelTopHandler sets the operation handler for the update cube sat solar panel top operation
 	UpdateCubeSatSolarPanelTopHandler UpdateCubeSatSolarPanelTopHandler
+	// UpdateCubeSatVHTransceiverHandler sets the operation handler for the update cube sat v h transceiver operation
+	UpdateCubeSatVHTransceiverHandler UpdateCubeSatVHTransceiverHandler
 	// UpdateVHFAntennaSystemHandler sets the operation handler for the update v h f antenna system operation
 	UpdateVHFAntennaSystemHandler UpdateVHFAntennaSystemHandler
 
@@ -407,6 +432,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.CreateCubeSatProjectHandler == nil {
 		unregistered = append(unregistered, "CreateCubeSatProjectHandler")
 	}
+	if o.CreateCubeSatVHTransceiverHandler == nil {
+		unregistered = append(unregistered, "CreateCubeSatVHTransceiverHandler")
+	}
 	if o.CreatePowerSystemHandler == nil {
 		unregistered = append(unregistered, "CreatePowerSystemHandler")
 	}
@@ -440,6 +468,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.DeleteCubeSatSolarPanelTopHandler == nil {
 		unregistered = append(unregistered, "DeleteCubeSatSolarPanelTopHandler")
 	}
+	if o.DeleteCubeSatVHTransceiverHandler == nil {
+		unregistered = append(unregistered, "DeleteCubeSatVHTransceiverHandler")
+	}
 	if o.DeleteVHFAntennaSystemHandler == nil {
 		unregistered = append(unregistered, "DeleteVHFAntennaSystemHandler")
 	}
@@ -451,6 +482,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.GetAvailableChassisVPXHandler == nil {
 		unregistered = append(unregistered, "GetAvailableChassisVPXHandler")
+	}
+	if o.GetAvailableCubeSatVHTransceiversHandler == nil {
+		unregistered = append(unregistered, "GetAvailableCubeSatVHTransceiversHandler")
 	}
 	if o.GetAvailableVHFAntennaSystemsHandler == nil {
 		unregistered = append(unregistered, "GetAvailableVHFAntennaSystemsHandler")
@@ -475,6 +509,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.GetCubeSatSolarPanelsTopHandler == nil {
 		unregistered = append(unregistered, "GetCubeSatSolarPanelsTopHandler")
+	}
+	if o.GetCubeSatVHTransceiverHandler == nil {
+		unregistered = append(unregistered, "GetCubeSatVHTransceiverHandler")
 	}
 	if o.GetPowerSystemHandler == nil {
 		unregistered = append(unregistered, "GetPowerSystemHandler")
@@ -523,6 +560,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.UpdateCubeSatSolarPanelTopHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatSolarPanelTopHandler")
+	}
+	if o.UpdateCubeSatVHTransceiverHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatVHTransceiverHandler")
 	}
 	if o.UpdateVHFAntennaSystemHandler == nil {
 		unregistered = append(unregistered, "UpdateVHFAntennaSystemHandler")
@@ -645,6 +685,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/cube_sat_vhf_transceiver"] = NewCreateCubeSatVHTransceiver(o.context, o.CreateCubeSatVHTransceiverHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/cube_sat_power_system"] = NewCreatePowerSystem(o.context, o.CreatePowerSystemHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -689,6 +733,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/cube_sat_vhf_transceiver/{id}"] = NewDeleteCubeSatVHTransceiver(o.context, o.DeleteCubeSatVHTransceiverHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/vhf_antenna_system/{id}"] = NewDeleteVHFAntennaSystem(o.context, o.DeleteVHFAntennaSystemHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -702,6 +750,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/chassis_vpx/available_chassis"] = NewGetAvailableChassisVPX(o.context, o.GetAvailableChassisVPXHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/cube_sat_vhf_transceiver/available"] = NewGetAvailableCubeSatVHTransceivers(o.context, o.GetAvailableCubeSatVHTransceiversHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -734,6 +786,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/solar_panel_top/available_solar_panel_top"] = NewGetCubeSatSolarPanelsTop(o.context, o.GetCubeSatSolarPanelsTopHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/cube_sat_vhf_transceiver/{id}"] = NewGetCubeSatVHTransceiver(o.context, o.GetCubeSatVHTransceiverHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -798,6 +854,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/solar_panel_top/{id}"] = NewUpdateCubeSatSolarPanelTop(o.context, o.UpdateCubeSatSolarPanelTopHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/cube_sat_vhf_transceiver/{id}"] = NewUpdateCubeSatVHTransceiver(o.context, o.UpdateCubeSatVHTransceiverHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
