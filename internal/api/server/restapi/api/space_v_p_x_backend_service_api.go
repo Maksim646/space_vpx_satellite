@@ -65,6 +65,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		CreateSolarPanelTopHandler: CreateSolarPanelTopHandlerFunc(func(params CreateSolarPanelTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateSolarPanelTop has not yet been implemented")
 		}),
+		CreateVHFAntennaSystemHandler: CreateVHFAntennaSystemHandlerFunc(func(params CreateVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateVHFAntennaSystem has not yet been implemented")
+		}),
 		DeleteBoardComputingModuleHandler: DeleteBoardComputingModuleHandlerFunc(func(params DeleteBoardComputingModuleParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteBoardComputingModule has not yet been implemented")
 		}),
@@ -86,6 +89,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		DeleteCubeSatSolarPanelTopHandler: DeleteCubeSatSolarPanelTopHandlerFunc(func(params DeleteCubeSatSolarPanelTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteCubeSatSolarPanelTop has not yet been implemented")
 		}),
+		DeleteVHFAntennaSystemHandler: DeleteVHFAntennaSystemHandlerFunc(func(params DeleteVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteVHFAntennaSystem has not yet been implemented")
+		}),
 		GetCubeSatProjectHandler: GetCubeSatProjectHandlerFunc(func(params GetCubeSatProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetCubeSatProject has not yet been implemented")
 		}),
@@ -94,6 +100,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		GetAvailableChassisVPXHandler: GetAvailableChassisVPXHandlerFunc(func(params GetAvailableChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetAvailableChassisVPX has not yet been implemented")
+		}),
+		GetAvailableVHFAntennaSystemsHandler: GetAvailableVHFAntennaSystemsHandlerFunc(func(params GetAvailableVHFAntennaSystemsParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetAvailableVHFAntennaSystems has not yet been implemented")
 		}),
 		GetBoardComputingModuleByIDHandler: GetBoardComputingModuleByIDHandlerFunc(func(params GetBoardComputingModuleByIDParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetBoardComputingModuleByID has not yet been implemented")
@@ -131,6 +140,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		GetUserMeHandler: GetUserMeHandlerFunc(func(params GetUserMeParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetUserMe has not yet been implemented")
 		}),
+		GetVHFAntennaSystemHandler: GetVHFAntennaSystemHandlerFunc(func(params GetVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetVHFAntennaSystem has not yet been implemented")
+		}),
 		LoginAdminHandler: LoginAdminHandlerFunc(func(params LoginAdminParams) middleware.Responder {
 			return middleware.NotImplemented("operation LoginAdmin has not yet been implemented")
 		}),
@@ -160,6 +172,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		UpdateCubeSatSolarPanelTopHandler: UpdateCubeSatSolarPanelTopHandlerFunc(func(params UpdateCubeSatSolarPanelTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatSolarPanelTop has not yet been implemented")
+		}),
+		UpdateVHFAntennaSystemHandler: UpdateVHFAntennaSystemHandlerFunc(func(params UpdateVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateVHFAntennaSystem has not yet been implemented")
 		}),
 
 		// Applies when the "Authorization" header is set
@@ -225,6 +240,8 @@ type SpaceVPXBackendServiceAPI struct {
 	CreateSolarPanelSideHandler CreateSolarPanelSideHandler
 	// CreateSolarPanelTopHandler sets the operation handler for the create solar panel top operation
 	CreateSolarPanelTopHandler CreateSolarPanelTopHandler
+	// CreateVHFAntennaSystemHandler sets the operation handler for the create v h f antenna system operation
+	CreateVHFAntennaSystemHandler CreateVHFAntennaSystemHandler
 	// DeleteBoardComputingModuleHandler sets the operation handler for the delete board computing module operation
 	DeleteBoardComputingModuleHandler DeleteBoardComputingModuleHandler
 	// DeleteChassisVPXHandler sets the operation handler for the delete chassis v p x operation
@@ -239,12 +256,16 @@ type SpaceVPXBackendServiceAPI struct {
 	DeleteCubeSatSolarPanelSideHandler DeleteCubeSatSolarPanelSideHandler
 	// DeleteCubeSatSolarPanelTopHandler sets the operation handler for the delete cube sat solar panel top operation
 	DeleteCubeSatSolarPanelTopHandler DeleteCubeSatSolarPanelTopHandler
+	// DeleteVHFAntennaSystemHandler sets the operation handler for the delete v h f antenna system operation
+	DeleteVHFAntennaSystemHandler DeleteVHFAntennaSystemHandler
 	// GetCubeSatProjectHandler sets the operation handler for the get cube sat project operation
 	GetCubeSatProjectHandler GetCubeSatProjectHandler
 	// GetAvailableBoardComputingModulesHandler sets the operation handler for the get available board computing modules operation
 	GetAvailableBoardComputingModulesHandler GetAvailableBoardComputingModulesHandler
 	// GetAvailableChassisVPXHandler sets the operation handler for the get available chassis v p x operation
 	GetAvailableChassisVPXHandler GetAvailableChassisVPXHandler
+	// GetAvailableVHFAntennaSystemsHandler sets the operation handler for the get available v h f antenna systems operation
+	GetAvailableVHFAntennaSystemsHandler GetAvailableVHFAntennaSystemsHandler
 	// GetBoardComputingModuleByIDHandler sets the operation handler for the get board computing module by ID operation
 	GetBoardComputingModuleByIDHandler GetBoardComputingModuleByIDHandler
 	// GetChassisVPXByIDHandler sets the operation handler for the get chassis v p x by ID operation
@@ -269,6 +290,8 @@ type SpaceVPXBackendServiceAPI struct {
 	GetUserCubeSatProjectsHandler GetUserCubeSatProjectsHandler
 	// GetUserMeHandler sets the operation handler for the get user me operation
 	GetUserMeHandler GetUserMeHandler
+	// GetVHFAntennaSystemHandler sets the operation handler for the get v h f antenna system operation
+	GetVHFAntennaSystemHandler GetVHFAntennaSystemHandler
 	// LoginAdminHandler sets the operation handler for the login admin operation
 	LoginAdminHandler LoginAdminHandler
 	// LoginUserHandler sets the operation handler for the login user operation
@@ -289,6 +312,8 @@ type SpaceVPXBackendServiceAPI struct {
 	UpdateCubeSatSolarPanelSideHandler UpdateCubeSatSolarPanelSideHandler
 	// UpdateCubeSatSolarPanelTopHandler sets the operation handler for the update cube sat solar panel top operation
 	UpdateCubeSatSolarPanelTopHandler UpdateCubeSatSolarPanelTopHandler
+	// UpdateVHFAntennaSystemHandler sets the operation handler for the update v h f antenna system operation
+	UpdateVHFAntennaSystemHandler UpdateVHFAntennaSystemHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -391,6 +416,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.CreateSolarPanelTopHandler == nil {
 		unregistered = append(unregistered, "CreateSolarPanelTopHandler")
 	}
+	if o.CreateVHFAntennaSystemHandler == nil {
+		unregistered = append(unregistered, "CreateVHFAntennaSystemHandler")
+	}
 	if o.DeleteBoardComputingModuleHandler == nil {
 		unregistered = append(unregistered, "DeleteBoardComputingModuleHandler")
 	}
@@ -412,6 +440,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.DeleteCubeSatSolarPanelTopHandler == nil {
 		unregistered = append(unregistered, "DeleteCubeSatSolarPanelTopHandler")
 	}
+	if o.DeleteVHFAntennaSystemHandler == nil {
+		unregistered = append(unregistered, "DeleteVHFAntennaSystemHandler")
+	}
 	if o.GetCubeSatProjectHandler == nil {
 		unregistered = append(unregistered, "GetCubeSatProjectHandler")
 	}
@@ -420,6 +451,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.GetAvailableChassisVPXHandler == nil {
 		unregistered = append(unregistered, "GetAvailableChassisVPXHandler")
+	}
+	if o.GetAvailableVHFAntennaSystemsHandler == nil {
+		unregistered = append(unregistered, "GetAvailableVHFAntennaSystemsHandler")
 	}
 	if o.GetBoardComputingModuleByIDHandler == nil {
 		unregistered = append(unregistered, "GetBoardComputingModuleByIDHandler")
@@ -457,6 +491,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.GetUserMeHandler == nil {
 		unregistered = append(unregistered, "GetUserMeHandler")
 	}
+	if o.GetVHFAntennaSystemHandler == nil {
+		unregistered = append(unregistered, "GetVHFAntennaSystemHandler")
+	}
 	if o.LoginAdminHandler == nil {
 		unregistered = append(unregistered, "LoginAdminHandler")
 	}
@@ -486,6 +523,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.UpdateCubeSatSolarPanelTopHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatSolarPanelTopHandler")
+	}
+	if o.UpdateVHFAntennaSystemHandler == nil {
+		unregistered = append(unregistered, "UpdateVHFAntennaSystemHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -614,6 +654,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/solar_panel_top"] = NewCreateSolarPanelTop(o.context, o.CreateSolarPanelTopHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/vhf_antenna_system"] = NewCreateVHFAntennaSystem(o.context, o.CreateVHFAntennaSystemHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -642,6 +686,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/solar_panel_top/{id}"] = NewDeleteCubeSatSolarPanelTop(o.context, o.DeleteCubeSatSolarPanelTopHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/vhf_antenna_system/{id}"] = NewDeleteVHFAntennaSystem(o.context, o.DeleteVHFAntennaSystemHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -654,6 +702,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/chassis_vpx/available_chassis"] = NewGetAvailableChassisVPX(o.context, o.GetAvailableChassisVPXHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/vhf_antenna_system/available_vhf_antenna_systems"] = NewGetAvailableVHFAntennaSystems(o.context, o.GetAvailableVHFAntennaSystemsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -702,6 +754,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/user/get_me"] = NewGetUserMe(o.context, o.GetUserMeHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/vhf_antenna_system/{id}"] = NewGetVHFAntennaSystem(o.context, o.GetVHFAntennaSystemHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -742,6 +798,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/solar_panel_top/{id}"] = NewUpdateCubeSatSolarPanelTop(o.context, o.UpdateCubeSatSolarPanelTopHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/vhf_antenna_system/{id}"] = NewUpdateVHFAntennaSystem(o.context, o.UpdateVHFAntennaSystemHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

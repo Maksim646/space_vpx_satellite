@@ -2496,6 +2496,318 @@ func init() {
           }
         }
       }
+    },
+    "/vhf_antenna_system": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Create VHF Antenna System",
+        "operationId": "CreateVHFAntennaSystem",
+        "parameters": [
+          {
+            "description": "Create VHF Antenna System Body",
+            "name": "CreateVHFAntennaSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateVHFAntennaSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/vhf_antenna_system/available_vhf_antenna_systems": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Get Available VHF Antenna Systems",
+        "operationId": "GetAvailableVHFAntennaSystems",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset for pagination",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Limit for pagination",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "id"
+            ],
+            "type": "string",
+            "description": "Sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by minimum frequency",
+            "name": "FilterVHFAntennaSystemByMinFrequency",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by maximum frequency",
+            "name": "FilterVHFAntennaSystemByMaxFrequency",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Available VHF Antenna Systems Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystems"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/vhf_antenna_system/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Get VHF Antenna System",
+        "operationId": "GetVHFAntennaSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the VHF antenna system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Delete VHF Antenna System",
+        "operationId": "DeleteVHFAntennaSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the VHF antenna system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Update VHF Antenna System",
+        "operationId": "UpdateVHFAntennaSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the VHF antenna system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update VHF Antenna System Body",
+            "name": "UpdateVHFAntennaSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateVHFAntennaSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3194,6 +3506,44 @@ func init() {
         },
         "voc": {
           "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "CreateVHFAntennaSystemBody": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
         },
         "weight": {
           "type": "number"
@@ -4018,6 +4368,44 @@ func init() {
         }
       }
     },
+    "UpdateVHFAntennaSystemBody": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "UrlResponse": {
       "type": "object",
       "required": [
@@ -4049,6 +4437,70 @@ func init() {
         },
         "updated_at": {
           "type": "integer"
+        }
+      }
+    },
+    "VHFAntennaSystem": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "frequency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "VHFAntennaSystems": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "vhf_antenna_system": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VHFAntennaSystem"
+          }
         }
       }
     }
@@ -6553,6 +7005,319 @@ func init() {
           }
         }
       }
+    },
+    "/vhf_antenna_system": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Create VHF Antenna System",
+        "operationId": "CreateVHFAntennaSystem",
+        "parameters": [
+          {
+            "description": "Create VHF Antenna System Body",
+            "name": "CreateVHFAntennaSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateVHFAntennaSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/vhf_antenna_system/available_vhf_antenna_systems": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Get Available VHF Antenna Systems",
+        "operationId": "GetAvailableVHFAntennaSystems",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset for pagination",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Limit for pagination",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "id"
+            ],
+            "type": "string",
+            "description": "Sort parameters",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by minimum frequency",
+            "name": "FilterVHFAntennaSystemByMinFrequency",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Filter by maximum frequency",
+            "name": "FilterVHFAntennaSystemByMaxFrequency",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Available VHF Antenna Systems Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystems"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/vhf_antenna_system/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Get VHF Antenna System",
+        "operationId": "GetVHFAntennaSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the VHF antenna system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Delete VHF Antenna System",
+        "operationId": "DeleteVHFAntennaSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the VHF antenna system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "VHFAntennaSystem"
+        ],
+        "summary": "Update VHF Antenna System",
+        "operationId": "UpdateVHFAntennaSystem",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The ID of the VHF antenna system",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update VHF Antenna System Body",
+            "name": "UpdateVHFAntennaSystemBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateVHFAntennaSystemBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update VHF Antenna System Response",
+            "schema": {
+              "$ref": "#/definitions/VHFAntennaSystem"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7251,6 +8016,44 @@ func init() {
         },
         "voc": {
           "type": "number"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "CreateVHFAntennaSystemBody": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
         },
         "weight": {
           "type": "number"
@@ -8075,6 +8878,44 @@ func init() {
         }
       }
     },
+    "UpdateVHFAntennaSystemBody": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
     "UrlResponse": {
       "type": "object",
       "required": [
@@ -8106,6 +8947,70 @@ func init() {
         },
         "updated_at": {
           "type": "integer"
+        }
+      }
+    },
+    "VHFAntennaSystem": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "integer"
+        },
+        "frequency": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "length": {
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "type": "integer"
+        },
+        "mechanical_vibration": {
+          "type": "integer"
+        },
+        "min_operating_temperature": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        }
+      }
+    },
+    "VHFAntennaSystems": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "vhf_antenna_system": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VHFAntennaSystem"
+          }
         }
       }
     }

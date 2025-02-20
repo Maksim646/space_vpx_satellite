@@ -105,6 +105,13 @@ func New(
 	router.UpdateCubeSatPowerSystemHandler = api.UpdateCubeSatPowerSystemHandlerFunc(h.UpdateCubeSatPowerSystemHandler)
 	router.DeleteCubeSatPowerSystemHandler = api.DeleteCubeSatPowerSystemHandlerFunc(h.DeleteCubeSatPowerSystemHandler)
 
+	// CUBE SAT VHF ANTENNA SYSTEM
+	router.CreateVHFAntennaSystemHandler = api.CreateVHFAntennaSystemHandlerFunc(h.CreateVHFAntennaSystemHandler)
+	router.GetVHFAntennaSystemHandler = api.GetVHFAntennaSystemHandlerFunc(h.GetVHFAntennaSystemHandler)
+	router.GetAvailableVHFAntennaSystemsHandler = api.GetAvailableVHFAntennaSystemsHandlerFunc(h.GetAvailableVHFAntennaSystemsHandler)
+	router.UpdateVHFAntennaSystemHandler = api.UpdateVHFAntennaSystemHandlerFunc(h.UpdateVHFAntennaSystemHandler)
+	router.DeleteVHFAntennaSystemHandler = api.DeleteVHFAntennaSystemHandlerFunc(h.DeleteVHFAntennaSystemHandler)
+
 	// CUBE SAT BOARD COMPUTER SYSTEM
 	router.CreateBoardComputingModuleHandler = api.CreateBoardComputingModuleHandlerFunc(h.CreateBoardComputeringModuleHandler)
 	router.GetBoardComputingModuleByIDHandler = api.GetBoardComputingModuleByIDHandlerFunc(h.GetBoardComputingModuleHandler)

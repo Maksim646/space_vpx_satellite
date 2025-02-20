@@ -70,6 +70,8 @@ type ClientService interface {
 
 	CreateSolarPanelTop(params *CreateSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelTopOK, error)
 
+	CreateVHFAntennaSystem(params *CreateVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVHFAntennaSystemOK, error)
+
 	DeleteBoardComputingModule(params *DeleteBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoardComputingModuleNoContent, error)
 
 	DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error)
@@ -84,11 +86,15 @@ type ClientService interface {
 
 	DeleteCubeSatSolarPanelTop(params *DeleteCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCubeSatSolarPanelTopOK, error)
 
+	DeleteVHFAntennaSystem(params *DeleteVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVHFAntennaSystemOK, error)
+
 	GetCubeSatProject(params *GetCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatProjectOK, error)
 
 	GetAvailableBoardComputingModules(params *GetAvailableBoardComputingModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableBoardComputingModulesOK, error)
 
 	GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisVPXOK, error)
+
+	GetAvailableVHFAntennaSystems(params *GetAvailableVHFAntennaSystemsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableVHFAntennaSystemsOK, error)
 
 	GetBoardComputingModuleByID(params *GetBoardComputingModuleByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBoardComputingModuleByIDOK, error)
 
@@ -114,6 +120,8 @@ type ClientService interface {
 
 	GetUserMe(params *GetUserMeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserMeOK, error)
 
+	GetVHFAntennaSystem(params *GetVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVHFAntennaSystemOK, error)
+
 	LoginAdmin(params *LoginAdminParams, opts ...ClientOption) (*LoginAdminOK, error)
 
 	LoginUser(params *LoginUserParams, opts ...ClientOption) (*LoginUserOK, error)
@@ -133,6 +141,8 @@ type ClientService interface {
 	UpdateCubeSatSolarPanelSide(params *UpdateCubeSatSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelSideOK, error)
 
 	UpdateCubeSatSolarPanelTop(params *UpdateCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelTopOK, error)
+
+	UpdateVHFAntennaSystem(params *UpdateVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVHFAntennaSystemOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -411,6 +421,45 @@ func (a *Client) CreateSolarPanelTop(params *CreateSolarPanelTopParams, authInfo
 }
 
 /*
+CreateVHFAntennaSystem creates v h f antenna system
+*/
+func (a *Client) CreateVHFAntennaSystem(params *CreateVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVHFAntennaSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateVHFAntennaSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateVHFAntennaSystem",
+		Method:             "POST",
+		PathPattern:        "/vhf_antenna_system",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateVHFAntennaSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateVHFAntennaSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateVHFAntennaSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DeleteBoardComputingModule deletes a board computing module by ID
 */
 func (a *Client) DeleteBoardComputingModule(params *DeleteBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoardComputingModuleNoContent, error) {
@@ -684,6 +733,45 @@ func (a *Client) DeleteCubeSatSolarPanelTop(params *DeleteCubeSatSolarPanelTopPa
 }
 
 /*
+DeleteVHFAntennaSystem deletes v h f antenna system
+*/
+func (a *Client) DeleteVHFAntennaSystem(params *DeleteVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVHFAntennaSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteVHFAntennaSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteVHFAntennaSystem",
+		Method:             "DELETE",
+		PathPattern:        "/vhf_antenna_system/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteVHFAntennaSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteVHFAntennaSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteVHFAntennaSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetCubeSatProject gets cube sat project
 */
 func (a *Client) GetCubeSatProject(params *GetCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatProjectOK, error) {
@@ -797,6 +885,45 @@ func (a *Client) GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAvailableChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAvailableVHFAntennaSystems gets available v h f antenna systems
+*/
+func (a *Client) GetAvailableVHFAntennaSystems(params *GetAvailableVHFAntennaSystemsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableVHFAntennaSystemsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAvailableVHFAntennaSystemsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAvailableVHFAntennaSystems",
+		Method:             "GET",
+		PathPattern:        "/vhf_antenna_system/available_vhf_antenna_systems",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAvailableVHFAntennaSystemsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAvailableVHFAntennaSystemsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAvailableVHFAntennaSystems: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1269,6 +1396,45 @@ func (a *Client) GetUserMe(params *GetUserMeParams, authInfo runtime.ClientAuthI
 }
 
 /*
+GetVHFAntennaSystem gets v h f antenna system
+*/
+func (a *Client) GetVHFAntennaSystem(params *GetVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVHFAntennaSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetVHFAntennaSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetVHFAntennaSystem",
+		Method:             "GET",
+		PathPattern:        "/vhf_antenna_system/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetVHFAntennaSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetVHFAntennaSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetVHFAntennaSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 LoginAdmin logins admin
 */
 func (a *Client) LoginAdmin(params *LoginAdminParams, opts ...ClientOption) (*LoginAdminOK, error) {
@@ -1652,6 +1818,45 @@ func (a *Client) UpdateCubeSatSolarPanelTop(params *UpdateCubeSatSolarPanelTopPa
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateCubeSatSolarPanelTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateVHFAntennaSystem updates v h f antenna system
+*/
+func (a *Client) UpdateVHFAntennaSystem(params *UpdateVHFAntennaSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVHFAntennaSystemOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateVHFAntennaSystemParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateVHFAntennaSystem",
+		Method:             "PATCH",
+		PathPattern:        "/vhf_antenna_system/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateVHFAntennaSystemReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateVHFAntennaSystemOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateVHFAntennaSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

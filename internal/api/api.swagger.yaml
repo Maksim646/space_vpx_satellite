@@ -1219,6 +1219,213 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+### CUBE SAT VHF ANTENNA SYSTEM
+
+  /vhf_antenna_system/{id}:
+    get:
+      security:
+        - Bearer: []
+      summary: Get VHF Antenna System
+      operationId: GetVHFAntennaSystem
+      tags: 
+        - VHFAntennaSystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the VHF antenna system
+      responses:
+        200:
+          description: Get VHF Antenna System Response
+          schema:
+            $ref: '#/definitions/VHFAntennaSystem'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+    patch:
+      security:
+        - Bearer: []
+      summary: Update VHF Antenna System
+      operationId: UpdateVHFAntennaSystem
+      tags: 
+        - VHFAntennaSystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the VHF antenna system
+        - name: UpdateVHFAntennaSystemBody
+          description: Update VHF Antenna System Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateVHFAntennaSystemBody'
+      responses:
+        200:
+          description: Update VHF Antenna System Response
+          schema:
+            $ref: '#/definitions/VHFAntennaSystem'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      security:
+        - Bearer: []
+      summary: Delete VHF Antenna System
+      operationId: DeleteVHFAntennaSystem
+      tags: 
+        - VHFAntennaSystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the VHF antenna system
+      responses:
+        200:
+          description: Delete VHF Antenna System Response
+          schema:
+            $ref: '#/definitions/Error'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /vhf_antenna_system:
+    post:
+      security:
+        - Bearer: []
+      summary: Create VHF Antenna System
+      operationId: CreateVHFAntennaSystem
+      tags: 
+        - VHFAntennaSystem
+      parameters:
+        - name: CreateVHFAntennaSystemBody
+          description: Create VHF Antenna System Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateVHFAntennaSystemBody'
+      responses:
+        200:
+          description: Create VHF Antenna System Response
+          schema:
+            $ref: '#/definitions/VHFAntennaSystem'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /vhf_antenna_system/available_vhf_antenna_systems:
+    get:
+      security:
+        - Bearer: []
+      summary: Get Available VHF Antenna Systems
+      operationId: GetAvailableVHFAntennaSystems
+      tags: 
+        - VHFAntennaSystem
+      parameters:
+        - in: query
+          required: true
+          name: offset
+          type: integer
+          description: Offset for pagination
+          minimum: 0
+        - in: query
+          required: true
+          name: limit
+          type: integer
+          description: Limit for pagination
+          minimum: 1
+        - in: query
+          name: sort[field]
+          description: Sort parameters
+          enum: [created_at, id]
+          type: string
+        - in: query
+          name: FilterVHFAntennaSystemByMinFrequency
+          description: Filter by minimum frequency
+          type: number
+        - in: query
+          name: FilterVHFAntennaSystemByMaxFrequency
+          description: Filter by maximum frequency
+          type: number
+      responses:
+        200:
+          description: Get Available VHF Antenna Systems Response
+          schema:
+            $ref: '#/definitions/VHFAntennaSystems'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
 ### CUBE SAT BOARD COMPUTERING MODULE
   /board_computing_module:
     post:
@@ -2830,3 +3037,101 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/BoardComputingModule"
+
+### CUBE SAT VHF ANTENNA SYSTEM
+
+  VHFAntennaSystem:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: number
+      interface:
+        type: string
+      frequency:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+      updated_at:
+        type: integer
+      created_at:
+        type: integer
+
+  CreateVHFAntennaSystemBody:
+    type: object
+    properties:
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: number
+      interface:
+        type: string
+      frequency:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+
+  UpdateVHFAntennaSystemBody:
+    type: object
+    properties:
+      name:
+        type: string
+      length:
+        type: number
+      width:
+        type: number
+      height:
+        type: number
+      weight:
+        type: number
+      interface:
+        type: string
+      frequency:
+        type: number
+      max_operating_temperature:
+        type: number
+      min_operating_temperature:
+        type: number
+      mechanical_vibration:
+        type: integer
+      mechanical_shock:
+        type: integer
+
+  VHFAntennaSystems:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+      vhf_antenna_system:
+        type: array
+        items:
+          $ref: '#/definitions/VHFAntennaSystem'
