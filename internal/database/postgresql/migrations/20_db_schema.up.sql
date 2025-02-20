@@ -160,6 +160,65 @@ CREATE TABLE IF NOT EXISTS cube_sat_power_system
     created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
 );
 
+CREATE TABLE IF NOT EXISTS board_computing_module
+(
+    id                                  BIGSERIAL PRIMARY KEY,
+    name                                VARCHAR(255) UNIQUE,
+    length                              NUMERIC,
+    width                               NUMERIC,
+    height                              NUMERIC,
+    weight                              NUMERIC,
+    supply_voltage                      NUMERIC,
+    power_consumption                   NUMERIC,
+    interface                           VARCHAR(255),
+    max_operating_temperature           NUMERIC,
+    min_operating_temperature           NUMERIC,
+    mechanical_vibration                BIGINT,
+    mechanical_shock                    BIGINT,
+    updated_at                          TIMESTAMP WITHOUT TIME ZONE,
+    created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
+);
+
+CREATE TABLE IF NOT EXISTS vhf_transceiver
+(
+    id                                  BIGSERIAL PRIMARY KEY,
+    name                                VARCHAR(255) UNIQUE,
+    length                              NUMERIC,
+    width                               NUMERIC,
+    height                              NUMERIC,
+    weight                              NUMERIC,
+    supply_voltage                      NUMERIC,
+    power_consumption                   NUMERIC,
+    interface                           VARCHAR(255),
+    operating_frequency                 NUMERIC,
+    output_power                        NUMERIC,  -- Дб
+    sensitivity_receiver                NUMERIC,
+    max_operating_temperature           NUMERIC,
+    min_operating_temperature           NUMERIC,
+    mechanical_vibration                BIGINT,
+    mechanical_shock                    BIGINT,
+    updated_at                          TIMESTAMP WITHOUT TIME ZONE,
+    created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
+);
+
+CREATE TABLE IF NOT EXISTS vhf_antenna_system
+(
+    id                                  BIGSERIAL PRIMARY KEY,
+    name                                VARCHAR(255) UNIQUE,
+    length                              NUMERIC,
+    width                               NUMERIC,
+    height                              NUMERIC,
+    weight                              NUMERIC,
+    interface                           VARCHAR(255),
+    frequency                           NUMERIC,
+    max_operating_temperature           NUMERIC,
+    min_operating_temperature           NUMERIC,
+    mechanical_vibration                BIGINT,
+    mechanical_shock                    BIGINT,
+    updated_at                          TIMESTAMP WITHOUT TIME ZONE,
+    created_at                          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
+);
+
 CREATE TABLE IF NOT EXISTS admins
 (
     id                       uuid DEFAULT uuid_generate_v4(),

@@ -56,6 +56,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CreateBoardComputingModule(params *CreateBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoardComputingModuleCreated, error)
+
 	CreateChassisVPX(params *CreateChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateChassisVPXOK, error)
 
 	CreateCubeSatFrame(params *CreateCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCubeSatFrameOK, error)
@@ -67,6 +69,8 @@ type ClientService interface {
 	CreateSolarPanelSide(params *CreateSolarPanelSideParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelSideOK, error)
 
 	CreateSolarPanelTop(params *CreateSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSolarPanelTopOK, error)
+
+	DeleteBoardComputingModule(params *DeleteBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoardComputingModuleNoContent, error)
 
 	DeleteChassisVPX(params *DeleteChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteChassisVPXOK, error)
 
@@ -82,7 +86,11 @@ type ClientService interface {
 
 	GetCubeSatProject(params *GetCubeSatProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCubeSatProjectOK, error)
 
+	GetAvailableBoardComputingModules(params *GetAvailableBoardComputingModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableBoardComputingModulesOK, error)
+
 	GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisVPXOK, error)
+
+	GetBoardComputingModuleByID(params *GetBoardComputingModuleByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBoardComputingModuleByIDOK, error)
 
 	GetChassisVPXByID(params *GetChassisVPXByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChassisVPXByIDOK, error)
 
@@ -112,6 +120,8 @@ type ClientService interface {
 
 	RegisterUser(params *RegisterUserParams, opts ...ClientOption) (*RegisterUserOK, error)
 
+	UpdateBoardComputingModule(params *UpdateBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBoardComputingModuleOK, error)
+
 	UpdateChassisVPX(params *UpdateChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateChassisVPXOK, error)
 
 	UpdateCubeSatFrame(params *UpdateCubeSatFrameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatFrameOK, error)
@@ -125,6 +135,45 @@ type ClientService interface {
 	UpdateCubeSatSolarPanelTop(params *UpdateCubeSatSolarPanelTopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCubeSatSolarPanelTopOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+CreateBoardComputingModule creates a new board computing module
+*/
+func (a *Client) CreateBoardComputingModule(params *CreateBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBoardComputingModuleCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateBoardComputingModuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateBoardComputingModule",
+		Method:             "POST",
+		PathPattern:        "/board_computing_module",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateBoardComputingModuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateBoardComputingModuleCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateBoardComputingModule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -358,6 +407,45 @@ func (a *Client) CreateSolarPanelTop(params *CreateSolarPanelTopParams, authInfo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateSolarPanelTop: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteBoardComputingModule deletes a board computing module by ID
+*/
+func (a *Client) DeleteBoardComputingModule(params *DeleteBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteBoardComputingModuleNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteBoardComputingModuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteBoardComputingModule",
+		Method:             "DELETE",
+		PathPattern:        "/board_computing_module/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteBoardComputingModuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteBoardComputingModuleNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteBoardComputingModule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -635,6 +723,45 @@ func (a *Client) GetCubeSatProject(params *GetCubeSatProjectParams, authInfo run
 }
 
 /*
+GetAvailableBoardComputingModules gets a list of available board computing modules with filtering and pagination
+*/
+func (a *Client) GetAvailableBoardComputingModules(params *GetAvailableBoardComputingModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableBoardComputingModulesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAvailableBoardComputingModulesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetAvailableBoardComputingModules",
+		Method:             "GET",
+		PathPattern:        "/board_computing_module/available_board_computing_module",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAvailableBoardComputingModulesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAvailableBoardComputingModulesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetAvailableBoardComputingModules: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetAvailableChassisVPX gets available chassis v p x
 */
 func (a *Client) GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAvailableChassisVPXOK, error) {
@@ -670,6 +797,45 @@ func (a *Client) GetAvailableChassisVPX(params *GetAvailableChassisVPXParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetAvailableChassisVPX: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetBoardComputingModuleByID gets a board computing module by ID
+*/
+func (a *Client) GetBoardComputingModuleByID(params *GetBoardComputingModuleByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBoardComputingModuleByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetBoardComputingModuleByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetBoardComputingModuleByID",
+		Method:             "GET",
+		PathPattern:        "/board_computing_module/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetBoardComputingModuleByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetBoardComputingModuleByIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetBoardComputingModuleByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1213,6 +1379,45 @@ func (a *Client) RegisterUser(params *RegisterUserParams, opts ...ClientOption) 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RegisterUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateBoardComputingModule updates a board computing module by ID
+*/
+func (a *Client) UpdateBoardComputingModule(params *UpdateBoardComputingModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBoardComputingModuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateBoardComputingModuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateBoardComputingModule",
+		Method:             "PATCH",
+		PathPattern:        "/board_computing_module/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateBoardComputingModuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateBoardComputingModuleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateBoardComputingModule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -44,6 +44,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 
 		JSONProducer: runtime.JSONProducer(),
 
+		CreateBoardComputingModuleHandler: CreateBoardComputingModuleHandlerFunc(func(params CreateBoardComputingModuleParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation CreateBoardComputingModule has not yet been implemented")
+		}),
 		CreateChassisVPXHandler: CreateChassisVPXHandlerFunc(func(params CreateChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateChassisVPX has not yet been implemented")
 		}),
@@ -61,6 +64,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		CreateSolarPanelTopHandler: CreateSolarPanelTopHandlerFunc(func(params CreateSolarPanelTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation CreateSolarPanelTop has not yet been implemented")
+		}),
+		DeleteBoardComputingModuleHandler: DeleteBoardComputingModuleHandlerFunc(func(params DeleteBoardComputingModuleParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteBoardComputingModule has not yet been implemented")
 		}),
 		DeleteChassisVPXHandler: DeleteChassisVPXHandlerFunc(func(params DeleteChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation DeleteChassisVPX has not yet been implemented")
@@ -83,8 +89,14 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		GetCubeSatProjectHandler: GetCubeSatProjectHandlerFunc(func(params GetCubeSatProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetCubeSatProject has not yet been implemented")
 		}),
+		GetAvailableBoardComputingModulesHandler: GetAvailableBoardComputingModulesHandlerFunc(func(params GetAvailableBoardComputingModulesParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetAvailableBoardComputingModules has not yet been implemented")
+		}),
 		GetAvailableChassisVPXHandler: GetAvailableChassisVPXHandlerFunc(func(params GetAvailableChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetAvailableChassisVPX has not yet been implemented")
+		}),
+		GetBoardComputingModuleByIDHandler: GetBoardComputingModuleByIDHandlerFunc(func(params GetBoardComputingModuleByIDParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation GetBoardComputingModuleByID has not yet been implemented")
 		}),
 		GetChassisVPXByIDHandler: GetChassisVPXByIDHandlerFunc(func(params GetChassisVPXByIDParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetChassisVPXByID has not yet been implemented")
@@ -127,6 +139,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		}),
 		RegisterUserHandler: RegisterUserHandlerFunc(func(params RegisterUserParams) middleware.Responder {
 			return middleware.NotImplemented("operation RegisterUser has not yet been implemented")
+		}),
+		UpdateBoardComputingModuleHandler: UpdateBoardComputingModuleHandlerFunc(func(params UpdateBoardComputingModuleParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateBoardComputingModule has not yet been implemented")
 		}),
 		UpdateChassisVPXHandler: UpdateChassisVPXHandlerFunc(func(params UpdateChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateChassisVPX has not yet been implemented")
@@ -196,6 +211,8 @@ type SpaceVPXBackendServiceAPI struct {
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
 
+	// CreateBoardComputingModuleHandler sets the operation handler for the create board computing module operation
+	CreateBoardComputingModuleHandler CreateBoardComputingModuleHandler
 	// CreateChassisVPXHandler sets the operation handler for the create chassis v p x operation
 	CreateChassisVPXHandler CreateChassisVPXHandler
 	// CreateCubeSatFrameHandler sets the operation handler for the create cube sat frame operation
@@ -208,6 +225,8 @@ type SpaceVPXBackendServiceAPI struct {
 	CreateSolarPanelSideHandler CreateSolarPanelSideHandler
 	// CreateSolarPanelTopHandler sets the operation handler for the create solar panel top operation
 	CreateSolarPanelTopHandler CreateSolarPanelTopHandler
+	// DeleteBoardComputingModuleHandler sets the operation handler for the delete board computing module operation
+	DeleteBoardComputingModuleHandler DeleteBoardComputingModuleHandler
 	// DeleteChassisVPXHandler sets the operation handler for the delete chassis v p x operation
 	DeleteChassisVPXHandler DeleteChassisVPXHandler
 	// DeleteCubeSatFrameHandler sets the operation handler for the delete cube sat frame operation
@@ -222,8 +241,12 @@ type SpaceVPXBackendServiceAPI struct {
 	DeleteCubeSatSolarPanelTopHandler DeleteCubeSatSolarPanelTopHandler
 	// GetCubeSatProjectHandler sets the operation handler for the get cube sat project operation
 	GetCubeSatProjectHandler GetCubeSatProjectHandler
+	// GetAvailableBoardComputingModulesHandler sets the operation handler for the get available board computing modules operation
+	GetAvailableBoardComputingModulesHandler GetAvailableBoardComputingModulesHandler
 	// GetAvailableChassisVPXHandler sets the operation handler for the get available chassis v p x operation
 	GetAvailableChassisVPXHandler GetAvailableChassisVPXHandler
+	// GetBoardComputingModuleByIDHandler sets the operation handler for the get board computing module by ID operation
+	GetBoardComputingModuleByIDHandler GetBoardComputingModuleByIDHandler
 	// GetChassisVPXByIDHandler sets the operation handler for the get chassis v p x by ID operation
 	GetChassisVPXByIDHandler GetChassisVPXByIDHandler
 	// GetCubeSatFrameHandler sets the operation handler for the get cube sat frame operation
@@ -252,6 +275,8 @@ type SpaceVPXBackendServiceAPI struct {
 	LoginUserHandler LoginUserHandler
 	// RegisterUserHandler sets the operation handler for the register user operation
 	RegisterUserHandler RegisterUserHandler
+	// UpdateBoardComputingModuleHandler sets the operation handler for the update board computing module operation
+	UpdateBoardComputingModuleHandler UpdateBoardComputingModuleHandler
 	// UpdateChassisVPXHandler sets the operation handler for the update chassis v p x operation
 	UpdateChassisVPXHandler UpdateChassisVPXHandler
 	// UpdateCubeSatFrameHandler sets the operation handler for the update cube sat frame operation
@@ -345,6 +370,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 		unregistered = append(unregistered, "AuthorizationAuth")
 	}
 
+	if o.CreateBoardComputingModuleHandler == nil {
+		unregistered = append(unregistered, "CreateBoardComputingModuleHandler")
+	}
 	if o.CreateChassisVPXHandler == nil {
 		unregistered = append(unregistered, "CreateChassisVPXHandler")
 	}
@@ -362,6 +390,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.CreateSolarPanelTopHandler == nil {
 		unregistered = append(unregistered, "CreateSolarPanelTopHandler")
+	}
+	if o.DeleteBoardComputingModuleHandler == nil {
+		unregistered = append(unregistered, "DeleteBoardComputingModuleHandler")
 	}
 	if o.DeleteChassisVPXHandler == nil {
 		unregistered = append(unregistered, "DeleteChassisVPXHandler")
@@ -384,8 +415,14 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.GetCubeSatProjectHandler == nil {
 		unregistered = append(unregistered, "GetCubeSatProjectHandler")
 	}
+	if o.GetAvailableBoardComputingModulesHandler == nil {
+		unregistered = append(unregistered, "GetAvailableBoardComputingModulesHandler")
+	}
 	if o.GetAvailableChassisVPXHandler == nil {
 		unregistered = append(unregistered, "GetAvailableChassisVPXHandler")
+	}
+	if o.GetBoardComputingModuleByIDHandler == nil {
+		unregistered = append(unregistered, "GetBoardComputingModuleByIDHandler")
 	}
 	if o.GetChassisVPXByIDHandler == nil {
 		unregistered = append(unregistered, "GetChassisVPXByIDHandler")
@@ -428,6 +465,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	}
 	if o.RegisterUserHandler == nil {
 		unregistered = append(unregistered, "RegisterUserHandler")
+	}
+	if o.UpdateBoardComputingModuleHandler == nil {
+		unregistered = append(unregistered, "UpdateBoardComputingModuleHandler")
 	}
 	if o.UpdateChassisVPXHandler == nil {
 		unregistered = append(unregistered, "UpdateChassisVPXHandler")
@@ -549,6 +589,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/board_computing_module"] = NewCreateBoardComputingModule(o.context, o.CreateBoardComputingModuleHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/chassis_vpx"] = NewCreateChassisVPX(o.context, o.CreateChassisVPXHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -570,6 +614,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/solar_panel_top"] = NewCreateSolarPanelTop(o.context, o.CreateSolarPanelTopHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/board_computing_module/{id}"] = NewDeleteBoardComputingModule(o.context, o.DeleteBoardComputingModuleHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -601,7 +649,15 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/board_computing_module/available_board_computing_module"] = NewGetAvailableBoardComputingModules(o.context, o.GetAvailableBoardComputingModulesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/chassis_vpx/available_chassis"] = NewGetAvailableChassisVPX(o.context, o.GetAvailableChassisVPXHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/board_computing_module/{id}"] = NewGetBoardComputingModuleByID(o.context, o.GetBoardComputingModuleByIDHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -658,6 +714,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/auth/register"] = NewRegisterUser(o.context, o.RegisterUserHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/board_computing_module/{id}"] = NewUpdateBoardComputingModule(o.context, o.UpdateBoardComputingModuleHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}

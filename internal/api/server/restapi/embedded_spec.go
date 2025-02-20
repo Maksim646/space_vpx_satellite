@@ -187,6 +187,372 @@ func init() {
         }
       }
     },
+    "/board_computing_module": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Create a new Board Computing Module",
+        "operationId": "CreateBoardComputingModule",
+        "parameters": [
+          {
+            "description": "Board Computing Module object to be created",
+            "name": "boardComputingModule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateBoardComputingModuleBody"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModule"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/board_computing_module/available_board_computing_module": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Get a list of available Board Computing Modules with filtering and pagination",
+        "operationId": "GetAvailableBoardComputingModules",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Offset for pagination",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Limit for pagination",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "name",
+              "length",
+              "width",
+              "height",
+              "weight",
+              "supply_voltage",
+              "power_consumption",
+              "max_operating_temperature",
+              "min_operating_temperature"
+            ],
+            "type": "string",
+            "description": "Field to sort by",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string",
+            "description": "Sort direction",
+            "name": "sort[direction]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Minimum length to filter by",
+            "name": "FilterBoardComputingModuleByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Maximum length to filter by",
+            "name": "FilterBoardComputingModuleByLength[max]",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "Filter Board Computing Module By Name",
+            "name": "FilterBoardComputingModuleByName",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of Board Computing Modules",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModuleList"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/board_computing_module/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Get a Board Computing Module by ID",
+        "operationId": "GetBoardComputingModuleByID",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the Board Computing Module to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModule"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Board Computing Module not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Delete a Board Computing Module by ID",
+        "operationId": "DeleteBoardComputingModule",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the Board Computing Module to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted Board Computing Module"
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Board Computing Module not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Update a Board Computing Module by ID",
+        "operationId": "UpdateBoardComputingModule",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the Board Computing Module to update",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Board Computing Module object to update",
+            "name": "boardComputingModule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateBoardComputingModuleBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModule"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Board Computing Module not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/chassis_vpx": {
       "post": {
         "security": [
@@ -2133,6 +2499,92 @@ func init() {
     }
   },
   "definitions": {
+    "BoardComputingModule": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "description": "Creation timestamp",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Height in meters",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the Board Computing Module",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "interface": {
+          "description": "Communication interface",
+          "type": "string"
+        },
+        "length": {
+          "description": "Length in meters",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in Celsius",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the Board Computing Module",
+          "type": "string"
+        },
+        "power_consumption": {
+          "description": "Power consumption in watts",
+          "type": "number"
+        },
+        "supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Last update timestamp",
+          "type": "integer"
+        },
+        "weight": {
+          "description": "Weight in kilograms",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width in meters",
+          "type": "number"
+        }
+      }
+    },
+    "BoardComputingModuleList": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "board_computering_modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoardComputingModule"
+          }
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
     "ChassisVPX": {
       "type": "object",
       "required": [
@@ -2287,6 +2739,61 @@ func init() {
         },
         "count": {
           "type": "integer"
+        }
+      }
+    },
+    "CreateBoardComputingModuleBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Height in meters",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Communication interface",
+          "type": "string"
+        },
+        "length": {
+          "description": "Length in meters",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in Celsius",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the Board Computing Module",
+          "type": "string"
+        },
+        "power_consumption": {
+          "description": "Power consumption in watts",
+          "type": "number"
+        },
+        "supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight in kilograms",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width in meters",
+          "type": "number"
         }
       }
     },
@@ -3240,6 +3747,61 @@ func init() {
         },
         "width": {
           "description": "Width of the solar panel top",
+          "type": "number"
+        }
+      }
+    },
+    "UpdateBoardComputingModuleBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Height in meters",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Communication interface",
+          "type": "string"
+        },
+        "length": {
+          "description": "Length in meters",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in Celsius",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the Board Computing Module",
+          "type": "string"
+        },
+        "power_consumption": {
+          "description": "Power consumption in watts",
+          "type": "number"
+        },
+        "supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight in kilograms",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width in meters",
           "type": "number"
         }
       }
@@ -3669,6 +4231,373 @@ func init() {
         }
       }
     },
+    "/board_computing_module": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Create a new Board Computing Module",
+        "operationId": "CreateBoardComputingModule",
+        "parameters": [
+          {
+            "description": "Board Computing Module object to be created",
+            "name": "boardComputingModule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateBoardComputingModuleBody"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModule"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/board_computing_module/available_board_computing_module": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Get a list of available Board Computing Modules with filtering and pagination",
+        "operationId": "GetAvailableBoardComputingModules",
+        "parameters": [
+          {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Offset for pagination",
+            "name": "offset",
+            "in": "query",
+            "required": true
+          },
+          {
+            "minimum": 1,
+            "type": "integer",
+            "description": "Limit for pagination",
+            "name": "limit",
+            "in": "query",
+            "required": true
+          },
+          {
+            "enum": [
+              "created_at",
+              "name",
+              "length",
+              "width",
+              "height",
+              "weight",
+              "supply_voltage",
+              "power_consumption",
+              "max_operating_temperature",
+              "min_operating_temperature"
+            ],
+            "type": "string",
+            "description": "Field to sort by",
+            "name": "sort[field]",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string",
+            "description": "Sort direction",
+            "name": "sort[direction]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Minimum length to filter by",
+            "name": "FilterBoardComputingModuleByLength[min]",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Maximum length to filter by",
+            "name": "FilterBoardComputingModuleByLength[max]",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "Filter Board Computing Module By Name",
+            "name": "FilterBoardComputingModuleByName",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of Board Computing Modules",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModuleList"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/board_computing_module/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Get a Board Computing Module by ID",
+        "operationId": "GetBoardComputingModuleByID",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the Board Computing Module to retrieve",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModule"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Board Computing Module not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Delete a Board Computing Module by ID",
+        "operationId": "DeleteBoardComputingModule",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the Board Computing Module to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted Board Computing Module"
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Board Computing Module not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "BoardComputingModule"
+        ],
+        "summary": "Update a Board Computing Module by ID",
+        "operationId": "UpdateBoardComputingModule",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the Board Computing Module to update",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Board Computing Module object to update",
+            "name": "boardComputingModule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateBoardComputingModuleBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/BoardComputingModule"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Board Computing Module not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/chassis_vpx": {
       "post": {
         "security": [
@@ -5627,6 +6556,92 @@ func init() {
     }
   },
   "definitions": {
+    "BoardComputingModule": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "description": "Creation timestamp",
+          "type": "integer"
+        },
+        "height": {
+          "description": "Height in meters",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique identifier for the Board Computing Module",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "interface": {
+          "description": "Communication interface",
+          "type": "string"
+        },
+        "length": {
+          "description": "Length in meters",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in Celsius",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the Board Computing Module",
+          "type": "string"
+        },
+        "power_consumption": {
+          "description": "Power consumption in watts",
+          "type": "number"
+        },
+        "supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
+        "updated_at": {
+          "description": "Last update timestamp",
+          "type": "integer"
+        },
+        "weight": {
+          "description": "Weight in kilograms",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width in meters",
+          "type": "number"
+        }
+      }
+    },
+    "BoardComputingModuleList": {
+      "type": "object",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "board_computering_modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoardComputingModule"
+          }
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
     "ChassisVPX": {
       "type": "object",
       "required": [
@@ -5781,6 +6796,61 @@ func init() {
         },
         "count": {
           "type": "integer"
+        }
+      }
+    },
+    "CreateBoardComputingModuleBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Height in meters",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Communication interface",
+          "type": "string"
+        },
+        "length": {
+          "description": "Length in meters",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in Celsius",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the Board Computing Module",
+          "type": "string"
+        },
+        "power_consumption": {
+          "description": "Power consumption in watts",
+          "type": "number"
+        },
+        "supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight in kilograms",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width in meters",
+          "type": "number"
         }
       }
     },
@@ -6734,6 +7804,61 @@ func init() {
         },
         "width": {
           "description": "Width of the solar panel top",
+          "type": "number"
+        }
+      }
+    },
+    "UpdateBoardComputingModuleBody": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Height in meters",
+          "type": "number"
+        },
+        "interface": {
+          "description": "Communication interface",
+          "type": "string"
+        },
+        "length": {
+          "description": "Length in meters",
+          "type": "number"
+        },
+        "max_operating_temperature": {
+          "description": "Maximum operating temperature in Celsius",
+          "type": "number"
+        },
+        "mechanical_shock": {
+          "description": "Mechanical shock rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mechanical_vibration": {
+          "description": "Mechanical vibration rating",
+          "type": "integer",
+          "format": "int64"
+        },
+        "min_operating_temperature": {
+          "description": "Minimum operating temperature in Celsius",
+          "type": "number"
+        },
+        "name": {
+          "description": "Name of the Board Computing Module",
+          "type": "string"
+        },
+        "power_consumption": {
+          "description": "Power consumption in watts",
+          "type": "number"
+        },
+        "supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
+        "weight": {
+          "description": "Weight in kilograms",
+          "type": "number"
+        },
+        "width": {
+          "description": "Width in meters",
           "type": "number"
         }
       }

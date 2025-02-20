@@ -22,14 +22,17 @@ import (
 )
 
 type Handler struct {
-	userUsecase                 model.IUserUsecase
-	adminUsecase                model.IAdminUsecase
-	projectUsecase              model.IProjectUsecase
-	chassisUsecase              model.IChassisUsecase
-	solarPanelUsecase           model.ISolarPanelUsecase
-	cubeSatSolarPanelTopUsecase model.ISolarPanelTopUsecase
-	cubeSatFrameUsecase         model.ICubeSatFrameUsecase
-	cubeSatPowerSystemUsecase   model.IPowerSystemUsecase
+	userUsecase                          model.IUserUsecase
+	adminUsecase                         model.IAdminUsecase
+	projectUsecase                       model.IProjectUsecase
+	chassisUsecase                       model.IChassisUsecase
+	solarPanelUsecase                    model.ISolarPanelUsecase
+	cubeSatSolarPanelTopUsecase          model.ISolarPanelTopUsecase
+	cubeSatFrameUsecase                  model.ICubeSatFrameUsecase
+	cubeSatPowerSystemUsecase            model.IPowerSystemUsecase
+	cubeSatBoardComputeringModuleUsecase model.IBoardComputingModuleUsecase
+	cubeSatVhfAntennaSystemUsecase       model.IVHFAntennaSystemUsecase
+	cubeSatVhfTransceiverUsecase         model.IVHFTransceiverUsecase
 
 	router       http.Handler
 	HashSalt     string
@@ -45,6 +48,9 @@ func New(
 	cubeSatSolarPanelTopUsecase model.ISolarPanelTopUsecase,
 	cubeSatFrameUsecase model.ICubeSatFrameUsecase,
 	cubeSatPowerSystemUsecase model.IPowerSystemUsecase,
+	cubeSatBoardComputeringModuleUsecase model.IBoardComputingModuleUsecase,
+	cubeSatVhfAntennaSystemUsecase model.IVHFAntennaSystemUsecase,
+	cubeSatVhfTransceiverUsecase model.IVHFTransceiverUsecase,
 
 	version string,
 	HashSalt string,
@@ -58,14 +64,17 @@ func New(
 	}
 
 	h := &Handler{
-		userUsecase:                 userUsecase,
-		adminUsecase:                adminUsecase,
-		projectUsecase:              projectUsecase,
-		chassisUsecase:              chassisUsecase,
-		solarPanelUsecase:           solarPanelUsecase,
-		cubeSatSolarPanelTopUsecase: cubeSatSolarPanelTopUsecase,
-		cubeSatFrameUsecase:         cubeSatFrameUsecase,
-		cubeSatPowerSystemUsecase:   cubeSatPowerSystemUsecase,
+		userUsecase:                          userUsecase,
+		adminUsecase:                         adminUsecase,
+		projectUsecase:                       projectUsecase,
+		chassisUsecase:                       chassisUsecase,
+		solarPanelUsecase:                    solarPanelUsecase,
+		cubeSatSolarPanelTopUsecase:          cubeSatSolarPanelTopUsecase,
+		cubeSatFrameUsecase:                  cubeSatFrameUsecase,
+		cubeSatPowerSystemUsecase:            cubeSatPowerSystemUsecase,
+		cubeSatBoardComputeringModuleUsecase: cubeSatBoardComputeringModuleUsecase,
+		cubeSatVhfAntennaSystemUsecase:       cubeSatVhfAntennaSystemUsecase,
+		cubeSatVhfTransceiverUsecase:         cubeSatVhfTransceiverUsecase,
 
 		HashSalt:     HashSalt,
 		jwtSigninKey: jwtSigninKey,
@@ -95,6 +104,13 @@ func New(
 	router.GetCubeSatPowerSystemsHandler = api.GetCubeSatPowerSystemsHandlerFunc(h.GetCubeSatPowerSystems)
 	router.UpdateCubeSatPowerSystemHandler = api.UpdateCubeSatPowerSystemHandlerFunc(h.UpdateCubeSatPowerSystemHandler)
 	router.DeleteCubeSatPowerSystemHandler = api.DeleteCubeSatPowerSystemHandlerFunc(h.DeleteCubeSatPowerSystemHandler)
+
+	// CUBE SAT BOARD COMPUTER SYSTEM
+	router.CreateBoardComputingModuleHandler = api.CreateBoardComputingModuleHandlerFunc(h.CreateBoardComputeringModuleHandler)
+	router.GetBoardComputingModuleByIDHandler = api.GetBoardComputingModuleByIDHandlerFunc(h.GetBoardComputingModuleHandler)
+	router.GetAvailableBoardComputingModulesHandler = api.GetAvailableBoardComputingModulesHandlerFunc(h.GetBoardComputingModules)
+	router.UpdateBoardComputingModuleHandler = api.UpdateBoardComputingModuleHandlerFunc(h.UpdateBoardComputingModuleHandler)
+	router.DeleteBoardComputingModuleHandler = api.DeleteBoardComputingModuleHandlerFunc(h.DeleteBoardComputingModuleHandler)
 
 	// SOLAR PANEL SIDE
 	router.CreateSolarPanelSideHandler = api.CreateSolarPanelSideHandlerFunc(h.CreateSolarPanelSideHandler)

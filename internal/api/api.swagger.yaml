@@ -1219,6 +1219,242 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+### CUBE SAT BOARD COMPUTERING MODULE
+  /board_computing_module:
+    post:
+      security:
+        - Bearer: []
+      summary: Create a new Board Computing Module
+      operationId: CreateBoardComputingModule
+      tags:
+        - BoardComputingModule
+      parameters:
+        - in: body
+          name: boardComputingModule
+          description: Board Computing Module object to be created
+          required: true
+          schema:
+            $ref: "#/definitions/CreateBoardComputingModuleBody"
+      responses:
+        201:
+          description: Successfully created Board Computing Module
+          schema:
+            $ref: "#/definitions/BoardComputingModule"
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/Error"
+
+  /board_computing_module/{id}:
+    get:
+      security:
+        - Bearer: []
+      summary: Get a Board Computing Module by ID
+      operationId: GetBoardComputingModuleByID
+      tags:
+        - BoardComputingModule
+      parameters:
+        - name: id
+          in: path
+          description: ID of the Board Computing Module to retrieve
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Successfully retrieved Board Computing Module
+          schema:
+            $ref: "#/definitions/BoardComputingModule"
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Board Computing Module not found
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/Error"
+
+    patch:
+      security:
+        - Bearer: []
+      summary: Update a Board Computing Module by ID
+      operationId: UpdateBoardComputingModule
+      tags:
+        - BoardComputingModule
+      parameters:
+        - name: id
+          in: path
+          description: ID of the Board Computing Module to update
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: boardComputingModule
+          description: Board Computing Module object to update
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateBoardComputingModuleBody"
+      responses:
+        200:
+          description: Successfully updated Board Computing Module
+          schema:
+            $ref: "#/definitions/BoardComputingModule"
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Board Computing Module not found
+          schema:
+            $ref: "#/definitions/Error"
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/Error"
+
+    delete:
+      security:
+        - Bearer: []
+      summary: Delete a Board Computing Module by ID
+      operationId: DeleteBoardComputingModule
+      tags:
+        - BoardComputingModule
+      parameters:
+        - name: id
+          in: path
+          description: ID of the Board Computing Module to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        204:
+          description: Successfully deleted Board Computing Module
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Board Computing Module not found
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/Error"
+
+  /board_computing_module/available_board_computing_module:
+    get:
+      security:
+        - Bearer: []
+      summary: Get a list of available Board Computing Modules with filtering and pagination
+      operationId: GetAvailableBoardComputingModules
+      tags:
+        - BoardComputingModule
+      parameters:
+        - name: offset
+          in: query
+          description: Offset for pagination
+          required: true
+          type: integer
+          minimum: 0
+        - name: limit
+          in: query
+          description: Limit for pagination
+          required: true
+          type: integer
+          minimum: 1
+        - name: sort[field]
+          in: query
+          description: Field to sort by
+          type: string
+          enum: [created_at, name, length, width, height, weight, supply_voltage, power_consumption, max_operating_temperature, min_operating_temperature]
+        - name: sort[direction]
+          in: query
+          description: Sort direction
+          type: string
+          enum: [asc, desc]
+        - name: FilterBoardComputingModuleByLength[min]
+          in: query
+          description: Minimum length to filter by
+          type: number
+        - name: FilterBoardComputingModuleByLength[max]
+          in: query
+          description: Maximum length to filter by
+          type: number
+        - name: FilterBoardComputingModuleByName
+          in: query
+          description: Filter Board Computing Module By Name
+          type: string
+      responses:
+        200:
+          description: Successfully retrieved list of Board Computing Modules
+          schema:
+            $ref: "#/definitions/BoardComputingModuleList"
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
 ### CUBE SAT FRAME
   /cube_sat_frame:
     post:
@@ -2354,7 +2590,7 @@ definitions:
       mechanical_shock:
         type: integer
 
-### CUBESATFRAME
+### CUBE SAT FRAME
   CreateCubeSatFrameBody:
     type: object
     required:
@@ -2443,3 +2679,154 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/CubeSatFrame"
+
+### CUBE SAT BOARD COMPUTERING MODULE
+
+  BoardComputingModule:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique identifier for the Board Computing Module
+        readOnly: true
+      name:
+        type: string
+        description: Name of the Board Computing Module
+      length:
+        type: number
+        description: Length in meters
+      width:
+        type: number
+        description: Width in meters
+      height:
+        type: number
+        description: Height in meters
+      weight:
+        type: number
+        description: Weight in kilograms
+      supply_voltage:
+        type: number
+        description: Supply voltage in volts
+      power_consumption:
+        type: number
+        description: Power consumption in watts
+      interface:
+        type: string
+        description: Communication interface
+      max_operating_temperature:
+        type: number
+        description: Maximum operating temperature in Celsius
+      min_operating_temperature:
+        type: number
+        description: Minimum operating temperature in Celsius
+      mechanical_vibration:
+        type: integer
+        format: int64
+        description: Mechanical vibration rating
+      mechanical_shock:
+        type: integer
+        format: int64
+        description: Mechanical shock rating
+      updated_at:
+        type: integer
+        description: Last update timestamp
+      created_at:
+        type: integer
+        description: Creation timestamp
+
+  CreateBoardComputingModuleBody:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the Board Computing Module
+      length:
+        type: number
+        description: Length in meters
+      width:
+        type: number
+        description: Width in meters
+      height:
+        type: number
+        description: Height in meters
+      weight:
+        type: number
+        description: Weight in kilograms
+      supply_voltage:
+        type: number
+        description: Supply voltage in volts
+      power_consumption:
+        type: number
+        description: Power consumption in watts
+      interface:
+        type: string
+        description: Communication interface
+      max_operating_temperature:
+        type: number
+        description: Maximum operating temperature in Celsius
+      min_operating_temperature:
+        type: number
+        description: Minimum operating temperature in Celsius
+      mechanical_vibration:
+        type: integer
+        format: int64
+        description: Mechanical vibration rating
+      mechanical_shock:
+        type: integer
+        format: int64
+        description: Mechanical shock rating
+
+  UpdateBoardComputingModuleBody:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the Board Computing Module
+      length:
+        type: number
+        description: Length in meters
+      width:
+        type: number
+        description: Width in meters
+      height:
+        type: number
+        description: Height in meters
+      weight:
+        type: number
+        description: Weight in kilograms
+      supply_voltage:
+        type: number
+        description: Supply voltage in volts
+      power_consumption:
+        type: number
+        description: Power consumption in watts
+      interface:
+        type: string
+        description: Communication interface
+      max_operating_temperature:
+        type: number
+        description: Maximum operating temperature in Celsius
+      min_operating_temperature:
+        type: number
+        description: Minimum operating temperature in Celsius
+      mechanical_vibration:
+        type: integer
+        format: int64
+        description: Mechanical vibration rating
+      mechanical_shock:
+        type: integer
+        format: int64
+        description: Mechanical shock rating
+
+  BoardComputingModuleList:
+    type: object
+    required:
+      - count
+    properties:
+      count:
+        type: integer
+      board_computering_modules:
+        type: array
+        items:
+          $ref: "#/definitions/BoardComputingModule"

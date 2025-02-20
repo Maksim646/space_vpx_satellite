@@ -17,7 +17,6 @@ import (
 	"github.com/Maksim646/space_vpx_satellite/pkg/logger"
 	"github.com/justinas/alice"
 
-	//"github.com/docker/docker/daemon/logger"
 	"github.com/heetch/sqalx"
 	"github.com/jmoiron/sqlx"
 	"github.com/kelseyhightower/envconfig"
@@ -46,6 +45,15 @@ import (
 
 	_cubeSatPowerSystemRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_power_system/repository/postgresql"
 	_cubeSatPowerSystemUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_power_system/usecase"
+
+	_cubeSatBoardComputeringModuleRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_board_computering_module/repository/postgresql"
+	_cubeSatBoardComputeringModuleUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_board_computering_module/usecase"
+
+	_cubeSatVhfAntennaSystemRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_vhf_antenna_system/repository/postgresql"
+	_cubeSatVhfAntennaSystemUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_vhf_antenna_system/usecase"
+
+	_cubeSatVhfTransceiverRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_vhf_transceiver/repository/postgresql"
+	_cubeSatVhfTransceiverUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_vhf_transceiver/usecase"
 )
 
 const (
@@ -122,6 +130,15 @@ func main() {
 	cubeSatPowerSystemRepo := _cubeSatPowerSystemRepo.New(sqalxConn)
 	cubeSatPowerSystemUsecase := _cubeSatPowerSystemUsecase.New(cubeSatPowerSystemRepo)
 
+	cubeSatBoardComputeringModuleRepo := _cubeSatBoardComputeringModuleRepo.New(sqalxConn)
+	cubeSatBoardComputeringModuleUsecase := _cubeSatBoardComputeringModuleUsecase.New(cubeSatBoardComputeringModuleRepo)
+
+	cubeSatVhfAntennaSystemRepo := _cubeSatVhfAntennaSystemRepo.New(sqalxConn)
+	cubeSatVhfAntennaSystemUsecase := _cubeSatVhfAntennaSystemUsecase.New(cubeSatVhfAntennaSystemRepo)
+
+	cubeSatVhfTransceiverRepo := _cubeSatVhfTransceiverRepo.New(sqalxConn)
+	cubeSatVhfTransceiverUsecase := _cubeSatVhfTransceiverUsecase.New(cubeSatVhfTransceiverRepo)
+
 	appHandler := handler.New(
 		userUsecase,
 		adminUsecase,
@@ -131,6 +148,9 @@ func main() {
 		cubeSatSolarPanelTopUsecase,
 		cubeSatFrameUsecase,
 		cubeSatPowerSystemUsecase,
+		cubeSatBoardComputeringModuleUsecase,
+		cubeSatVhfAntennaSystemUsecase,
+		cubeSatVhfTransceiverUsecase,
 
 		httpVersion,
 		config.HashSalt,
