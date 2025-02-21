@@ -20,8 +20,8 @@ import (
 // swagger:model BoardComputingModuleList
 type BoardComputingModuleList struct {
 
-	// board computering modules
-	BoardComputeringModules []*BoardComputingModule `json:"board_computering_modules"`
+	// board computing modules
+	BoardComputingModules []*BoardComputingModule `json:"board_computing_modules"`
 
 	// count
 	// Required: true
@@ -32,7 +32,7 @@ type BoardComputingModuleList struct {
 func (m *BoardComputingModuleList) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateBoardComputeringModules(formats); err != nil {
+	if err := m.validateBoardComputingModules(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -46,22 +46,22 @@ func (m *BoardComputingModuleList) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *BoardComputingModuleList) validateBoardComputeringModules(formats strfmt.Registry) error {
-	if swag.IsZero(m.BoardComputeringModules) { // not required
+func (m *BoardComputingModuleList) validateBoardComputingModules(formats strfmt.Registry) error {
+	if swag.IsZero(m.BoardComputingModules) { // not required
 		return nil
 	}
 
-	for i := 0; i < len(m.BoardComputeringModules); i++ {
-		if swag.IsZero(m.BoardComputeringModules[i]) { // not required
+	for i := 0; i < len(m.BoardComputingModules); i++ {
+		if swag.IsZero(m.BoardComputingModules[i]) { // not required
 			continue
 		}
 
-		if m.BoardComputeringModules[i] != nil {
-			if err := m.BoardComputeringModules[i].Validate(formats); err != nil {
+		if m.BoardComputingModules[i] != nil {
+			if err := m.BoardComputingModules[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("board_computering_modules" + "." + strconv.Itoa(i))
+					return ve.ValidateName("board_computing_modules" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("board_computering_modules" + "." + strconv.Itoa(i))
+					return ce.ValidateName("board_computing_modules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -85,7 +85,7 @@ func (m *BoardComputingModuleList) validateCount(formats strfmt.Registry) error 
 func (m *BoardComputingModuleList) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateBoardComputeringModules(ctx, formats); err != nil {
+	if err := m.contextValidateBoardComputingModules(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -95,21 +95,21 @@ func (m *BoardComputingModuleList) ContextValidate(ctx context.Context, formats 
 	return nil
 }
 
-func (m *BoardComputingModuleList) contextValidateBoardComputeringModules(ctx context.Context, formats strfmt.Registry) error {
+func (m *BoardComputingModuleList) contextValidateBoardComputingModules(ctx context.Context, formats strfmt.Registry) error {
 
-	for i := 0; i < len(m.BoardComputeringModules); i++ {
+	for i := 0; i < len(m.BoardComputingModules); i++ {
 
-		if m.BoardComputeringModules[i] != nil {
+		if m.BoardComputingModules[i] != nil {
 
-			if swag.IsZero(m.BoardComputeringModules[i]) { // not required
+			if swag.IsZero(m.BoardComputingModules[i]) { // not required
 				return nil
 			}
 
-			if err := m.BoardComputeringModules[i].ContextValidate(ctx, formats); err != nil {
+			if err := m.BoardComputingModules[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("board_computering_modules" + "." + strconv.Itoa(i))
+					return ve.ValidateName("board_computing_modules" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("board_computering_modules" + "." + strconv.Itoa(i))
+					return ce.ValidateName("board_computing_modules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

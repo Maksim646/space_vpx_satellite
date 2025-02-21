@@ -1011,7 +1011,7 @@ paths:
             $ref: '#/definitions/Error'
 
 
-###SOLARPANELSIDE
+###SOLAR PANEL SIDE
   /solar_panel_side/{id}:
     get:
       security:
@@ -1219,7 +1219,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-### CUBE SAT VHF TRABSCIEVER
+### CUBE SAT VHF TRANSCEIVER
 
   /cube_sat_vhf_transceiver/{id}:
     get:
@@ -1633,7 +1633,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-### CUBE SAT BOARD COMPUTERING MODULE
+### CUBE SAT BOARD COMPUTING MODULE
   /board_computing_module:
     post:
       security:
@@ -2127,6 +2127,20 @@ definitions:
     properties:
       project_name:
         type: string
+      frame_name:
+        type: string
+      solar_panel_side_name:
+        type: string
+      solar_panel_top_name:
+        type: string
+      board_computing_module_name:
+        type: string
+      power_system_name:
+        type: string
+      vhf_antenna_system_name:
+        type: string
+      vhf_transceiver_name:
+        type: string
   
   CreateCubeSatProjectResponse:
     type: object
@@ -2145,9 +2159,19 @@ definitions:
     properties:
       project_name:
         type: string
-      cube_sat_frame_name:
+      frame_name:
         type: string
-      solar_panael_name:
+      solar_panel_side_name:
+        type: string
+      solar_panel_top_name:
+        type: string
+      board_computing_module_name:
+        type: string
+      power_system_name:
+        type: string
+      vhf_antenna_system_name:
+        type: string
+      vhf_transceiver_name:
         type: string
 
 
@@ -2166,9 +2190,19 @@ definitions:
         type: integer
       project_name:
         type: string
-      cube_sat_frame_name:
+      frame_name:
         type: string
-      cube_sat_solar_panel_name:
+      solar_panel_side_name:
+        type: string
+      solar_panel_top_name:
+        type: string
+      board_computing_module_name:
+        type: string
+      power_system_name:
+        type: string
+      vhf_antenna_system_name:
+        type: string
+      vhf_transceiver_name:
         type: string
 
 
@@ -3094,7 +3128,7 @@ definitions:
         items:
           $ref: "#/definitions/CubeSatFrame"
 
-### CUBE SAT BOARD COMPUTERING MODULE
+### CUBE SAT BOARD COMPUTING MODULE
 
   BoardComputingModule:
     type: object
@@ -3240,7 +3274,7 @@ definitions:
     properties:
       count:
         type: integer
-      board_computering_modules:
+      board_computing_modules:
         type: array
         items:
           $ref: "#/definitions/BoardComputingModule"
@@ -3343,7 +3377,7 @@ definitions:
         items:
           $ref: '#/definitions/VHFAntennaSystem'
 
-### CUBE SAT VHF TRABSCIEVER
+### CUBE SAT VHF TRANSCEIVER
   VHFTransceiver:
     type: object
     properties:

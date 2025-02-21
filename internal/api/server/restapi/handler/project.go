@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/Maksim646/space_vpx_satellite/internal/api/definition"
 	"github.com/Maksim646/space_vpx_satellite/internal/api/server/restapi/api"
@@ -14,8 +15,19 @@ import (
 func (h *Handler) CreateProjectHandler(req api.CreateCubeSatProjectParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("create project request")
 	ctx := req.HTTPRequest.Context()
+	cubeSatProject := model.CubeSatProject{
+		Name:                     *req.CreateCubeSatProject.ProjectName,
+		UserID:                   principal.ID,
+		FrameName:                sql.NullString{String: req.CreateCubeSatProject.FrameName, Valid: req.CreateCubeSatProject.FrameName != ""},
+		SolarPanelSideName:       sql.NullString{String: req.CreateCubeSatProject.SolarPanelSideName, Valid: req.CreateCubeSatProject.SolarPanelSideName != ""},
+		SolarPanelTopName:        sql.NullString{String: req.CreateCubeSatProject.SolarPanelTopName, Valid: req.CreateCubeSatProject.SolarPanelTopName != ""},
+		PowerSystemName:          sql.NullString{String: req.CreateCubeSatProject.PowerSystemName, Valid: req.CreateCubeSatProject.PowerSystemName != ""},
+		BoardComputingModuleName: sql.NullString{String: req.CreateCubeSatProject.BoardComputingModuleName, Valid: req.CreateCubeSatProject.BoardComputingModuleName != ""},
+		VHFAntennaSystemName:     sql.NullString{String: req.CreateCubeSatProject.VhfAntennaSystemName, Valid: req.CreateCubeSatProject.VhfAntennaSystemName != ""},
+		VhfTransceiverName:       sql.NullString{String: req.CreateCubeSatProject.VhfTransceiverName, Valid: req.CreateCubeSatProject.VhfTransceiverName != ""},
+	}
 
-	projectID, err := h.projectUsecase.CreatedProject(ctx, *req.CreateCubeSatProject.ProjectName, principal.ID)
+	projectID, err := h.projectUsecase.CreatedProject(ctx, cubeSatProject)
 	if err != nil {
 		zap.L().Error("error create project", zap.Error(err))
 		return api.NewCreateCubeSatProjectInternalServerError()
@@ -41,7 +53,6 @@ func (h *Handler) GetProjectByIDHandler(req api.GetCubeSatProjectParams, princip
 	projectResult := h.ProjectToDefinition(ctx, project)
 
 	return api.NewGetCubeSatProjectOK().WithPayload(&projectResult)
-
 }
 
 func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, principal *definition.Principal) middleware.Responder {
@@ -50,7 +61,7 @@ func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, princ
 
 	project, err := h.projectUsecase.GetProjectByID(ctx, req.ID)
 	if err != nil {
-		zap.L().Error("error getch cube sat project", zap.Error(err))
+		zap.L().Error("error fetch cube sat project", zap.Error(err))
 		return api.NewUpdateCubeSatProjectBadRequest().WithPayload(&definition.Error{
 			Message: &model.ProjectNotFound,
 		})
@@ -60,12 +71,39 @@ func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, princ
 		project.Name = *req.UpdateCubeSatProjectBody.ProjectName
 	}
 
-	if req.UpdateCubeSatProjectBody.CubeSatFrameName != "" {
-		project.CubeSatFrameName.String = req.UpdateCubeSatProjectBody.CubeSatFrameName
+	if req.UpdateCubeSatProjectBody.FrameName != "" {
+		project.FrameName.String = req.UpdateCubeSatProjectBody.FrameName
+		project.FrameName.Valid = true
 	}
 
-	if req.UpdateCubeSatProjectBody.SolarPanaelName != "" {
-		project.CubeSatSolarPanelName.String = req.UpdateCubeSatProjectBody.SolarPanaelName
+	if req.UpdateCubeSatProjectBody.SolarPanelSideName != "" {
+		project.SolarPanelSideName.String = req.UpdateCubeSatProjectBody.SolarPanelSideName
+		project.SolarPanelSideName.Valid = true
+	}
+
+	if req.UpdateCubeSatProjectBody.SolarPanelTopName != "" {
+		project.SolarPanelTopName.String = req.UpdateCubeSatProjectBody.SolarPanelTopName
+		project.SolarPanelTopName.Valid = true
+	}
+
+	if req.UpdateCubeSatProjectBody.PowerSystemName != "" {
+		project.PowerSystemName.String = req.UpdateCubeSatProjectBody.PowerSystemName
+		project.PowerSystemName.Valid = true
+	}
+
+	if req.UpdateCubeSatProjectBody.BoardComputingModuleName != "" {
+		project.BoardComputingModuleName.String = req.UpdateCubeSatProjectBody.BoardComputingModuleName
+		project.BoardComputingModuleName.Valid = true
+	}
+
+	if req.UpdateCubeSatProjectBody.VhfAntennaSystemName != "" {
+		project.VHFAntennaSystemName.String = req.UpdateCubeSatProjectBody.VhfAntennaSystemName
+		project.VHFAntennaSystemName.Valid = true
+	}
+
+	if req.UpdateCubeSatProjectBody.VhfTransceiverName != "" {
+		project.VhfTransceiverName.String = req.UpdateCubeSatProjectBody.VhfTransceiverName
+		project.VhfTransceiverName.Valid = true
 	}
 
 	err = h.projectUsecase.UpdateProjectByID(ctx, project)
@@ -81,7 +119,6 @@ func (h *Handler) UpdateProjectHandler(req api.UpdateCubeSatProjectParams, princ
 	projectResult := h.ProjectToDefinition(ctx, newProject)
 
 	return api.NewUpdateCubeSatProjectOK().WithPayload(&projectResult)
-
 }
 
 func (h *Handler) DeleteProject(req api.DeleteCubeSatProjectParams, principal *definition.Principal) middleware.Responder {
@@ -131,13 +168,18 @@ func (h *Handler) GetProjectsByUser(req api.GetUserCubeSatProjectsParams, princi
 
 func (h *Handler) ProjectToDefinition(ctx context.Context, project model.CubeSatProject) definition.CubeSatProject {
 	projectResult := &definition.CubeSatProject{
-		ID:                    project.ID,
-		UserID:                project.UserID,
-		ProjectName:           &project.Name,
-		CubeSatFrameName:      project.CubeSatFrameName.String,
-		CubeSatSolarPanelName: project.CubeSatSolarPanelName.String,
-		CreatedAt:             project.CreatedAt.Unix(),
-		UpdatedAt:             project.UpdatedAt.Time.Unix(),
+		ID:                       project.ID,
+		UserID:                   project.UserID,
+		ProjectName:              &project.Name,
+		FrameName:                project.FrameName.String,
+		SolarPanelSideName:       project.SolarPanelSideName.String,
+		SolarPanelTopName:        project.SolarPanelTopName.String,
+		PowerSystemName:          project.PowerSystemName.String,
+		BoardComputingModuleName: project.BoardComputingModuleName.String,
+		VhfAntennaSystemName:     project.VHFAntennaSystemName.String,
+		VhfTransceiverName:       project.VhfTransceiverName.String,
+		CreatedAt:                project.CreatedAt.Unix(),
+		UpdatedAt:                project.UpdatedAt.Time.Unix(),
 	}
 
 	return *projectResult
@@ -148,13 +190,18 @@ func (h *Handler) ProjectsToDefinition(ctx context.Context, projects []model.Cub
 
 	for i := range projects {
 		projectsData[i] = &definition.CubeSatProject{
-			ID:                    projects[i].ID,
-			ProjectName:           &projects[i].Name,
-			UserID:                projects[i].UserID,
-			CubeSatFrameName:      projects[i].CubeSatFrameName.String,
-			CubeSatSolarPanelName: projects[i].CubeSatSolarPanelName.String,
-			CreatedAt:             projects[i].CreatedAt.Unix(),
-			UpdatedAt:             projects[i].UpdatedAt.Time.Unix(),
+			ID:                       projects[i].ID,
+			ProjectName:              &projects[i].Name,
+			UserID:                   projects[i].UserID,
+			FrameName:                projects[i].FrameName.String,
+			SolarPanelSideName:       projects[i].SolarPanelSideName.String,
+			SolarPanelTopName:        projects[i].SolarPanelTopName.String,
+			PowerSystemName:          projects[i].PowerSystemName.String,
+			BoardComputingModuleName: projects[i].BoardComputingModuleName.String,
+			VhfAntennaSystemName:     projects[i].VHFAntennaSystemName.String,
+			VhfTransceiverName:       projects[i].VhfTransceiverName.String,
+			CreatedAt:                projects[i].CreatedAt.Unix(),
+			UpdatedAt:                projects[i].UpdatedAt.Time.Unix(),
 		}
 	}
 	return projectsData

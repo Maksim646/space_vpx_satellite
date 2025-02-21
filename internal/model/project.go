@@ -20,17 +20,22 @@ const (
 )
 
 type CubeSatProject struct {
-	ID                    string         `db:"id"`
-	UserID                string         `db:"user_id"`
-	CubeSatFrameName      sql.NullString `db:"cube_sat_frame_name"`
-	CubeSatSolarPanelName sql.NullString `db:"solar_panael_name"`
-	Name                  string         `db:"name"`
-	CreatedAt             time.Time      `db:"created_at"`
-	UpdatedAt             sql.NullTime   `db:"updated_at"`
+	ID                       string         `db:"id"`
+	UserID                   string         `db:"user_id"`
+	FrameName                sql.NullString `db:"frame_name"`
+	SolarPanelSideName       sql.NullString `db:"solar_panel_side_name"`
+	SolarPanelTopName        sql.NullString `db:"solar_panel_top_name"`
+	PowerSystemName          sql.NullString `db:"power_system_name"`
+	BoardComputingModuleName sql.NullString `db:"board_computering_module_name"`
+	VHFAntennaSystemName     sql.NullString `db:"vhf_antenna_system_name"`
+	VhfTransceiverName       sql.NullString `db:"vhf_transceiver_name"`
+	Name                     string         `db:"name"`
+	CreatedAt                time.Time      `db:"created_at"`
+	UpdatedAt                sql.NullTime   `db:"updated_at"`
 }
 
 type IProjectRepository interface {
-	CreatedProject(ctx context.Context, name string, userID string) (string, error)
+	CreatedProject(ctx context.Context, project CubeSatProject) (string, error)
 
 	GetProjectByID(ctx context.Context, projectID string) (CubeSatProject, error)
 	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatProject, int64, error)
@@ -41,7 +46,7 @@ type IProjectRepository interface {
 }
 
 type IProjectUsecase interface {
-	CreatedProject(ctx context.Context, name string, userID string) (string, error)
+	CreatedProject(ctx context.Context, project CubeSatProject) (string, error)
 
 	GetProjectByID(ctx context.Context, projectID string) (CubeSatProject, error)
 	GetProjectsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatProject, int64, error)

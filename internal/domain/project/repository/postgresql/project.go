@@ -7,9 +7,6 @@ import (
 	"fmt"
 	"time"
 
-	//"strings"
-	//"time"
-
 	"github.com/Maksim646/space_vpx_satellite/internal/database/postgresql"
 	"github.com/Maksim646/space_vpx_satellite/internal/model"
 
@@ -31,8 +28,13 @@ func (r *ProjectRepository) GetProjectBuilder() sq.SelectBuilder {
 		"cube_sat_projects.id",
 		"cube_sat_projects.user_id",
 		"cube_sat_projects.name",
-		"cube_sat_projects.cube_sat_frame_name",
-		"cube_sat_projects.solar_panael_name",
+		"cube_sat_projects.frame_name",
+		"cube_sat_projects.solar_panel_side_name",
+		"cube_sat_projects.solar_panel_top_name",
+		"cube_sat_projects.power_system_name",
+		"cube_sat_projects.board_computering_module_name",
+		"cube_sat_projects.vhf_antenna_system_name",
+		"cube_sat_projects.vhf_transceiver_name",
 		"cube_sat_projects.created_at",
 		"cube_sat_projects.updated_at",
 	).
@@ -41,15 +43,29 @@ func (r *ProjectRepository) GetProjectBuilder() sq.SelectBuilder {
 	return builder
 }
 
-func (r *ProjectRepository) CreatedProject(ctx context.Context, name string, userID string) (string, error) {
+func (r *ProjectRepository) CreatedProject(ctx context.Context, project model.CubeSatProject) (string, error) {
 	query, params, err := postgresql.Builder.Insert("cube_sat_projects").
 		Columns(
 			"name",
 			"user_id",
+			"frame_name",
+			"solar_panel_side_name",
+			"solar_panel_top_name",
+			"power_system_name",
+			"board_computering_module_name",
+			"vhf_antenna_system_name",
+			"vhf_transceiver_name",
 		).
 		Values(
-			name,
-			userID,
+			project.Name,
+			project.UserID,
+			project.FrameName,
+			project.SolarPanelSideName,
+			project.SolarPanelTopName,
+			project.PowerSystemName,
+			project.BoardComputingModuleName,
+			project.VHFAntennaSystemName,
+			project.VhfTransceiverName,
 		).
 		Suffix("RETURNING id").
 		ToSql()
@@ -69,8 +85,13 @@ func (r *ProjectRepository) GetProjectByID(ctx context.Context, projectID string
 		"cube_sat_projects.id",
 		"cube_sat_projects.user_id",
 		"cube_sat_projects.name",
-		"cube_sat_projects.cube_sat_frame_name",
-		"cube_sat_projects.solar_panael_name",
+		"cube_sat_projects.frame_name",
+		"cube_sat_projects.solar_panel_side_name",
+		"cube_sat_projects.solar_panel_top_name",
+		"cube_sat_projects.power_system_name",
+		"cube_sat_projects.board_computering_module_name",
+		"cube_sat_projects.vhf_antenna_system_name",
+		"cube_sat_projects.vhf_transceiver_name",
 		"cube_sat_projects.updated_at",
 		"cube_sat_projects.created_at",
 	).
@@ -123,8 +144,13 @@ func (r *ProjectRepository) GetProjectsByFilters(ctx context.Context, offset int
 func (r *ProjectRepository) UpdateProjectByID(ctx context.Context, cubeSatProject model.CubeSatProject) error {
 	query, params, err := postgresql.Builder.Update("cube_sat_projects").
 		Set("name", cubeSatProject.Name).
-		Set("cube_sat_frame_name", cubeSatProject.CubeSatFrameName.String).
-		Set("solar_panael_name", cubeSatProject.CubeSatSolarPanelName.String).
+		Set("frame_name", cubeSatProject.FrameName.String).
+		Set("solar_panel_side_name", cubeSatProject.SolarPanelSideName.String).
+		Set("solar_panel_top_name", cubeSatProject.SolarPanelTopName.String).
+		Set("power_system_name", cubeSatProject.PowerSystemName.String).
+		Set("board_computering_module_name", cubeSatProject.BoardComputingModuleName.String).
+		Set("vhf_antenna_system_name", cubeSatProject.VHFAntennaSystemName.String).
+		Set("vhf_transceiver_name", cubeSatProject.VhfTransceiverName.String).
 		Set("updated_at", time.Now().UTC()).
 		Where(sq.Eq{"id": cubeSatProject.ID}).
 		ToSql()

@@ -305,8 +305,8 @@ func (h *Handler) GetBoardComputingModules(req api.GetAvailableBoardComputingMod
 	boardComputingModulesDefinition := h.BoardComputingModulesToDefinition(ctx, boardComputingModules)
 
 	return api.NewGetAvailableBoardComputingModulesOK().WithPayload(&definition.BoardComputingModuleList{
-		Count:                   useful.Int64Ptr(int64(len(boardComputingModulesDefinition))),
-		BoardComputeringModules: boardComputingModulesDefinition,
+		Count:                 useful.Int64Ptr(int64(len(boardComputingModulesDefinition))),
+		BoardComputingModules: boardComputingModulesDefinition,
 	})
 }
 

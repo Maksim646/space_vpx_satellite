@@ -16,8 +16,8 @@ func New(projectRepository model.IProjectRepository) model.IProjectUsecase {
 	}
 }
 
-func (u *Usecase) CreatedProject(ctx context.Context, name string, userID string) (string, error) {
-	return u.projectRepository.CreatedProject(ctx, name, userID)
+func (u *Usecase) CreatedProject(ctx context.Context, project model.CubeSatProject) (string, error) {
+	return u.projectRepository.CreatedProject(ctx, project)
 }
 
 func (u *Usecase) GetProjectByID(ctx context.Context, projectID string) (model.CubeSatProject, error) {

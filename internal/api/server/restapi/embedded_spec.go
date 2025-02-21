@@ -3197,7 +3197,7 @@ func init() {
         "count"
       ],
       "properties": {
-        "board_computering_modules": {
+        "board_computing_modules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/BoardComputingModule"
@@ -3612,7 +3612,28 @@ func init() {
         "project_name"
       ],
       "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        },
+        "frame_name": {
+          "type": "string"
+        },
+        "power_system_name": {
+          "type": "string"
+        },
         "project_name": {
+          "type": "string"
+        },
+        "solar_panel_side_name": {
+          "type": "string"
+        },
+        "solar_panel_top_name": {
+          "type": "string"
+        },
+        "vhf_antenna_system_name": {
+          "type": "string"
+        },
+        "vhf_transceiver_name": {
           "type": "string"
         }
       }
@@ -4116,25 +4137,40 @@ func init() {
         "project_name"
       ],
       "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        },
         "created_at": {
           "type": "integer"
         },
-        "cube_sat_frame_name": {
-          "type": "string"
-        },
-        "cube_sat_solar_panel_name": {
+        "frame_name": {
           "type": "string"
         },
         "id": {
           "type": "string"
         },
+        "power_system_name": {
+          "type": "string"
+        },
         "project_name": {
+          "type": "string"
+        },
+        "solar_panel_side_name": {
+          "type": "string"
+        },
+        "solar_panel_top_name": {
           "type": "string"
         },
         "updated_at": {
           "type": "integer"
         },
         "user_id": {
+          "type": "string"
+        },
+        "vhf_antenna_system_name": {
+          "type": "string"
+        },
+        "vhf_transceiver_name": {
           "type": "string"
         }
       }
@@ -4540,13 +4576,28 @@ func init() {
         "project_name"
       ],
       "properties": {
-        "cube_sat_frame_name": {
+        "board_computing_module_name": {
+          "type": "string"
+        },
+        "frame_name": {
+          "type": "string"
+        },
+        "power_system_name": {
           "type": "string"
         },
         "project_name": {
           "type": "string"
         },
-        "solar_panael_name": {
+        "solar_panel_side_name": {
+          "type": "string"
+        },
+        "solar_panel_top_name": {
+          "type": "string"
+        },
+        "vhf_antenna_system_name": {
+          "type": "string"
+        },
+        "vhf_transceiver_name": {
           "type": "string"
         }
       }
@@ -8195,7 +8246,7 @@ func init() {
         "count"
       ],
       "properties": {
-        "board_computering_modules": {
+        "board_computing_modules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/BoardComputingModule"
@@ -8610,7 +8661,28 @@ func init() {
         "project_name"
       ],
       "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        },
+        "frame_name": {
+          "type": "string"
+        },
+        "power_system_name": {
+          "type": "string"
+        },
         "project_name": {
+          "type": "string"
+        },
+        "solar_panel_side_name": {
+          "type": "string"
+        },
+        "solar_panel_top_name": {
+          "type": "string"
+        },
+        "vhf_antenna_system_name": {
+          "type": "string"
+        },
+        "vhf_transceiver_name": {
           "type": "string"
         }
       }
@@ -9114,25 +9186,40 @@ func init() {
         "project_name"
       ],
       "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        },
         "created_at": {
           "type": "integer"
         },
-        "cube_sat_frame_name": {
-          "type": "string"
-        },
-        "cube_sat_solar_panel_name": {
+        "frame_name": {
           "type": "string"
         },
         "id": {
           "type": "string"
         },
+        "power_system_name": {
+          "type": "string"
+        },
         "project_name": {
+          "type": "string"
+        },
+        "solar_panel_side_name": {
+          "type": "string"
+        },
+        "solar_panel_top_name": {
           "type": "string"
         },
         "updated_at": {
           "type": "integer"
         },
         "user_id": {
+          "type": "string"
+        },
+        "vhf_antenna_system_name": {
+          "type": "string"
+        },
+        "vhf_transceiver_name": {
           "type": "string"
         }
       }
@@ -9538,13 +9625,28 @@ func init() {
         "project_name"
       ],
       "properties": {
-        "cube_sat_frame_name": {
+        "board_computing_module_name": {
+          "type": "string"
+        },
+        "frame_name": {
+          "type": "string"
+        },
+        "power_system_name": {
           "type": "string"
         },
         "project_name": {
           "type": "string"
         },
-        "solar_panael_name": {
+        "solar_panel_side_name": {
+          "type": "string"
+        },
+        "solar_panel_top_name": {
+          "type": "string"
+        },
+        "vhf_antenna_system_name": {
+          "type": "string"
+        },
+        "vhf_transceiver_name": {
           "type": "string"
         }
       }
