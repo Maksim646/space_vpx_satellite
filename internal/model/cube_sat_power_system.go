@@ -53,6 +53,7 @@ type IPowerSystemRepository interface {
 	CreatePowerSystem(ctx context.Context, powerSystem CubeSatPowerSystem) (int64, error)
 
 	GetPowerSystemByID(ctx context.Context, powerSystemID int64) (CubeSatPowerSystem, error)
+	GetPowerSystemByName(ctx context.Context, powerSystemName string) (CubeSatPowerSystem, error)
 	GetPowerSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatPowerSystem, error)
 
 	UpdatePowerSystem(ctx context.Context, powerSystem CubeSatPowerSystem) error
@@ -64,6 +65,7 @@ type IPowerSystemUsecase interface {
 	CreatePowerSystem(ctx context.Context, powerSystem CubeSatPowerSystem) (int64, error)
 
 	GetPowerSystemByID(ctx context.Context, powerSystemID int64) (CubeSatPowerSystem, error)
+	GetPowerSystemByName(ctx context.Context, powerSystemName string) (CubeSatPowerSystem, error)
 	GetPowerSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatPowerSystem, error)
 
 	UpdatePowerSystem(ctx context.Context, powerSystem CubeSatPowerSystem) error

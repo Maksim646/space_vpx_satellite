@@ -155,6 +155,9 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		GetVHFAntennaSystemHandler: GetVHFAntennaSystemHandlerFunc(func(params GetVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation GetVHFAntennaSystem has not yet been implemented")
 		}),
+		LoadTestDataHandler: LoadTestDataHandlerFunc(func(params LoadTestDataParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation LoadTestData has not yet been implemented")
+		}),
 		LoginAdminHandler: LoginAdminHandlerFunc(func(params LoginAdminParams) middleware.Responder {
 			return middleware.NotImplemented("operation LoginAdmin has not yet been implemented")
 		}),
@@ -170,11 +173,20 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		UpdateChassisVPXHandler: UpdateChassisVPXHandlerFunc(func(params UpdateChassisVPXParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateChassisVPX has not yet been implemented")
 		}),
+		UpdateCubeSatBoardComputingModuleByProjectHandler: UpdateCubeSatBoardComputingModuleByProjectHandlerFunc(func(params UpdateCubeSatBoardComputingModuleByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatBoardComputingModuleByProject has not yet been implemented")
+		}),
 		UpdateCubeSatFrameHandler: UpdateCubeSatFrameHandlerFunc(func(params UpdateCubeSatFrameParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatFrame has not yet been implemented")
 		}),
+		UpdateCubeSatFrameByProjectHandler: UpdateCubeSatFrameByProjectHandlerFunc(func(params UpdateCubeSatFrameByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatFrameByProject has not yet been implemented")
+		}),
 		UpdateCubeSatPowerSystemHandler: UpdateCubeSatPowerSystemHandlerFunc(func(params UpdateCubeSatPowerSystemParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatPowerSystem has not yet been implemented")
+		}),
+		UpdateCubeSatPowerSystemByProjectHandler: UpdateCubeSatPowerSystemByProjectHandlerFunc(func(params UpdateCubeSatPowerSystemByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatPowerSystemByProject has not yet been implemented")
 		}),
 		UpdateCubeSatProjectHandler: UpdateCubeSatProjectHandlerFunc(func(params UpdateCubeSatProjectParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatProject has not yet been implemented")
@@ -182,14 +194,29 @@ func NewSpaceVPXBackendServiceAPI(spec *loads.Document) *SpaceVPXBackendServiceA
 		UpdateCubeSatSolarPanelSideHandler: UpdateCubeSatSolarPanelSideHandlerFunc(func(params UpdateCubeSatSolarPanelSideParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatSolarPanelSide has not yet been implemented")
 		}),
+		UpdateCubeSatSolarPanelSideByProjectHandler: UpdateCubeSatSolarPanelSideByProjectHandlerFunc(func(params UpdateCubeSatSolarPanelSideByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatSolarPanelSideByProject has not yet been implemented")
+		}),
 		UpdateCubeSatSolarPanelTopHandler: UpdateCubeSatSolarPanelTopHandlerFunc(func(params UpdateCubeSatSolarPanelTopParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatSolarPanelTop has not yet been implemented")
+		}),
+		UpdateCubeSatSolarPanelTopByProjectHandler: UpdateCubeSatSolarPanelTopByProjectHandlerFunc(func(params UpdateCubeSatSolarPanelTopByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatSolarPanelTopByProject has not yet been implemented")
 		}),
 		UpdateCubeSatVHTransceiverHandler: UpdateCubeSatVHTransceiverHandlerFunc(func(params UpdateCubeSatVHTransceiverParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateCubeSatVHTransceiver has not yet been implemented")
 		}),
+		UpdateCubeSatVhfAntennaSystemByProjectHandler: UpdateCubeSatVhfAntennaSystemByProjectHandlerFunc(func(params UpdateCubeSatVhfAntennaSystemByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatVhfAntennaSystemByProject has not yet been implemented")
+		}),
+		UpdateCubeSatVhfTransceiverByProjectHandler: UpdateCubeSatVhfTransceiverByProjectHandlerFunc(func(params UpdateCubeSatVhfTransceiverByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateCubeSatVhfTransceiverByProject has not yet been implemented")
+		}),
 		UpdateVHFAntennaSystemHandler: UpdateVHFAntennaSystemHandlerFunc(func(params UpdateVHFAntennaSystemParams, principal *models.Principal) middleware.Responder {
 			return middleware.NotImplemented("operation UpdateVHFAntennaSystem has not yet been implemented")
+		}),
+		ValidateCubeSatProjectByProjectHandler: ValidateCubeSatProjectByProjectHandlerFunc(func(params ValidateCubeSatProjectByProjectParams, principal *models.Principal) middleware.Responder {
+			return middleware.NotImplemented("operation ValidateCubeSatProjectByProject has not yet been implemented")
 		}),
 
 		// Applies when the "Authorization" header is set
@@ -315,6 +342,8 @@ type SpaceVPXBackendServiceAPI struct {
 	GetUserMeHandler GetUserMeHandler
 	// GetVHFAntennaSystemHandler sets the operation handler for the get v h f antenna system operation
 	GetVHFAntennaSystemHandler GetVHFAntennaSystemHandler
+	// LoadTestDataHandler sets the operation handler for the load test data operation
+	LoadTestDataHandler LoadTestDataHandler
 	// LoginAdminHandler sets the operation handler for the login admin operation
 	LoginAdminHandler LoginAdminHandler
 	// LoginUserHandler sets the operation handler for the login user operation
@@ -325,20 +354,36 @@ type SpaceVPXBackendServiceAPI struct {
 	UpdateBoardComputingModuleHandler UpdateBoardComputingModuleHandler
 	// UpdateChassisVPXHandler sets the operation handler for the update chassis v p x operation
 	UpdateChassisVPXHandler UpdateChassisVPXHandler
+	// UpdateCubeSatBoardComputingModuleByProjectHandler sets the operation handler for the update cube sat board computing module by project operation
+	UpdateCubeSatBoardComputingModuleByProjectHandler UpdateCubeSatBoardComputingModuleByProjectHandler
 	// UpdateCubeSatFrameHandler sets the operation handler for the update cube sat frame operation
 	UpdateCubeSatFrameHandler UpdateCubeSatFrameHandler
+	// UpdateCubeSatFrameByProjectHandler sets the operation handler for the update cube sat frame by project operation
+	UpdateCubeSatFrameByProjectHandler UpdateCubeSatFrameByProjectHandler
 	// UpdateCubeSatPowerSystemHandler sets the operation handler for the update cube sat power system operation
 	UpdateCubeSatPowerSystemHandler UpdateCubeSatPowerSystemHandler
+	// UpdateCubeSatPowerSystemByProjectHandler sets the operation handler for the update cube sat power system by project operation
+	UpdateCubeSatPowerSystemByProjectHandler UpdateCubeSatPowerSystemByProjectHandler
 	// UpdateCubeSatProjectHandler sets the operation handler for the update cube sat project operation
 	UpdateCubeSatProjectHandler UpdateCubeSatProjectHandler
 	// UpdateCubeSatSolarPanelSideHandler sets the operation handler for the update cube sat solar panel side operation
 	UpdateCubeSatSolarPanelSideHandler UpdateCubeSatSolarPanelSideHandler
+	// UpdateCubeSatSolarPanelSideByProjectHandler sets the operation handler for the update cube sat solar panel side by project operation
+	UpdateCubeSatSolarPanelSideByProjectHandler UpdateCubeSatSolarPanelSideByProjectHandler
 	// UpdateCubeSatSolarPanelTopHandler sets the operation handler for the update cube sat solar panel top operation
 	UpdateCubeSatSolarPanelTopHandler UpdateCubeSatSolarPanelTopHandler
+	// UpdateCubeSatSolarPanelTopByProjectHandler sets the operation handler for the update cube sat solar panel top by project operation
+	UpdateCubeSatSolarPanelTopByProjectHandler UpdateCubeSatSolarPanelTopByProjectHandler
 	// UpdateCubeSatVHTransceiverHandler sets the operation handler for the update cube sat v h transceiver operation
 	UpdateCubeSatVHTransceiverHandler UpdateCubeSatVHTransceiverHandler
+	// UpdateCubeSatVhfAntennaSystemByProjectHandler sets the operation handler for the update cube sat vhf antenna system by project operation
+	UpdateCubeSatVhfAntennaSystemByProjectHandler UpdateCubeSatVhfAntennaSystemByProjectHandler
+	// UpdateCubeSatVhfTransceiverByProjectHandler sets the operation handler for the update cube sat vhf transceiver by project operation
+	UpdateCubeSatVhfTransceiverByProjectHandler UpdateCubeSatVhfTransceiverByProjectHandler
 	// UpdateVHFAntennaSystemHandler sets the operation handler for the update v h f antenna system operation
 	UpdateVHFAntennaSystemHandler UpdateVHFAntennaSystemHandler
+	// ValidateCubeSatProjectByProjectHandler sets the operation handler for the validate cube sat project by project operation
+	ValidateCubeSatProjectByProjectHandler ValidateCubeSatProjectByProjectHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -531,6 +576,9 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.GetVHFAntennaSystemHandler == nil {
 		unregistered = append(unregistered, "GetVHFAntennaSystemHandler")
 	}
+	if o.LoadTestDataHandler == nil {
+		unregistered = append(unregistered, "LoadTestDataHandler")
+	}
 	if o.LoginAdminHandler == nil {
 		unregistered = append(unregistered, "LoginAdminHandler")
 	}
@@ -546,11 +594,20 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.UpdateChassisVPXHandler == nil {
 		unregistered = append(unregistered, "UpdateChassisVPXHandler")
 	}
+	if o.UpdateCubeSatBoardComputingModuleByProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatBoardComputingModuleByProjectHandler")
+	}
 	if o.UpdateCubeSatFrameHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatFrameHandler")
 	}
+	if o.UpdateCubeSatFrameByProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatFrameByProjectHandler")
+	}
 	if o.UpdateCubeSatPowerSystemHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatPowerSystemHandler")
+	}
+	if o.UpdateCubeSatPowerSystemByProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatPowerSystemByProjectHandler")
 	}
 	if o.UpdateCubeSatProjectHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatProjectHandler")
@@ -558,14 +615,29 @@ func (o *SpaceVPXBackendServiceAPI) Validate() error {
 	if o.UpdateCubeSatSolarPanelSideHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatSolarPanelSideHandler")
 	}
+	if o.UpdateCubeSatSolarPanelSideByProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatSolarPanelSideByProjectHandler")
+	}
 	if o.UpdateCubeSatSolarPanelTopHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatSolarPanelTopHandler")
+	}
+	if o.UpdateCubeSatSolarPanelTopByProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatSolarPanelTopByProjectHandler")
 	}
 	if o.UpdateCubeSatVHTransceiverHandler == nil {
 		unregistered = append(unregistered, "UpdateCubeSatVHTransceiverHandler")
 	}
+	if o.UpdateCubeSatVhfAntennaSystemByProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatVhfAntennaSystemByProjectHandler")
+	}
+	if o.UpdateCubeSatVhfTransceiverByProjectHandler == nil {
+		unregistered = append(unregistered, "UpdateCubeSatVhfTransceiverByProjectHandler")
+	}
 	if o.UpdateVHFAntennaSystemHandler == nil {
 		unregistered = append(unregistered, "UpdateVHFAntennaSystemHandler")
+	}
+	if o.ValidateCubeSatProjectByProjectHandler == nil {
+		unregistered = append(unregistered, "ValidateCubeSatProjectByProjectHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -814,6 +886,10 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/vhf_antenna_system/{id}"] = NewGetVHFAntennaSystem(o.context, o.GetVHFAntennaSystemHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/test_data_load"] = NewLoadTestData(o.context, o.LoadTestDataHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -834,14 +910,26 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/chassis_vpx/{id}"] = NewUpdateChassisVPX(o.context, o.UpdateChassisVPXHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projects/{project_id}/board_computing_module"] = NewUpdateCubeSatBoardComputingModuleByProject(o.context, o.UpdateCubeSatBoardComputingModuleByProjectHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/cube_sat_frame/{id}"] = NewUpdateCubeSatFrame(o.context, o.UpdateCubeSatFrameHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projects/{project_id}/frame"] = NewUpdateCubeSatFrameByProject(o.context, o.UpdateCubeSatFrameByProjectHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/cube_sat_power_system/{id}"] = NewUpdateCubeSatPowerSystem(o.context, o.UpdateCubeSatPowerSystemHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projects/{project_id}/power_system"] = NewUpdateCubeSatPowerSystemByProject(o.context, o.UpdateCubeSatPowerSystemByProjectHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
@@ -850,18 +938,38 @@ func (o *SpaceVPXBackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/solar_panel_side/{id}"] = NewUpdateCubeSatSolarPanelSide(o.context, o.UpdateCubeSatSolarPanelSideHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projects/{project_id}/solar_panel_side"] = NewUpdateCubeSatSolarPanelSideByProject(o.context, o.UpdateCubeSatSolarPanelSideByProjectHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/solar_panel_top/{id}"] = NewUpdateCubeSatSolarPanelTop(o.context, o.UpdateCubeSatSolarPanelTopHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projects/{project_id}/solar_panel_top"] = NewUpdateCubeSatSolarPanelTopByProject(o.context, o.UpdateCubeSatSolarPanelTopByProjectHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/cube_sat_vhf_transceiver/{id}"] = NewUpdateCubeSatVHTransceiver(o.context, o.UpdateCubeSatVHTransceiverHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projects/{project_id}/vhf_antenna_system"] = NewUpdateCubeSatVhfAntennaSystemByProject(o.context, o.UpdateCubeSatVhfAntennaSystemByProjectHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projects/{project_id}/vhf_transceiver"] = NewUpdateCubeSatVhfTransceiverByProject(o.context, o.UpdateCubeSatVhfTransceiverByProjectHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/vhf_antenna_system/{id}"] = NewUpdateVHFAntennaSystem(o.context, o.UpdateVHFAntennaSystemHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/projects/{project_id}/validate"] = NewValidateCubeSatProjectByProject(o.context, o.ValidateCubeSatProjectByProjectHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

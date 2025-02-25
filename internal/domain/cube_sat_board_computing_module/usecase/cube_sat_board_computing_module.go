@@ -24,6 +24,10 @@ func (u *BoardComputingModuleUsecase) GetBoardComputingModuleByID(ctx context.Co
 	return u.boardComputingModuleRepository.GetBoardComputingModuleByID(ctx, moduleID)
 }
 
+func (u *BoardComputingModuleUsecase) GetBoardComputingModuleByName(ctx context.Context, moduleName string) (model.BoardComputingModule, error) {
+	return u.boardComputingModuleRepository.GetBoardComputingModuleByName(ctx, moduleName)
+}
+
 func (u *BoardComputingModuleUsecase) GetBoardComputingModulesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.BoardComputingModule, error) {
 	return u.boardComputingModuleRepository.GetBoardComputingModulesByFilters(ctx, offset, limit, sortParams, filters)
 }

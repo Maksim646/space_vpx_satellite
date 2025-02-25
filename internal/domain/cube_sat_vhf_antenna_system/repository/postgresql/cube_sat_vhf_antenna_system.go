@@ -101,6 +101,41 @@ func (r *VHFAntennaSystemRepository) GetVHFAntennaSystemByID(ctx context.Context
 	return antennaSystem, err
 }
 
+func (r *VHFAntennaSystemRepository) GetVHFAntennaSystemByName(ctx context.Context, vhfAntennaSystemName string) (model.VHFAntennaSystem, error) {
+	var antennaSystem model.VHFAntennaSystem
+	query, params, err := postgresql.Builder.Select(
+		"id",
+		"name",
+		"length",
+		"width",
+		"height",
+		"weight",
+		"interface",
+		"frequency",
+		"max_operating_temperature",
+		"min_operating_temperature",
+		"mechanical_vibration",
+		"mechanical_shock",
+		"updated_at",
+		"created_at",
+	).
+		From("vhf_antenna_system").
+		Where(sq.Eq{"name": vhfAntennaSystemName}).
+		ToSql()
+	if err != nil {
+		return antennaSystem, err
+	}
+
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	if err = r.sqalxConn.GetContext(ctx, &antennaSystem, query, params...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return antennaSystem, model.ErrVHFAntennaSystemNotFound
+		}
+	}
+
+	return antennaSystem, err
+}
+
 // GetVHFAntennaSystemsByFilters retrieves VHF antenna systems from the database based on filters.
 func (r *VHFAntennaSystemRepository) GetVHFAntennaSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.VHFAntennaSystem, error) {
 	builder := postgresql.Builder.Select(

@@ -46,10 +46,11 @@ type CubeSatSolarPanelSide struct {
 	CreatedAt               time.Time       `db:"created_at"`
 }
 
-type ISolarPanelRepository interface {
+type ISolarPanelSideRepository interface {
 	CreateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) (int64, error)
 
 	GetSolarPanelSideByID(ctx context.Context, solarPanelSideID int64) (CubeSatSolarPanelSide, error)
+	GetSolarPanelSideByName(ctx context.Context, solarPanelSideName string) (CubeSatSolarPanelSide, error)
 	GetSolarPanelSideByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatSolarPanelSide, error)
 
 	UpdateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) error
@@ -57,10 +58,11 @@ type ISolarPanelRepository interface {
 	DeleteSolarPanelSide(ctx context.Context, solarPanelSideID int64) error
 }
 
-type ISolarPanelUsecase interface {
+type ISolarPanelSideUsecase interface {
 	CreateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) (int64, error)
 
 	GetSolarPanelSideByID(ctx context.Context, solarPanelSideID int64) (CubeSatSolarPanelSide, error)
+	GetSolarPanelSideByName(ctx context.Context, solarPanelSideName string) (CubeSatSolarPanelSide, error)
 	GetSolarPanelSideByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatSolarPanelSide, error)
 
 	UpdateSolarPanelSide(ctx context.Context, solarPanel CubeSatSolarPanelSide) error

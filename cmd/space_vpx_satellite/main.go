@@ -46,8 +46,8 @@ import (
 	_cubeSatPowerSystemRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_power_system/repository/postgresql"
 	_cubeSatPowerSystemUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_power_system/usecase"
 
-	_cubeSatBoardComputeringModuleRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_board_computering_module/repository/postgresql"
-	_cubeSatBoardComputeringModuleUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_board_computering_module/usecase"
+	_cubeSatBoardComputingModuleRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_board_computing_module/repository/postgresql"
+	_cubeSatBoardComputingModuleUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_board_computing_module/usecase"
 
 	_cubeSatVhfAntennaSystemRepo "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_vhf_antenna_system/repository/postgresql"
 	_cubeSatVhfAntennaSystemUsecase "github.com/Maksim646/space_vpx_satellite/internal/domain/cube_sat_vhf_antenna_system/usecase"
@@ -130,8 +130,8 @@ func main() {
 	cubeSatPowerSystemRepo := _cubeSatPowerSystemRepo.New(sqalxConn)
 	cubeSatPowerSystemUsecase := _cubeSatPowerSystemUsecase.New(cubeSatPowerSystemRepo)
 
-	cubeSatBoardComputeringModuleRepo := _cubeSatBoardComputeringModuleRepo.New(sqalxConn)
-	cubeSatBoardComputeringModuleUsecase := _cubeSatBoardComputeringModuleUsecase.New(cubeSatBoardComputeringModuleRepo)
+	cubeSatBoardComputingModuleRepo := _cubeSatBoardComputingModuleRepo.New(sqalxConn)
+	cubeSatBoardComputingModuleUsecase := _cubeSatBoardComputingModuleUsecase.New(cubeSatBoardComputingModuleRepo)
 
 	cubeSatVhfAntennaSystemRepo := _cubeSatVhfAntennaSystemRepo.New(sqalxConn)
 	cubeSatVhfAntennaSystemUsecase := _cubeSatVhfAntennaSystemUsecase.New(cubeSatVhfAntennaSystemRepo)
@@ -148,7 +148,7 @@ func main() {
 		cubeSatSolarPanelTopUsecase,
 		cubeSatFrameUsecase,
 		cubeSatPowerSystemUsecase,
-		cubeSatBoardComputeringModuleUsecase,
+		cubeSatBoardComputingModuleUsecase,
 		cubeSatVhfAntennaSystemUsecase,
 		cubeSatVhfTransceiverUsecase,
 

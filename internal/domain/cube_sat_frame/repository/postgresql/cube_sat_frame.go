@@ -29,6 +29,8 @@ func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSat
 			"width",
 			"length",
 			"weight",
+			"size",
+			"interface",
 			"operating_temperature_min",
 			"operating_temperature_max",
 			"mechanical_vibration",
@@ -40,7 +42,9 @@ func (r *CubeSatFrameRepository) CreateCubeSatFrame(ctx context.Context, cubeSat
 			cubeSatFrame.Height.Float64,
 			cubeSatFrame.Width.Float64,
 			cubeSatFrame.Length.Float64,
-			cubeSatFrame.Weight.Int64,
+			cubeSatFrame.Weight.Float64,
+			cubeSatFrame.Size,
+			cubeSatFrame.Interface.String,
 			cubeSatFrame.OperatingTemperatureMin,
 			cubeSatFrame.OperatingTemperatureMax,
 			cubeSatFrame.MechanicalVibration,
@@ -64,9 +68,11 @@ func (r *CubeSatFrameRepository) UpdateCubeSatFrame(ctx context.Context, cubeSat
 	query, params, err := postgresql.Builder.Update("cube_sat_frame").
 		Set("name", cubeSatFrame.Name.String).
 		Set("height", cubeSatFrame.Height.Float64).
-		Set("width", cubeSatFrame.Weight.Int64).
+		Set("width", cubeSatFrame.Width.Float64).
 		Set("length", cubeSatFrame.Length.Float64).
-		Set("weight", cubeSatFrame.Weight.Int64).
+		Set("weight", cubeSatFrame.Weight.Float64).
+		Set("interface", cubeSatFrame.Size).
+		Set("interface", cubeSatFrame.Interface.String).
 		Set("operating_temperature_min", cubeSatFrame.OperatingTemperatureMin.Int64).
 		Set("operating_temperature_max", cubeSatFrame.OperatingTemperatureMax.Int64).
 		Set("mechanical_vibration", cubeSatFrame.MechanicalVibration.Int64).
@@ -93,6 +99,8 @@ func (r *CubeSatFrameRepository) GetCubeSatFrameByID(ctx context.Context, id int
 		"width",
 		"length",
 		"weight",
+		"size",
+		"interface",
 		"operating_temperature_min",
 		"operating_temperature_max",
 		"mechanical_vibration",
@@ -116,6 +124,40 @@ func (r *CubeSatFrameRepository) GetCubeSatFrameByID(ctx context.Context, id int
 	return cubeSatFrame, err
 }
 
+func (r *CubeSatFrameRepository) GetCubeSatFrameByName(ctx context.Context, frameName string) (model.CubeSatFrame, error) {
+	var cubeSatFrame model.CubeSatFrame
+	query, params, err := postgresql.Builder.Select(
+		"id",
+		"name",
+		"height",
+		"width",
+		"length",
+		"weight",
+		"size",
+		"interface",
+		"operating_temperature_min",
+		"operating_temperature_max",
+		"mechanical_vibration",
+		"mechanical_shock",
+		"link",
+	).
+		From("cube_sat_frame").
+		Where(sq.Eq{"name": frameName}).
+		ToSql()
+	if err != nil {
+		return cubeSatFrame, err
+	}
+
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	if err = r.sqalxConn.GetContext(ctx, &cubeSatFrame, query, params...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return cubeSatFrame, model.ErrChassisNotFound
+		}
+	}
+
+	return cubeSatFrame, err
+}
+
 func (r *CubeSatFrameRepository) GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatFrame, error) {
 	builder := postgresql.Builder.Select(
 		"id",
@@ -124,6 +166,8 @@ func (r *CubeSatFrameRepository) GetCubeSatFramesByFilters(ctx context.Context, 
 		"width",
 		"length",
 		"weight",
+		"size",
+		"interface",
 		"operating_temperature_min",
 		"operating_temperature_max",
 		"mechanical_vibration",

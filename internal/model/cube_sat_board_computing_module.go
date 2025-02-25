@@ -44,6 +44,7 @@ type IBoardComputingModuleRepository interface {
 	CreateBoardComputingModule(ctx context.Context, module BoardComputingModule) (int64, error)
 
 	GetBoardComputingModuleByID(ctx context.Context, moduleID int64) (BoardComputingModule, error)
+	GetBoardComputingModuleByName(ctx context.Context, moduleName string) (BoardComputingModule, error)
 	GetBoardComputingModulesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]BoardComputingModule, error)
 
 	UpdateBoardComputingModule(ctx context.Context, module BoardComputingModule) error
@@ -55,6 +56,7 @@ type IBoardComputingModuleUsecase interface {
 	CreateBoardComputingModule(ctx context.Context, module BoardComputingModule) (int64, error)
 
 	GetBoardComputingModuleByID(ctx context.Context, moduleID int64) (BoardComputingModule, error)
+	GetBoardComputingModuleByName(ctx context.Context, moduleName string) (BoardComputingModule, error)
 	GetBoardComputingModulesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]BoardComputingModule, error)
 
 	UpdateBoardComputingModule(ctx context.Context, module BoardComputingModule) error

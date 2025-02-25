@@ -19,12 +19,14 @@ func (h *Handler) CubeSatFrameToDefinition(ctx context.Context, cubeSat model.Cu
 		ID:                      &cubeSat.ID,
 		Name:                    cubeSat.Name.String,
 		Length:                  &cubeSat.Length.Float64,
+		Size:                    cubeSat.Size,
+		Interface:               cubeSat.Interface.String,
 		Link:                    &cubeSat.Link.String,
 		MechanicalShock:         &cubeSat.MechanicalShock.Int64,
 		MechanicalVibration:     &cubeSat.MechanicalVibration.Int64,
 		OperatingTemperatureMax: &cubeSat.OperatingTemperatureMax.Int64,
 		OperatingTemperatureMin: &cubeSat.OperatingTemperatureMin.Int64,
-		Weight:                  &cubeSat.Weight.Int64,
+		Weight:                  &cubeSat.Weight.Float64,
 		Width:                   &cubeSat.Width.Float64,
 	}
 	return &cubeSatFrameDefinition
@@ -40,7 +42,9 @@ func (h *Handler) CubeSatFramesToDefinition(ctx context.Context, cubeSats []mode
 			Length:                  &cubeSats[i].Length.Float64,
 			Width:                   &cubeSats[i].Width.Float64,
 			Height:                  &cubeSats[i].Height.Float64,
-			Weight:                  &cubeSats[i].Weight.Int64,
+			Weight:                  &cubeSats[i].Weight.Float64,
+			Size:                    cubeSats[i].Size,
+			Interface:               cubeSats[i].Interface.String,
 			OperatingTemperatureMin: &cubeSats[i].OperatingTemperatureMin.Int64,
 			OperatingTemperatureMax: &cubeSats[i].OperatingTemperatureMax.Int64,
 			MechanicalVibration:     &cubeSats[i].MechanicalVibration.Int64,
@@ -67,7 +71,9 @@ func (h *Handler) CreateCubeSatFrameHandler(req api.CreateCubeSatFrameParams, pr
 		Name:                    sql.NullString{String: req.CreateCubeSatFrameBody.Name, Valid: true},
 		Length:                  sql.NullFloat64{Float64: *req.CreateCubeSatFrameBody.Length, Valid: true},
 		Width:                   sql.NullFloat64{Float64: *req.CreateCubeSatFrameBody.Width, Valid: true},
-		Weight:                  sql.NullInt64{Int64: *req.CreateCubeSatFrameBody.Weight, Valid: true},
+		Weight:                  sql.NullFloat64{Float64: *req.CreateCubeSatFrameBody.Weight, Valid: true},
+		Size:                    req.CreateCubeSatFrameBody.Size,
+		Interface:               sql.NullString{String: req.CreateCubeSatFrameBody.Interface, Valid: true},
 		OperatingTemperatureMin: sql.NullInt64{Int64: *req.CreateCubeSatFrameBody.OperatingTemperatureMin, Valid: true},
 		OperatingTemperatureMax: sql.NullInt64{Int64: *req.CreateCubeSatFrameBody.OperatingTemperatureMax, Valid: true},
 		MechanicalVibration:     sql.NullInt64{Int64: *req.CreateCubeSatFrameBody.MechanicalVibration, Valid: true},
@@ -147,7 +153,7 @@ func (h *Handler) UpdateCubeSatFrameHandler(req api.UpdateCubeSatFrameParams, pr
 		cubeSatFrame.Width.Float64 = *req.CreateCubeSatFrameBody.Width
 	}
 	if *req.CreateCubeSatFrameBody.Weight != 0 {
-		cubeSatFrame.Weight.Int64 = *req.CreateCubeSatFrameBody.Weight
+		cubeSatFrame.Weight.Float64 = *req.CreateCubeSatFrameBody.Weight
 	}
 	if *req.CreateCubeSatFrameBody.OperatingTemperatureMin != 0 {
 		cubeSatFrame.OperatingTemperatureMin.Int64 = *req.CreateCubeSatFrameBody.OperatingTemperatureMin

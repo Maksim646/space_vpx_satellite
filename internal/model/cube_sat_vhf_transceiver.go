@@ -47,6 +47,7 @@ type IVHFTransceiverRepository interface {
 	CreateVHFTransceiver(ctx context.Context, vhfTransceiver VHFTransceiver) (int64, error)
 
 	GetVHFTransceiverByID(ctx context.Context, vhfTransceiverID int64) (VHFTransceiver, error)
+	GetVHFTransceiverByName(ctx context.Context, vhfTransceiverName string) (VHFTransceiver, error)
 	GetVHFTransceiversByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]VHFTransceiver, error)
 
 	UpdateVHFTransceiver(ctx context.Context, vhfTransceiver VHFTransceiver) error
@@ -58,6 +59,7 @@ type IVHFTransceiverUsecase interface {
 	CreateVHFTransceiver(ctx context.Context, vhfTransceiver VHFTransceiver) (int64, error)
 
 	GetVHFTransceiverByID(ctx context.Context, vhfTransceiverID int64) (VHFTransceiver, error)
+	GetVHFTransceiverByName(ctx context.Context, vhfTransceiverName string) (VHFTransceiver, error)
 	GetVHFTransceiversByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]VHFTransceiver, error)
 
 	UpdateVHFTransceiver(ctx context.Context, vhfTransceiver VHFTransceiver) error

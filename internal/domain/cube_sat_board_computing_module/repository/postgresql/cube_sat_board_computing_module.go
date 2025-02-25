@@ -104,6 +104,42 @@ func (r *BoardComputingModuleRepository) GetBoardComputingModuleByID(ctx context
 	return module, err
 }
 
+func (r *BoardComputingModuleRepository) GetBoardComputingModuleByName(ctx context.Context, moduleName string) (model.BoardComputingModule, error) {
+	var module model.BoardComputingModule
+	query, params, err := postgresql.Builder.Select(
+		"id",
+		"name",
+		"length",
+		"width",
+		"height",
+		"weight",
+		"supply_voltage",
+		"power_consumption",
+		"interface",
+		"max_operating_temperature",
+		"min_operating_temperature",
+		"mechanical_vibration",
+		"mechanical_shock",
+		"updated_at",
+		"created_at",
+	).
+		From("board_computing_module").
+		Where(sq.Eq{"name": moduleName}).
+		ToSql()
+	if err != nil {
+		return module, err
+	}
+
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	if err = r.sqalxConn.GetContext(ctx, &module, query, params...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return module, model.ErrBoardComputingModuleNotFound
+		}
+	}
+
+	return module, err
+}
+
 // GetBoardComputingModulesByFilters retrieves board computing modules from the database based on filters.
 func (r *BoardComputingModuleRepository) GetBoardComputingModulesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.BoardComputingModule, error) {
 	builder := postgresql.Builder.Select(

@@ -32,6 +32,9 @@ type CreateCubeSatProjectBody struct {
 	// Required: true
 	ProjectName *string `json:"project_name"`
 
+	// size
+	Size int64 `json:"size,omitempty"`
+
 	// solar panel side name
 	SolarPanelSideName string `json:"solar_panel_side_name,omitempty"`
 

@@ -109,6 +109,45 @@ func (r *VHFTransceiverRepository) GetVHFTransceiverByID(ctx context.Context, vh
 	return transceiver, err
 }
 
+func (r *VHFTransceiverRepository) GetVHFTransceiverByName(ctx context.Context, vhfTransceiverName string) (model.VHFTransceiver, error) {
+	var transceiver model.VHFTransceiver
+	query, params, err := postgresql.Builder.Select(
+		"id",
+		"name",
+		"length",
+		"width",
+		"height",
+		"weight",
+		"supply_voltage",
+		"power_consumption",
+		"interface",
+		"operating_frequency",
+		"output_power",
+		"sensitivity_receiver",
+		"max_operating_temperature",
+		"min_operating_temperature",
+		"mechanical_vibration",
+		"mechanical_shock",
+		"updated_at",
+		"created_at",
+	).
+		From("vhf_transceiver").
+		Where(sq.Eq{"name": vhfTransceiverName}).
+		ToSql()
+	if err != nil {
+		return transceiver, err
+	}
+
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	if err = r.sqalxConn.GetContext(ctx, &transceiver, query, params...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return transceiver, model.ErrVHFTransceiverNotFound
+		}
+	}
+
+	return transceiver, err
+}
+
 func (r *VHFTransceiverRepository) GetVHFTransceiversByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.VHFTransceiver, error) {
 	builder := postgresql.Builder.Select(
 		"id",

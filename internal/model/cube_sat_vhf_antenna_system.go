@@ -43,6 +43,7 @@ type IVHFAntennaSystemRepository interface {
 	CreateVHFAntennaSystem(ctx context.Context, vhfAntennaSystem VHFAntennaSystem) (int64, error)
 
 	GetVHFAntennaSystemByID(ctx context.Context, vhfAntennaSystemID int64) (VHFAntennaSystem, error)
+	GetVHFAntennaSystemByName(ctx context.Context, vhfAntennaSystemName string) (VHFAntennaSystem, error)
 	GetVHFAntennaSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]VHFAntennaSystem, error)
 
 	UpdateVHFAntennaSystem(ctx context.Context, vhfAntennaSystem VHFAntennaSystem) error
@@ -54,6 +55,7 @@ type IVHFAntennaSystemUsecase interface {
 	CreateVHFAntennaSystem(ctx context.Context, vhfAntennaSystem VHFAntennaSystem) (int64, error)
 
 	GetVHFAntennaSystemByID(ctx context.Context, vhfAntennaSystemID int64) (VHFAntennaSystem, error)
+	GetVHFAntennaSystemByName(ctx context.Context, vhfAntennaSystemName string) (VHFAntennaSystem, error)
 	GetVHFAntennaSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]VHFAntennaSystem, error)
 
 	UpdateVHFAntennaSystem(ctx context.Context, vhfAntennaSystem VHFAntennaSystem) error

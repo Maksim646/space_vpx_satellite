@@ -37,7 +37,7 @@ func (h *Handler) CreateBoardComputeringModuleHandler(req api.CreateBoardComputi
 		Interface:               sql.NullString{String: req.BoardComputingModule.Interface, Valid: true},
 	}
 
-	boardComputeringModuleID, err := h.cubeSatBoardComputeringModuleUsecase.CreateBoardComputingModule(ctx, boardComputeringModule)
+	boardComputeringModuleID, err := h.cubeSatBoardComputingModuleUsecase.CreateBoardComputingModule(ctx, boardComputeringModule)
 	if err != nil {
 		zap.L().Error("error create new board computering module", zap.Error(err))
 		return api.NewCreateBoardComputingModuleInternalServerError().WithPayload(&definition.Error{
@@ -45,7 +45,7 @@ func (h *Handler) CreateBoardComputeringModuleHandler(req api.CreateBoardComputi
 		})
 	}
 
-	boardComputeringModuleResult, err := h.cubeSatBoardComputeringModuleUsecase.GetBoardComputingModuleByID(ctx, boardComputeringModuleID)
+	boardComputeringModuleResult, err := h.cubeSatBoardComputingModuleUsecase.GetBoardComputingModuleByID(ctx, boardComputeringModuleID)
 	if err != nil {
 		return api.NewCreateBoardComputingModuleBadRequest().WithPayload(&definition.Error{
 			Message: &model.BoardComputingModuleNotFound,
@@ -78,7 +78,7 @@ func (h *Handler) GetBoardComputingModuleHandler(req api.GetBoardComputingModule
 		return api.NewGetBoardComputingModuleByIDForbidden()
 	}
 
-	boardComputingModule, err := h.cubeSatBoardComputeringModuleUsecase.GetBoardComputingModuleByID(ctx, req.ID)
+	boardComputingModule, err := h.cubeSatBoardComputingModuleUsecase.GetBoardComputingModuleByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetch board computing module", zap.Error(err))
 		return api.NewGetBoardComputingModuleByIDBadRequest().WithPayload(&definition.Error{
@@ -114,7 +114,7 @@ func (h *Handler) UpdateBoardComputingModuleHandler(req api.UpdateBoardComputing
 		return api.NewUpdateBoardComputingModuleForbidden()
 	}
 
-	boardComputingModule, err := h.cubeSatBoardComputeringModuleUsecase.GetBoardComputingModuleByID(ctx, req.ID)
+	boardComputingModule, err := h.cubeSatBoardComputingModuleUsecase.GetBoardComputingModuleByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetch board computing module", zap.Error(err))
 		return api.NewUpdateBoardComputingModuleBadRequest().WithPayload(&definition.Error{
@@ -181,13 +181,13 @@ func (h *Handler) UpdateBoardComputingModuleHandler(req api.UpdateBoardComputing
 
 	boardComputingModule.UpdatedAt.Time = time.Now()
 
-	err = h.cubeSatBoardComputeringModuleUsecase.UpdateBoardComputingModule(ctx, boardComputingModule)
+	err = h.cubeSatBoardComputingModuleUsecase.UpdateBoardComputingModule(ctx, boardComputingModule)
 	if err != nil {
 		zap.L().Error("error update board computing module", zap.Error(err))
 		return api.NewUpdateBoardComputingModuleInternalServerError()
 	}
 
-	newBoardComputingModule, err := h.cubeSatBoardComputeringModuleUsecase.GetBoardComputingModuleByID(ctx, boardComputingModule.ID)
+	newBoardComputingModule, err := h.cubeSatBoardComputingModuleUsecase.GetBoardComputingModuleByID(ctx, boardComputingModule.ID)
 	if err != nil {
 		zap.L().Error("error fetch board computing module", zap.Error(err))
 		return api.NewUpdateBoardComputingModuleInternalServerError()
@@ -223,7 +223,7 @@ func (h *Handler) DeleteBoardComputingModuleHandler(req api.DeleteBoardComputing
 	}
 
 	// Check if BoardComputingModule exists
-	_, err := h.cubeSatBoardComputeringModuleUsecase.GetBoardComputingModuleByID(ctx, req.ID)
+	_, err := h.cubeSatBoardComputingModuleUsecase.GetBoardComputingModuleByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetch board computing module", zap.Error(err))
 		return api.NewDeleteBoardComputingModuleBadRequest().WithPayload(&definition.Error{
@@ -231,7 +231,7 @@ func (h *Handler) DeleteBoardComputingModuleHandler(req api.DeleteBoardComputing
 		})
 	}
 
-	err = h.cubeSatBoardComputeringModuleUsecase.DeleteBoardComputingModule(ctx, req.ID)
+	err = h.cubeSatBoardComputingModuleUsecase.DeleteBoardComputingModule(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error delete board computing module", zap.Error(err))
 		return api.NewDeleteBoardComputingModuleInternalServerError()
@@ -294,7 +294,7 @@ func (h *Handler) GetBoardComputingModules(req api.GetAvailableBoardComputingMod
 		filters[model.FilterBoardComputingModuleByMinLength] = *req.FilterBoardComputingModuleByLengthMin
 	}
 
-	boardComputingModules, err := h.cubeSatBoardComputeringModuleUsecase.GetBoardComputingModulesByFilters(ctx, req.Offset, req.Limit, sortParams, filters)
+	boardComputingModules, err := h.cubeSatBoardComputingModuleUsecase.GetBoardComputingModulesByFilters(ctx, req.Offset, req.Limit, sortParams, filters)
 	if err != nil {
 		zap.L().Error("error fetch board computing modules", zap.Error(err))
 		return api.NewGetAvailableBoardComputingModulesBadRequest().WithPayload(&definition.Error{

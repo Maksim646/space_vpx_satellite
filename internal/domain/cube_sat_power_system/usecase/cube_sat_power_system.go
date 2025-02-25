@@ -24,6 +24,10 @@ func (u *PowerSystemUsecase) GetPowerSystemByID(ctx context.Context, powerSystem
 	return u.powerSystemRepository.GetPowerSystemByID(ctx, powerSystemID)
 }
 
+func (u *PowerSystemUsecase) GetPowerSystemByName(ctx context.Context, powerSystemName string) (model.CubeSatPowerSystem, error) {
+	return u.powerSystemRepository.GetPowerSystemByName(ctx, powerSystemName)
+}
+
 func (u *PowerSystemUsecase) GetPowerSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatPowerSystem, error) {
 	return u.powerSystemRepository.GetPowerSystemsByFilters(ctx, offset, limit, sortParams, filters)
 }

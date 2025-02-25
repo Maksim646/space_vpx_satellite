@@ -7,10 +7,10 @@ import (
 )
 
 type SolarPanelUsecase struct {
-	solarPanelRepository model.ISolarPanelRepository
+	solarPanelRepository model.ISolarPanelSideRepository
 }
 
-func New(solarPanelRepository model.ISolarPanelRepository) model.ISolarPanelUsecase {
+func New(solarPanelRepository model.ISolarPanelSideRepository) model.ISolarPanelSideUsecase {
 	return &SolarPanelUsecase{
 		solarPanelRepository: solarPanelRepository,
 	}
@@ -22,6 +22,10 @@ func (u *SolarPanelUsecase) CreateSolarPanelSide(ctx context.Context, solarPanel
 
 func (u *SolarPanelUsecase) GetSolarPanelSideByID(ctx context.Context, solarPanelSideID int64) (model.CubeSatSolarPanelSide, error) {
 	return u.solarPanelRepository.GetSolarPanelSideByID(ctx, solarPanelSideID)
+}
+
+func (u *SolarPanelUsecase) GetSolarPanelSideByName(ctx context.Context, solarPanelSideName string) (model.CubeSatSolarPanelSide, error) {
+	return u.solarPanelRepository.GetSolarPanelSideByName(ctx, solarPanelSideName)
 }
 
 func (u *SolarPanelUsecase) GetSolarPanelSideByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatSolarPanelSide, error) {

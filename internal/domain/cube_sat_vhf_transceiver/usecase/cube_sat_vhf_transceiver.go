@@ -28,6 +28,10 @@ func (u *VHFTransceiverUsecase) GetVHFTransceiverByID(ctx context.Context, vhfTr
 	return u.vhfTransceiverRepository.GetVHFTransceiverByID(ctx, vhfTransceiverID)
 }
 
+func (u *VHFTransceiverUsecase) GetVHFTransceiverByName(ctx context.Context, vhfTransceiverName string) (model.VHFTransceiver, error) {
+	return u.vhfTransceiverRepository.GetVHFTransceiverByName(ctx, vhfTransceiverName)
+}
+
 // GetVHFTransceiversByFilters retrieves VHF transceivers based on the provided filters.
 func (u *VHFTransceiverUsecase) GetVHFTransceiversByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.VHFTransceiver, error) {
 	return u.vhfTransceiverRepository.GetVHFTransceiversByFilters(ctx, offset, limit, sortParams, filters)

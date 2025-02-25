@@ -115,6 +115,47 @@ func (r *SolarPanelTopRepository) GetSolarPanelTopByID(ctx context.Context, sola
 	return solarPanelTop, err
 }
 
+func (r SolarPanelTopRepository) GetSolarPanelTopByName(ctx context.Context, solarPanelTopName string) (model.SolarPanelTop, error) {
+	var solarPanelTop model.SolarPanelTop
+	query, params, err := postgresql.Builder.Select(
+		"id",
+		"name",
+		"length",
+		"width",
+		"height",
+		"weight",
+		"interface",
+		"voc",
+		"isc",
+		"vmp",
+		"imp",
+		"efficiency",
+		"coil_area",
+		"coil_resistance",
+		"min_operating_temperature",
+		"max_operating_temperature",
+		"mechanical_vibration",
+		"mechanical_shock",
+		"updated_at",
+		"created_at",
+	).
+		From("cube_sat_solar_panel_top").
+		Where(sq.Eq{"name": solarPanelTopName}).
+		ToSql()
+	if err != nil {
+		return solarPanelTop, err
+	}
+
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	if err = r.sqalxConn.GetContext(ctx, &solarPanelTop, query, params...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return solarPanelTop, model.ErrSolarPanelTopNotFound
+		}
+	}
+
+	return solarPanelTop, err
+}
+
 func (r *SolarPanelTopRepository) GetSolarPanelTopByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.SolarPanelTop, error) {
 	builder := postgresql.Builder.Select(
 		"id",

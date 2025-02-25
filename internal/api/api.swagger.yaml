@@ -323,6 +323,396 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /projects/{project_id}/frame:
+    put:
+      security:
+        - Bearer: []
+      summary: Update the Frame of a CubeSat Project
+      operationId: UpdateCubeSatFrameByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to update
+        - in: body
+          name: AddCubeSatFrame
+          description: Frame object to update
+          required: true
+          schema:
+            $ref: "#/definitions/AddCubeSatFrame"
+      responses:
+        200:
+          description: Successfully updated Frame
+          schema:
+            $ref: '#/definitions/CubeSatProject' # Or a more specific Frame object
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/{project_id}/solar_panel_side:
+    put:
+      security:
+        - Bearer: []
+      summary: Update the Solar Panel Side of a CubeSat Project
+      operationId: UpdateCubeSatSolarPanelSideByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to update
+        - in: body
+          name: AddCubeSatSolarPanelSide
+          description: Solar Panel Side object to update
+          required: true
+          schema:
+            $ref: "#/definitions/AddCubeSatSolarPanelSide"
+      responses:
+        200:
+          description: Successfully updated Solar Panel Side
+          schema:
+            $ref: '#/definitions/CubeSatProject' # Or a more specific SolarPanelSide object
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/{project_id}/solar_panel_top:
+    put:
+      security:
+        - Bearer: []
+      summary: Update the Solar Panel Top of a CubeSat Project
+      operationId: UpdateCubeSatSolarPanelTopByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to update
+        - in: body
+          name: AddCubeSatSolarPanelTop
+          description: Solar Panel Top object to update
+          required: true
+          schema:
+            $ref: "#/definitions/AddCubeSatSolarPanelTop"
+      responses:
+        200:
+          description: Successfully updated Solar Panel Top
+          schema:
+            $ref: '#/definitions/CubeSatProject' # Or a more specific SolarPanelTop object
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/{project_id}/board_computing_module:
+    put:
+      security:
+        - Bearer: []
+      summary: Update the Board Computing Module of a CubeSat Project
+      operationId: UpdateCubeSatBoardComputingModuleByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to update
+        - in: body
+          name: AddCubeSatBoardComputingModule
+          description: Board Computing Module object to update
+          required: true
+          schema:
+            $ref: "#/definitions/AddCubeSatBoardComputingModule"
+      responses:
+        200:
+          description: Successfully updated Board Computing Module
+          schema:
+            $ref: '#/definitions/CubeSatProject' # Or a more specific BoardComputingModule object
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/{project_id}/vhf_antenna_system:
+    put:
+      security:
+        - Bearer: []
+      summary: Update the VHF Antenna System of a CubeSat Project
+      operationId: UpdateCubeSatVhfAntennaSystemByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to update
+        - in: body
+          name: AddCubeSatVhfAntennaSystem
+          description: VHF Antenna System object to update
+          required: true
+          schema:
+            $ref: "#/definitions/AddCubeSatVhfAntennaSystem"
+      responses:
+        200:
+          description: Successfully updated VHF Antenna System
+          schema:
+            $ref: '#/definitions/CubeSatProject' # Or a more specific VHFAntennaSystem object
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/{project_id}/power_system:
+    put:
+      security:
+        - Bearer: []
+      summary: Update the Power System of a CubeSat Project
+      operationId: UpdateCubeSatPowerSystemByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to update
+        - in: body
+          name: AddCubeSatPowerSystem
+          description: Power System object to update
+          required: true
+          schema:
+            $ref: "#/definitions/AddCubeSatPowerSystem"
+      responses:
+        200:
+          description: Successfully updated Power System
+          schema:
+            $ref: '#/definitions/CubeSatProject' # Or a more specific PowerSystem object
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/{project_id}/vhf_transceiver:
+    put:
+      security:
+        - Bearer: []
+      summary: Update the VHF Transceiver of a CubeSat Project
+      operationId: UpdateCubeSatVhfTransceiverByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to update
+        - in: body
+          name: AddCubeSatVhfTransceiver
+          description: VHF Transceiver object to update
+          required: true
+          schema:
+            $ref: "#/definitions/AddCubeSatVhfTransceiver"
+      responses:
+        200:
+          description: Successfully updated VHF Transceiver
+          schema:
+            $ref: '#/definitions/CubeSatProject' # Or a more specific VHFTransceiver object
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Unprocessable Entity (e.g., validation errors)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /projects/{project_id}/validate:
+    post:
+      security:
+        - Bearer: []
+      summary: Validate the compatibility of a CubeSat Project
+      operationId: ValidateCubeSatProjectByProject
+      tags:
+        - CubeSatProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          type: string
+          description: The ID of the project to validate
+      responses:
+        200:
+          description: Successfully validated CubeSat Project
+          schema:
+            $ref: '#/definitions/CubeSatProjectValidationResult'
+        400:
+          description: Bad request (e.g., invalid input)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Project not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
 ### USER
   /user/get_me:
     get:
@@ -2077,12 +2467,64 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /test_data_load:
+    get:
+      security:
+        - Bearer: []
+      summary: Load Test Data
+      operationId: LoadTestData
+      tags: 
+        - TestData
+      responses:
+        200:
+          description: Load Test Data response
+          schema:
+            $ref: '#/definitions/Error'
+        400:
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error' 
+        422:
+          description: Unprocessable Entity
+          schema:
+            $ref: "#/definitions/Error"        
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+      
+
 
         
 
 
 
 definitions:
+
+  CubeSatProjectValidationResult:
+    type: object
+    properties:
+      is_compatible:
+        type: boolean
+        description: Indicates if the project is compatible
+      errors:
+        type: array
+        items:
+          $ref: "#/definitions/ValidationError"
+
+  ValidationError:
+    type: object
+    properties:
+      detail_type:
+        type: string
+        description: The type of detail causing the error (e.g., "solar_panel_side")
+      message:
+        type: string
+        description: A description of the validation error
 
   UrlResponse:
       type: object
@@ -2141,6 +2583,8 @@ definitions:
         type: string
       vhf_transceiver_name:
         type: string
+      size:
+        type: integer
   
   CreateCubeSatProjectResponse:
     type: object
@@ -2159,18 +2603,62 @@ definitions:
     properties:
       project_name:
         type: string
+      size:
+        type: integer
+
+  AddCubeSatFrame:
+    type: object
+    required:
+      - frame_name
+    properties:
       frame_name:
         type: string
+
+  AddCubeSatSolarPanelSide:
+    type: object
+    required:
+      - solar_panel_side_name
+    properties:
       solar_panel_side_name:
         type: string
+
+  AddCubeSatSolarPanelTop:
+    type: object
+    required:
+      - solar_panel_top_name
+    properties:
       solar_panel_top_name:
         type: string
+
+  AddCubeSatBoardComputingModule:
+    type: object
+    required:
+      - board_computing_module_name
+    properties:
       board_computing_module_name:
         type: string
-      power_system_name:
-        type: string
+
+  AddCubeSatVhfAntennaSystem:
+    type: object
+    required:
+      - vhf_antenna_system_name
+    properties:
       vhf_antenna_system_name:
         type: string
+
+  AddCubeSatPowerSystem:
+    type: object
+    required:
+      - board_computing_module_name
+    properties:
+      board_computing_module_name:
+        type: string
+
+  AddCubeSatVhfTransceiver:
+    type: object
+    required:
+      - vhf_transceiver_name
+    properties:
       vhf_transceiver_name:
         type: string
 
@@ -3061,7 +3549,11 @@ definitions:
       height:
         type: number
       weight:
+        type: number
+      size:
         type: integer
+      interface:
+        type: string
       operating_temperature_min:
         type: integer
       operating_temperature_max:
@@ -3098,7 +3590,11 @@ definitions:
       height:
         type: number
       weight:
+        type: number
+      size:
         type: integer
+      interface:
+        type: string
       operating_temperature_min:
         type: integer
       operating_temperature_max:

@@ -22,17 +22,17 @@ import (
 )
 
 type Handler struct {
-	userUsecase                          model.IUserUsecase
-	adminUsecase                         model.IAdminUsecase
-	projectUsecase                       model.IProjectUsecase
-	chassisUsecase                       model.IChassisUsecase
-	solarPanelUsecase                    model.ISolarPanelUsecase
-	cubeSatSolarPanelTopUsecase          model.ISolarPanelTopUsecase
-	cubeSatFrameUsecase                  model.ICubeSatFrameUsecase
-	cubeSatPowerSystemUsecase            model.IPowerSystemUsecase
-	cubeSatBoardComputeringModuleUsecase model.IBoardComputingModuleUsecase
-	cubeSatVhfAntennaSystemUsecase       model.IVHFAntennaSystemUsecase
-	cubeSatVhfTransceiverUsecase         model.IVHFTransceiverUsecase
+	userUsecase                        model.IUserUsecase
+	adminUsecase                       model.IAdminUsecase
+	projectUsecase                     model.IProjectUsecase
+	chassisUsecase                     model.IChassisUsecase
+	cubeSatSolarPanelSideUsecase       model.ISolarPanelSideUsecase
+	cubeSatSolarPanelTopUsecase        model.ISolarPanelTopUsecase
+	cubeSatFrameUsecase                model.ICubeSatFrameUsecase
+	cubeSatPowerSystemUsecase          model.IPowerSystemUsecase
+	cubeSatBoardComputingModuleUsecase model.IBoardComputingModuleUsecase
+	cubeSatVhfAntennaSystemUsecase     model.IVHFAntennaSystemUsecase
+	cubeSatVhfTransceiverUsecase       model.IVHFTransceiverUsecase
 
 	router       http.Handler
 	HashSalt     string
@@ -44,11 +44,11 @@ func New(
 	adminUsecase model.IAdminUsecase,
 	projectUsecase model.IProjectUsecase,
 	chassisUsecase model.IChassisUsecase,
-	solarPanelUsecase model.ISolarPanelUsecase,
+	cubeSatSolarPanelSideUsecase model.ISolarPanelSideUsecase,
 	cubeSatSolarPanelTopUsecase model.ISolarPanelTopUsecase,
 	cubeSatFrameUsecase model.ICubeSatFrameUsecase,
 	cubeSatPowerSystemUsecase model.IPowerSystemUsecase,
-	cubeSatBoardComputeringModuleUsecase model.IBoardComputingModuleUsecase,
+	cubeSatBoardComputingModuleUsecase model.IBoardComputingModuleUsecase,
 	cubeSatVhfAntennaSystemUsecase model.IVHFAntennaSystemUsecase,
 	cubeSatVhfTransceiverUsecase model.IVHFTransceiverUsecase,
 
@@ -64,17 +64,17 @@ func New(
 	}
 
 	h := &Handler{
-		userUsecase:                          userUsecase,
-		adminUsecase:                         adminUsecase,
-		projectUsecase:                       projectUsecase,
-		chassisUsecase:                       chassisUsecase,
-		solarPanelUsecase:                    solarPanelUsecase,
-		cubeSatSolarPanelTopUsecase:          cubeSatSolarPanelTopUsecase,
-		cubeSatFrameUsecase:                  cubeSatFrameUsecase,
-		cubeSatPowerSystemUsecase:            cubeSatPowerSystemUsecase,
-		cubeSatBoardComputeringModuleUsecase: cubeSatBoardComputeringModuleUsecase,
-		cubeSatVhfAntennaSystemUsecase:       cubeSatVhfAntennaSystemUsecase,
-		cubeSatVhfTransceiverUsecase:         cubeSatVhfTransceiverUsecase,
+		userUsecase:                        userUsecase,
+		adminUsecase:                       adminUsecase,
+		projectUsecase:                     projectUsecase,
+		chassisUsecase:                     chassisUsecase,
+		cubeSatSolarPanelSideUsecase:       cubeSatSolarPanelSideUsecase,
+		cubeSatSolarPanelTopUsecase:        cubeSatSolarPanelTopUsecase,
+		cubeSatFrameUsecase:                cubeSatFrameUsecase,
+		cubeSatPowerSystemUsecase:          cubeSatPowerSystemUsecase,
+		cubeSatBoardComputingModuleUsecase: cubeSatBoardComputingModuleUsecase,
+		cubeSatVhfAntennaSystemUsecase:     cubeSatVhfAntennaSystemUsecase,
+		cubeSatVhfTransceiverUsecase:       cubeSatVhfTransceiverUsecase,
 
 		HashSalt:     HashSalt,
 		jwtSigninKey: jwtSigninKey,
@@ -85,6 +85,9 @@ func New(
 	router.UseSwaggerUI()
 	router.Logger = zap.S().Infof
 	router.BearerAuth = h.ValidateHeader
+
+	// LOAD TEST DATA
+	router.LoadTestDataHandler = api.LoadTestDataHandlerFunc(h.LoadTestDataHandler)
 
 	// AUTH
 	router.RegisterUserHandler = api.RegisterUserHandlerFunc(h.RegisterUserHandler)
@@ -97,6 +100,9 @@ func New(
 	router.GetCubeSatProjectHandler = api.GetCubeSatProjectHandlerFunc(h.GetProjectByIDHandler)
 	router.DeleteCubeSatProjectHandler = api.DeleteCubeSatProjectHandlerFunc(h.DeleteProject)
 	router.GetUserCubeSatProjectsHandler = api.GetUserCubeSatProjectsHandlerFunc(h.GetProjectsByUser)
+
+	router.UpdateCubeSatFrameByProjectHandler = api.UpdateCubeSatFrameByProjectHandlerFunc(h.AddCubeSatFrameHandler)
+	// router.UpdateCubeSatBoardComputingModuleByProjectHandler = api.UpdateCubeSatBoardComputingModuleByProjectHandlerFunc(h.)
 
 	// CUBE SAT POWER SYSTEM
 	router.CreatePowerSystemHandler = api.CreatePowerSystemHandlerFunc(h.CreatePowerSystemHandler)

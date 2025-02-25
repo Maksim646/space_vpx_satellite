@@ -19,30 +19,12 @@ import (
 // swagger:model UpdateCubeSatProjectBody
 type UpdateCubeSatProjectBody struct {
 
-	// board computing module name
-	BoardComputingModuleName string `json:"board_computing_module_name,omitempty"`
-
-	// frame name
-	FrameName string `json:"frame_name,omitempty"`
-
-	// power system name
-	PowerSystemName string `json:"power_system_name,omitempty"`
-
 	// project name
 	// Required: true
 	ProjectName *string `json:"project_name"`
 
-	// solar panel side name
-	SolarPanelSideName string `json:"solar_panel_side_name,omitempty"`
-
-	// solar panel top name
-	SolarPanelTopName string `json:"solar_panel_top_name,omitempty"`
-
-	// vhf antenna system name
-	VhfAntennaSystemName string `json:"vhf_antenna_system_name,omitempty"`
-
-	// vhf transceiver name
-	VhfTransceiverName string `json:"vhf_transceiver_name,omitempty"`
+	// size
+	Size int64 `json:"size,omitempty"`
 }
 
 // Validate validates this update cube sat project body

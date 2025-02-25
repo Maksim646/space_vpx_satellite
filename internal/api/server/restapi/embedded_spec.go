@@ -2142,6 +2142,599 @@ func init() {
         }
       }
     },
+    "/projects/{project_id}/board_computing_module": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Board Computing Module of a CubeSat Project",
+        "operationId": "UpdateCubeSatBoardComputingModuleByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Board Computing Module object to update",
+            "name": "AddCubeSatBoardComputingModule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatBoardComputingModule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/frame": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Frame of a CubeSat Project",
+        "operationId": "UpdateCubeSatFrameByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Frame object to update",
+            "name": "AddCubeSatFrame",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatFrame"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Frame",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/power_system": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Power System of a CubeSat Project",
+        "operationId": "UpdateCubeSatPowerSystemByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Power System object to update",
+            "name": "AddCubeSatPowerSystem",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatPowerSystem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Power System",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/solar_panel_side": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Solar Panel Side of a CubeSat Project",
+        "operationId": "UpdateCubeSatSolarPanelSideByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Solar Panel Side object to update",
+            "name": "AddCubeSatSolarPanelSide",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatSolarPanelSide"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Solar Panel Side",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/solar_panel_top": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Solar Panel Top of a CubeSat Project",
+        "operationId": "UpdateCubeSatSolarPanelTopByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Solar Panel Top object to update",
+            "name": "AddCubeSatSolarPanelTop",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatSolarPanelTop"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Solar Panel Top",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/validate": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Validate the compatibility of a CubeSat Project",
+        "operationId": "ValidateCubeSatProjectByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to validate",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully validated CubeSat Project",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProjectValidationResult"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/vhf_antenna_system": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the VHF Antenna System of a CubeSat Project",
+        "operationId": "UpdateCubeSatVhfAntennaSystemByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "VHF Antenna System object to update",
+            "name": "AddCubeSatVhfAntennaSystem",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatVhfAntennaSystem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated VHF Antenna System",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/vhf_transceiver": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the VHF Transceiver of a CubeSat Project",
+        "operationId": "UpdateCubeSatVhfTransceiverByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "VHF Transceiver object to update",
+            "name": "AddCubeSatVhfTransceiver",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatVhfTransceiver"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated VHF Transceiver",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/solar_panel_side": {
       "post": {
         "security": [
@@ -2762,6 +3355,52 @@ func init() {
         }
       }
     },
+    "/test_data_load": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "TestData"
+        ],
+        "summary": "Load Test Data",
+        "operationId": "LoadTestData",
+        "responses": {
+          "200": {
+            "description": "Load Test Data response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/user/get_me": {
       "get": {
         "security": [
@@ -3122,6 +3761,83 @@ func init() {
     }
   },
   "definitions": {
+    "AddCubeSatBoardComputingModule": {
+      "type": "object",
+      "required": [
+        "board_computing_module_name"
+      ],
+      "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatFrame": {
+      "type": "object",
+      "required": [
+        "frame_name"
+      ],
+      "properties": {
+        "frame_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatPowerSystem": {
+      "type": "object",
+      "required": [
+        "board_computing_module_name"
+      ],
+      "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatSolarPanelSide": {
+      "type": "object",
+      "required": [
+        "solar_panel_side_name"
+      ],
+      "properties": {
+        "solar_panel_side_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatSolarPanelTop": {
+      "type": "object",
+      "required": [
+        "solar_panel_top_name"
+      ],
+      "properties": {
+        "solar_panel_top_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatVhfAntennaSystem": {
+      "type": "object",
+      "required": [
+        "vhf_antenna_system_name"
+      ],
+      "properties": {
+        "vhf_antenna_system_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatVhfTransceiver": {
+      "type": "object",
+      "required": [
+        "vhf_transceiver_name"
+      ],
+      "properties": {
+        "vhf_transceiver_name": {
+          "type": "string"
+        }
+      }
+    },
     "BoardComputingModule": {
       "type": "object",
       "properties": {
@@ -3577,6 +4293,9 @@ func init() {
         "height": {
           "type": "number"
         },
+        "interface": {
+          "type": "string"
+        },
         "length": {
           "type": "number"
         },
@@ -3598,8 +4317,11 @@ func init() {
         "operating_temperature_min": {
           "type": "integer"
         },
-        "weight": {
+        "size": {
           "type": "integer"
+        },
+        "weight": {
+          "type": "number"
         },
         "width": {
           "type": "number"
@@ -3623,6 +4345,9 @@ func init() {
         },
         "project_name": {
           "type": "string"
+        },
+        "size": {
+          "type": "integer"
         },
         "solar_panel_side_name": {
           "type": "string"
@@ -3960,6 +4685,9 @@ func init() {
         "id": {
           "type": "integer"
         },
+        "interface": {
+          "type": "string"
+        },
         "length": {
           "type": "number"
         },
@@ -3981,12 +4709,15 @@ func init() {
         "operating_temperature_min": {
           "type": "integer"
         },
+        "size": {
+          "type": "integer"
+        },
         "updated_at": {
           "description": "Timestamp of the last update",
           "type": "integer"
         },
         "weight": {
-          "type": "integer"
+          "type": "number"
         },
         "width": {
           "type": "number"
@@ -4172,6 +4903,21 @@ func init() {
         },
         "vhf_transceiver_name": {
           "type": "string"
+        }
+      }
+    },
+    "CubeSatProjectValidationResult": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        },
+        "is_compatible": {
+          "description": "Indicates if the project is compatible",
+          "type": "boolean"
         }
       }
     },
@@ -4576,29 +5322,11 @@ func init() {
         "project_name"
       ],
       "properties": {
-        "board_computing_module_name": {
-          "type": "string"
-        },
-        "frame_name": {
-          "type": "string"
-        },
-        "power_system_name": {
-          "type": "string"
-        },
         "project_name": {
           "type": "string"
         },
-        "solar_panel_side_name": {
-          "type": "string"
-        },
-        "solar_panel_top_name": {
-          "type": "string"
-        },
-        "vhf_antenna_system_name": {
-          "type": "string"
-        },
-        "vhf_transceiver_name": {
-          "type": "string"
+        "size": {
+          "type": "integer"
         }
       }
     },
@@ -5039,6 +5767,19 @@ func init() {
         },
         "width": {
           "type": "number"
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "detail_type": {
+          "description": "The type of detail causing the error (e.g., \"solar_panel_side\")",
+          "type": "string"
+        },
+        "message": {
+          "description": "A description of the validation error",
+          "type": "string"
         }
       }
     }
@@ -7186,6 +7927,599 @@ func init() {
         }
       }
     },
+    "/projects/{project_id}/board_computing_module": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Board Computing Module of a CubeSat Project",
+        "operationId": "UpdateCubeSatBoardComputingModuleByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Board Computing Module object to update",
+            "name": "AddCubeSatBoardComputingModule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatBoardComputingModule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Board Computing Module",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/frame": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Frame of a CubeSat Project",
+        "operationId": "UpdateCubeSatFrameByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Frame object to update",
+            "name": "AddCubeSatFrame",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatFrame"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Frame",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/power_system": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Power System of a CubeSat Project",
+        "operationId": "UpdateCubeSatPowerSystemByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Power System object to update",
+            "name": "AddCubeSatPowerSystem",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatPowerSystem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Power System",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/solar_panel_side": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Solar Panel Side of a CubeSat Project",
+        "operationId": "UpdateCubeSatSolarPanelSideByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Solar Panel Side object to update",
+            "name": "AddCubeSatSolarPanelSide",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatSolarPanelSide"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Solar Panel Side",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/solar_panel_top": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the Solar Panel Top of a CubeSat Project",
+        "operationId": "UpdateCubeSatSolarPanelTopByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Solar Panel Top object to update",
+            "name": "AddCubeSatSolarPanelTop",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatSolarPanelTop"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated Solar Panel Top",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/validate": {
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Validate the compatibility of a CubeSat Project",
+        "operationId": "ValidateCubeSatProjectByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to validate",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully validated CubeSat Project",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProjectValidationResult"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/vhf_antenna_system": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the VHF Antenna System of a CubeSat Project",
+        "operationId": "UpdateCubeSatVhfAntennaSystemByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "VHF Antenna System object to update",
+            "name": "AddCubeSatVhfAntennaSystem",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatVhfAntennaSystem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated VHF Antenna System",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/vhf_transceiver": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "CubeSatProject"
+        ],
+        "summary": "Update the VHF Transceiver of a CubeSat Project",
+        "operationId": "UpdateCubeSatVhfTransceiverByProject",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to update",
+            "name": "project_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "VHF Transceiver object to update",
+            "name": "AddCubeSatVhfTransceiver",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCubeSatVhfTransceiver"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated VHF Transceiver",
+            "schema": {
+              "$ref": "#/definitions/CubeSatProject"
+            }
+          },
+          "400": {
+            "description": "Bad request (e.g., invalid input)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Project not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity (e.g., validation errors)",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/solar_panel_side": {
       "post": {
         "security": [
@@ -7810,6 +9144,52 @@ func init() {
         }
       }
     },
+    "/test_data_load": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "TestData"
+        ],
+        "summary": "Load Test Data",
+        "operationId": "LoadTestData",
+        "responses": {
+          "200": {
+            "description": "Load Test Data response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/user/get_me": {
       "get": {
         "security": [
@@ -8171,6 +9551,83 @@ func init() {
     }
   },
   "definitions": {
+    "AddCubeSatBoardComputingModule": {
+      "type": "object",
+      "required": [
+        "board_computing_module_name"
+      ],
+      "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatFrame": {
+      "type": "object",
+      "required": [
+        "frame_name"
+      ],
+      "properties": {
+        "frame_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatPowerSystem": {
+      "type": "object",
+      "required": [
+        "board_computing_module_name"
+      ],
+      "properties": {
+        "board_computing_module_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatSolarPanelSide": {
+      "type": "object",
+      "required": [
+        "solar_panel_side_name"
+      ],
+      "properties": {
+        "solar_panel_side_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatSolarPanelTop": {
+      "type": "object",
+      "required": [
+        "solar_panel_top_name"
+      ],
+      "properties": {
+        "solar_panel_top_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatVhfAntennaSystem": {
+      "type": "object",
+      "required": [
+        "vhf_antenna_system_name"
+      ],
+      "properties": {
+        "vhf_antenna_system_name": {
+          "type": "string"
+        }
+      }
+    },
+    "AddCubeSatVhfTransceiver": {
+      "type": "object",
+      "required": [
+        "vhf_transceiver_name"
+      ],
+      "properties": {
+        "vhf_transceiver_name": {
+          "type": "string"
+        }
+      }
+    },
     "BoardComputingModule": {
       "type": "object",
       "properties": {
@@ -8626,6 +10083,9 @@ func init() {
         "height": {
           "type": "number"
         },
+        "interface": {
+          "type": "string"
+        },
         "length": {
           "type": "number"
         },
@@ -8647,8 +10107,11 @@ func init() {
         "operating_temperature_min": {
           "type": "integer"
         },
-        "weight": {
+        "size": {
           "type": "integer"
+        },
+        "weight": {
+          "type": "number"
         },
         "width": {
           "type": "number"
@@ -8672,6 +10135,9 @@ func init() {
         },
         "project_name": {
           "type": "string"
+        },
+        "size": {
+          "type": "integer"
         },
         "solar_panel_side_name": {
           "type": "string"
@@ -9009,6 +10475,9 @@ func init() {
         "id": {
           "type": "integer"
         },
+        "interface": {
+          "type": "string"
+        },
         "length": {
           "type": "number"
         },
@@ -9030,12 +10499,15 @@ func init() {
         "operating_temperature_min": {
           "type": "integer"
         },
+        "size": {
+          "type": "integer"
+        },
         "updated_at": {
           "description": "Timestamp of the last update",
           "type": "integer"
         },
         "weight": {
-          "type": "integer"
+          "type": "number"
         },
         "width": {
           "type": "number"
@@ -9221,6 +10693,21 @@ func init() {
         },
         "vhf_transceiver_name": {
           "type": "string"
+        }
+      }
+    },
+    "CubeSatProjectValidationResult": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        },
+        "is_compatible": {
+          "description": "Indicates if the project is compatible",
+          "type": "boolean"
         }
       }
     },
@@ -9625,29 +11112,11 @@ func init() {
         "project_name"
       ],
       "properties": {
-        "board_computing_module_name": {
-          "type": "string"
-        },
-        "frame_name": {
-          "type": "string"
-        },
-        "power_system_name": {
-          "type": "string"
-        },
         "project_name": {
           "type": "string"
         },
-        "solar_panel_side_name": {
-          "type": "string"
-        },
-        "solar_panel_top_name": {
-          "type": "string"
-        },
-        "vhf_antenna_system_name": {
-          "type": "string"
-        },
-        "vhf_transceiver_name": {
-          "type": "string"
+        "size": {
+          "type": "integer"
         }
       }
     },
@@ -10088,6 +11557,19 @@ func init() {
         },
         "width": {
           "type": "number"
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "detail_type": {
+          "description": "The type of detail causing the error (e.g., \"solar_panel_side\")",
+          "type": "string"
+        },
+        "message": {
+          "description": "A description of the validation error",
+          "type": "string"
         }
       }
     }

@@ -17,7 +17,7 @@ type SolarPanelRepository struct {
 	sqalxConn sqalx.Node
 }
 
-func New(sqalxConn sqalx.Node) model.ISolarPanelRepository {
+func New(sqalxConn sqalx.Node) model.ISolarPanelSideRepository {
 	return &SolarPanelRepository{sqalxConn: sqalxConn}
 }
 
@@ -100,6 +100,47 @@ func (r *SolarPanelRepository) GetSolarPanelSideByID(ctx context.Context, solarP
 	).
 		From("cube_sat_solar_panel_side").
 		Where(sq.Eq{"id": solarPanelSideID}).
+		ToSql()
+	if err != nil {
+		return solarPanel, err
+	}
+
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	if err = r.sqalxConn.GetContext(ctx, &solarPanel, query, params...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return solarPanel, model.ErrSolarPanelNotFound
+		}
+	}
+
+	return solarPanel, err
+}
+
+func (r *SolarPanelRepository) GetSolarPanelSideByName(ctx context.Context, solarPanelSideName string) (model.CubeSatSolarPanelSide, error) {
+	var solarPanel model.CubeSatSolarPanelSide
+	query, params, err := postgresql.Builder.Select(
+		"id",
+		"name",
+		"length",
+		"width",
+		"height",
+		"weight",
+		"interface",
+		"voc",
+		"isc",
+		"vmp",
+		"imp",
+		"efficiency",
+		"coil_area",
+		"coil_resistance",
+		"max_operating_temperature",
+		"min_operating_temperature",
+		"mechanical_vibration",
+		"mechanical_shock",
+		"updated_at",
+		"created_at",
+	).
+		From("cube_sat_solar_panel_side").
+		Where(sq.Eq{"name": solarPanelSideName}).
 		ToSql()
 	if err != nil {
 		return solarPanel, err

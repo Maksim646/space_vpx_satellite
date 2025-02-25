@@ -30,6 +30,9 @@ type CubeSatFrame struct {
 	// Required: true
 	ID *int64 `json:"id"`
 
+	// interface
+	Interface string `json:"interface,omitempty"`
+
 	// length
 	// Required: true
 	Length *float64 `json:"length"`
@@ -57,12 +60,15 @@ type CubeSatFrame struct {
 	// Required: true
 	OperatingTemperatureMin *int64 `json:"operating_temperature_min"`
 
+	// size
+	Size int64 `json:"size,omitempty"`
+
 	// Timestamp of the last update
 	UpdatedAt int64 `json:"updated_at,omitempty"`
 
 	// weight
 	// Required: true
-	Weight *int64 `json:"weight"`
+	Weight *float64 `json:"weight"`
 
 	// width
 	// Required: true

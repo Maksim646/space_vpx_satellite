@@ -24,6 +24,10 @@ func (u *SolarPanelTopUsecase) GetSolarPanelTopByID(ctx context.Context, solarPa
 	return u.solarPanelTopRepository.GetSolarPanelTopByID(ctx, solarPanelTopID)
 }
 
+func (u *SolarPanelTopUsecase) GetSolarPanelTopByName(ctx context.Context, solarPanelTopName string) (model.SolarPanelTop, error) {
+	return u.solarPanelTopRepository.GetSolarPanelTopByName(ctx, solarPanelTopName)
+}
+
 func (u *SolarPanelTopUsecase) GetSolarPanelTopByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.SolarPanelTop, error) {
 	return u.solarPanelTopRepository.GetSolarPanelTopByFilters(ctx, offset, limit, sortParams, filters)
 }

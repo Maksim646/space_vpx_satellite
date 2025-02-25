@@ -127,6 +127,51 @@ func (r *PowerSystemRepository) GetPowerSystemByID(ctx context.Context, powerSys
 	return powerSystem, err
 }
 
+func (r *PowerSystemRepository) GetPowerSystemByName(ctx context.Context, powerSystemName string) (model.CubeSatPowerSystem, error) {
+	var powerSystem model.CubeSatPowerSystem
+	query, params, err := postgresql.Builder.Select(
+		"id",
+		"name",
+		"length",
+		"width",
+		"height",
+		"weight",
+		"solar_panel_channels",
+		"solar_panels_type",
+		"solar_panel_voltage_min",
+		"solar_panel_voltage_max",
+		"solar_panel_current_per_channel_max",
+		"total_current_of_solar_panels_max",
+		"output_channels",
+		"system_bus_voltage_solar_panels",
+		"system_bus_voltage_output_channels",
+		"current_output_channels_max",
+		"total_output_current",
+		"data_interface",
+		"max_operating_temperature",
+		"min_operating_temperature",
+		"mechanical_vibration",
+		"mechanical_shock",
+		"updated_at",
+		"created_at",
+	).
+		From("cube_sat_power_system").
+		Where(sq.Eq{"name": powerSystemName}).
+		ToSql()
+	if err != nil {
+		return powerSystem, err
+	}
+
+	zap.L().Debug(postgresql.BuildQuery(query, params))
+	if err = r.sqalxConn.GetContext(ctx, &powerSystem, query, params...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return powerSystem, model.ErrPowerSystemNotFound
+		}
+	}
+
+	return powerSystem, err
+}
+
 func (r *PowerSystemRepository) GetPowerSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.CubeSatPowerSystem, error) {
 	builder := postgresql.Builder.Select(
 		"id",

@@ -28,6 +28,10 @@ func (u *VHFAntennaSystemUsecase) GetVHFAntennaSystemByID(ctx context.Context, v
 	return u.vhfAntennaSystemRepository.GetVHFAntennaSystemByID(ctx, vhfAntennaSystemID)
 }
 
+func (u *VHFAntennaSystemUsecase) GetVHFAntennaSystemByName(ctx context.Context, vhfAntennaSystemName string) (model.VHFAntennaSystem, error) {
+	return u.vhfAntennaSystemRepository.GetVHFAntennaSystemByName(ctx, vhfAntennaSystemName)
+}
+
 // GetVHFAntennaSystemsByFilters retrieves VHF antenna systems based on the provided filters.
 func (u *VHFAntennaSystemUsecase) GetVHFAntennaSystemsByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.VHFAntennaSystem, error) {
 	return u.vhfAntennaSystemRepository.GetVHFAntennaSystemsByFilters(ctx, offset, limit, sortParams, filters)

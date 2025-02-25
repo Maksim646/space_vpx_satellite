@@ -13,6 +13,10 @@ var (
 
 	ProjectNotFound  = "project not found"
 	ProjectsNotFound = "projects not found"
+
+	InvalidSize = "cube sat invalid size, try "
+
+	InvalidInterface = "cube sat invalid interface, try "
 )
 
 const (
@@ -23,10 +27,11 @@ type CubeSatProject struct {
 	ID                       string         `db:"id"`
 	UserID                   string         `db:"user_id"`
 	FrameName                sql.NullString `db:"frame_name"`
+	Size                     int64          `db:"size"`
 	SolarPanelSideName       sql.NullString `db:"solar_panel_side_name"`
 	SolarPanelTopName        sql.NullString `db:"solar_panel_top_name"`
 	PowerSystemName          sql.NullString `db:"power_system_name"`
-	BoardComputingModuleName sql.NullString `db:"board_computering_module_name"`
+	BoardComputingModuleName sql.NullString `db:"board_computing_module_name"`
 	VHFAntennaSystemName     sql.NullString `db:"vhf_antenna_system_name"`
 	VhfTransceiverName       sql.NullString `db:"vhf_transceiver_name"`
 	Name                     string         `db:"name"`

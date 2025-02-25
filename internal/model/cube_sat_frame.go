@@ -29,7 +29,9 @@ type CubeSatFrame struct {
 	Length                  sql.NullFloat64 `db:"length"`
 	Width                   sql.NullFloat64 `db:"width"`
 	Height                  sql.NullFloat64 `db:"height"`
-	Weight                  sql.NullInt64   `db:"weight"`
+	Weight                  sql.NullFloat64 `db:"weight"`
+	Size                    int64           `db:"size"`
+	Interface               sql.NullString  `db:"interface"`
 	OperatingTemperatureMin sql.NullInt64   `db:"operating_temperature_min"`
 	OperatingTemperatureMax sql.NullInt64   `db:"operating_temperature_max"`
 	MechanicalVibration     sql.NullInt64   `db:"mechanical_vibration"`
@@ -45,6 +47,7 @@ type ICubeSatFrameRepository interface {
 	UpdateCubeSatFrame(ctx context.Context, cubeSatFrame CubeSatFrame) error
 
 	GetCubeSatFrameByID(ctx context.Context, id int64) (CubeSatFrame, error)
+	GetCubeSatFrameByName(ctx context.Context, frameName string) (CubeSatFrame, error)
 	GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatFrame, error)
 
 	DeleteCubeSatFrame(ctx context.Context, id int64) error
@@ -56,6 +59,7 @@ type ICubeSatFrameUsecase interface {
 	UpdateCubeSatFrame(ctx context.Context, cubeSatFrame CubeSatFrame) error
 
 	GetCubeSatFrameByID(ctx context.Context, id int64) (CubeSatFrame, error)
+	GetCubeSatFrameByName(ctx context.Context, frameName string) (CubeSatFrame, error)
 	GetCubeSatFramesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]CubeSatFrame, error)
 
 	DeleteCubeSatFrame(ctx context.Context, id int64) error

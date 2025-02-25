@@ -23,6 +23,9 @@ type CreateCubeSatFrameBody struct {
 	// Required: true
 	Height *float64 `json:"height"`
 
+	// interface
+	Interface string `json:"interface,omitempty"`
+
 	// length
 	// Required: true
 	Length *float64 `json:"length"`
@@ -50,9 +53,12 @@ type CreateCubeSatFrameBody struct {
 	// Required: true
 	OperatingTemperatureMin *int64 `json:"operating_temperature_min"`
 
+	// size
+	Size int64 `json:"size,omitempty"`
+
 	// weight
 	// Required: true
-	Weight *int64 `json:"weight"`
+	Weight *float64 `json:"weight"`
 
 	// width
 	// Required: true

@@ -43,7 +43,7 @@ func (h *Handler) CreateSolarPanelSideHandler(req api.CreateSolarPanelSideParams
 		Height:                  sql.NullFloat64{Float64: *req.CreateSolarPanelSideBody.Height, Valid: true},
 	}
 
-	SolarPanelID, err := h.solarPanelUsecase.CreateSolarPanelSide(ctx, solarPanel)
+	SolarPanelID, err := h.cubeSatSolarPanelSideUsecase.CreateSolarPanelSide(ctx, solarPanel)
 	if err != nil {
 		zap.L().Error("error create new solar panel", zap.Error(err))
 		return api.NewCreateSolarPanelSideInternalServerError().WithPayload(&definition.Error{
@@ -51,7 +51,7 @@ func (h *Handler) CreateSolarPanelSideHandler(req api.CreateSolarPanelSideParams
 		})
 	}
 
-	solarPanelResult, err := h.solarPanelUsecase.GetSolarPanelSideByID(ctx, SolarPanelID)
+	solarPanelResult, err := h.cubeSatSolarPanelSideUsecase.GetSolarPanelSideByID(ctx, SolarPanelID)
 	if err != nil {
 
 		return api.NewCreateSolarPanelSideBadRequest().WithPayload(&definition.Error{
@@ -91,7 +91,7 @@ func (h *Handler) GetSolarPanelSideHandler(req api.GetSolarPanelSideParams, prin
 		return api.NewGetSolarPanelSideForbidden()
 	}
 
-	solarPanel, err := h.solarPanelUsecase.GetSolarPanelSideByID(ctx, req.ID)
+	solarPanel, err := h.cubeSatSolarPanelSideUsecase.GetSolarPanelSideByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetch solar panel", zap.Error(err))
 		return api.NewGetSolarPanelSideBadRequest().WithPayload(&definition.Error{
@@ -129,7 +129,7 @@ func (h *Handler) UpdateCubeSatSolarPanelSideHandler(req api.UpdateCubeSatSolarP
 		return api.NewUpdateCubeSatSolarPanelSideForbidden()
 	}
 
-	solarPanel, err := h.solarPanelUsecase.GetSolarPanelSideByID(ctx, req.ID)
+	solarPanel, err := h.cubeSatSolarPanelSideUsecase.GetSolarPanelSideByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetch solar panel", zap.Error(err))
 		return api.NewUpdateCubeSatSolarPanelSideBadRequest().WithPayload(&definition.Error{
@@ -224,13 +224,13 @@ func (h *Handler) UpdateCubeSatSolarPanelSideHandler(req api.UpdateCubeSatSolarP
 
 	solarPanel.UpdatedAt.Time = time.Now()
 
-	err = h.solarPanelUsecase.UpdateSolarPanelSide(ctx, solarPanel)
+	err = h.cubeSatSolarPanelSideUsecase.UpdateSolarPanelSide(ctx, solarPanel)
 	if err != nil {
 		zap.L().Error("error update solar panel side", zap.Error(err))
 		return api.NewUpdateCubeSatSolarPanelSideInternalServerError()
 	}
 
-	newSolarPanel, err := h.solarPanelUsecase.GetSolarPanelSideByID(ctx, solarPanel.ID)
+	newSolarPanel, err := h.cubeSatSolarPanelSideUsecase.GetSolarPanelSideByID(ctx, solarPanel.ID)
 	if err != nil {
 		zap.L().Error("error fetch dolar panel side", zap.Error(err))
 		return api.NewUpdateCubeSatSolarPanelSideInternalServerError()
@@ -267,7 +267,7 @@ func (h *Handler) DeleteCubeSatSolarPanelSideHandler(req api.DeleteCubeSatSolarP
 		return api.NewDeleteSolarPanelSideForbidden()
 	}
 
-	solarPanel, err := h.solarPanelUsecase.GetSolarPanelSideByID(ctx, req.ID)
+	solarPanel, err := h.cubeSatSolarPanelSideUsecase.GetSolarPanelSideByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetch solar panel", zap.Error(err))
 		return api.NewDeleteCubeSatSolarPanelSideBadRequest().WithPayload(&definition.Error{
@@ -275,7 +275,7 @@ func (h *Handler) DeleteCubeSatSolarPanelSideHandler(req api.DeleteCubeSatSolarP
 		})
 	}
 
-	err = h.solarPanelUsecase.DeleteSolarPanelSide(ctx, solarPanel.ID)
+	err = h.cubeSatSolarPanelSideUsecase.DeleteSolarPanelSide(ctx, solarPanel.ID)
 	if err != nil {
 		zap.L().Error("error fetch solar panel", zap.Error(err))
 		return api.NewDeleteCubeSatSolarPanelSideInternalServerError()
@@ -316,7 +316,7 @@ func (h *Handler) GetCubeSatSolarPanelsSide(req api.GetCubeSatSolarPanelsSidePar
 		filters[model.FilterCubeSatSolarPanelSideByMinLength] = *req.FilterCubeSatSolarPanelByLengthMin
 	}
 
-	solarPanelsSide, err := h.solarPanelUsecase.GetSolarPanelSideByFilters(ctx, req.Offset, req.Limit, sortParams, filters)
+	solarPanelsSide, err := h.cubeSatSolarPanelSideUsecase.GetSolarPanelSideByFilters(ctx, req.Offset, req.Limit, sortParams, filters)
 	if err != nil {
 		zap.L().Error("error fetch solar panels", zap.Error(err))
 		return api.NewGetCubeSatSolarPanelsSideBadRequest().WithPayload(&definition.Error{
