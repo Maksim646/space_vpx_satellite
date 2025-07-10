@@ -26,11 +26,17 @@ jobs:
     - name: Deploy to VM via SSH
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: ${{ secrets.VM_HOST }}
-        username: ${{ secrets.VM_USER }}
-        key: ${{ secrets.VM_SSH_KEY }}
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
         script: |
           cd ~/backend
           git pull
           docker compose down
           docker compose up -d --build
+          
+    - name: Setup docker-compose.yml
+      run: |
+        echo "$DOCKER_COMPOSE_CONTENT" > docker-compose.yml
+      env:
+        DOCKER_COMPOSE_CONTENT: ${{ secrets.DOCKER_COMPOSE_YML }}
