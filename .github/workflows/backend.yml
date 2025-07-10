@@ -20,6 +20,13 @@ jobs:
     - name: Run Go tests
       run: go test ./...
 
+    - name: Setup docker-compose.yml from secret
+      run: |
+        mkdir -p space_vpx_satellite/space_vpx_satellite
+        echo "$DOCKER_COMPOSE_YML" > space_vpx_satellite/space_vpx_satellite/docker-compose.yml
+      env:
+        DOCKER_COMPOSE_YML: ${{ secrets.DOCKER_COMPOSE_YML }}
+
     - name: Build Docker image
       run: make build
 
@@ -34,10 +41,3 @@ jobs:
           git pull
           docker compose down
           docker compose up -d --build
-          
-    - name: Setup docker-compose.yml from secret
-      run: |
-        mkdir -p space_vpx_satellite/space_vpx_satellite
-        echo "$DOCKER_COMPOSE_YML" > space_vpx_satellite/space_vpx_satellite/docker-compose.yml
-      env:
-        DOCKER_COMPOSE_YML: ${{ secrets.DOCKER_COMPOSE_YML }}
