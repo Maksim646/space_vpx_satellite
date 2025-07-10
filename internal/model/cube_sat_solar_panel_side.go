@@ -8,10 +8,10 @@ import (
 )
 
 var (
-	ErrSolarPanelNotFound = errors.New("solar panel not found")
+	ErrSolarPanelSideNotFound = errors.New("solar panel side not found")
 
-	SolarPanelNotFound  = "solar panel not found"
-	SolarPanelsNotFound = "solar panels not found"
+	SolarPanelSideNotFound  = "solar panel side not found"
+	SolarPanelsSideNotFound = "solar panels side not found"
 )
 
 const (

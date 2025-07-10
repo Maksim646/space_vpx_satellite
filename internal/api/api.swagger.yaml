@@ -347,7 +347,7 @@ paths:
         200:
           description: Successfully updated Frame
           schema:
-            $ref: '#/definitions/CubeSatProject' # Or a more specific Frame object
+            $ref: '#/definitions/CubeSatProject'
         400:
           description: Bad request (e.g., invalid input)
           schema:
@@ -497,7 +497,7 @@ paths:
         200:
           description: Successfully updated Board Computing Module
           schema:
-            $ref: '#/definitions/CubeSatProject' # Or a more specific BoardComputingModule object
+            $ref: '#/definitions/CubeSatProject'
         400:
           description: Bad request (e.g., invalid input)
           schema:
@@ -1616,7 +1616,7 @@ paths:
       security:
         - Bearer: []
       summary: Get CubeSat VHF Transceiver
-      operationId: GetCubeSatVHTransceiver
+      operationId: GetCubeSatVHFTransceiver
       tags: 
         - CubeSatVHFTransceiver
       parameters:
@@ -1651,7 +1651,7 @@ paths:
       security:
         - Bearer: []
       summary: Update CubeSat VHF Transceiver
-      operationId: UpdateCubeSatVHTransceiver
+      operationId: UpdateCubeSatVHFTransceiver
       tags: 
         - CubeSatVHFTransceiver
       parameters:
@@ -1692,7 +1692,7 @@ paths:
       security:
         - Bearer: []
       summary: Delete CubeSat VHF Transceiver
-      operationId: DeleteCubeSatVHTransceiver
+      operationId: DeleteCubeSatVHFTransceiver
       tags: 
         - CubeSatVHFTransceiver
       parameters:
@@ -1728,7 +1728,7 @@ paths:
       security:
         - Bearer: []
       summary: Create CubeSat VHF Transceiver
-      operationId: CreateCubeSatVHTransceiver
+      operationId: CreateCubeSatVHFTransceiver
       tags: 
         - CubeSatVHFTransceiver
       parameters:
@@ -1765,7 +1765,7 @@ paths:
       security:
         - Bearer: []
       summary: Get Available CubeSat VHF Transceivers
-      operationId: GetAvailableCubeSatVHTransceivers
+      operationId: GetAvailableCubeSatVHFTransceivers
       tags: 
         - CubeSatVHFTransceiver
       parameters:
@@ -3056,7 +3056,10 @@ definitions:
       system_bus_voltage_solar_panels:
         type: number
         description: System bus voltage for solar panels
-      system_bus_voltage_output_channels:
+      max_system_bus_voltage_output_channels:
+        type: number
+        description: System bus voltage for output channels
+      min_system_bus_voltage_output_channels:
         type: number
         description: System bus voltage for output channels
       current_output_channels_max:
@@ -3132,8 +3135,12 @@ definitions:
         type: integer
       system_bus_voltage_solar_panels:
         type: number
-      system_bus_voltage_output_channels:
+      max_system_bus_voltage_output_channels:
         type: number
+        description: System bus voltage for output channels
+      min_system_bus_voltage_output_channels:
+        type: number
+        description: System bus voltage for output channels
       current_output_channels_max:
         type: number
       total_output_current:
@@ -3182,8 +3189,12 @@ definitions:
         type: integer
       system_bus_voltage_solar_panels:
         type: number
-      system_bus_voltage_output_channels:
+      max_system_bus_voltage_output_channels:
         type: number
+        description: System bus voltage for output channels
+      min_system_bus_voltage_output_channels:
+        type: number
+        description: System bus voltage for output channels
       current_output_channels_max:
         type: number
       total_output_current:
@@ -3649,9 +3660,14 @@ definitions:
       weight:
         type: number
         description: Weight in kilograms
-      supply_voltage:
+      max_supply_voltage:
         type: number
         description: Supply voltage in volts
+      min_supply_voltage:
+        type: number
+        description: Supply voltage in volts
+      data_bus:
+        type: string
       power_consumption:
         type: number
         description: Power consumption in watts
@@ -3697,9 +3713,14 @@ definitions:
       weight:
         type: number
         description: Weight in kilograms
-      supply_voltage:
+      max_supply_voltage:
         type: number
         description: Supply voltage in volts
+      min_supply_voltage:
+        type: number
+        description: Supply voltage in volts
+      data_bus:
+        type: string
       power_consumption:
         type: number
         description: Power consumption in watts
@@ -3739,9 +3760,14 @@ definitions:
       weight:
         type: number
         description: Weight in kilograms
-      supply_voltage:
+      max_supply_voltage:
         type: number
         description: Supply voltage in volts
+      min_supply_voltage:
+        type: number
+        description: Supply voltage in volts
+      data_bus:
+        type: string
       power_consumption:
         type: number
         description: Power consumption in watts

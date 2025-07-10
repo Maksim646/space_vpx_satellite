@@ -13,17 +13,14 @@ import (
 	"go.uber.org/zap"
 )
 
-// BoardComputingModuleRepository implements the IBoardComputingModuleRepository interface.
 type BoardComputingModuleRepository struct {
 	sqalxConn sqalx.Node
 }
 
-// New creates a new BoardComputingModuleRepository.
 func New(sqalxConn sqalx.Node) model.IBoardComputingModuleRepository {
 	return &BoardComputingModuleRepository{sqalxConn: sqalxConn}
 }
 
-// CreateBoardComputingModule creates a new board computing module in the database.
 func (r *BoardComputingModuleRepository) CreateBoardComputingModule(ctx context.Context, module model.BoardComputingModule) (int64, error) {
 	query, params, err := postgresql.Builder.Insert("board_computing_module").
 		Columns(
@@ -32,7 +29,9 @@ func (r *BoardComputingModuleRepository) CreateBoardComputingModule(ctx context.
 			"width",
 			"height",
 			"weight",
-			"supply_voltage",
+			"max_supply_voltage",
+			"min_supply_voltage",
+			"data_bus",
 			"power_consumption",
 			"interface",
 			"max_operating_temperature",
@@ -46,7 +45,9 @@ func (r *BoardComputingModuleRepository) CreateBoardComputingModule(ctx context.
 			module.Width.Float64,
 			module.Height.Float64,
 			module.Weight.Float64,
-			module.SupplyVoltage.Float64,
+			module.MaxSupplyVoltage.Float64,
+			module.MinSupplyVoltage.Float64,
+			module.DataBus.String,
 			module.PowerConsumption.Float64,
 			module.Interface.String,
 			module.MaxOperatingTemperature.Float64,
@@ -67,7 +68,6 @@ func (r *BoardComputingModuleRepository) CreateBoardComputingModule(ctx context.
 	return newModuleID, err
 }
 
-// GetBoardComputingModuleByID retrieves a board computing module from the database by its ID.
 func (r *BoardComputingModuleRepository) GetBoardComputingModuleByID(ctx context.Context, moduleID int64) (model.BoardComputingModule, error) {
 	var module model.BoardComputingModule
 	query, params, err := postgresql.Builder.Select(
@@ -77,7 +77,9 @@ func (r *BoardComputingModuleRepository) GetBoardComputingModuleByID(ctx context
 		"width",
 		"height",
 		"weight",
-		"supply_voltage",
+		"max_supply_voltage",
+		"min_supply_voltage",
+		"data_bus",
 		"power_consumption",
 		"interface",
 		"max_operating_temperature",
@@ -113,7 +115,9 @@ func (r *BoardComputingModuleRepository) GetBoardComputingModuleByName(ctx conte
 		"width",
 		"height",
 		"weight",
-		"supply_voltage",
+		"max_supply_voltage",
+		"min_supply_voltage",
+		"data_bus",
 		"power_consumption",
 		"interface",
 		"max_operating_temperature",
@@ -140,7 +144,6 @@ func (r *BoardComputingModuleRepository) GetBoardComputingModuleByName(ctx conte
 	return module, err
 }
 
-// GetBoardComputingModulesByFilters retrieves board computing modules from the database based on filters.
 func (r *BoardComputingModuleRepository) GetBoardComputingModulesByFilters(ctx context.Context, offset int64, limit int64, sortParams string, filters map[string]interface{}) ([]model.BoardComputingModule, error) {
 	builder := postgresql.Builder.Select(
 		"id",
@@ -149,7 +152,9 @@ func (r *BoardComputingModuleRepository) GetBoardComputingModulesByFilters(ctx c
 		"width",
 		"height",
 		"weight",
-		"supply_voltage",
+		"max_supply_voltage",
+		"min_supply_voltage",
+		"data_bus",
 		"power_consumption",
 		"interface",
 		"max_operating_temperature",
@@ -202,7 +207,6 @@ func (r *BoardComputingModuleRepository) ApplyFilters(builder sq.SelectBuilder, 
 	return builder
 }
 
-// UpdateBoardComputingModule updates an existing board computing module in the database.
 func (r *BoardComputingModuleRepository) UpdateBoardComputingModule(ctx context.Context, module model.BoardComputingModule) error {
 	query, params, err := postgresql.Builder.Update("board_computing_module").
 		Set("name", module.Name.String).
@@ -210,7 +214,9 @@ func (r *BoardComputingModuleRepository) UpdateBoardComputingModule(ctx context.
 		Set("width", module.Width.Float64).
 		Set("height", module.Height.Float64).
 		Set("weight", module.Weight.Float64).
-		Set("supply_voltage", module.SupplyVoltage.Float64).
+		Set("max_supply_voltage", module.MaxSupplyVoltage.Float64).
+		Set("min_supply_voltage", module.MinSupplyVoltage.Float64).
+		Set("data_bus", module.DataBus.String).
 		Set("power_consumption", module.PowerConsumption.Float64).
 		Set("interface", module.Interface.String).
 		Set("max_operating_temperature", module.MaxOperatingTemperature.Float64).
@@ -229,7 +235,6 @@ func (r *BoardComputingModuleRepository) UpdateBoardComputingModule(ctx context.
 	return err
 }
 
-// DeleteBoardComputingModule deletes a board computing module from the database by its ID.
 func (r *BoardComputingModuleRepository) DeleteBoardComputingModule(ctx context.Context, moduleID int64) error {
 	query, params, err := postgresql.Builder.Delete("board_computing_module").
 		Where(sq.Eq{"id": moduleID}).

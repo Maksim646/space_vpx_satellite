@@ -118,8 +118,14 @@ func New(
 	router.UpdateVHFAntennaSystemHandler = api.UpdateVHFAntennaSystemHandlerFunc(h.UpdateVHFAntennaSystemHandler)
 	router.DeleteVHFAntennaSystemHandler = api.DeleteVHFAntennaSystemHandlerFunc(h.DeleteVHFAntennaSystemHandler)
 
+	// CUBE SAT VHF TRANSCEIVER
+	router.CreateCubeSatVHFTransceiverHandler = api.CreateCubeSatVHFTransceiverHandlerFunc(h.CreateCubeSatVHFTransceiverHandler)
+	router.UpdateCubeSatVHFTransceiverHandler = api.UpdateCubeSatVHFTransceiverHandlerFunc(h.UpdateCubeSatVHFTransceiverHandler)
+	router.GetCubeSatVHFTransceiverHandler = api.GetCubeSatVHFTransceiverHandlerFunc(h.GetCubeSatVHFTransceiverHandler)
+	router.GetAvailableCubeSatVHFTransceiversHandler = api.GetAvailableCubeSatVHFTransceiversHandlerFunc(h.GetAvailableCubeSatVHFTransceiversHandler)
+
 	// CUBE SAT BOARD COMPUTER SYSTEM
-	router.CreateBoardComputingModuleHandler = api.CreateBoardComputingModuleHandlerFunc(h.CreateBoardComputeringModuleHandler)
+	router.CreateBoardComputingModuleHandler = api.CreateBoardComputingModuleHandlerFunc(h.CreateBoardComputingModuleHandler)
 	router.GetBoardComputingModuleByIDHandler = api.GetBoardComputingModuleByIDHandlerFunc(h.GetBoardComputingModuleHandler)
 	router.GetAvailableBoardComputingModulesHandler = api.GetAvailableBoardComputingModulesHandlerFunc(h.GetBoardComputingModules)
 	router.UpdateBoardComputingModuleHandler = api.UpdateBoardComputingModuleHandlerFunc(h.UpdateBoardComputingModuleHandler)
@@ -152,6 +158,9 @@ func New(
 	router.GetCubeSatFramesHandler = api.GetCubeSatFramesHandlerFunc(h.GetAvailableCubeSatFrames)
 	router.UpdateCubeSatFrameHandler = api.UpdateCubeSatFrameHandlerFunc(h.UpdateCubeSatFrameHandler)
 	router.DeleteCubeSatFrameHandler = api.DeleteCubeSatFrameHandlerFunc(h.DeleteCubeSatFrameHandler)
+
+	// ADD COMPONENTS
+	router.UpdateCubeSatBoardComputingModuleByProjectHandler = api.UpdateCubeSatBoardComputingModuleByProjectHandlerFunc(h.AddCubeSatBoardComputingModule)
 
 	// USER
 	router.GetUserMeHandler = api.GetUserMeHandlerFunc(h.GetUserMe)

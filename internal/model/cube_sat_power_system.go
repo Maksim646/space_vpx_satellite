@@ -12,6 +12,8 @@ var (
 
 	PowerSystemNotFound  = "power system not found"
 	PowerSystemsNotFound = "power systems not found"
+
+	PowerSystemDoesNotCompatibility = "power system does not compatibility"
 )
 
 const (
@@ -23,30 +25,31 @@ const (
 )
 
 type CubeSatPowerSystem struct {
-	ID                             int64           `db:"id"`
-	Name                           sql.NullString  `db:"name"`
-	Length                         sql.NullFloat64 `db:"length"`
-	Width                          sql.NullFloat64 `db:"width"`
-	Height                         sql.NullFloat64 `db:"height"`
-	Weight                         sql.NullFloat64 `db:"weight"`
-	SolarPanelChannels             sql.NullInt64   `db:"solar_panel_channels"`
-	SolarPanelsType                sql.NullString  `db:"solar_panels_type"`
-	SolarPanelVoltageMin           sql.NullFloat64 `db:"solar_panel_voltage_min"`
-	SolarPanelVoltageMax           sql.NullFloat64 `db:"solar_panel_voltage_max"`
-	SolarPanelCurrentPerChannelMax sql.NullFloat64 `db:"solar_panel_current_per_channel_max"`
-	TotalCurrentOfSolarPanelsMax   sql.NullFloat64 `db:"total_current_of_solar_panels_max"`
-	OutputChannels                 sql.NullInt64   `db:"output_channels"`
-	SystemBusVoltageSolarPanels    sql.NullFloat64 `db:"system_bus_voltage_solar_panels"`
-	SystemBusVoltageOutputChannels sql.NullFloat64 `db:"system_bus_voltage_output_channels"`
-	CurrentOutputChannelsMax       sql.NullFloat64 `db:"current_output_channels_max"`
-	TotalOutputCurrent             sql.NullFloat64 `db:"total_output_current"`
-	DataInterface                  sql.NullString  `db:"data_interface"`
-	MaxOperatingTemperature        sql.NullFloat64 `db:"max_operating_temperature"`
-	MinOperatingTemperature        sql.NullFloat64 `db:"min_operating_temperature"`
-	MechanicalVibration            sql.NullInt64   `db:"mechanical_vibration"`
-	MechanicalShock                sql.NullInt64   `db:"mechanical_shock"`
-	UpdatedAt                      sql.NullTime    `db:"updated_at"`
-	CreatedAt                      time.Time       `db:"created_at"`
+	ID                                int64           `db:"id"`
+	Name                              sql.NullString  `db:"name"`
+	Length                            sql.NullFloat64 `db:"length"`
+	Width                             sql.NullFloat64 `db:"width"`
+	Height                            sql.NullFloat64 `db:"height"`
+	Weight                            sql.NullFloat64 `db:"weight"`
+	SolarPanelChannels                sql.NullInt64   `db:"solar_panel_channels"`
+	SolarPanelsType                   sql.NullString  `db:"solar_panels_type"`
+	SolarPanelVoltageMin              sql.NullFloat64 `db:"solar_panel_voltage_min"`
+	SolarPanelVoltageMax              sql.NullFloat64 `db:"solar_panel_voltage_max"`
+	SolarPanelCurrentPerChannelMax    sql.NullFloat64 `db:"solar_panel_current_per_channel_max"`
+	TotalCurrentOfSolarPanelsMax      sql.NullFloat64 `db:"total_current_of_solar_panels_max"`
+	OutputChannels                    sql.NullInt64   `db:"output_channels"`
+	SystemBusVoltageSolarPanels       sql.NullFloat64 `db:"system_bus_voltage_solar_panels"`
+	MaxSystemBusVoltageOutputChannels sql.NullFloat64 `db:"max_system_bus_voltage_output_channels"`
+	MinSystemBusVoltageOutputChannels sql.NullFloat64 `db:"min_system_bus_voltage_output_channels"`
+	CurrentOutputChannelsMax          sql.NullFloat64 `db:"current_output_channels_max"`
+	TotalOutputCurrent                sql.NullFloat64 `db:"total_output_current"`
+	DataInterface                     sql.NullString  `db:"data_interface"`
+	MaxOperatingTemperature           sql.NullFloat64 `db:"max_operating_temperature"`
+	MinOperatingTemperature           sql.NullFloat64 `db:"min_operating_temperature"`
+	MechanicalVibration               sql.NullInt64   `db:"mechanical_vibration"`
+	MechanicalShock                   sql.NullInt64   `db:"mechanical_shock"`
+	UpdatedAt                         sql.NullTime    `db:"updated_at"`
+	CreatedAt                         time.Time       `db:"created_at"`
 }
 
 type IPowerSystemRepository interface {

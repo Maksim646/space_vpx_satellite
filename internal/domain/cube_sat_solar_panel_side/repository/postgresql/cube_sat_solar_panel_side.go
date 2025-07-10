@@ -108,7 +108,7 @@ func (r *SolarPanelRepository) GetSolarPanelSideByID(ctx context.Context, solarP
 	zap.L().Debug(postgresql.BuildQuery(query, params))
 	if err = r.sqalxConn.GetContext(ctx, &solarPanel, query, params...); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return solarPanel, model.ErrSolarPanelNotFound
+			return solarPanel, model.ErrSolarPanelSideNotFound
 		}
 	}
 
@@ -149,7 +149,7 @@ func (r *SolarPanelRepository) GetSolarPanelSideByName(ctx context.Context, sola
 	zap.L().Debug(postgresql.BuildQuery(query, params))
 	if err = r.sqalxConn.GetContext(ctx, &solarPanel, query, params...); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return solarPanel, model.ErrSolarPanelNotFound
+			return solarPanel, model.ErrSolarPanelSideNotFound
 		}
 	}
 

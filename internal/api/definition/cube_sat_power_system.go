@@ -41,6 +41,9 @@ type CubeSatPowerSystem struct {
 	// Maximum operating temperature in degrees Celsius
 	MaxOperatingTemperature float64 `json:"max_operating_temperature,omitempty"`
 
+	// System bus voltage for output channels
+	MaxSystemBusVoltageOutputChannels float64 `json:"max_system_bus_voltage_output_channels,omitempty"`
+
 	// Mechanical shock value
 	MechanicalShock int64 `json:"mechanical_shock,omitempty"`
 
@@ -49,6 +52,9 @@ type CubeSatPowerSystem struct {
 
 	// Minimum operating temperature in degrees Celsius
 	MinOperatingTemperature float64 `json:"min_operating_temperature,omitempty"`
+
+	// System bus voltage for output channels
+	MinSystemBusVoltageOutputChannels float64 `json:"min_system_bus_voltage_output_channels,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -70,9 +76,6 @@ type CubeSatPowerSystem struct {
 
 	// Type of solar panels used
 	SolarPanelsType string `json:"solar_panels_type,omitempty"`
-
-	// System bus voltage for output channels
-	SystemBusVoltageOutputChannels float64 `json:"system_bus_voltage_output_channels,omitempty"`
 
 	// System bus voltage for solar panels
 	SystemBusVoltageSolarPanels float64 `json:"system_bus_voltage_solar_panels,omitempty"`

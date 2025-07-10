@@ -36,6 +36,9 @@ type UpdatePowerSystemBody struct {
 	// max operating temperature
 	MaxOperatingTemperature float64 `json:"max_operating_temperature,omitempty"`
 
+	// System bus voltage for output channels
+	MaxSystemBusVoltageOutputChannels float64 `json:"max_system_bus_voltage_output_channels,omitempty"`
+
 	// mechanical shock
 	MechanicalShock int64 `json:"mechanical_shock,omitempty"`
 
@@ -44,6 +47,9 @@ type UpdatePowerSystemBody struct {
 
 	// min operating temperature
 	MinOperatingTemperature float64 `json:"min_operating_temperature,omitempty"`
+
+	// System bus voltage for output channels
+	MinSystemBusVoltageOutputChannels float64 `json:"min_system_bus_voltage_output_channels,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -65,9 +71,6 @@ type UpdatePowerSystemBody struct {
 
 	// solar panels type
 	SolarPanelsType string `json:"solar_panels_type,omitempty"`
-
-	// system bus voltage output channels
-	SystemBusVoltageOutputChannels float64 `json:"system_bus_voltage_output_channels,omitempty"`
 
 	// system bus voltage solar panels
 	SystemBusVoltageSolarPanels float64 `json:"system_bus_voltage_solar_panels,omitempty"`

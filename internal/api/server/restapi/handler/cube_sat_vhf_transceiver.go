@@ -14,12 +14,12 @@ import (
 	"go.uber.org/zap"
 )
 
-func (h *Handler) CreateCubeSatVHFTransceiverHandler(req api.CreateCubeSatVHTransceiverParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) CreateCubeSatVHFTransceiverHandler(req api.CreateCubeSatVHFTransceiverParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("create CubeSat VHF transceiver request")
 	ctx := req.HTTPRequest.Context()
 
 	if principal.Role == 0 {
-		return api.NewCreateCubeSatVHTransceiverForbidden()
+		return api.NewCreateCubeSatVHFTransceiverForbidden()
 	}
 
 	cubeSatVHFTransceiver := model.VHFTransceiver{
@@ -43,18 +43,18 @@ func (h *Handler) CreateCubeSatVHFTransceiverHandler(req api.CreateCubeSatVHTran
 	transceiverID, err := h.cubeSatVhfTransceiverUsecase.CreateVHFTransceiver(ctx, cubeSatVHFTransceiver)
 	if err != nil {
 		zap.L().Error("error creating new CubeSat VHF transceiver", zap.Error(err))
-		return api.NewCreateCubeSatVHTransceiverInternalServerError().WithPayload(&definition.Error{
+		return api.NewCreateCubeSatVHFTransceiverInternalServerError().WithPayload(&definition.Error{
 			Message: useful.StrPtr("error creating new CubeSat VHF transceiver"),
 		})
 	}
 
 	transceiverResult, err := h.cubeSatVhfTransceiverUsecase.GetVHFTransceiverByID(ctx, transceiverID)
 	if err != nil {
-		return api.NewCreateCubeSatVHTransceiverBadRequest().WithPayload(&definition.Error{
+		return api.NewCreateCubeSatVHFTransceiverBadRequest().WithPayload(&definition.Error{
 			Message: &model.VHFTransceiverNotFound,
 		})
 	}
-	return api.NewCreateCubeSatVHTransceiverOK().WithPayload(&definition.VHFTransceiver{
+	return api.NewCreateCubeSatVHFTransceiverOK().WithPayload(&definition.VHFTransceiver{
 		ID:                      transceiverResult.ID,
 		Name:                    transceiverResult.Name.String,
 		Length:                  transceiverResult.Length.Float64,
@@ -76,23 +76,23 @@ func (h *Handler) CreateCubeSatVHFTransceiverHandler(req api.CreateCubeSatVHTran
 	})
 }
 
-func (h *Handler) GetCubeSatVHFTransceiverHandler(req api.GetCubeSatVHTransceiverParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) GetCubeSatVHFTransceiverHandler(req api.GetCubeSatVHFTransceiverParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("get CubeSat VHF transceiver request, id:" + strconv.Itoa(int(req.ID)))
 	ctx := req.HTTPRequest.Context()
 
 	if principal.Role != 0 {
-		return api.NewGetCubeSatVHTransceiverForbidden()
+		return api.NewGetCubeSatVHFTransceiverForbidden()
 	}
 
 	transceiver, err := h.cubeSatVhfTransceiverUsecase.GetVHFTransceiverByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetching CubeSat VHF transceiver", zap.Error(err))
-		return api.NewGetCubeSatVHTransceiverBadRequest().WithPayload(&definition.Error{
+		return api.NewGetCubeSatVHFTransceiverBadRequest().WithPayload(&definition.Error{
 			Message: &model.VHFTransceiverNotFound,
 		})
 	}
 
-	return api.NewGetCubeSatVHTransceiverOK().WithPayload(&definition.VHFTransceiver{
+	return api.NewGetCubeSatVHFTransceiverOK().WithPayload(&definition.VHFTransceiver{
 		ID:                      transceiver.ID,
 		Name:                    transceiver.Name.String,
 		Length:                  transceiver.Length.Float64,
@@ -114,18 +114,18 @@ func (h *Handler) GetCubeSatVHFTransceiverHandler(req api.GetCubeSatVHTransceive
 	})
 }
 
-func (h *Handler) UpdateCubeSatVHFTransceiverHandler(req api.UpdateCubeSatVHTransceiverParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) UpdateCubeSatVHFTransceiverHandler(req api.UpdateCubeSatVHFTransceiverParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("update CubeSat VHF transceiver request, id:" + strconv.Itoa(int(req.ID)))
 	ctx := req.HTTPRequest.Context()
 
 	if principal.Role == 0 {
-		return api.NewUpdateCubeSatVHTransceiverForbidden()
+		return api.NewUpdateCubeSatVHFTransceiverForbidden()
 	}
 
 	transceiver, err := h.cubeSatVhfTransceiverUsecase.GetVHFTransceiverByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetching CubeSat VHF transceiver", zap.Error(err))
-		return api.NewUpdateCubeSatVHTransceiverBadRequest().WithPayload(&definition.Error{
+		return api.NewUpdateCubeSatVHFTransceiverBadRequest().WithPayload(&definition.Error{
 			Message: &model.VHFTransceiverNotFound,
 		})
 	}
@@ -202,16 +202,16 @@ func (h *Handler) UpdateCubeSatVHFTransceiverHandler(req api.UpdateCubeSatVHTran
 	err = h.cubeSatVhfTransceiverUsecase.UpdateVHFTransceiver(ctx, transceiver)
 	if err != nil {
 		zap.L().Error("error updating CubeSat VHF transceiver", zap.Error(err))
-		return api.NewUpdateCubeSatVHTransceiverInternalServerError()
+		return api.NewUpdateCubeSatVHFTransceiverInternalServerError()
 	}
 
 	newTransceiver, err := h.cubeSatVhfTransceiverUsecase.GetVHFTransceiverByID(ctx, transceiver.ID)
 	if err != nil {
 		zap.L().Error("error fetching updated CubeSat VHF transceiver", zap.Error(err))
-		return api.NewUpdateCubeSatVHTransceiverInternalServerError()
+		return api.NewUpdateCubeSatVHFTransceiverInternalServerError()
 	}
 
-	return api.NewUpdateCubeSatVHTransceiverOK().WithPayload(&definition.VHFTransceiver{
+	return api.NewUpdateCubeSatVHFTransceiverOK().WithPayload(&definition.VHFTransceiver{
 		ID:                      newTransceiver.ID,
 		Name:                    newTransceiver.Name.String,
 		Length:                  newTransceiver.Length.Float64,
@@ -233,18 +233,18 @@ func (h *Handler) UpdateCubeSatVHFTransceiverHandler(req api.UpdateCubeSatVHTran
 	})
 }
 
-func (h *Handler) DeleteCubeSatVHFTransceiverHandler(req api.DeleteCubeSatVHTransceiverParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) DeleteCubeSatVHFTransceiverHandler(req api.DeleteCubeSatVHFTransceiverParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("delete CubeSat VHF transceiver request, id:" + strconv.Itoa(int(req.ID)))
 	ctx := req.HTTPRequest.Context()
 
 	if principal.Role == 0 {
-		return api.NewDeleteCubeSatVHTransceiverForbidden()
+		return api.NewDeleteCubeSatVHFTransceiverForbidden()
 	}
 
 	transceiver, err := h.cubeSatVhfTransceiverUsecase.GetVHFTransceiverByID(ctx, req.ID)
 	if err != nil {
 		zap.L().Error("error fetching CubeSat VHF transceiver", zap.Error(err))
-		return api.NewDeleteCubeSatVHTransceiverBadRequest().WithPayload(&definition.Error{
+		return api.NewDeleteCubeSatVHFTransceiverBadRequest().WithPayload(&definition.Error{
 			Message: &model.VHFTransceiverNotFound,
 		})
 	}
@@ -252,20 +252,20 @@ func (h *Handler) DeleteCubeSatVHFTransceiverHandler(req api.DeleteCubeSatVHTran
 	err = h.cubeSatVhfTransceiverUsecase.DeleteVHFTransceiver(ctx, transceiver.ID)
 	if err != nil {
 		zap.L().Error("error deleting CubeSat VHF transceiver", zap.Error(err))
-		return api.NewDeleteCubeSatVHTransceiverInternalServerError()
+		return api.NewDeleteCubeSatVHFTransceiverInternalServerError()
 	}
 
-	return api.NewDeleteCubeSatVHTransceiverOK().WithPayload(&definition.Error{
+	return api.NewDeleteCubeSatVHFTransceiverOK().WithPayload(&definition.Error{
 		Message: useful.StrPtr("CubeSat VHF transceiver deleted successfully"),
 	})
 }
 
-func (h *Handler) GetAvailableCubeSatVHFTransceiversHandler(req api.GetAvailableCubeSatVHTransceiversParams, principal *definition.Principal) middleware.Responder {
+func (h *Handler) GetAvailableCubeSatVHFTransceiversHandler(req api.GetAvailableCubeSatVHFTransceiversParams, principal *definition.Principal) middleware.Responder {
 	zap.L().Info("fetch CubeSat VHF transceivers request, userID: " + principal.ID)
 	ctx := req.HTTPRequest.Context()
 
 	if principal.Role != 0 {
-		return api.NewGetAvailableCubeSatVHTransceiversForbidden()
+		return api.NewGetAvailableCubeSatVHFTransceiversForbidden()
 	}
 
 	var sortParams string
@@ -293,14 +293,14 @@ func (h *Handler) GetAvailableCubeSatVHFTransceiversHandler(req api.GetAvailable
 	transceivers, err := h.cubeSatVhfTransceiverUsecase.GetVHFTransceiversByFilters(ctx, req.Offset, req.Limit, sortParams, filters)
 	if err != nil {
 		zap.L().Error("error fetching CubeSat VHF transceivers", zap.Error(err))
-		return api.NewGetAvailableCubeSatVHTransceiversBadRequest().WithPayload(&definition.Error{
+		return api.NewGetAvailableCubeSatVHFTransceiversBadRequest().WithPayload(&definition.Error{
 			Message: &model.VHFTransceiversNotFound,
 		})
 	}
 
 	transceiversDefinition := h.CubeSatVHFTransceiversToDefinition(ctx, transceivers)
 
-	return api.NewGetAvailableCubeSatVHTransceiversOK().WithPayload(&definition.CubeSatVHFTransceivers{
+	return api.NewGetAvailableCubeSatVHFTransceiversOK().WithPayload(&definition.CubeSatVHFTransceivers{
 		Count:           useful.Int64Ptr(int64(len(transceiversDefinition))),
 		VhfTransceivers: transceiversDefinition,
 	})

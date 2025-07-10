@@ -37,7 +37,8 @@ func (r *PowerSystemRepository) CreatePowerSystem(ctx context.Context, powerSyst
 			"total_current_of_solar_panels_max",
 			"output_channels",
 			"system_bus_voltage_solar_panels",
-			"system_bus_voltage_output_channels",
+			"max_system_bus_voltage_output_channels",
+			"min_system_bus_voltage_output_channels",
 			"current_output_channels_max",
 			"total_output_current",
 			"data_interface",
@@ -60,7 +61,8 @@ func (r *PowerSystemRepository) CreatePowerSystem(ctx context.Context, powerSyst
 			powerSystem.TotalCurrentOfSolarPanelsMax.Float64,
 			powerSystem.OutputChannels.Int64,
 			powerSystem.SystemBusVoltageSolarPanels.Float64,
-			powerSystem.SystemBusVoltageOutputChannels.Float64,
+			powerSystem.MaxSystemBusVoltageOutputChannels.Float64,
+			powerSystem.MinSystemBusVoltageOutputChannels.Float64,
 			powerSystem.CurrentOutputChannelsMax.Float64,
 			powerSystem.TotalOutputCurrent.Float64,
 			powerSystem.DataInterface.String,
@@ -99,7 +101,8 @@ func (r *PowerSystemRepository) GetPowerSystemByID(ctx context.Context, powerSys
 		"total_current_of_solar_panels_max",
 		"output_channels",
 		"system_bus_voltage_solar_panels",
-		"system_bus_voltage_output_channels",
+		"max_system_bus_voltage_output_channels",
+		"min_system_bus_voltage_output_channels",
 		"current_output_channels_max",
 		"total_output_current",
 		"data_interface",
@@ -144,7 +147,8 @@ func (r *PowerSystemRepository) GetPowerSystemByName(ctx context.Context, powerS
 		"total_current_of_solar_panels_max",
 		"output_channels",
 		"system_bus_voltage_solar_panels",
-		"system_bus_voltage_output_channels",
+		"max_system_bus_voltage_output_channels",
+		"min_system_bus_voltage_output_channels",
 		"current_output_channels_max",
 		"total_output_current",
 		"data_interface",
@@ -188,7 +192,8 @@ func (r *PowerSystemRepository) GetPowerSystemsByFilters(ctx context.Context, of
 		"total_current_of_solar_panels_max",
 		"output_channels",
 		"system_bus_voltage_solar_panels",
-		"system_bus_voltage_output_channels",
+		"max_system_bus_voltage_output_channels",
+		"min_system_bus_voltage_output_channels",
 		"current_output_channels_max",
 		"total_output_current",
 		"data_interface",
@@ -250,7 +255,8 @@ func (r *PowerSystemRepository) UpdatePowerSystem(ctx context.Context, powerSyst
 		Set("total_current_of_solar_panels_max", powerSystem.TotalCurrentOfSolarPanelsMax.Float64).
 		Set("output_channels", powerSystem.OutputChannels.Int64).
 		Set("system_bus_voltage_solar_panels", powerSystem.SystemBusVoltageSolarPanels.Float64).
-		Set("system_bus_voltage_output_channels", powerSystem.SystemBusVoltageOutputChannels.Float64).
+		Set("max_system_bus_voltage_output_channels", powerSystem.MaxSystemBusVoltageOutputChannels.Float64).
+		Set("min_system_bus_voltage_output_channels", powerSystem.MinSystemBusVoltageOutputChannels.Float64).
 		Set("current_output_channels_max", powerSystem.CurrentOutputChannelsMax.Float64).
 		Set("total_output_current", powerSystem.TotalOutputCurrent.Float64).
 		Set("data_interface", powerSystem.DataInterface.String).

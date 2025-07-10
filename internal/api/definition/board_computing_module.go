@@ -22,6 +22,9 @@ type BoardComputingModule struct {
 	// Creation timestamp
 	CreatedAt int64 `json:"created_at,omitempty"`
 
+	// data bus
+	DataBus string `json:"data_bus,omitempty"`
+
 	// Height in meters
 	Height float64 `json:"height,omitempty"`
 
@@ -38,6 +41,9 @@ type BoardComputingModule struct {
 	// Maximum operating temperature in Celsius
 	MaxOperatingTemperature float64 `json:"max_operating_temperature,omitempty"`
 
+	// Supply voltage in volts
+	MaxSupplyVoltage float64 `json:"max_supply_voltage,omitempty"`
+
 	// Mechanical shock rating
 	MechanicalShock int64 `json:"mechanical_shock,omitempty"`
 
@@ -47,14 +53,14 @@ type BoardComputingModule struct {
 	// Minimum operating temperature in Celsius
 	MinOperatingTemperature float64 `json:"min_operating_temperature,omitempty"`
 
+	// Supply voltage in volts
+	MinSupplyVoltage float64 `json:"min_supply_voltage,omitempty"`
+
 	// Name of the Board Computing Module
 	Name string `json:"name,omitempty"`
 
 	// Power consumption in watts
 	PowerConsumption float64 `json:"power_consumption,omitempty"`
-
-	// Supply voltage in volts
-	SupplyVoltage float64 `json:"supply_voltage,omitempty"`
 
 	// Last update timestamp
 	UpdatedAt int64 `json:"updated_at,omitempty"`

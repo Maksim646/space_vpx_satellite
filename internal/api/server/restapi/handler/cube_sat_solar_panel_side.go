@@ -55,7 +55,7 @@ func (h *Handler) CreateSolarPanelSideHandler(req api.CreateSolarPanelSideParams
 	if err != nil {
 
 		return api.NewCreateSolarPanelSideBadRequest().WithPayload(&definition.Error{
-			Message: &model.SolarPanelNotFound,
+			Message: &model.SolarPanelSideNotFound,
 		})
 	}
 	return api.NewCreateSolarPanelSideOK().WithPayload(&definition.SolarPanelSide{
@@ -95,7 +95,7 @@ func (h *Handler) GetSolarPanelSideHandler(req api.GetSolarPanelSideParams, prin
 	if err != nil {
 		zap.L().Error("error fetch solar panel", zap.Error(err))
 		return api.NewGetSolarPanelSideBadRequest().WithPayload(&definition.Error{
-			Message: &model.SolarPanelNotFound,
+			Message: &model.SolarPanelSideNotFound,
 		})
 	}
 	return api.NewGetSolarPanelSideOK().WithPayload(&definition.SolarPanelSide{
@@ -133,7 +133,7 @@ func (h *Handler) UpdateCubeSatSolarPanelSideHandler(req api.UpdateCubeSatSolarP
 	if err != nil {
 		zap.L().Error("error fetch solar panel", zap.Error(err))
 		return api.NewUpdateCubeSatSolarPanelSideBadRequest().WithPayload(&definition.Error{
-			Message: &model.SolarPanelNotFound,
+			Message: &model.SolarPanelSideNotFound,
 		})
 	}
 
@@ -271,7 +271,7 @@ func (h *Handler) DeleteCubeSatSolarPanelSideHandler(req api.DeleteCubeSatSolarP
 	if err != nil {
 		zap.L().Error("error fetch solar panel", zap.Error(err))
 		return api.NewDeleteCubeSatSolarPanelSideBadRequest().WithPayload(&definition.Error{
-			Message: &model.SolarPanelNotFound,
+			Message: &model.SolarPanelSideNotFound,
 		})
 	}
 
@@ -320,7 +320,7 @@ func (h *Handler) GetCubeSatSolarPanelsSide(req api.GetCubeSatSolarPanelsSidePar
 	if err != nil {
 		zap.L().Error("error fetch solar panels", zap.Error(err))
 		return api.NewGetCubeSatSolarPanelsSideBadRequest().WithPayload(&definition.Error{
-			Message: &model.SolarPanelsNotFound,
+			Message: &model.SolarPanelsSideNotFound,
 		})
 	}
 

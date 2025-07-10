@@ -14,8 +14,8 @@ import (
 	"go.uber.org/zap"
 )
 
-func (h *Handler) CreateBoardComputeringModuleHandler(req api.CreateBoardComputingModuleParams, principal *definition.Principal) middleware.Responder {
-	zap.L().Info("create board computering module request")
+func (h *Handler) CreateBoardComputingModuleHandler(req api.CreateBoardComputingModuleParams, principal *definition.Principal) middleware.Responder {
+	zap.L().Info("create board computing module request")
 	ctx := req.HTTPRequest.Context()
 
 	if principal.Role == 0 {
@@ -28,7 +28,9 @@ func (h *Handler) CreateBoardComputeringModuleHandler(req api.CreateBoardComputi
 		Width:                   sql.NullFloat64{Float64: req.BoardComputingModule.Width, Valid: true},
 		Height:                  sql.NullFloat64{Float64: req.BoardComputingModule.Height, Valid: true},
 		Weight:                  sql.NullFloat64{Float64: req.BoardComputingModule.Weight, Valid: true},
-		SupplyVoltage:           sql.NullFloat64{Float64: req.BoardComputingModule.SupplyVoltage, Valid: true},
+		MaxSupplyVoltage:        sql.NullFloat64{Float64: req.BoardComputingModule.MaxSupplyVoltage, Valid: true},
+		MinSupplyVoltage:        sql.NullFloat64{Float64: req.BoardComputingModule.MinSupplyVoltage, Valid: true},
+		DataBus:                 sql.NullString{String: req.BoardComputingModule.DataBus, Valid: true},
 		PowerConsumption:        sql.NullFloat64{Float64: req.BoardComputingModule.PowerConsumption, Valid: true},
 		MinOperatingTemperature: sql.NullFloat64{Float64: req.BoardComputingModule.MinOperatingTemperature, Valid: true},
 		MaxOperatingTemperature: sql.NullFloat64{Float64: req.BoardComputingModule.MaxOperatingTemperature, Valid: true},
@@ -58,7 +60,9 @@ func (h *Handler) CreateBoardComputeringModuleHandler(req api.CreateBoardComputi
 		Width:                   boardComputeringModuleResult.Width.Float64,
 		Height:                  boardComputeringModuleResult.Height.Float64,
 		Weight:                  boardComputeringModuleResult.Weight.Float64,
-		SupplyVoltage:           boardComputeringModuleResult.SupplyVoltage.Float64,
+		MaxSupplyVoltage:        boardComputeringModuleResult.MaxSupplyVoltage.Float64,
+		MinSupplyVoltage:        boardComputeringModuleResult.MinSupplyVoltage.Float64,
+		DataBus:                 boardComputeringModuleResult.DataBus.String,
 		PowerConsumption:        boardComputeringModuleResult.PowerConsumption.Float64,
 		CreatedAt:               boardComputeringModuleResult.CreatedAt.Unix(),
 		Interface:               boardComputeringModuleResult.Interface.String,
@@ -93,7 +97,9 @@ func (h *Handler) GetBoardComputingModuleHandler(req api.GetBoardComputingModule
 		Width:                   boardComputingModule.Width.Float64,
 		Height:                  boardComputingModule.Height.Float64,
 		Weight:                  boardComputingModule.Weight.Float64,
-		SupplyVoltage:           boardComputingModule.SupplyVoltage.Float64,
+		MaxSupplyVoltage:        boardComputingModule.MaxSupplyVoltage.Float64,
+		MinSupplyVoltage:        boardComputingModule.MinSupplyVoltage.Float64,
+		DataBus:                 boardComputingModule.DataBus.String,
 		PowerConsumption:        boardComputingModule.PowerConsumption.Float64,
 		Interface:               boardComputingModule.Interface.String,
 		MaxOperatingTemperature: boardComputingModule.MaxOperatingTemperature.Float64,
@@ -147,10 +153,21 @@ func (h *Handler) UpdateBoardComputingModuleHandler(req api.UpdateBoardComputing
 		boardComputingModule.Weight.Valid = true
 	}
 
-	if req.BoardComputingModule.SupplyVoltage != 0 {
-		boardComputingModule.SupplyVoltage.Float64 = req.BoardComputingModule.SupplyVoltage
-		boardComputingModule.SupplyVoltage.Valid = true
+	if req.BoardComputingModule.MaxSupplyVoltage != 0 {
+		boardComputingModule.MaxSupplyVoltage.Float64 = req.BoardComputingModule.MaxSupplyVoltage
+		boardComputingModule.MaxSupplyVoltage.Valid = true
 	}
+
+	if req.BoardComputingModule.MinSupplyVoltage != 0 {
+		boardComputingModule.MinSupplyVoltage.Float64 = req.BoardComputingModule.MinSupplyVoltage
+		boardComputingModule.MinSupplyVoltage.Valid = true
+	}
+
+	if req.BoardComputingModule.DataBus != "" {
+		boardComputingModule.DataBus.String = req.BoardComputingModule.DataBus
+		boardComputingModule.DataBus.Valid = true
+	}
+
 	if req.BoardComputingModule.PowerConsumption != 0 {
 		boardComputingModule.PowerConsumption.Float64 = req.BoardComputingModule.PowerConsumption
 		boardComputingModule.PowerConsumption.Valid = true
@@ -201,7 +218,9 @@ func (h *Handler) UpdateBoardComputingModuleHandler(req api.UpdateBoardComputing
 		Width:                   newBoardComputingModule.Width.Float64,
 		Height:                  newBoardComputingModule.Height.Float64,
 		Weight:                  newBoardComputingModule.Weight.Float64,
-		SupplyVoltage:           newBoardComputingModule.SupplyVoltage.Float64,
+		MaxSupplyVoltage:        newBoardComputingModule.MaxSupplyVoltage.Float64,
+		MinSupplyVoltage:        newBoardComputingModule.MinSupplyVoltage.Float64,
+		DataBus:                 newBoardComputingModule.DataBus.String,
 		PowerConsumption:        newBoardComputingModule.PowerConsumption.Float64,
 		Interface:               newBoardComputingModule.Interface.String,
 		MaxOperatingTemperature: newBoardComputingModule.MaxOperatingTemperature.Float64,
@@ -321,7 +340,9 @@ func (h *Handler) BoardComputingModulesToDefinition(ctx context.Context, boardCo
 			Width:                   boardComputingModules[i].Width.Float64,
 			Height:                  boardComputingModules[i].Height.Float64,
 			Weight:                  boardComputingModules[i].Weight.Float64,
-			SupplyVoltage:           boardComputingModules[i].SupplyVoltage.Float64,
+			MaxSupplyVoltage:        boardComputingModules[i].MaxSupplyVoltage.Float64,
+			MinSupplyVoltage:        boardComputingModules[i].MinSupplyVoltage.Float64,
+			DataBus:                 boardComputingModules[i].DataBus.String,
 			PowerConsumption:        boardComputingModules[i].PowerConsumption.Float64,
 			Interface:               boardComputingModules[i].Interface.String,
 			MaxOperatingTemperature: boardComputingModules[i].MaxOperatingTemperature.Float64,

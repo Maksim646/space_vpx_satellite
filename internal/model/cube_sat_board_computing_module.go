@@ -29,7 +29,9 @@ type BoardComputingModule struct {
 	Width                   sql.NullFloat64 `db:"width"`
 	Height                  sql.NullFloat64 `db:"height"`
 	Weight                  sql.NullFloat64 `db:"weight"`
-	SupplyVoltage           sql.NullFloat64 `db:"supply_voltage"`
+	MaxSupplyVoltage        sql.NullFloat64 `db:"max_supply_voltage"`
+	MinSupplyVoltage        sql.NullFloat64 `db:"min_supply_voltage"`
+	DataBus                 sql.NullString  `db:"data_bus"`
 	PowerConsumption        sql.NullFloat64 `db:"power_consumption"`
 	Interface               sql.NullString  `db:"interface"`
 	MaxOperatingTemperature sql.NullFloat64 `db:"max_operating_temperature"`

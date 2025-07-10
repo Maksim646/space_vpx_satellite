@@ -1600,7 +1600,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Create CubeSat VHF Transceiver",
-        "operationId": "CreateCubeSatVHTransceiver",
+        "operationId": "CreateCubeSatVHFTransceiver",
         "parameters": [
           {
             "description": "Create VHF Transceiver Body",
@@ -1657,7 +1657,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Get Available CubeSat VHF Transceivers",
-        "operationId": "GetAvailableCubeSatVHTransceivers",
+        "operationId": "GetAvailableCubeSatVHFTransceivers",
         "parameters": [
           {
             "type": "integer",
@@ -1741,7 +1741,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Get CubeSat VHF Transceiver",
-        "operationId": "GetCubeSatVHTransceiver",
+        "operationId": "GetCubeSatVHFTransceiver",
         "parameters": [
           {
             "type": "integer",
@@ -1794,7 +1794,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Delete CubeSat VHF Transceiver",
-        "operationId": "DeleteCubeSatVHTransceiver",
+        "operationId": "DeleteCubeSatVHFTransceiver",
         "parameters": [
           {
             "type": "integer",
@@ -1847,7 +1847,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Update CubeSat VHF Transceiver",
-        "operationId": "UpdateCubeSatVHTransceiver",
+        "operationId": "UpdateCubeSatVHFTransceiver",
         "parameters": [
           {
             "type": "integer",
@@ -3845,6 +3845,9 @@ func init() {
           "description": "Creation timestamp",
           "type": "integer"
         },
+        "data_bus": {
+          "type": "string"
+        },
         "height": {
           "description": "Height in meters",
           "type": "number"
@@ -3867,6 +3870,10 @@ func init() {
           "description": "Maximum operating temperature in Celsius",
           "type": "number"
         },
+        "max_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock rating",
           "type": "integer",
@@ -3881,16 +3888,16 @@ func init() {
           "description": "Minimum operating temperature in Celsius",
           "type": "number"
         },
+        "min_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "name": {
           "description": "Name of the Board Computing Module",
           "type": "string"
         },
         "power_consumption": {
           "description": "Power consumption in watts",
-          "type": "number"
-        },
-        "supply_voltage": {
-          "description": "Supply voltage in volts",
           "type": "number"
         },
         "updated_at": {
@@ -4084,6 +4091,9 @@ func init() {
     "CreateBoardComputingModuleBody": {
       "type": "object",
       "properties": {
+        "data_bus": {
+          "type": "string"
+        },
         "height": {
           "description": "Height in meters",
           "type": "number"
@@ -4100,6 +4110,10 @@ func init() {
           "description": "Maximum operating temperature in Celsius",
           "type": "number"
         },
+        "max_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock rating",
           "type": "integer",
@@ -4114,16 +4128,16 @@ func init() {
           "description": "Minimum operating temperature in Celsius",
           "type": "number"
         },
+        "min_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "name": {
           "description": "Name of the Board Computing Module",
           "type": "string"
         },
         "power_consumption": {
           "description": "Power consumption in watts",
-          "type": "number"
-        },
-        "supply_voltage": {
-          "description": "Supply voltage in volts",
           "type": "number"
         },
         "weight": {
@@ -4400,6 +4414,10 @@ func init() {
         "max_operating_temperature": {
           "type": "number"
         },
+        "max_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
         "mechanical_shock": {
           "type": "integer"
         },
@@ -4407,6 +4425,10 @@ func init() {
           "type": "integer"
         },
         "min_operating_temperature": {
+          "type": "number"
+        },
+        "min_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
           "type": "number"
         },
         "name": {
@@ -4429,9 +4451,6 @@ func init() {
         },
         "solar_panels_type": {
           "type": "string"
-        },
-        "system_bus_voltage_output_channels": {
-          "type": "number"
         },
         "system_bus_voltage_solar_panels": {
           "type": "number"
@@ -4776,6 +4795,10 @@ func init() {
           "description": "Maximum operating temperature in degrees Celsius",
           "type": "number"
         },
+        "max_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock value",
           "type": "integer"
@@ -4786,6 +4809,10 @@ func init() {
         },
         "min_operating_temperature": {
           "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
           "type": "number"
         },
         "name": {
@@ -4814,10 +4841,6 @@ func init() {
         "solar_panels_type": {
           "description": "Type of solar panels used",
           "type": "string"
-        },
-        "system_bus_voltage_output_channels": {
-          "description": "System bus voltage for output channels",
-          "type": "number"
         },
         "system_bus_voltage_solar_panels": {
           "description": "System bus voltage for solar panels",
@@ -5264,6 +5287,9 @@ func init() {
     "UpdateBoardComputingModuleBody": {
       "type": "object",
       "properties": {
+        "data_bus": {
+          "type": "string"
+        },
         "height": {
           "description": "Height in meters",
           "type": "number"
@@ -5280,6 +5306,10 @@ func init() {
           "description": "Maximum operating temperature in Celsius",
           "type": "number"
         },
+        "max_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock rating",
           "type": "integer",
@@ -5294,16 +5324,16 @@ func init() {
           "description": "Minimum operating temperature in Celsius",
           "type": "number"
         },
+        "min_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "name": {
           "description": "Name of the Board Computing Module",
           "type": "string"
         },
         "power_consumption": {
           "description": "Power consumption in watts",
-          "type": "number"
-        },
-        "supply_voltage": {
-          "description": "Supply voltage in volts",
           "type": "number"
         },
         "weight": {
@@ -5353,6 +5383,10 @@ func init() {
         "max_operating_temperature": {
           "type": "number"
         },
+        "max_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
         "mechanical_shock": {
           "type": "integer"
         },
@@ -5360,6 +5394,10 @@ func init() {
           "type": "integer"
         },
         "min_operating_temperature": {
+          "type": "number"
+        },
+        "min_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
           "type": "number"
         },
         "name": {
@@ -5382,9 +5420,6 @@ func init() {
         },
         "solar_panels_type": {
           "type": "string"
-        },
-        "system_bus_voltage_output_channels": {
-          "type": "number"
         },
         "system_bus_voltage_solar_panels": {
           "type": "number"
@@ -7382,7 +7417,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Create CubeSat VHF Transceiver",
-        "operationId": "CreateCubeSatVHTransceiver",
+        "operationId": "CreateCubeSatVHFTransceiver",
         "parameters": [
           {
             "description": "Create VHF Transceiver Body",
@@ -7439,7 +7474,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Get Available CubeSat VHF Transceivers",
-        "operationId": "GetAvailableCubeSatVHTransceivers",
+        "operationId": "GetAvailableCubeSatVHFTransceivers",
         "parameters": [
           {
             "minimum": 0,
@@ -7524,7 +7559,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Get CubeSat VHF Transceiver",
-        "operationId": "GetCubeSatVHTransceiver",
+        "operationId": "GetCubeSatVHFTransceiver",
         "parameters": [
           {
             "type": "integer",
@@ -7577,7 +7612,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Delete CubeSat VHF Transceiver",
-        "operationId": "DeleteCubeSatVHTransceiver",
+        "operationId": "DeleteCubeSatVHFTransceiver",
         "parameters": [
           {
             "type": "integer",
@@ -7630,7 +7665,7 @@ func init() {
           "CubeSatVHFTransceiver"
         ],
         "summary": "Update CubeSat VHF Transceiver",
-        "operationId": "UpdateCubeSatVHTransceiver",
+        "operationId": "UpdateCubeSatVHFTransceiver",
         "parameters": [
           {
             "type": "integer",
@@ -9635,6 +9670,9 @@ func init() {
           "description": "Creation timestamp",
           "type": "integer"
         },
+        "data_bus": {
+          "type": "string"
+        },
         "height": {
           "description": "Height in meters",
           "type": "number"
@@ -9657,6 +9695,10 @@ func init() {
           "description": "Maximum operating temperature in Celsius",
           "type": "number"
         },
+        "max_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock rating",
           "type": "integer",
@@ -9671,16 +9713,16 @@ func init() {
           "description": "Minimum operating temperature in Celsius",
           "type": "number"
         },
+        "min_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "name": {
           "description": "Name of the Board Computing Module",
           "type": "string"
         },
         "power_consumption": {
           "description": "Power consumption in watts",
-          "type": "number"
-        },
-        "supply_voltage": {
-          "description": "Supply voltage in volts",
           "type": "number"
         },
         "updated_at": {
@@ -9874,6 +9916,9 @@ func init() {
     "CreateBoardComputingModuleBody": {
       "type": "object",
       "properties": {
+        "data_bus": {
+          "type": "string"
+        },
         "height": {
           "description": "Height in meters",
           "type": "number"
@@ -9890,6 +9935,10 @@ func init() {
           "description": "Maximum operating temperature in Celsius",
           "type": "number"
         },
+        "max_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock rating",
           "type": "integer",
@@ -9904,16 +9953,16 @@ func init() {
           "description": "Minimum operating temperature in Celsius",
           "type": "number"
         },
+        "min_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "name": {
           "description": "Name of the Board Computing Module",
           "type": "string"
         },
         "power_consumption": {
           "description": "Power consumption in watts",
-          "type": "number"
-        },
-        "supply_voltage": {
-          "description": "Supply voltage in volts",
           "type": "number"
         },
         "weight": {
@@ -10190,6 +10239,10 @@ func init() {
         "max_operating_temperature": {
           "type": "number"
         },
+        "max_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
         "mechanical_shock": {
           "type": "integer"
         },
@@ -10197,6 +10250,10 @@ func init() {
           "type": "integer"
         },
         "min_operating_temperature": {
+          "type": "number"
+        },
+        "min_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
           "type": "number"
         },
         "name": {
@@ -10219,9 +10276,6 @@ func init() {
         },
         "solar_panels_type": {
           "type": "string"
-        },
-        "system_bus_voltage_output_channels": {
-          "type": "number"
         },
         "system_bus_voltage_solar_panels": {
           "type": "number"
@@ -10566,6 +10620,10 @@ func init() {
           "description": "Maximum operating temperature in degrees Celsius",
           "type": "number"
         },
+        "max_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock value",
           "type": "integer"
@@ -10576,6 +10634,10 @@ func init() {
         },
         "min_operating_temperature": {
           "description": "Minimum operating temperature in degrees Celsius",
+          "type": "number"
+        },
+        "min_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
           "type": "number"
         },
         "name": {
@@ -10604,10 +10666,6 @@ func init() {
         "solar_panels_type": {
           "description": "Type of solar panels used",
           "type": "string"
-        },
-        "system_bus_voltage_output_channels": {
-          "description": "System bus voltage for output channels",
-          "type": "number"
         },
         "system_bus_voltage_solar_panels": {
           "description": "System bus voltage for solar panels",
@@ -11054,6 +11112,9 @@ func init() {
     "UpdateBoardComputingModuleBody": {
       "type": "object",
       "properties": {
+        "data_bus": {
+          "type": "string"
+        },
         "height": {
           "description": "Height in meters",
           "type": "number"
@@ -11070,6 +11131,10 @@ func init() {
           "description": "Maximum operating temperature in Celsius",
           "type": "number"
         },
+        "max_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "mechanical_shock": {
           "description": "Mechanical shock rating",
           "type": "integer",
@@ -11084,16 +11149,16 @@ func init() {
           "description": "Minimum operating temperature in Celsius",
           "type": "number"
         },
+        "min_supply_voltage": {
+          "description": "Supply voltage in volts",
+          "type": "number"
+        },
         "name": {
           "description": "Name of the Board Computing Module",
           "type": "string"
         },
         "power_consumption": {
           "description": "Power consumption in watts",
-          "type": "number"
-        },
-        "supply_voltage": {
-          "description": "Supply voltage in volts",
           "type": "number"
         },
         "weight": {
@@ -11143,6 +11208,10 @@ func init() {
         "max_operating_temperature": {
           "type": "number"
         },
+        "max_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
+          "type": "number"
+        },
         "mechanical_shock": {
           "type": "integer"
         },
@@ -11150,6 +11219,10 @@ func init() {
           "type": "integer"
         },
         "min_operating_temperature": {
+          "type": "number"
+        },
+        "min_system_bus_voltage_output_channels": {
+          "description": "System bus voltage for output channels",
           "type": "number"
         },
         "name": {
@@ -11172,9 +11245,6 @@ func init() {
         },
         "solar_panels_type": {
           "type": "string"
-        },
-        "system_bus_voltage_output_channels": {
-          "type": "number"
         },
         "system_bus_voltage_solar_panels": {
           "type": "number"
