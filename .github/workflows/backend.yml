@@ -35,8 +35,9 @@ jobs:
           docker compose down
           docker compose up -d --build
           
-    - name: Setup docker-compose.yml
+    - name: Setup docker-compose.yml from secret
       run: |
-        echo "$DOCKER_COMPOSE_CONTENT" > docker-compose.yml
+        mkdir -p space_vpx_satellite/space_vpx_satellite
+        echo "$DOCKER_COMPOSE_YML" > space_vpx_satellite/space_vpx_satellite/docker-compose.yml
       env:
-        DOCKER_COMPOSE_CONTENT: ${{ secrets.DOCKER_COMPOSE_YML }}
+        DOCKER_COMPOSE_YML: ${{ secrets.DOCKER_COMPOSE_YML }}
