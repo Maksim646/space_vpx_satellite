@@ -23,9 +23,12 @@ jobs:
     - name: Setup docker-compose.yml from secret
       run: |
         mkdir -p space_vpx_satellite/space_vpx_satellite
-        echo "$DOCKER_COMPOSE_YML" > space_vpx_satellite/space_vpx_satellite/docker-compose.yml
+        printf '%s\n' "$DOCKER_COMPOSE_YML" > space_vpx_satellite/space_vpx_satellite/docker-compose.yml
       env:
         DOCKER_COMPOSE_YML: ${{ secrets.DOCKER_COMPOSE_YML }}
+
+    - name: Check docker-compose.yml file
+      run: cat space_vpx_satellite/space_vpx_satellite/docker-compose.yml
 
     - name: Build Docker image
       run: make build
