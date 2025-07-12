@@ -13,7 +13,8 @@ DB_REMOVE_MSG = Removing the PostgreSQL database...
 
 build:
 	@echo "$(BUILD_MSG)"
-	@docker compose -f ./docker-compose.yml down space-vpx-sattelite-dev
+	@docker compose -f ./docker-compose.yml stop space-vpx-sattelite-dev || true
+	@docker compose -f ./docker-compose.yml rm -f space-vpx-sattelite-dev || true
 	@docker compose -f ./docker-compose.yml build space-vpx-sattelite-dev
 	@docker compose -f ./docker-compose.yml up space-vpx-sattelite-dev -d
 

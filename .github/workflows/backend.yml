@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        path: .
 
     - name: Set up Go
       uses: actions/setup-go@v5
@@ -22,13 +24,12 @@ jobs:
 
     - name: Setup docker-compose.yml from secret
       run: |
-        mkdir -p space_vpx_satellite/space_vpx_satellite
-        printf '%s\n' "$DOCKER_COMPOSE_YML" > space_vpx_satellite/space_vpx_satellite/docker-compose.yml
+        printf '%s\n' "$DOCKER_COMPOSE_YML" > docker-compose.yml
       env:
         DOCKER_COMPOSE_YML: ${{ secrets.DOCKER_COMPOSE_YML }}
 
     - name: Check docker-compose.yml file
-      run: cat space_vpx_satellite/space_vpx_satellite/docker-compose.yml
+      run: cat docker-compose.yml
 
     - name: Build Docker image
       run: make build
@@ -40,7 +41,6 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          cd ~/backend
+          cd ~/satellite_assembly/satellite_assembler/space_vpx_satellite
           git pull
-          docker compose down
-          docker compose up -d --build
+          make build
