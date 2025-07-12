@@ -4,9 +4,10 @@ FROM golang:alpine AS build
 RUN apk add --no-cache git
 
 WORKDIR /src
-COPY space_vpx_satellite/go.mod space_vpx_satellite/go.sum ./
-COPY space_vpx_satellite/vendor ./vendor
-COPY space_vpx_satellite/ ./
+COPY go.mod go.sum ./
+COPY vendor ./vendor
+COPY ./ ./
+
 
 
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-X 'main.Version=$(git rev-parse --short HEAD)'" -o /bin/space_vpx_satellite ./cmd/space_vpx_satellite
