@@ -43,5 +43,4 @@ jobs:
         script: |
           cd ~/satellite_assembly/satellite_assembler/space_vpx_satellite
           git pull
-          docker compose down
-          docker compose up -d --build
+          make build
