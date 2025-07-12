@@ -29,7 +29,7 @@ jobs:
         DOCKER_COMPOSE_YML: ${{ secrets.DOCKER_COMPOSE_YML }}
 
     - name: Check docker-compose.yml file
-      run: cat space_vpx_satellite/space_vpx_satellite/docker-compose.yml
+      run: cat docker-compose.yml
 
     - name: Build Docker image
       run: make build
