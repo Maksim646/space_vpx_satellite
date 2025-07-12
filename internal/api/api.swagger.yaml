@@ -2757,7 +2757,9 @@ definitions:
   LoginResponse:
     type: object
     properties:
-       access_token:
+      access_token:
+        type: string
+      welcome:
         type: string
 
   LoginAdmin:

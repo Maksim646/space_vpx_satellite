@@ -50,6 +50,7 @@ func (h *Handler) RegisterUserHandler(req api.RegisterUserParams) middleware.Res
 
 	return api.NewRegisterUserOK().WithPayload(&definition.LoginResponse{
 		AccessToken: token,
+		Welcome:     "Welcome to SpaceVPX!",
 	})
 }
 
@@ -83,6 +84,7 @@ func (h *Handler) LoginUserHandler(req api.LoginUserParams) middleware.Responder
 
 	return api.NewLoginUserOK().WithPayload(&definition.LoginResponse{
 		AccessToken: token,
+		Welcome:     "Welcome to SpaceVPX!",
 	})
 
 }

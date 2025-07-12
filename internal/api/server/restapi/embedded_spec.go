@@ -5043,6 +5043,9 @@ func init() {
       "properties": {
         "access_token": {
           "type": "string"
+        },
+        "welcome": {
+          "type": "string"
         }
       }
     },
@@ -10867,6 +10870,9 @@ func init() {
       "type": "object",
       "properties": {
         "access_token": {
+          "type": "string"
+        },
+        "welcome": {
           "type": "string"
         }
       }

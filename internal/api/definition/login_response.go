@@ -19,6 +19,9 @@ type LoginResponse struct {
 
 	// access token
 	AccessToken string `json:"access_token,omitempty"`
+
+	// welcome
+	Welcome string `json:"welcome,omitempty"`
 }
 
 // Validate validates this login response
