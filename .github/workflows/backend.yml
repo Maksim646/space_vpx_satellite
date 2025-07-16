@@ -42,5 +42,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           cd ~/satellite_assembly/satellite_assembler/space_vpx_satellite
+          git reset --hard HEAD
+          git pull origin main
           git pull
           make build

@@ -21,6 +21,7 @@ func (h *Handler) RegisterUserHandler(req api.RegisterUserParams) middleware.Res
 
 	_, err := h.userUsecase.GetUserByEmail(ctx, *req.RegisterUser.Email)
 	if err == nil {
+		zap.L().Error("user already exists", zap.String("email", *req.RegisterUser.Email))
 		return api.NewRegisterUserBadRequest().WithPayload(&definition.Error{
 			Message: useful.StrPtr("user already exists"),
 		})
@@ -28,6 +29,7 @@ func (h *Handler) RegisterUserHandler(req api.RegisterUserParams) middleware.Res
 
 	passwordHash, err := hash.GenerateHash(*req.RegisterUser.Password, h.HashSalt)
 	if err != nil {
+		zap.L().Error("error generate password hash", zap.Error(err))
 		return api.NewRegisterUserInternalServerError()
 	}
 
@@ -40,11 +42,13 @@ func (h *Handler) RegisterUserHandler(req api.RegisterUserParams) middleware.Res
 
 	user, err := h.userUsecase.GetUserByID(ctx, userID)
 	if err != nil {
+		zap.L().Error("error get user by id", zap.Error(err))
 		return api.NewRegisterUserInternalServerError()
 	}
 
 	token, err := jsonwebtoken.GenerateToken(user.ID, 0, h.jwtSigninKey)
 	if err != nil {
+		zap.L().Error("error generate token", zap.Error(err))
 		return api.NewRegisterUserInternalServerError()
 	}
 
