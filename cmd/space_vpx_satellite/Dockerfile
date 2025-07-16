@@ -10,6 +10,7 @@ COPY ./ ./
 
 
 
+
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-X 'main.Version=$(git rev-parse --short HEAD)'" -o /bin/space_vpx_satellite ./cmd/space_vpx_satellite
 
 FROM alpine

@@ -16,8 +16,8 @@ func BuildLogger(level string) error {
 	loggerCfg := zap.Config{
 		Level:            zap.NewAtomicLevelAt(loggerLevel),
 		Encoding:         "json",
-		OutputPaths:      []string{"./zap.log"},
-		ErrorOutputPaths: []string{"./zap.log"},
+		OutputPaths:      []string{"stdout"},
+		ErrorOutputPaths: []string{"stderr"},
 		EncoderConfig: zapcore.EncoderConfig{
 			LevelKey:      "level",
 			TimeKey:       "time",
