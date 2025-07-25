@@ -235,6 +235,7 @@ CREATE TABLE IF NOT EXISTS admins
     id                       uuid DEFAULT uuid_generate_v4(),
     name                     VARCHAR(255),
     email                    VARCHAR(255) UNIQUE,
+    role                     VARCHAR(50) NOT NULL DEFAULT 'admin',
     password_hash            VARCHAR(255),
     updated_at               TIMESTAMP WITHOUT TIME ZONE,
     created_at               TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT(now() at TIME zone 'utc')
